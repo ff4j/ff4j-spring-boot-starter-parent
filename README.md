@@ -9,6 +9,36 @@
 
 This project aims in providing a bootable starter which provides RESTful apis for FF4J. 
 
+Create a bootable jar with 
+
+`mvn clean install`
+
+Add dependency in your project
+
+~~~
+<dependency>
+	<groupId>org.ff4j</groupId>
+	<artifactId>ff4j-spring-boot-starter</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+</dependency>
+~~~
+
+All you would have to do in your configuration is to enable ff4j with `@EnableFF4J`
+
+### Sample
+
+A sample project can be found at [https://github.com/paul58914080/ff4j-spring-boot-starter-parent/tree/master/ff4j-spring-boot-sample](https://github.com/paul58914080/ff4j-spring-boot-starter-parent/tree/master/ff4j-spring-boot-sample)
+
+Use `mvn spring-boot:run`
+
+Once the sample application is booted use the following curl command
+ 
+`curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X GET http://localhost:8080/ff4j`
+
+Have a look at [FF4JConfiguration](https://github.com/paul58914080/ff4j-spring-boot-starter-parent/blob/master/ff4j-spring-boot-sample/src/main/java/org/ff4j/sample/config/FF4JConfiguration.java)
+
+### What is FF4J ?
+
 FF4J is a proposition of [Feature Toggle](http://martinfowler.com/bliki/FeatureToggle.html). 
 You can enable and disable features through configuration at runtime with dedicated consoles or Web API but also __monitor__ features usage. You can also define any __Property__ and change its value at runtime with 
 the exact same web console.
