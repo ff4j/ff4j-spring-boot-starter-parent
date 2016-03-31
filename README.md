@@ -5,7 +5,7 @@
 
 ## Spring boot starter for FF4J (Feature Flipping for Java)
 
-[![Join the chat at https://gitter.im/paul58914080/ff4j-spring-boot-starter-parent](https://badges.gitter.im/paul58914080/ff4j-spring-boot-starter-parent.svg)](https://gitter.im/paul58914080/ff4j-spring-boot-starter-parent?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![Build Status](https://travis-ci.org/paul58914080/ff4j-spring-boot-starter-parent.svg?branch=master)](https://travis-ci.org/paul58914080/ff4j-spring-boot-starter-parent) [![Coverage Status](https://coveralls.io/repos/github/paul58914080/ff4j-spring-boot-starter-parent/badge.svg?branch=master)](https://coveralls.io/github/paul58914080/ff4j-spring-boot-starter-parent?branch=master)
+[![Join the chat at https://gitter.im/paul58914080/ff4j-spring-boot-starter-parent](https://badges.gitter.im/paul58914080/ff4j-spring-boot-starter-parent.svg)](https://gitter.im/paul58914080/ff4j-spring-boot-starter-parent?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![Build Status](https://travis-ci.org/paul58914080/ff4j-spring-boot-starter-parent.svg?branch=master)](https://travis-ci.org/paul58914080/ff4j-spring-boot-starter-parent) [![Coverage Status](https://coveralls.io/repos/github/paul58914080/ff4j-spring-boot-starter-parent/badge.svg?branch=master)](https://coveralls.io/github/paul58914080/ff4j-spring-boot-starter-parent?branch=master) [![License Apache2](http://img.shields.io/badge/license-APACHE2-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
 
 This project aims in providing a bootable starter which provides RESTful apis for FF4J. 
 
