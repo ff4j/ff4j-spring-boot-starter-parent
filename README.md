@@ -5,7 +5,7 @@
 
 ## Spring boot starter for FF4J (Feature Flipping for Java)
 
-[![Build Status](https://travis-ci.org/paul58914080/ff4j-spring-boot-starter-parent.svg?branch=master)](https://travis-ci.org/paul58914080/ff4j-spring-boot-starter-parent) [![Coverage Status](https://coveralls.io/repos/github/paul58914080/spring-boot-ff4j/badge.svg?branch=master)](https://coveralls.io/github/paul58914080/spring-boot-ff4j?branch=master)
+[![Build Status](https://travis-ci.org/paul58914080/ff4j-spring-boot-starter-parent.svg?branch=master)](https://travis-ci.org/paul58914080/ff4j-spring-boot-starter-parent) [![Coverage Status](https://coveralls.io/repos/github/paul58914080/ff4j-spring-boot-starter-parent/badge.svg?branch=master)](https://coveralls.io/github/paul58914080/ff4j-spring-boot-starter-parent?branch=master)
 
 This project aims in providing a bootable starter which provides RESTful apis for FF4J. 
 
