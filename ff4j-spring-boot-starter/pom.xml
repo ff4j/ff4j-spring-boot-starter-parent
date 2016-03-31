@@ -6,7 +6,7 @@
     <artifactId>ff4j-spring-boot-starter</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
-    <name>ff4j-spring-boot</name>
+    <name>ff4j-spring-boot-starter</name>
     <description>A spring boot project for feature toggling with ff4j</description>
     <parent>
         <groupId>org.ff4j</groupId>
