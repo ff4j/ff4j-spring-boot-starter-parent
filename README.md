@@ -1,6 +1,6 @@
 <p align="center">
-<img src="https://github.com/paul58914080/ff4j-spring-boot-starter/blob/master/images/spring-boot.png" alt="Spring boot" height="120px" />
-<img src="https://github.com/paul58914080/ff4j-spring-boot-starter/blob/master/images/ff4j.png" alt="Feature Flipping For Java" height="120px" />
+<img src="https://github.com/paul58914080/ff4j-spring-boot-starter-parent/blob/master/images/spring-boot.png" alt="Spring boot" height="120px" />
+<img src="https://github.com/paul58914080/ff4j-spring-boot-starter-parent/blob/master/images/ff4j.png" alt="Feature Flipping For Java" height="120px" />
 </p>
 
 ## Spring boot starter for FF4J (Feature Flipping for Java)
