@@ -27,7 +27,7 @@ All you would have to do in your configuration is to enable ff4j with `@EnableFF
 
 ### Sample
 
-A sample project can be found at [https://github.com/paul58914080/ff4j-spring-boot-starter-parent/tree/master/ff4j-spring-boot-sample](https://github.com/paul58914080/ff4j-spring-boot-starter-parent/tree/master/ff4j-spring-boot-sample)
+A sample project can be found at [ff4j-spring-boot-sample](https://github.com/paul58914080/ff4j-spring-boot-starter-parent/tree/master/ff4j-spring-boot-sample)
 
 Use `mvn spring-boot:run`
 
