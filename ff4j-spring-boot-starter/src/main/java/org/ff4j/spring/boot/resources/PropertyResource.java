@@ -17,8 +17,6 @@ package org.ff4j.spring.boot.resources;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
-import org.ff4j.spring.boot.constants.CommonConstants;
-import org.ff4j.spring.boot.constants.FeatureConstants;
 import org.ff4j.spring.boot.domain.PropertyApiBean;
 import org.ff4j.spring.boot.model.FeatureActions;
 import org.ff4j.spring.boot.services.PropertyService;
@@ -30,6 +28,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import static org.ff4j.spring.boot.constants.CommonConstants.ROOT;
+import static org.ff4j.spring.boot.constants.FeatureConstants.*;
 import static org.ff4j.web.FF4jWebConstants.OPERATION_UPDATE;
 import static org.springframework.http.HttpStatus.NO_CONTENT;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
@@ -41,7 +41,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
  * @author <a href="mailto:paul58914080@gmail.com">Paul Williams</a>
  */
 @RestController
-@RequestMapping(value = FeatureConstants.RESOURCE_PROPERTIES_STORE_PROPERTIES + CommonConstants.ROOT + FeatureConstants.PATH_PARAM_NAME)
+@RequestMapping(value = RESOURCE_PROPERTIES_STORE_PROPERTIES + ROOT + PATH_PARAM_NAME)
 public class PropertyResource {
     @Autowired
     private PropertyService propertyService;
@@ -51,7 +51,7 @@ public class PropertyResource {
     @ApiResponses({
             @ApiResponse(code = 200, message = "Information about property"),
             @ApiResponse(code = 404, message = "Property not found")})
-    public PropertyApiBean getProperty(@PathVariable(value = FeatureConstants.PARAM_NAME) String propertyName) {
+    public PropertyApiBean getProperty(@PathVariable(value = PARAM_NAME) String propertyName) {
         return propertyService.getProperty(propertyName);
     }
 
@@ -62,7 +62,7 @@ public class PropertyResource {
             @ApiResponse(code = 201, message = "Property has been created"),
             @ApiResponse(code = 202, message = "Property has been updated"),
             @ApiResponse(code = 204, message = "No content, no changes made to the feature")})
-    public ResponseEntity createOrUpdateProperty(@PathVariable(value = FeatureConstants.PARAM_NAME) String propertyName, @RequestBody PropertyApiBean propertyApiBean) {
+    public ResponseEntity createOrUpdateProperty(@PathVariable(value = PARAM_NAME) String propertyName, @RequestBody PropertyApiBean propertyApiBean) {
         return FeatureActions.getBooleanResponseEntityByHttpStatus(propertyService.createOrUpdateProperty(propertyName, propertyApiBean));
     }
 
@@ -72,18 +72,18 @@ public class PropertyResource {
             @ApiResponse(code = 204, message = "No content, property is deleted"),
             @ApiResponse(code = 404, message = "Property not found")
     })
-    public ResponseEntity deleteProperty(@PathVariable(value = FeatureConstants.PARAM_NAME) String propertyName) {
+    public ResponseEntity deleteProperty(@PathVariable(value = PARAM_NAME) String propertyName) {
         propertyService.deleteProperty(propertyName);
         return new ResponseEntity(NO_CONTENT);
     }
 
-    @RequestMapping(value = CommonConstants.ROOT + OPERATION_UPDATE + CommonConstants.ROOT + FeatureConstants.PATH_PARAM_VALUE, method = POST, produces = APPLICATION_JSON_VALUE)
+    @RequestMapping(value = ROOT + OPERATION_UPDATE + ROOT + PATH_PARAM_VALUE, method = POST, produces = APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Update value of a property", response = ResponseEntity.class)
     @ApiResponses({
             @ApiResponse(code = 202, message = "Property has been updated"),
             @ApiResponse(code = 404, message = "Property not found"),
             @ApiResponse(code = 400, message = "Invalid new value")})
-    public ResponseEntity updatePropertyName(@PathVariable(value = FeatureConstants.PARAM_NAME) String propertyName, @PathVariable(value = FeatureConstants.PARAM_VALUE) String newPropertyName) {
+    public ResponseEntity updatePropertyName(@PathVariable(value = PARAM_NAME) String propertyName, @PathVariable(value = PARAM_VALUE) String newPropertyName) {
         propertyService.updatePropertyName(propertyName, newPropertyName);
         return new ResponseEntity(HttpStatus.ACCEPTED);
     }

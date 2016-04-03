@@ -15,8 +15,8 @@
 package org.ff4j.spring.boot.domain;
 
 import org.ff4j.audit.graph.PieSector;
-import org.junit.Test;
 import org.ff4j.spring.boot.constants.CommonConstants;
+import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

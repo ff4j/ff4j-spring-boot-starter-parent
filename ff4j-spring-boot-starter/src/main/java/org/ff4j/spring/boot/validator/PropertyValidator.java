@@ -16,9 +16,9 @@ package org.ff4j.spring.boot.validator;
 
 import org.apache.commons.lang3.StringUtils;
 import org.ff4j.FF4j;
+import org.ff4j.spring.boot.exceptions.PropertyNameBlankException;
 import org.ff4j.spring.boot.exceptions.PropertyNameNotMatchException;
 import org.ff4j.spring.boot.exceptions.PropertyNotFoundException;
-import org.ff4j.spring.boot.exceptions.PropertyNameBlankException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

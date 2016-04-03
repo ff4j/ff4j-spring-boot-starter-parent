@@ -24,15 +24,16 @@ import org.ff4j.spring.boot.domain.PropertyApiBean;
 import org.ff4j.spring.boot.domain.PropertyStoreApiBean;
 import org.ff4j.spring.boot.services.PropertyStoreService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+import static org.ff4j.spring.boot.constants.FeatureConstants.RESOURCE_FF4J_PROPERTY_STORE;
 import static org.ff4j.web.FF4jWebConstants.RESOURCE_CACHE;
 import static org.ff4j.web.FF4jWebConstants.STORE_CLEAR;
+import static org.springframework.http.HttpStatus.NO_CONTENT;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
@@ -43,7 +44,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
  * @author <a href="mailto:paul58914080@gmail.com">Paul Williams</a>
  */
 @RestController
-@RequestMapping(value = FeatureConstants.RESOURCE_FF4J_PROPERTY_STORE)
+@RequestMapping(value = RESOURCE_FF4J_PROPERTY_STORE)
 public class PropertyStoreResource {
 
     @Autowired
@@ -68,7 +69,7 @@ public class PropertyStoreResource {
     @ApiResponses(@ApiResponse(code = 204, message = "all properties have been deleted", response = ResponseEntity.class))
     public ResponseEntity deleteAllProperties() {
         propertyStoreService.deleteAllProperties();
-        return new ResponseEntity(HttpStatus.NO_CONTENT);
+        return new ResponseEntity(NO_CONTENT);
     }
 
     @RequestMapping(value = CommonConstants.ROOT + RESOURCE_CACHE, method = GET, produces = APPLICATION_JSON_VALUE)
@@ -85,6 +86,6 @@ public class PropertyStoreResource {
             @ApiResponse(code = 404, message = "property store is not cached")})
     public ResponseEntity clearCachedPropertyStore() {
         propertyStoreService.clearCachedPropertyStore();
-        return new ResponseEntity(HttpStatus.NO_CONTENT);
+        return new ResponseEntity(NO_CONTENT);
     }
 }
