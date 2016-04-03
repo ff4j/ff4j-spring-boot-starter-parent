@@ -17,7 +17,6 @@ package org.ff4j.spring.boot.resources;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
-import org.ff4j.spring.boot.constants.FeatureConstants;
 import org.ff4j.spring.boot.domain.FeatureApiBean;
 import org.ff4j.spring.boot.model.FeatureActions;
 import org.ff4j.spring.boot.services.FeatureServices;
@@ -117,7 +116,7 @@ public class FeatureResource {
         return new ResponseEntity<>(ACCEPTED);
     }
 
-    @RequestMapping(value = ROOT + OPERATION_ADDGROUP + ROOT + FeatureConstants.PATH_PARAM_GROUP, method = POST, consumes = APPLICATION_JSON_VALUE)
+    @RequestMapping(value = ROOT + OPERATION_ADDGROUP + ROOT + PATH_PARAM_GROUP, method = POST, consumes = APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Define the group of the feature", response = ResponseEntity.class)
     @ApiResponses({
             @ApiResponse(code = 202, message = "Group has been defined"),
@@ -128,7 +127,7 @@ public class FeatureResource {
         return new ResponseEntity<>(ACCEPTED);
     }
 
-    @RequestMapping(value = ROOT + OPERATION_REMOVEGROUP + ROOT + FeatureConstants.PATH_PARAM_GROUP, method = POST, consumes = APPLICATION_JSON_VALUE)
+    @RequestMapping(value = ROOT + OPERATION_REMOVEGROUP + ROOT + PATH_PARAM_GROUP, method = POST, consumes = APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Remove the group of the feature", response = ResponseEntity.class)
     @ApiResponses({
             @ApiResponse(code = 204, message = "Group has been removed"),
