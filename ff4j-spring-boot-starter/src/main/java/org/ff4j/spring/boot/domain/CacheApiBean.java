@@ -15,7 +15,6 @@
 package org.ff4j.spring.boot.domain;
 
 
-import lombok.Getter;
 import org.ff4j.cache.FF4jCacheProxy;
 import org.ff4j.core.FeatureStore;
 import org.ff4j.property.store.PropertyStore;
@@ -33,16 +32,12 @@ public class CacheApiBean implements Serializable {
 
     private static final long serialVersionUID = -2564221971597313125L;
 
-    @Getter
     private String cacheProvider;
 
-    @Getter
     private String cacheStore;
 
-    @Getter
     private Set<String> featureNames = new HashSet<>();
 
-    @Getter
     private Set<String> propertyNames = new HashSet<>();
 
     public CacheApiBean(FeatureStore featureStore) {
@@ -62,5 +57,37 @@ public class CacheApiBean implements Serializable {
             cacheProvider = cacheProxy.getCacheProvider();
             propertyNames = cacheProxy.getCacheManager().listCachedPropertyNames();
         }
+    }
+
+    public Set<String> getPropertyNames() {
+        return propertyNames;
+    }
+
+    public void setPropertyNames(Set<String> propertyNames) {
+        this.propertyNames = propertyNames;
+    }
+
+    public String getCacheProvider() {
+        return cacheProvider;
+    }
+
+    public void setCacheProvider(String cacheProvider) {
+        this.cacheProvider = cacheProvider;
+    }
+
+    public String getCacheStore() {
+        return cacheStore;
+    }
+
+    public void setCacheStore(String cacheStore) {
+        this.cacheStore = cacheStore;
+    }
+
+    public Set<String> getFeatureNames() {
+        return featureNames;
+    }
+
+    public void setFeatureNames(Set<String> featureNames) {
+        this.featureNames = featureNames;
     }
 }

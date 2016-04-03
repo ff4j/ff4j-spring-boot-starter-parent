@@ -14,7 +14,6 @@
 
 package org.ff4j.spring.boot.domain;
 
-import lombok.Getter;
 import org.ff4j.audit.graph.BarSeries;
 import org.ff4j.spring.boot.constants.CommonConstants;
 
@@ -32,13 +31,10 @@ public class BarSeriesApiBean implements Serializable {
 
     private static final long serialVersionUID = 8703972617439641703L;
 
-    @Getter
     private String label = CommonConstants.N_A;
 
-    @Getter
     private String color = CommonConstants.HTML_WHITE;
 
-    @Getter
     private List<Double> values = new ArrayList<>();
 
     public BarSeriesApiBean() {
@@ -50,4 +46,17 @@ public class BarSeriesApiBean implements Serializable {
         this.color = barSeries.getColor();
         this.values = barSeries.getValues();
     }
+
+    public String getLabel() {
+        return label;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public List<Double> getValues() {
+        return values;
+    }
+
 }

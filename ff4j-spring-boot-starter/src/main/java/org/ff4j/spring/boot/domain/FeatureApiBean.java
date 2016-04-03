@@ -15,8 +15,6 @@
 package org.ff4j.spring.boot.domain;
 
 
-import lombok.Getter;
-import lombok.Setter;
 import org.ff4j.core.Feature;
 import org.ff4j.property.Property;
 
@@ -35,32 +33,18 @@ public class FeatureApiBean implements Serializable {
 
     private static final long serialVersionUID = -4977143873952901044L;
 
-    @Getter
-    @Setter
     private String uid;
 
-    @Getter
-    @Setter
     private boolean enable;
 
-    @Getter
-    @Setter
     private String description;
 
-    @Getter
-    @Setter
     private String group;
 
-    @Getter
-    @Setter
     private List<String> permissions = new ArrayList<>();
 
-    @Getter
-    @Setter
     private FlippingStrategyApiBean flippingStrategy;
 
-    @Getter
-    @Setter
     private Map<String, PropertyApiBean> customProperties = new HashMap<>();
 
     public FeatureApiBean() {
@@ -81,5 +65,61 @@ public class FeatureApiBean implements Serializable {
                 customProperties.put(ap1.getName(), new PropertyApiBean(ap1));
             }
         }
+    }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
+
+    public boolean isEnable() {
+        return enable;
+    }
+
+    public void setEnable(boolean enable) {
+        this.enable = enable;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getGroup() {
+        return group;
+    }
+
+    public void setGroup(String group) {
+        this.group = group;
+    }
+
+    public List<String> getPermissions() {
+        return permissions;
+    }
+
+    public void setPermissions(List<String> permissions) {
+        this.permissions = permissions;
+    }
+
+    public FlippingStrategyApiBean getFlippingStrategy() {
+        return flippingStrategy;
+    }
+
+    public void setFlippingStrategy(FlippingStrategyApiBean flippingStrategy) {
+        this.flippingStrategy = flippingStrategy;
+    }
+
+    public Map<String, PropertyApiBean> getCustomProperties() {
+        return customProperties;
+    }
+
+    public void setCustomProperties(Map<String, PropertyApiBean> customProperties) {
+        this.customProperties = customProperties;
     }
 }

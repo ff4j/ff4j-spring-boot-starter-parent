@@ -15,7 +15,6 @@
 package org.ff4j.spring.boot.domain;
 
 
-import lombok.Getter;
 import org.ff4j.audit.graph.PieSector;
 import org.ff4j.spring.boot.constants.CommonConstants;
 
@@ -31,13 +30,10 @@ public class PieSectorApiBean implements Serializable {
 
     private static final long serialVersionUID = -8998722757094848417L;
 
-    @Getter
     private String label = CommonConstants.N_A;
 
-    @Getter
     private double value = 0.0;
 
-    @Getter
     private String color = CommonConstants.HTML_WHITE;
 
     public PieSectorApiBean() {
@@ -48,5 +44,17 @@ public class PieSectorApiBean implements Serializable {
         this.label = sector.getLabel();
         this.value = sector.getValue();
         this.color = sector.getColor();
+    }
+
+    public String getLabel() {
+        return label;
+    }
+
+    public double getValue() {
+        return value;
+    }
+
+    public String getColor() {
+        return color;
     }
 }

@@ -18,8 +18,6 @@ import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import lombok.Getter;
-import lombok.Setter;
 import org.apache.commons.lang3.StringUtils;
 import org.ff4j.security.AbstractAuthorizationManager;
 import org.ff4j.spring.boot.resources.AbstractStepDef;
@@ -106,10 +104,8 @@ public class FF4JStepDef extends AbstractStepDef {
     }
 
     private class TestAuthorizationsManager extends AbstractAuthorizationManager {
-        @Setter
         private String currentUserPermissions;
-        @Getter
-        @Setter
+
         private String allPermissions;
 
         @Override
@@ -121,14 +117,31 @@ public class FF4JStepDef extends AbstractStepDef {
         public Set<String> listAllPermissions() {
             return StringUtils.isBlank(allPermissions) ? null : new HashSet<>(Arrays.asList(allPermissions.split(",")));
         }
+
+        public void setCurrentUserPermissions(String currentUserPermissions) {
+            this.currentUserPermissions = currentUserPermissions;
+        }
+
+        public String getAllPermissions() {
+            return allPermissions;
+        }
+
+        public void setAllPermissions(String allPermissions) {
+            this.allPermissions = allPermissions;
+        }
     }
 
     private class FormParam {
-        @Getter
-        @Setter
         private String name;
-        @Getter
-        @Setter
         private String value;
+
+        public String getName() {
+            return name;
+        }
+
+
+        public String getValue() {
+            return value;
+        }
     }
 }

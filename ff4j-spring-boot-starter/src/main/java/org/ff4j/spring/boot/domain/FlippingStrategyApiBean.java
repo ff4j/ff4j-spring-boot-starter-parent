@@ -14,8 +14,6 @@
 
 package org.ff4j.spring.boot.domain;
 
-import lombok.Getter;
-import lombok.Setter;
 import org.ff4j.core.FlippingStrategy;
 
 import java.io.Serializable;
@@ -31,12 +29,8 @@ public class FlippingStrategyApiBean implements Serializable {
 
     private static final long serialVersionUID = 2257391205134600598L;
 
-    @Getter
-    @Setter
     private String type;
 
-    @Getter
-    @Setter
     private Map<String, String> initParams = new HashMap<>();
 
     public FlippingStrategyApiBean() {
@@ -46,5 +40,21 @@ public class FlippingStrategyApiBean implements Serializable {
     public FlippingStrategyApiBean(FlippingStrategy fs) {
         this.type = fs.getClass().getCanonicalName();
         this.initParams = fs.getInitParams();
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public Map<String, String> getInitParams() {
+        return initParams;
+    }
+
+    public void setInitParams(Map<String, String> initParams) {
+        this.initParams = initParams;
     }
 }

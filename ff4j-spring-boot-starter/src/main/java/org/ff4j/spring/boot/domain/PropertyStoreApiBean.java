@@ -15,7 +15,6 @@
 package org.ff4j.spring.boot.domain;
 
 
-import lombok.Getter;
 import org.ff4j.cache.FF4jCacheProxy;
 import org.ff4j.property.store.PropertyStore;
 
@@ -32,16 +31,12 @@ public class PropertyStoreApiBean implements Serializable {
 
     private static final long serialVersionUID = 5459281574635411541L;
 
-    @Getter
     private String type;
 
-    @Getter
     private int numberOfProperties;
 
-    @Getter
     private Set<String> properties = new HashSet<>();
 
-    @Getter
     private CacheApiBean cache;
 
     public PropertyStoreApiBean(PropertyStore pStore) {
@@ -51,5 +46,21 @@ public class PropertyStoreApiBean implements Serializable {
         }
         properties = pStore.listPropertyNames();
         numberOfProperties = properties.size();
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public int getNumberOfProperties() {
+        return numberOfProperties;
+    }
+
+    public Set<String> getProperties() {
+        return properties;
+    }
+
+    public CacheApiBean getCache() {
+        return cache;
     }
 }

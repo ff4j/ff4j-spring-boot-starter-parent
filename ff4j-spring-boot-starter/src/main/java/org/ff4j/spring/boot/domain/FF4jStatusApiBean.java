@@ -15,7 +15,6 @@
 package org.ff4j.spring.boot.domain;
 
 
-import lombok.Getter;
 import org.ff4j.FF4j;
 
 import java.io.Serializable;
@@ -30,22 +29,16 @@ public class FF4jStatusApiBean implements Serializable {
 
     private static final long serialVersionUID = 3126369513162358650L;
 
-    @Getter
     private String uptime;
 
-    @Getter
     private boolean autocreate;
 
-    @Getter
     private String version = "N/A";
 
-    @Getter
     private FeatureStoreApiBean featuresStore;
 
-    @Getter
     private EventRepositoryApiBean eventRepository;
 
-    @Getter
     private AuthorizationsManagerApiBean authorizationsManager;
 
     public FF4jStatusApiBean(FF4j ff4j) {
@@ -73,5 +66,29 @@ public class FF4jStatusApiBean implements Serializable {
         if (null != ff4j.getAuthorizationsManager()) {
             authorizationsManager = new AuthorizationsManagerApiBean(ff4j.getAuthorizationsManager());
         }
+    }
+
+    public String getUptime() {
+        return uptime;
+    }
+
+    public boolean isAutocreate() {
+        return autocreate;
+    }
+
+    public String getVersion() {
+        return version;
+    }
+
+    public FeatureStoreApiBean getFeaturesStore() {
+        return featuresStore;
+    }
+
+    public EventRepositoryApiBean getEventRepository() {
+        return eventRepository;
+    }
+
+    public AuthorizationsManagerApiBean getAuthorizationsManager() {
+        return authorizationsManager;
     }
 }

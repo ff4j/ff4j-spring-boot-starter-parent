@@ -15,8 +15,6 @@
 package org.ff4j.spring.boot.domain;
 
 
-import lombok.Getter;
-import lombok.Setter;
 import org.ff4j.property.Property;
 import org.ff4j.property.util.PropertyFactory;
 
@@ -34,23 +32,14 @@ public class PropertyApiBean implements Serializable {
 
     private static final long serialVersionUID = -5366099799518640405L;
 
-    @Getter
-    @Setter
     private String name;
 
-    @Getter
-    @Setter
     private String description;
 
-    @Getter
-    @Setter
     private String type;
 
-    @Getter
-    @Setter
     private String value;
 
-    @Getter
     private Set<String> fixedValues = new HashSet<>();
 
     public PropertyApiBean() {
@@ -71,5 +60,25 @@ public class PropertyApiBean implements Serializable {
 
     public Property asProperty() {
         return PropertyFactory.createProperty(name, type, value, description, fixedValues);
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public Set<String> getFixedValues() {
+        return fixedValues;
     }
 }

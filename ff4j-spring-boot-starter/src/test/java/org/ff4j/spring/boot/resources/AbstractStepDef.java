@@ -14,8 +14,6 @@
 
 package org.ff4j.spring.boot.resources;
 
-import lombok.Getter;
-import lombok.Setter;
 import org.apache.commons.lang3.StringUtils;
 import org.ff4j.FF4j;
 import org.ff4j.core.Feature;
@@ -164,10 +162,16 @@ public abstract class AbstractStepDef {
         STRING("string", PropertyString.class.getName()),
         BOOLEAN("boolean", PropertyBoolean.class.getName());
 
-        @Getter
         private String name;
-        @Getter
         private String type;
+
+        public String getName() {
+            return name;
+        }
+
+        public String getType() {
+            return type;
+        }
 
         PropertyValueEnum(String name, String type) {
             this.name = name;
@@ -185,38 +189,98 @@ public abstract class AbstractStepDef {
     }
 
     protected class FeaturePojo {
-        @Getter
-        @Setter
         private String uid;
-        @Getter
-        @Setter
         private String enable;
-        @Getter
-        @Setter
         private String description;
-        @Getter
-        @Setter
         private String group;
-        @Getter
-        @Setter
         private String permissions;
+
+        public String getUid() {
+            return uid;
+        }
+
+        public void setUid(String uid) {
+            this.uid = uid;
+        }
+
+        public String getEnable() {
+            return enable;
+        }
+
+        public void setEnable(String enable) {
+            this.enable = enable;
+        }
+
+        public String getDescription() {
+            return description;
+        }
+
+        public void setDescription(String description) {
+            this.description = description;
+        }
+
+        public String getGroup() {
+            return group;
+        }
+
+        public void setGroup(String group) {
+            this.group = group;
+        }
+
+        public String getPermissions() {
+            return permissions;
+        }
+
+        public void setPermissions(String permissions) {
+            this.permissions = permissions;
+        }
     }
 
     protected class PropertyPojo {
-        @Getter
-        @Setter
         private String name;
-        @Getter
-        @Setter
         private String description;
-        @Getter
-        @Setter
         private String type;
-        @Getter
-        @Setter
         private String value;
-        @Getter
-        @Setter
         private String fixedValueCSV;
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getDescription() {
+            return description;
+        }
+
+        public void setDescription(String description) {
+            this.description = description;
+        }
+
+        public String getType() {
+            return type;
+        }
+
+        public void setType(String type) {
+            this.type = type;
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        public void setValue(String value) {
+            this.value = value;
+        }
+
+        public String getFixedValueCSV() {
+            return fixedValueCSV;
+        }
+
+        public void setFixedValueCSV(String fixedValueCSV) {
+            this.fixedValueCSV = fixedValueCSV;
+        }
     }
 }

@@ -15,7 +15,6 @@
 package org.ff4j.spring.boot.domain;
 
 
-import lombok.Getter;
 import org.ff4j.audit.graph.BarChart;
 import org.ff4j.audit.graph.PieChart;
 import org.ff4j.audit.graph.PieSector;
@@ -35,16 +34,12 @@ public class EventRepositoryApiBean implements Serializable {
 
     private static final long serialVersionUID = -3365322115944400241L;
 
-    @Getter
     private String type;
 
-    @Getter
     private int hitCount;
 
-    @Getter
     private PieChartApiBean eventsPie;
 
-    @Getter
     private BarChartApiBean barChart;
 
     public EventRepositoryApiBean(EventRepository evtRepository, Long start, Long end) {
@@ -78,5 +73,37 @@ public class EventRepositoryApiBean implements Serializable {
         for (PieSector sector : pie.getSectors()) {
             hitCount += sector.getValue();
         }
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public int getHitCount() {
+        return hitCount;
+    }
+
+    public void setHitCount(int hitCount) {
+        this.hitCount = hitCount;
+    }
+
+    public PieChartApiBean getEventsPie() {
+        return eventsPie;
+    }
+
+    public void setEventsPie(PieChartApiBean eventsPie) {
+        this.eventsPie = eventsPie;
+    }
+
+    public BarChartApiBean getBarChart() {
+        return barChart;
+    }
+
+    public void setBarChart(BarChartApiBean barChart) {
+        this.barChart = barChart;
     }
 }
