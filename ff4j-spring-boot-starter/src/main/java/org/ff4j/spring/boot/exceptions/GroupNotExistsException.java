@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
  *
  * @author <a href="mailto:paul58914080@gmail.com">Paul Williams</a>
  */
-@ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "group does not exists")
+@ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "group does not exist")
 public class GroupNotExistsException extends RuntimeException {
     private static final long serialVersionUID = 1411016561174496249L;
 }
