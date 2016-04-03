@@ -79,31 +79,15 @@ public class EventRepositoryApiBean implements Serializable {
         return type;
     }
 
-    public void setType(String type) {
-        this.type = type;
-    }
-
     public int getHitCount() {
         return hitCount;
-    }
-
-    public void setHitCount(int hitCount) {
-        this.hitCount = hitCount;
     }
 
     public PieChartApiBean getEventsPie() {
         return eventsPie;
     }
 
-    public void setEventsPie(PieChartApiBean eventsPie) {
-        this.eventsPie = eventsPie;
-    }
-
     public BarChartApiBean getBarChart() {
         return barChart;
-    }
-
-    public void setBarChart(BarChartApiBean barChart) {
-        this.barChart = barChart;
     }
 }
