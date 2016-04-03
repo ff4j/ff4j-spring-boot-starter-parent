@@ -25,4 +25,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ResponseStatus(value = HttpStatus.BAD_REQUEST, reason = "flipping strategy specified wrongly")
 public class FlippingStrategyBadRequestException extends RuntimeException {
     private static final long serialVersionUID = -3239022865148294488L;
+
+    public FlippingStrategyBadRequestException(Throwable cause) {
+        super(cause);
+    }
 }

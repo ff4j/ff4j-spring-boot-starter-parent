@@ -25,8 +25,6 @@ import org.ff4j.spring.boot.exceptions.PropertiesBadRequestException;
 import org.ff4j.spring.boot.model.FeatureActions;
 import org.ff4j.spring.boot.validator.FeatureValidator;
 import org.ff4j.utils.MappingUtil;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -41,8 +39,6 @@ import java.util.Map;
  */
 @Service
 public class FeatureServices {
-
-    private final Logger logger = LoggerFactory.getLogger(FeatureServices.class);
 
     @Autowired
     private FF4j ff4j;
@@ -81,8 +77,7 @@ public class FeatureServices {
                     feature.addProperty(propertyBean.asProperty());
                 }
             } catch (IllegalArgumentException exception) {
-                logger.error("IllegalArgumentException", exception);
-                throw new PropertiesBadRequestException();
+                throw new PropertiesBadRequestException(exception);
             }
         }
     }
@@ -94,8 +89,7 @@ public class FeatureServices {
                 Map<String, String> initParams = flipApiBean.getInitParams();
                 feature.setFlippingStrategy(MappingUtil.instanceFlippingStrategy(featureApiBean.getUid(), flipApiBean.getType(), initParams));
             } catch (FeatureAccessException exception) {
-                logger.error("FeatureAccessException", exception);
-                throw new FlippingStrategyBadRequestException();
+                throw new FlippingStrategyBadRequestException(exception);
             }
         }
     }

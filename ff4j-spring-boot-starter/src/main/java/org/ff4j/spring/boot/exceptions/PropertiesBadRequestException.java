@@ -25,4 +25,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ResponseStatus(value = HttpStatus.BAD_REQUEST, reason = "properties specified wrongly")
 public class PropertiesBadRequestException extends RuntimeException {
     private static final long serialVersionUID = -3239022865148294488L;
+
+    public PropertiesBadRequestException(Throwable cause) {
+        super(cause);
+    }
 }
