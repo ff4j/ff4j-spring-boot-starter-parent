@@ -22,8 +22,8 @@ import org.ff4j.core.Feature;
 import org.ff4j.spring.boot.domain.CacheApiBean;
 import org.ff4j.spring.boot.domain.FeatureApiBean;
 import org.ff4j.spring.boot.domain.FeatureStoreApiBean;
-import org.ff4j.spring.boot.exceptions.FeatureStoreNotCached;
 import org.ff4j.spring.boot.domain.GroupDescApiBean;
+import org.ff4j.spring.boot.exceptions.FeatureStoreNotCached;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -70,12 +70,10 @@ public class FeatureStoreServices {
 
     private void initGroupMap(Map<String, GroupDescApiBean> groups, String featureUID, String groupName) {
         if (StringUtils.isNotBlank(groupName)) {
-            if (groups.containsKey(groupName)) {
-                groups.get(groupName).getFeatures().add(featureUID);
-            } else {
+            if (!groups.containsKey(groupName)) {
                 groups.put(groupName, new GroupDescApiBean(groupName, new ArrayList<>()));
-                groups.get(groupName).getFeatures().add(featureUID);
             }
+            groups.get(groupName).getFeatures().add(featureUID);
         }
     }
 
