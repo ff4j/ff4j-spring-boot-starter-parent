@@ -50,6 +50,4 @@ More information at [ff4j.org](http://ff4j.org) or [reference guide](https://git
   <br>
   <img src="https://raw.github.com/clun/ff4j/master/src/site/resources/images/stack3.png?raw=true" />
 </p>
-
-
 </p>
