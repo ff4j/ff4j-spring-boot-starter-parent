@@ -17,9 +17,9 @@
          xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>ff4j-services</artifactId>
+    <artifactId>ff4j-spring-services</artifactId>
     <packaging>jar</packaging>
-    <name>ff4j-services</name>
+    <name>ff4j-spring-services</name>
     <description>A spring oriented services for ff4j</description>
     <parent>
         <groupId>org.ff4j</groupId>
@@ -71,7 +71,7 @@
         </dependency>
     </dependencies>
     <build>
-        <finalName>ff4j-services</finalName>
+        <finalName>ff4j-spring-services</finalName>
         <directory>target</directory>
         <outputDirectory>target/classes</outputDirectory>
         <testOutputDirectory>target/test-classes</testOutputDirectory>
@@ -99,7 +99,7 @@
                     <testTarget>1.8</testTarget>
                 </configuration>
             </plugin>
-            <!--<plugin>
+            <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>0.7.5.201505241946</version>
@@ -122,7 +122,7 @@
                 <groupId>org.eluder.coveralls</groupId>
                 <artifactId>coveralls-maven-plugin</artifactId>
                 <version>4.1.0</version>
-            </plugin>-->
+            </plugin>
         </plugins>
     </build>
 </project>

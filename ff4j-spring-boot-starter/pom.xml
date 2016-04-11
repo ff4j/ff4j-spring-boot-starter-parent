@@ -39,7 +39,7 @@
         </dependency>
         <dependency>
             <groupId>org.ff4j</groupId>
-            <artifactId>ff4j-services</artifactId>
+            <artifactId>ff4j-spring-services</artifactId>
             <scope>compile</scope>
             <type>jar</type>
             <version>${project.version}</version>

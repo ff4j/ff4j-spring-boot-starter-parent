@@ -37,7 +37,7 @@
         <spring.version>4.2.5.RELEASE</spring.version>
     </properties>
     <modules>
-        <module>ff4j-services</module>
+        <module>ff4j-spring-services</module>
         <module>ff4j-spring-boot-autoconfigure</module>
         <module>ff4j-spring-boot-starter</module>
     </modules>
