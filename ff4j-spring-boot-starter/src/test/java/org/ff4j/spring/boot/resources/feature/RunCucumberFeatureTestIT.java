@@ -27,5 +27,5 @@ import org.junit.runner.RunWith;
 @CucumberOptions(features = "classpath:features/FeatureResource.feature", strict = true,
         plugin = {"json:target/cucumber/FeatureResource.json", "junit:target/cucumber/FeatureResource.xml"},
         glue = "classpath:org/ff4j/spring/boot/resources/feature", tags = "@FeatureResource")
-public class RunCucumberFeatureTest {
+public class RunCucumberFeatureTestIT {
 }
