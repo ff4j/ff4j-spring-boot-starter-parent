@@ -205,7 +205,7 @@
                     </execution>
                     <execution>
                         <id>integration-test</id>
-                        <phase>integration-test</phase>
+                        <phase>test</phase>
                         <goals>
                             <goal>test</goal>
                         </goals>
