@@ -34,13 +34,20 @@
         <jsonassert.version>1.2.3</jsonassert.version>
         <easymock.version>3.1</easymock.version>
         <swagger.version>2.2.2</swagger.version>
+        <spring.version>4.2.5.RELEASE</spring.version>
     </properties>
     <modules>
+        <module>ff4j-services</module>
         <module>ff4j-spring-boot-autoconfigure</module>
         <module>ff4j-spring-boot-starter</module>
     </modules>
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context</artifactId>
+                <version>4.2.5.RELEASE</version>
+            </dependency>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot</artifactId>

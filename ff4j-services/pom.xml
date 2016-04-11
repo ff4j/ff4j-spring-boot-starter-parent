@@ -17,11 +17,10 @@
          xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>ff4j-spring-boot-starter</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <artifactId>ff4j-services</artifactId>
     <packaging>jar</packaging>
-    <name>ff4j-spring-boot-starter</name>
-    <description>A spring boot project for feature toggling with ff4j</description>
+    <name>ff4j-services</name>
+    <description>A spring oriented services for ff4j</description>
     <parent>
         <groupId>org.ff4j</groupId>
         <artifactId>ff4j-spring-boot-starter-parent</artifactId>
@@ -29,20 +28,12 @@
     </parent>
     <dependencies>
         <dependency>
-            <groupId>org.ff4j</groupId>
-            <artifactId>ff4j-spring-boot-autoconfigure</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
         </dependency>
         <dependency>
             <groupId>org.ff4j</groupId>
-            <artifactId>ff4j-services</artifactId>
-            <scope>compile</scope>
-            <type>jar</type>
-            <version>${project.version}</version>
+            <artifactId>ff4j-core</artifactId>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
@@ -51,15 +42,6 @@
         <dependency>
             <groupId>commons-collections</groupId>
             <artifactId>commons-collections</artifactId>
-        </dependency>
-        <!-- Swagger -->
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger2</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger-ui</artifactId>
         </dependency>
         <!-- Test dependency -->
         <dependency>
@@ -87,13 +69,9 @@
             <groupId>org.easymock</groupId>
             <artifactId>easymock</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-        </dependency>
     </dependencies>
     <build>
-        <finalName>ff4j-spring-boot-starter</finalName>
+        <finalName>ff4j-services</finalName>
         <directory>target</directory>
         <outputDirectory>target/classes</outputDirectory>
         <testOutputDirectory>target/test-classes</testOutputDirectory>

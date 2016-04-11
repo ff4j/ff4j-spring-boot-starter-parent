@@ -12,28 +12,24 @@
  * Copyright 2013-2016 the original author or authors.
  */
 
-package org.ff4j.spring.boot.config;
+package org.ff4j.services;
 
 import org.ff4j.FF4j;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
+import org.ff4j.services.domain.EventRepositoryApiBean;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  * Created by Paul
  *
  * @author <a href="mailto:paul58914080@gmail.com">Paul Williams</a>
  */
-@Configuration
-@ConditionalOnClass({FF4j.class})
-@ComponentScan(value = {"org.ff4j.spring.boot", "org.ff4j.services"})
-public class FF4JConfiguration {
+@Service
+public class MonitoringServices {
+    @Autowired
+    private FF4j ff4j;
 
-    @Bean
-    @ConditionalOnMissingBean
-    public FF4j getFF4j() {
-        return new FF4j();
+    public EventRepositoryApiBean getMonitoringStatus(Long start, Long end) {
+        return new EventRepositoryApiBean(ff4j.getEventRepository(), start, end);
     }
 }

@@ -12,28 +12,36 @@
  * Copyright 2013-2016 the original author or authors.
  */
 
-package org.ff4j.spring.boot.config;
+package org.ff4j.services.domain;
 
-import org.ff4j.FF4j;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Paul
  *
  * @author <a href="mailto:paul58914080@gmail.com">Paul Williams</a>
  */
-@Configuration
-@ConditionalOnClass({FF4j.class})
-@ComponentScan(value = {"org.ff4j.spring.boot", "org.ff4j.services"})
-public class FF4JConfiguration {
+public class GroupDescApiBean implements Serializable {
 
-    @Bean
-    @ConditionalOnMissingBean
-    public FF4j getFF4j() {
-        return new FF4j();
+    private static final long serialVersionUID = -7339190302097692175L;
+
+    private String groupName;
+
+    private List<String> features = new ArrayList<>();
+
+    public GroupDescApiBean(String groupName, List<String> names) {
+        this.groupName = groupName;
+        this.features = names;
+    }
+
+    public String getGroupName() {
+        return groupName;
+    }
+
+    public List<String> getFeatures() {
+        return features;
     }
 }

@@ -12,28 +12,17 @@
  * Copyright 2013-2016 the original author or authors.
  */
 
-package org.ff4j.spring.boot.config;
-
-import org.ff4j.FF4j;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
+package org.ff4j.services.exceptions;
 
 /**
  * Created by Paul
  *
  * @author <a href="mailto:paul58914080@gmail.com">Paul Williams</a>
  */
-@Configuration
-@ConditionalOnClass({FF4j.class})
-@ComponentScan(value = {"org.ff4j.spring.boot", "org.ff4j.services"})
-public class FF4JConfiguration {
+public class FlippingStrategyBadRequestException extends RuntimeException {
+    private static final long serialVersionUID = -3239022865148294488L;
 
-    @Bean
-    @ConditionalOnMissingBean
-    public FF4j getFF4j() {
-        return new FF4j();
+    public FlippingStrategyBadRequestException(Throwable cause) {
+        super(cause);
     }
 }
