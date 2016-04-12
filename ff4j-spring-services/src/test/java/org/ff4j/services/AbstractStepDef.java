@@ -74,7 +74,7 @@ public class AbstractStepDef {
         ff4j.setPropertiesStore(new InMemoryPropertyStore());
     }
 
-    private Property asProperty(String name, String type, String value, String description, Set<String> fixedValues) {
+    protected Property asProperty(String name, String type, String value, String description, Set<String> fixedValues) {
         return PropertyFactory.createProperty(name, getType(type), value, description, fixedValues);
     }
 
