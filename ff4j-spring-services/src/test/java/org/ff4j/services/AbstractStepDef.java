@@ -210,7 +210,7 @@ public class AbstractStepDef {
             this.value = value;
         }
 
-        String getFixedValueCSV() {
+        public String getFixedValueCSV() {
             return fixedValueCSV;
         }
 

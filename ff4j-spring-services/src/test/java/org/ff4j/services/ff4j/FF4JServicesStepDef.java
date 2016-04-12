@@ -113,13 +113,13 @@ public class FF4JServicesStepDef extends AbstractStepDef {
 
     @When("^the user requests to check if the feature is flipped with feature uid as \"([^\"]*)\" and parameters$")
     public void the_user_requests_to_check_if_the_feature_is_flipped_with_feature_uid_as_and_parameters(String featureUID, Map<String, String> params) throws Throwable {
-        params = new HashMap<>(params);
-        Set<String> keys = params.keySet();
+        Map<String, String> hashedParams = new HashMap<>(params);
+        Set<String> keys = hashedParams.keySet();
         for (String key : keys) {
-            params.replace(key, params.get(key).replace("or", "|"));
+            hashedParams.replace(key, hashedParams.get(key).replace("or", "|"));
         }
         try {
-            actualResponse = ff4jServices.check(featureUID, params);
+            actualResponse = ff4jServices.check(featureUID, hashedParams);
         } catch (Throwable t) {
             exception = t;
         }
