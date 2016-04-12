@@ -36,7 +36,7 @@ import static org.ff4j.services.utils.JsonUtils.GSON;
  *
  * @author <a href="mailto:paul58914080@gmail.com">Paul Williams</a>
  */
-public class FeatureStepDef extends AbstractStepDef {
+public class FeatureServicesStepDef extends AbstractStepDef {
 
     @Autowired
     private FeatureServices featureServices;
