@@ -12,7 +12,7 @@
  * Copyright 2013-2016 the original author or authors.
  */
 
-package org.ff4j.services.feature;
+package org.ff4j.services.featurestore;
 
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
@@ -24,8 +24,8 @@ import org.junit.runner.RunWith;
  * @author <a href="mailto:paul58914080@gmail.com">Paul Williams</a>
  */
 @RunWith(Cucumber.class)
-@CucumberOptions(features = "classpath:features/FeatureService.feature", strict = true,
-        plugin = {"json:target/cucumber/FeatureService.json", "junit:target/cucumber/FeatureService.xml"},
-        glue = "classpath:org/ff4j/services", tags = "@FeatureServices")
-public class RunCucumberFeatureTest {
+@CucumberOptions(features = "classpath:features/FeatureStoreServices.feature", strict = true,
+        plugin = {"json:target/cucumber/FeatureStoreServices.json", "junit:target/cucumber/FeatureStoreServices.xml"},
+        glue = "classpath:org/ff4j/services/featurestore", tags = "@FeatureStoreServices")
+public class RunCucumberFeatureStoreServicesTest {
 }
