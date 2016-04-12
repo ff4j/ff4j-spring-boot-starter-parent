@@ -1,6 +1,6 @@
 @FF4JServices
 
-Feature: Provides RESTful api's to do the following
+Feature: Provides api's to do the following
   - Provide core information on ff4J and available sub resources
   - Display security resources
   - Check if a feature is flipped
