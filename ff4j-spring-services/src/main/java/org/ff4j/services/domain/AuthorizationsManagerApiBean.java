@@ -52,4 +52,12 @@ public class AuthorizationsManagerApiBean implements Serializable {
     public List<String> getPermissions() {
         return permissions;
     }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public void setPermissions(List<String> permissions) {
+        this.permissions = permissions;
+    }
 }

@@ -95,4 +95,28 @@ public class FF4jStatusApiBean implements Serializable {
     public AuthorizationsManagerApiBean getAuthorizationsManager() {
         return authorizationsManager;
     }
+
+    public void setUptime(String uptime) {
+        this.uptime = uptime;
+    }
+
+    public void setAutocreate(boolean autocreate) {
+        this.autocreate = autocreate;
+    }
+
+    public void setVersion(String version) {
+        this.version = version;
+    }
+
+    public void setFeaturesStore(FeatureStoreApiBean featuresStore) {
+        this.featuresStore = featuresStore;
+    }
+
+    public void setEventRepository(EventRepositoryApiBean eventRepository) {
+        this.eventRepository = eventRepository;
+    }
+
+    public void setAuthorizationsManager(AuthorizationsManagerApiBean authorizationsManager) {
+        this.authorizationsManager = authorizationsManager;
+    }
 }

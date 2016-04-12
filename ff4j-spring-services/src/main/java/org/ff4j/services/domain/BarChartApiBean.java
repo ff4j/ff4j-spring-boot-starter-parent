@@ -59,4 +59,16 @@ public class BarChartApiBean implements Serializable {
     public List<BarSeriesApiBean> getSeries() {
         return series;
     }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setLabels(List<String> labels) {
+        this.labels = labels;
+    }
+
+    public void setSeries(List<BarSeriesApiBean> series) {
+        this.series = series;
+    }
 }

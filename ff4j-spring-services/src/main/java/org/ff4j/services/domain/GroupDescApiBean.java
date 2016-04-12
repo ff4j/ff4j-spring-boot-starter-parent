@@ -48,4 +48,12 @@ public class GroupDescApiBean implements Serializable {
     public List<String> getFeatures() {
         return features;
     }
+
+    public void setGroupName(String groupName) {
+        this.groupName = groupName;
+    }
+
+    public void setFeatures(List<String> features) {
+        this.features = features;
+    }
 }

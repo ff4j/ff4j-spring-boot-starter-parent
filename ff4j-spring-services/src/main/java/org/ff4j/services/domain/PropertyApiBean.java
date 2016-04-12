@@ -81,4 +81,24 @@ public class PropertyApiBean implements Serializable {
     public Set<String> getFixedValues() {
         return fixedValues;
     }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
+    }
+
+    public void setFixedValues(Set<String> fixedValues) {
+        this.fixedValues = fixedValues;
+    }
 }

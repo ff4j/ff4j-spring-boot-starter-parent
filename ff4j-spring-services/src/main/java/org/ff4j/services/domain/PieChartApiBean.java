@@ -51,4 +51,12 @@ public class PieChartApiBean implements Serializable {
     public List<PieSectorApiBean> getSectors() {
         return sectors;
     }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setSectors(List<PieSectorApiBean> sectors) {
+        this.sectors = sectors;
+    }
 }

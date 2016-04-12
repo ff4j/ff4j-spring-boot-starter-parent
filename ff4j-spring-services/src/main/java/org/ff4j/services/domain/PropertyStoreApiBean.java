@@ -67,4 +67,20 @@ public class PropertyStoreApiBean implements Serializable {
     public CacheApiBean getCache() {
         return cache;
     }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public void setNumberOfProperties(int numberOfProperties) {
+        this.numberOfProperties = numberOfProperties;
+    }
+
+    public void setProperties(Set<String> properties) {
+        this.properties = properties;
+    }
+
+    public void setCache(CacheApiBean cache) {
+        this.cache = cache;
+    }
 }

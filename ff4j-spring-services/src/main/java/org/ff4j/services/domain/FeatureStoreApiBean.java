@@ -81,4 +81,28 @@ public class FeatureStoreApiBean implements Serializable {
     public CacheApiBean getCache() {
         return cache;
     }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public void setNumberOfFeatures(int numberOfFeatures) {
+        this.numberOfFeatures = numberOfFeatures;
+    }
+
+    public void setNumberOfGroups(int numberOfGroups) {
+        this.numberOfGroups = numberOfGroups;
+    }
+
+    public void setFeatures(List<String> features) {
+        this.features = features;
+    }
+
+    public void setGroups(List<String> groups) {
+        this.groups = groups;
+    }
+
+    public void setCache(CacheApiBean cache) {
+        this.cache = cache;
+    }
 }

@@ -78,4 +78,20 @@ public class CacheApiBean implements Serializable {
     public Set<String> getFeatureNames() {
         return featureNames;
     }
+
+    public void setCacheProvider(String cacheProvider) {
+        this.cacheProvider = cacheProvider;
+    }
+
+    public void setCacheStore(String cacheStore) {
+        this.cacheStore = cacheStore;
+    }
+
+    public void setFeatureNames(Set<String> featureNames) {
+        this.featureNames = featureNames;
+    }
+
+    public void setPropertyNames(Set<String> propertyNames) {
+        this.propertyNames = propertyNames;
+    }
 }
