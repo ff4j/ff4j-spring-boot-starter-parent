@@ -41,15 +41,11 @@ import static org.ff4j.services.utils.JsonUtils.GSON;
  * @author <a href="mailto:paul58914080@gmail.com">Paul Williams</a>
  */
 public class FF4JServicesStepDef extends AbstractStepDef {
-
     @Autowired
     private FF4jServices ff4jServices;
-
     @Autowired
     private FeatureServices featureServices;
-
     private Throwable exception;
-
     private Object actualResponse;
 
     @Given("^the feature store is cleared$")
