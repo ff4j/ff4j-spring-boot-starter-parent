@@ -14,13 +14,20 @@
 
 package org.ff4j.services;
 
+import org.apache.commons.lang3.StringUtils;
 import org.ff4j.FF4j;
 import org.ff4j.core.Feature;
+import org.ff4j.property.*;
+import org.ff4j.property.store.InMemoryPropertyStore;
+import org.ff4j.property.util.PropertyFactory;
+import org.ff4j.store.InMemoryFeatureStore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Paul
@@ -41,10 +48,80 @@ public class AbstractStepDef {
             createFeature(feature);
         }
     }
+
+    protected void createProperties(List<PropertyPojo> properties) {
+        for (PropertyPojo propertyPojo : properties) {
+            Property property = asProperty(propertyPojo.getName(), propertyPojo.getType(), propertyPojo.getValue(),
+                    propertyPojo.getDescription(),
+                    StringUtils.isNotBlank(propertyPojo.getFixedValueCSV()) ? new HashSet<>(Arrays.asList(propertyPojo.getFixedValueCSV().split(","))) : null);
+            createProperty(property);
+        }
+    }
+
+    private void createProperty(Property property) {
+        ff4j.createProperty(property);
+    }
+
     protected void createFeature(Feature feature) {
         ff4j.createFeature(feature);
     }
 
+    protected void clearFeatureStore() {
+        ff4j.setFeatureStore(new InMemoryFeatureStore());
+    }
+
+    protected void clearPropertyStore() {
+        ff4j.setPropertiesStore(new InMemoryPropertyStore());
+    }
+
+    private Property asProperty(String name, String type, String value, String description, Set<String> fixedValues) {
+        return PropertyFactory.createProperty(name, getType(type), value, description, fixedValues);
+    }
+
+    private String getType(String name) {
+        PropertyValueEnum propertyEnum = PropertyValueEnum.getEnum(name);
+        switch (propertyEnum) {
+            case INT:
+            case LONG:
+            case STRING:
+            case BOOLEAN:
+                return propertyEnum.getType();
+            default:
+                return null;
+        }
+    }
+
+    private enum PropertyValueEnum {
+        INT("int", PropertyInt.class.getName()),
+        LONG("long", PropertyLong.class.getName()),
+        STRING("string", PropertyString.class.getName()),
+        BOOLEAN("boolean", PropertyBoolean.class.getName());
+
+        private String name;
+        private String type;
+
+        public String getName() {
+            return name;
+        }
+
+        public String getType() {
+            return type;
+        }
+
+        PropertyValueEnum(String name, String type) {
+            this.name = name;
+            this.type = type;
+        }
+
+        public static PropertyValueEnum getEnum(String name) {
+            for (PropertyValueEnum propertyValueEnum : PropertyValueEnum.values()) {
+                if (StringUtils.isNotBlank(name) && name.equalsIgnoreCase(propertyValueEnum.getName())) {
+                    return propertyValueEnum;
+                }
+            }
+            throw new UnsupportedOperationException("property " + name + " not found");
+        }
+    }
 
     protected class FeaturePojo {
         private String uid;
@@ -91,6 +168,54 @@ public class AbstractStepDef {
 
         public void setPermissions(String permissions) {
             this.permissions = permissions;
+        }
+    }
+
+    protected class PropertyPojo {
+        private String name;
+        private String description;
+        private String type;
+        private String value;
+        private String fixedValueCSV;
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getDescription() {
+            return description;
+        }
+
+        public void setDescription(String description) {
+            this.description = description;
+        }
+
+        public String getType() {
+            return type;
+        }
+
+        public void setType(String type) {
+            this.type = type;
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        public void setValue(String value) {
+            this.value = value;
+        }
+
+        String getFixedValueCSV() {
+            return fixedValueCSV;
+        }
+
+        public void setFixedValueCSV(String fixedValueCSV) {
+            this.fixedValueCSV = fixedValueCSV;
         }
     }
 }
