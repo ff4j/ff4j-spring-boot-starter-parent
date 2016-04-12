@@ -36,6 +36,7 @@
         <swagger.version>2.2.2</swagger.version>
         <spring.version>4.2.5.RELEASE</spring.version>
         <version.jacoco>0.7.5.201505241946</version.jacoco>
+        <meanbean.version>2.0.3</meanbean.version>
     </properties>
     <modules>
         <module>ff4j-spring-services</module>
@@ -156,6 +157,12 @@
                         <groupId>commons-logging</groupId>
                     </exclusion>
                 </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.meanbean</groupId>
+                <artifactId>meanbean</artifactId>
+                <version>${meanbean.version}</version>
+                <scope>test</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>

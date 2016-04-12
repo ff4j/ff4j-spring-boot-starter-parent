@@ -42,6 +42,10 @@ public class EventRepositoryApiBean implements Serializable {
 
     private BarChartApiBean barChart;
 
+    public EventRepositoryApiBean() {
+        super();
+    }
+
     public EventRepositoryApiBean(EventRepository evtRepository, Long start, Long end) {
         type = evtRepository.getClass().getCanonicalName();
         Long computedStart = start;

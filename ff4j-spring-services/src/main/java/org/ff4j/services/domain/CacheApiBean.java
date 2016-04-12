@@ -40,6 +40,10 @@ public class CacheApiBean implements Serializable {
 
     private Set<String> propertyNames = new HashSet<>();
 
+    public CacheApiBean() {
+        super();
+    }
+
     public CacheApiBean(FeatureStore featureStore) {
         if (featureStore instanceof FF4jCacheProxy) {
             FF4jCacheProxy cacheProxy = (FF4jCacheProxy) featureStore;

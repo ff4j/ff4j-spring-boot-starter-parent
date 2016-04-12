@@ -36,6 +36,10 @@ public class AuthorizationsManagerApiBean implements Serializable {
 
     private List<String> permissions = new ArrayList<>();
 
+    public AuthorizationsManagerApiBean() {
+        super();
+    }
+
     public AuthorizationsManagerApiBean(AuthorizationsManager authMgr) {
         type = authMgr.getClass().getCanonicalName();
         permissions.addAll(authMgr.listAllPermissions());

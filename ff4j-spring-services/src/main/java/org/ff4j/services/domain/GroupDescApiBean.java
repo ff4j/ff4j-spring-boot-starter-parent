@@ -32,6 +32,10 @@ public class GroupDescApiBean implements Serializable {
 
     private List<String> features = new ArrayList<>();
 
+    public GroupDescApiBean() {
+        super();
+    }
+
     public GroupDescApiBean(String groupName, List<String> names) {
         this.groupName = groupName;
         this.features = names;

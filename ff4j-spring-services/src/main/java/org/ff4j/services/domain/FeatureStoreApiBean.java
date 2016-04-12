@@ -43,6 +43,10 @@ public class FeatureStoreApiBean implements Serializable {
 
     private CacheApiBean cache;
 
+    public FeatureStoreApiBean() {
+        super();
+    }
+
     public FeatureStoreApiBean(FeatureStore featureStore) {
         type = featureStore.getClass().getCanonicalName();
         if (featureStore instanceof FF4jCacheProxy) {

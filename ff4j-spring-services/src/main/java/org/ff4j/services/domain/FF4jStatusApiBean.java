@@ -41,6 +41,10 @@ public class FF4jStatusApiBean implements Serializable {
 
     private AuthorizationsManagerApiBean authorizationsManager;
 
+    public FF4jStatusApiBean() {
+        super();
+    }
+
     public FF4jStatusApiBean(FF4j ff4j) {
         // UpTime
         long up = System.currentTimeMillis() - ff4j.getStartTime();

@@ -38,6 +38,10 @@ public class BarChartApiBean implements Serializable {
 
     private List<BarSeriesApiBean> series = new ArrayList<>();
 
+    public BarChartApiBean() {
+        super();
+    }
+
     public BarChartApiBean(BarChart barChart) {
         this.title = barChart.getTitle();
         this.labels = barChart.getLabels();

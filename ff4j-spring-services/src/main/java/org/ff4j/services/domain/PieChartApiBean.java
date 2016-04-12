@@ -35,6 +35,10 @@ public class PieChartApiBean implements Serializable {
 
     private List<PieSectorApiBean> sectors = new ArrayList<>();
 
+    public PieChartApiBean() {
+        super();
+    }
+
     public PieChartApiBean(PieChart pie) {
         title = pie.getTitle();
         sectors.addAll(pie.getSectors().stream().map(PieSectorApiBean::new).collect(Collectors.toList()));
