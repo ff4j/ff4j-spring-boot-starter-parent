@@ -115,7 +115,7 @@ public class PropertyServicesStepDef extends AbstractStepDef {
 
     @Then("^the user gets the response as$")
     public void the_user_gets_the_response_as(String expectedResponse) throws Throwable {
-        JSONAssert.assertEquals(expectedResponse, GSON.toJson(actualResponse), true);
+        JSONAssert.assertEquals(expectedResponse, GSON.toJson(actualResponse), false);
     }
 }
 
