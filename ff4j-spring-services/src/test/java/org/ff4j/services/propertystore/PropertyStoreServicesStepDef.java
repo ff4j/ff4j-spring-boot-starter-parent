@@ -23,15 +23,11 @@ import org.ff4j.cache.InMemoryCacheManager;
 import org.ff4j.property.Property;
 import org.ff4j.services.AbstractStepDef;
 import org.ff4j.services.PropertyStoreServices;
-import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.ff4j.services.utils.JsonUtils.GSON;
 
 /**
  * Created by Paul
@@ -42,8 +38,6 @@ public class PropertyStoreServicesStepDef extends AbstractStepDef {
 
     @Autowired
     private PropertyStoreServices propertyStoreServices;
-    private Object actualResponse;
-    private Throwable exception;
 
     @Given("^the feature store is cleared$")
     public void the_feature_store_is_cleared() throws Throwable {
@@ -116,12 +110,12 @@ public class PropertyStoreServicesStepDef extends AbstractStepDef {
 
     @Then("^the user gets an exception \"([^\"]*)\"$")
     public void the_user_gets_an_exception(String className) throws Throwable {
-        assertThat(exception).isInstanceOf(Class.forName(className));
+        assertException(className);
     }
 
     @Then("^the user gets the response as$")
     public void the_user_gets_the_response_as(String expectedResponse) throws Throwable {
-        JSONAssert.assertEquals(expectedResponse, GSON.toJson(actualResponse), false);
+        assertLenientResponse(expectedResponse);
     }
 }
 

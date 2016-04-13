@@ -25,14 +25,10 @@ import org.ff4j.services.AbstractStepDef;
 import org.ff4j.services.FF4jServices;
 import org.ff4j.services.FeatureServices;
 import org.ff4j.services.domain.FeatureApiBean;
-import org.ff4j.services.model.FeatureActions;
-import org.ff4j.store.InMemoryFeatureStore;
-import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.*;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.ff4j.services.utils.JsonUtils.GSON;
 
 /**
@@ -41,16 +37,15 @@ import static org.ff4j.services.utils.JsonUtils.GSON;
  * @author <a href="mailto:paul58914080@gmail.com">Paul Williams</a>
  */
 public class FF4JServicesStepDef extends AbstractStepDef {
+
     @Autowired
     private FF4jServices ff4jServices;
     @Autowired
     private FeatureServices featureServices;
-    private Throwable exception;
-    private Object actualResponse;
 
     @Given("^the feature store is cleared$")
     public void the_feature_store_is_cleared() throws Throwable {
-        ff4j.setFeatureStore(new InMemoryFeatureStore());
+        clearFeatureStore();
     }
 
     @Given("^the following features exists in the feature store$")
@@ -137,27 +132,27 @@ public class FF4JServicesStepDef extends AbstractStepDef {
 
     @Then("^feature is updated$")
     public void feature_is_updated() throws Throwable {
-        assertThat(actualResponse).isEqualTo(FeatureActions.UPDATED);
+        assertUpdated();
     }
 
     @Then("^the user gets a response true$")
     public void the_user_gets_a_response_true() throws Throwable {
-        assertThat(Boolean.parseBoolean(actualResponse.toString())).isTrue();
+        assertTrue();
     }
 
     @Then("^the user gets a response false$")
     public void the_user_gets_a_response_false() throws Throwable {
-        assertThat(Boolean.parseBoolean(actualResponse.toString())).isFalse();
+        assertFalse();
     }
 
     @Then("^the user gets an exception \"([^\"]*)\"$")
     public void the_user_gets_an_exception(String className) throws Throwable {
-        assertThat(exception).isInstanceOf(Class.forName(className));
+        assertException(className);
     }
 
     @Then("^the user gets the response as$")
     public void the_user_gets_the_response_as(String expectedResponse) throws Throwable {
-        JSONAssert.assertEquals(expectedResponse, GSON.toJson(actualResponse), false);
+        assertLenientResponse(expectedResponse);
     }
 
     private class TestAuthorizationsManager extends AbstractAuthorizationManager {

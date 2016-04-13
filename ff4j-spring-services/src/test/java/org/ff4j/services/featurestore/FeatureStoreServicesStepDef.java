@@ -22,15 +22,10 @@ import org.ff4j.cache.InMemoryCacheManager;
 import org.ff4j.core.Feature;
 import org.ff4j.services.AbstractStepDef;
 import org.ff4j.services.FeatureStoreServices;
-import org.ff4j.store.InMemoryFeatureStore;
-import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Arrays;
 import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.ff4j.services.utils.JsonUtils.GSON;
 
 /**
  * Created by Paul
@@ -42,13 +37,9 @@ public class FeatureStoreServicesStepDef extends AbstractStepDef {
     @Autowired
     private FeatureStoreServices featureStoreServices;
 
-    private Throwable exception;
-
-    private Object actualResponse;
-
     @Given("^the feature store is cleared$")
     public void the_feature_store_is_cleared() throws Throwable {
-        ff4j.setFeatureStore(new InMemoryFeatureStore());
+        clearFeatureStore();
     }
 
     @Given("^the following features exists in the feature store$")
@@ -112,13 +103,11 @@ public class FeatureStoreServicesStepDef extends AbstractStepDef {
 
     @Then("^the user gets an exception \"([^\"]*)\"$")
     public void the_user_gets_an_exception(String className) throws Throwable {
-        assertThat(exception).isInstanceOf(Class.forName(className));
+       assertException(className);
     }
 
     @Then("^the user gets the response as$")
     public void the_user_gets_the_response_as(String expectedResponse) throws Throwable {
-        JSONAssert.assertEquals(expectedResponse, GSON.toJson(actualResponse), true);
+        assertStrictResponse(expectedResponse);
     }
 }
-
-

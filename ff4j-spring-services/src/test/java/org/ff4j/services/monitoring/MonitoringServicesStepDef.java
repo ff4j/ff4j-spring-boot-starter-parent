@@ -19,12 +19,9 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.ff4j.services.AbstractStepDef;
 import org.ff4j.services.MonitoringServices;
-import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
-
-import static org.ff4j.services.utils.JsonUtils.GSON;
 
 /**
  * Created by Paul
@@ -35,7 +32,6 @@ public class MonitoringServicesStepDef extends AbstractStepDef {
 
     @Autowired
     private MonitoringServices monitoringServices;
-    private Object actualResponse;
 
     @Given("^the feature store is cleared$")
     public void the_feature_store_is_cleared() throws Throwable {
@@ -64,7 +60,7 @@ public class MonitoringServicesStepDef extends AbstractStepDef {
 
     @Then("^the user gets the response as$")
     public void the_user_gets_the_response_as(String expectedResponse) throws Throwable {
-        JSONAssert.assertEquals(expectedResponse, GSON.toJson(actualResponse), true);
+        assertStrictResponse(expectedResponse);
     }
 }
 

@@ -20,7 +20,9 @@ import org.ff4j.core.Feature;
 import org.ff4j.property.*;
 import org.ff4j.property.store.InMemoryPropertyStore;
 import org.ff4j.property.util.PropertyFactory;
+import org.ff4j.services.model.FeatureActions;
 import org.ff4j.store.InMemoryFeatureStore;
+import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 
@@ -28,6 +30,9 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.ff4j.services.utils.JsonUtils.GSON;
 
 /**
  * Created by Paul
@@ -39,6 +44,8 @@ public class AbstractStepDef {
 
     @Autowired
     protected FF4j ff4j;
+    protected Throwable exception;
+    protected Object actualResponse;
 
     protected void createFeatures(List<FeaturePojo> features) {
         for (FeaturePojo featurePojo : features) {
@@ -76,6 +83,34 @@ public class AbstractStepDef {
 
     protected Property asProperty(String name, String type, String value, String description, Set<String> fixedValues) {
         return PropertyFactory.createProperty(name, getType(type), value, description, fixedValues);
+    }
+
+    protected void assertException(String className) throws ClassNotFoundException {
+        assertThat(exception).isInstanceOf(Class.forName(className));
+    }
+
+    protected void assertUpdated() {
+        assertThat(actualResponse).isEqualTo(FeatureActions.UPDATED);
+    }
+
+    protected void assertCreated() {
+        assertThat(actualResponse).isEqualTo(FeatureActions.CREATED);
+    }
+
+    protected void assertStrictResponse(String expectedResponse) {
+        JSONAssert.assertEquals(expectedResponse, GSON.toJson(actualResponse), true);
+    }
+
+    protected void assertFalse() {
+        assertThat(Boolean.parseBoolean(actualResponse.toString())).isFalse();
+    }
+
+    protected void assertTrue() {
+        assertThat(Boolean.parseBoolean(actualResponse.toString())).isTrue();
+    }
+
+    protected void assertLenientResponse(String expectedResponse) {
+        JSONAssert.assertEquals(expectedResponse, GSON.toJson(actualResponse), false);
     }
 
     private String getType(String name) {

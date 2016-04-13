@@ -20,13 +20,10 @@ import cucumber.api.java.en.When;
 import org.ff4j.services.AbstractStepDef;
 import org.ff4j.services.PropertyServices;
 import org.ff4j.services.domain.PropertyApiBean;
-import org.ff4j.services.model.FeatureActions;
-import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.ff4j.services.utils.JsonUtils.GSON;
 
 /**
@@ -38,8 +35,6 @@ public class PropertyServicesStepDef extends AbstractStepDef {
 
     @Autowired
     private PropertyServices propertyServices;
-    private Object actualResponse;
-    private Throwable exception;
 
     @Given("^the feature store is cleared$")
     public void the_feature_store_is_cleared() throws Throwable {
@@ -100,22 +95,22 @@ public class PropertyServicesStepDef extends AbstractStepDef {
 
     @Then("^property is created$")
     public void property_is_created() throws Throwable {
-        assertThat(actualResponse).isEqualTo(FeatureActions.CREATED);
+        assertCreated();
     }
 
     @Then("^property is updated$")
     public void property_is_updated() throws Throwable {
-        assertThat(actualResponse).isEqualTo(FeatureActions.UPDATED);
+        assertUpdated();
     }
 
     @Then("^the user gets an exception \"([^\"]*)\"$")
     public void the_user_gets_an_exception(String className) throws Throwable {
-        assertThat(exception).isInstanceOf(Class.forName(className));
+        assertException(className);
     }
 
     @Then("^the user gets the response as$")
     public void the_user_gets_the_response_as(String expectedResponse) throws Throwable {
-        JSONAssert.assertEquals(expectedResponse, GSON.toJson(actualResponse), false);
+        assertLenientResponse(expectedResponse);
     }
 }
 
