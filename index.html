@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>ff4j-spring-boot-starter-parent by paul58914080</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">ff4j-spring-boot-starter-parent</h1>
+      <h2 class="project-tagline">A spring boot starter for FF4J (Feature Flipping For Java)</h2>
+      <a href="https://github.com/paul58914080/ff4j-spring-boot-starter-parent" class="btn">View on GitHub</a>
+      <a href="https://github.com/paul58914080/ff4j-spring-boot-starter-parent/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/paul58914080/ff4j-spring-boot-starter-parent/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <p><img src="https://github.com/paul58914080/ff4j-spring-boot-starter-parent/blob/master/images/ff4j.png" alt="ff4j"> <img src="https://github.com/paul58914080/ff4j-spring-boot-starter-parent/blob/master/images/spring-boot.png" alt="spring-boot"></p>
+
+<h2>
+<a id="spring-boot-starter-for-ff4j-feature-flipping-for-java" class="anchor" href="#spring-boot-starter-for-ff4j-feature-flipping-for-java" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Spring boot starter for FF4J (Feature Flipping for Java)</h2>
+
+<p><a href="https://travis-ci.org/paul58914080/ff4j-spring-boot-starter-parent"><img src="https://travis-ci.org/paul58914080/ff4j-spring-boot-starter-parent.svg?branch=master" alt="Build Status"></a>  <a href="https://www.codacy.com/app/paul58914080/ff4j-spring-boot-starter-parent"><img src="https://api.codacy.com/project/badge/grade/d5e9fee6aef044058f72c41a84a73e6f" alt="Codacy Badge"></a> <a href="https://coveralls.io/github/paul58914080/ff4j-spring-boot-starter-parent?branch=master"><img src="https://coveralls.io/repos/github/paul58914080/ff4j-spring-boot-starter-parent/badge.svg?branch=master" alt="Coverage Status"></a> <a href="https://www.apache.org/licenses/LICENSE-2.0.html"><img src="http://img.shields.io/badge/license-APACHE2-blue.svg" alt="License Apache2"></a> <a href="https://gitter.im/paul58914080/ff4j-spring-boot-starter-parent?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge&amp;utm_content=badge"><img src="https://badges.gitter.im/paul58914080/ff4j-spring-boot-starter-parent.svg" alt="Join the chat at https://gitter.im/paul58914080/ff4j-spring-boot-starter-parent"></a> </p>
+
+<p>This project aims in providing a bootable starter which provides RESTful apis for FF4J. </p>
+
+<p>Create a bootable jar with </p>
+
+<p><code>mvn clean install</code></p>
+
+<p>Add dependency in your project</p>
+
+<pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;org.ff4j&lt;/groupId&gt;
+    &lt;artifactId&gt;ff4j-spring-boot-starter&lt;/artifactId&gt;
+    &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
+
+<p>All you would have to do in your configuration is to enable ff4j with <code>@EnableFF4J</code></p>
+
+<h3>
+<a id="sample" class="anchor" href="#sample" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Sample</h3>
+
+<p>A sample project can be found at <a href="https://github.com/paul58914080/ff4j-spring-boot-starter-parent/tree/master/ff4j-spring-boot-sample">ff4j-spring-boot-sample</a></p>
+
+<p>Use <code>mvn spring-boot:run</code></p>
+
+<p>Once the sample application is booted use the following curl command</p>
+
+<p><code>curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X GET http://localhost:8080/ff4j</code></p>
+
+<p>Have a look at <a href="https://github.com/paul58914080/ff4j-spring-boot-starter-parent/blob/master/ff4j-spring-boot-sample/src/main/java/org/ff4j/sample/config/FF4JConfiguration.java">FF4JConfiguration</a></p>
+
+<h3>
+<a id="what-is-ff4j-" class="anchor" href="#what-is-ff4j-" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>What is FF4J ?</h3>
+
+<p>FF4J is a proposition of <a href="http://martinfowler.com/bliki/FeatureToggle.html">Feature Toggle</a>. 
+You can enable and disable features through configuration at runtime with dedicated consoles or Web API but also <strong>monitor</strong> features usage. You can also define any <strong>Property</strong> and change its value at runtime with 
+the exact same web console.</p>
+
+<p>More information at <a href="http://ff4j.org">ff4j.org</a> or <a href="https://github.com/clun/ff4j-extra/raw/master/ff4j-reference-guide-1.3.pdf">reference guide</a>. To access a demo please click <a href="http://cannys.com/ff4j-demo">here</a></p>
+
+<p></p><p align="center">
+  <img src="https://raw.github.com/clun/ff4j/master/src/site/resources/images/ff4j-console.png" alt="ff4j-console">
+  <br>
+  <img src="https://raw.github.com/clun/ff4j/master/src/site/resources/images/stack3.png" alt="ff4j-stack">
+</p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/paul58914080/ff4j-spring-boot-starter-parent">ff4j-spring-boot-starter-parent</a> is maintained by <a href="https://github.com/paul58914080">paul58914080</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
