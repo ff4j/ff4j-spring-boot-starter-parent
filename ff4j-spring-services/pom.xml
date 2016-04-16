@@ -36,6 +36,10 @@
             <artifactId>ff4j-core</artifactId>
         </dependency>
         <dependency>
+            <artifactId>ff4j-aop</artifactId>
+            <groupId>org.ff4j</groupId>
+        </dependency>
+        <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
         </dependency>
