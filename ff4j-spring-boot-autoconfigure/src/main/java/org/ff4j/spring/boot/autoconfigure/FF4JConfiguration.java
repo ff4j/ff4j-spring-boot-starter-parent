@@ -12,21 +12,28 @@
  * Copyright 2013-2016 the original author or authors.
  */
 
-package org.ff4j.sample.config;
+package org.ff4j.spring.boot.autoconfigure;
 
 import org.ff4j.FF4j;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
 
 /**
  * Created by Paul
  *
  * @author <a href="mailto:paul58914080@gmail.com">Paul Williams</a>
  */
-//@Configuration
+@Configuration
+@ConditionalOnClass({FF4j.class})
+@ComponentScan(value = {"org.ff4j.spring.boot.web.api", "org.ff4j.services", "org.ff4j.aop", "org.ff4j.spring"})
 public class FF4JConfiguration {
+
     @Bean
+    @ConditionalOnMissingBean
     public FF4j getFF4j() {
-        return new FF4j("ff4j-features.xml");
+        return new FF4j();
     }
 }
-

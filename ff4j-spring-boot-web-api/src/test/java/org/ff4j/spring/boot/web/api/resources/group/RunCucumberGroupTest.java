@@ -12,21 +12,20 @@
  * Copyright 2013-2016 the original author or authors.
  */
 
-package org.ff4j.sample.config;
+package org.ff4j.spring.boot.web.api.resources.group;
 
-import org.ff4j.FF4j;
-import org.springframework.context.annotation.Bean;
+import cucumber.api.CucumberOptions;
+import cucumber.api.junit.Cucumber;
+import org.junit.runner.RunWith;
 
 /**
  * Created by Paul
  *
  * @author <a href="mailto:paul58914080@gmail.com">Paul Williams</a>
  */
-//@Configuration
-public class FF4JConfiguration {
-    @Bean
-    public FF4j getFF4j() {
-        return new FF4j("ff4j-features.xml");
-    }
+@RunWith(Cucumber.class)
+@CucumberOptions(features = "classpath:features/GroupResource.feature", strict = true,
+        plugin = {"json:target/cucumber/GroupResource.json", "junit:target/cucumber/GroupResource.xml"},
+        glue = "classpath:org/ff4j/spring/boot/web/api/resources/group", tags = "@GroupResource")
+public class RunCucumberGroupTest {
 }
-
