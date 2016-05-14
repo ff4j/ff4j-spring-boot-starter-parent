@@ -24,7 +24,7 @@ Feature: Provides api's to do the following
     """
     {
       "autocreate": false,
-      "version": "1.4",
+      "version": "1.5",
       "featuresStore": {
         "type": "org.ff4j.store.InMemoryFeatureStore",
         "numberOfFeatures": 2,

@@ -160,6 +160,13 @@ public class FF4JServicesStepDef extends AbstractStepDef {
 
         private String allPermissions;
 
+        private String currentUserName;
+
+        @Override
+        public String getCurrentUserName() {
+            return currentUserName;
+        }
+
         @Override
         public Set<String> getCurrentUserPermissions() {
             return StringUtils.isBlank(currentUserPermissions) ? null : new HashSet<>(Arrays.asList(currentUserPermissions.split(",")));
@@ -168,18 +175,6 @@ public class FF4JServicesStepDef extends AbstractStepDef {
         @Override
         public Set<String> listAllPermissions() {
             return StringUtils.isBlank(allPermissions) ? null : new HashSet<>(Arrays.asList(allPermissions.split(",")));
-        }
-
-        public void setCurrentUserPermissions(String currentUserPermissions) {
-            this.currentUserPermissions = currentUserPermissions;
-        }
-
-        public String getAllPermissions() {
-            return allPermissions;
-        }
-
-        public void setAllPermissions(String allPermissions) {
-            this.allPermissions = allPermissions;
         }
     }
 }

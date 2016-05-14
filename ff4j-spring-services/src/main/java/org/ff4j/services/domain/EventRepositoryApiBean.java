@@ -68,10 +68,10 @@ public class EventRepositoryApiBean implements Serializable {
             computedEnd = c2.getTimeInMillis();
         }
         // Create PIE
-        PieChart pie = evtRepository.getHitsPieChart(computedStart, computedEnd);
+        PieChart pie = evtRepository.featuresListDistributionPie(computedStart, computedEnd);
         eventsPie = new PieChartApiBean(pie);
         // Create BARCHART
-        BarChart bc = evtRepository.getHitsBarChart(computedStart, computedEnd, 24);
+        BarChart bc = evtRepository.getFeaturesUsageOverTime(computedStart, computedEnd, 24);
         barChart = new BarChartApiBean(bc);
         // Total Count
         for (PieSector sector : pie.getSectors()) {
@@ -111,3 +111,4 @@ public class EventRepositoryApiBean implements Serializable {
         this.barChart = barChart;
     }
 }
+
