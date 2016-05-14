@@ -15,8 +15,8 @@
 package org.ff4j.sample.resources;
 
 import org.ff4j.FF4j;
-import org.ff4j.spring.autowire.AutowiredFF4JFeature;
-import org.ff4j.spring.autowire.AutowiredFF4JProperty;
+import org.ff4j.spring.autowire.FF4JFeature;
+import org.ff4j.spring.autowire.FF4JProperty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -30,20 +30,19 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class SampleResource {
 
-    @AutowiredFF4JProperty("maxLoginAttempts")
+    @FF4JProperty("maxLoginAttempts")
     private int maxLoginAttempts;
 
 
-    @AutowiredFF4JFeature(value = "AwesomeFeature")
+    @FF4JFeature(value = "AwesomeFeature")
     private boolean awesomeFeature;
 
     @Autowired
     private FF4j ff4j;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    @AutowiredFF4JFeature(value = "AwesomeFeature")
     public String sayHello() {
-        return "Awesome feature activated ? from ff4j.check(\"AwesomeFeature\") : " + ff4j.check("AwesomeFeature") + " from @AutowiredFF4JFeature(\"AwesomeFeature\") : " + awesomeFeature;
+        return "Awesome feature activated ? from ff4j.check(\"AwesomeFeature\") : " + ff4j.check("AwesomeFeature") + " from @FF4JFeature(\"AwesomeFeature\") : " + awesomeFeature;
     }
 
     @RequestMapping(value = "/maxLoginTries", method = RequestMethod.GET)

@@ -16,13 +16,14 @@ package org.ff4j.sample.config;
 
 import org.ff4j.FF4j;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 /**
  * Created by Paul
  *
  * @author <a href="mailto:paul58914080@gmail.com">Paul Williams</a>
  */
-//@Configuration
+@Configuration
 public class FF4JConfiguration {
     @Bean
     public FF4j getFF4j() {
