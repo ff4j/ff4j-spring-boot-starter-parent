@@ -89,6 +89,11 @@
                 <version>${ff4j.version}</version>
             </dependency>
             <dependency>
+                <artifactId>ff4j-web</artifactId>
+                <groupId>org.ff4j</groupId>
+                <version>${ff4j.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-lang3</artifactId>
                 <version>${commons.lang}</version>
