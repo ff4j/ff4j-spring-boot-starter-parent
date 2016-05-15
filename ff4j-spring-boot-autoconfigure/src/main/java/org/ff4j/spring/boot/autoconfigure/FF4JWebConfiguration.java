@@ -18,6 +18,7 @@ import org.ff4j.FF4j;
 import org.ff4j.web.embedded.ConsoleServlet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.embedded.ServletRegistrationBean;
 import org.springframework.boot.context.web.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
@@ -29,7 +30,7 @@ import org.springframework.context.annotation.Configuration;
  * @author <a href="mailto:paul58914080@gmail.com">Paul Williams</a>
  */
 @Configuration
-@ConditionalOnClass({ConsoleServlet.class})
+@ConditionalOnClass({FF4j.class, ConsoleServlet.class})
 public class FF4JWebConfiguration extends SpringBootServletInitializer {
 
     @Autowired
@@ -39,11 +40,13 @@ public class FF4JWebConfiguration extends SpringBootServletInitializer {
     private ConsoleServlet ff4jServlet;
 
     @Bean
+    @ConditionalOnMissingBean
     public ServletRegistrationBean servletRegistrationBean() {
         return new ServletRegistrationBean(ff4jServlet, "/ff4j-console");
     }
 
     @Bean
+    @ConditionalOnMissingBean
     public ConsoleServlet getFF4JServlet() {
         ConsoleServlet cs = new ConsoleServlet();
         cs.setFf4j(ff4j);
