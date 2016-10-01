@@ -14,6 +14,9 @@
 
 package org.ff4j.spring.boot.web.api.resources;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.ff4j.services.MonitoringServices;
 import org.ff4j.services.domain.EventRepositoryApiBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +43,13 @@ public class MonitoringResource {
     private MonitoringServices monitoringServices;
 
     @RequestMapping(method = GET, produces = APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Display <b>Monitoring</b> information for <b><u>all</u></b> features",
+            notes = "The <b>EventRepository</b> handle to store audit events is not required",
+            response = EventRepositoryApiBean.class)
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Status of event repository bean", response = EventRepositoryApiBean.class),
+            @ApiResponse(code = 404, message = "No event repository defined", response = String.class)
+    })
     public EventRepositoryApiBean getMonitoringStatus(@RequestParam(value = PARAM_START, required = false) Long start, @RequestParam(value = PARAM_END, required = false) Long end) {
         return monitoringServices.getMonitoringStatus(start, end);
     }
