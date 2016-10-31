@@ -34,7 +34,7 @@ Once the sample application is booted use the following curl command
  
 `curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X GET http://localhost:8080/ff4j`
 
-Have a look at [FF4JConfiguration](https://github.com/paul58914080/ff4j-spring-boot-starter-parent/blob/master/ff4j-spring-boot-sample/src/main/java/org/ff4j/sample/config/FF4JConfiguration.java) & [FF4JWebConfiguration](https://github.com/paul58914080/ff4j-spring-boot-starter-parent/blob/master/ff4j-spring-boot-sample/src/main/java/org/ff4j/sample/config/FF4JWebConfiguration.java)
+Have a look at [FF4JConfiguration](https://github.com/paul58914080/ff4j-spring-boot-starter-parent/blob/master/ff4j-spring-boot-sample/src/main/java/org/ff4j/sample/config/FF4JConfiguration.java)
 
 ### What is FF4J ?
 
