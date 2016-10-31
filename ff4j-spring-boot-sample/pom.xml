@@ -20,7 +20,7 @@
     <groupId>org.ff4j</groupId>
     <artifactId>ff4j-spring-boot-sample</artifactId>
     <packaging>jar</packaging>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>AMIGOS-SNAPSHOT</version>
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
@@ -38,7 +38,7 @@
         <dependency>
             <groupId>org.ff4j</groupId>
             <artifactId>ff4j-spring-boot-starter</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>AMIGOS-SNAPSHOT</version>
         </dependency>
     </dependencies>
     <build>

@@ -15,10 +15,10 @@
 package org.ff4j.services.domain;
 
 
-import org.ff4j.audit.graph.PieSector;
-import org.ff4j.services.constants.CommonConstants;
-
 import java.io.Serializable;
+
+import org.ff4j.audit.chart.Serie;
+import org.ff4j.services.constants.CommonConstants;
 
 
 /**
@@ -32,7 +32,7 @@ public class PieSectorApiBean implements Serializable {
 
     private String label = CommonConstants.N_A;
 
-    private double value = 0.0;
+    private int value = 0;
 
     private String color = CommonConstants.HTML_WHITE;
 
@@ -40,7 +40,7 @@ public class PieSectorApiBean implements Serializable {
         super();
     }
 
-    public PieSectorApiBean(PieSector sector) {
+    public PieSectorApiBean(Serie<Integer> sector) {
         this.label = sector.getLabel();
         this.value = sector.getValue();
         this.color = sector.getColor();

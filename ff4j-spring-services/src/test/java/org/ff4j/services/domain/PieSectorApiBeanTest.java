@@ -14,7 +14,6 @@
 
 package org.ff4j.services.domain;
 
-import org.ff4j.audit.graph.PieSector;
 import org.ff4j.services.constants.CommonConstants;
 import org.junit.Test;
 
@@ -33,14 +32,5 @@ public class PieSectorApiBeanTest {
         assertThat(bean.getColor()).isEqualTo(CommonConstants.HTML_WHITE);
         assertThat(bean.getValue()).isEqualTo(0.0);
         assertThat(bean.getLabel()).isEqualTo(CommonConstants.N_A);
-    }
-
-    @Test
-    public void testWhenPieSector() {
-        PieSector pieSector = new PieSector("login", 0.1, "CCCCCC");
-        PieSectorApiBean bean = new PieSectorApiBean(pieSector);
-        assertThat(bean.getColor()).isEqualTo("CCCCCC");
-        assertThat(bean.getValue()).isEqualTo(0.1);
-        assertThat(bean.getLabel()).isEqualTo("login");
     }
 }

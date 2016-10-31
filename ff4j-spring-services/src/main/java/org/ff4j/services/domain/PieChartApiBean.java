@@ -14,12 +14,12 @@
 
 package org.ff4j.services.domain;
 
-import org.ff4j.audit.graph.PieChart;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+
+import org.ff4j.audit.chart.PieChart;
+import org.ff4j.audit.chart.Serie;
 
 
 /**
@@ -33,7 +33,7 @@ public class PieChartApiBean implements Serializable {
 
     private String title;
 
-    private List<PieSectorApiBean> sectors = new ArrayList<>();
+    private List<PieSectorApiBean> sectors = new ArrayList<PieSectorApiBean>();
 
     public PieChartApiBean() {
         super();
@@ -41,7 +41,9 @@ public class PieChartApiBean implements Serializable {
 
     public PieChartApiBean(PieChart pie) {
         title = pie.getTitle();
-        sectors.addAll(pie.getSectors().stream().map(PieSectorApiBean::new).collect(Collectors.toList()));
+        for (Serie<Integer> sector : pie.getSectors()) {
+            sectors.add(new PieSectorApiBean(sector));
+        }
     }
 
     public String getTitle() {

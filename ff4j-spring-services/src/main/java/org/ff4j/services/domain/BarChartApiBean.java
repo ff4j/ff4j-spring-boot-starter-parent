@@ -15,12 +15,10 @@
 package org.ff4j.services.domain;
 
 
-import org.ff4j.audit.graph.BarChart;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 
 /**
@@ -34,18 +32,16 @@ public class BarChartApiBean implements Serializable {
 
     private String title;
 
-    private List<String> labels = new ArrayList<>();
+    private List<String> labels = new ArrayList<String>();
 
-    private List<BarSeriesApiBean> series = new ArrayList<>();
+    private List<BarSeriesApiBean> series = new ArrayList<BarSeriesApiBean>();
 
     public BarChartApiBean() {
         super();
     }
 
-    public BarChartApiBean(BarChart barChart) {
+    public BarChartApiBean(org.ff4j.audit.chart.BarChart barChart) {
         this.title = barChart.getTitle();
-        this.labels = barChart.getLabels();
-        series.addAll(barChart.getSeries().values().stream().map(BarSeriesApiBean::new).collect(Collectors.toList()));
     }
 
     public String getTitle() {

@@ -14,13 +14,11 @@
 
 package org.ff4j.services.domain;
 
-import org.ff4j.audit.graph.BarSeries;
-import org.ff4j.services.constants.CommonConstants;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
+import org.ff4j.audit.chart.Serie;
+import org.ff4j.services.constants.CommonConstants;
 
 /**
  * Created by Paul
@@ -35,27 +33,73 @@ public class BarSeriesApiBean implements Serializable {
 
     private String color = CommonConstants.HTML_WHITE;
 
-    private List<Double> values = new ArrayList<>();
+    private Double value = 0D;
 
     public BarSeriesApiBean() {
         super();
     }
 
-    public BarSeriesApiBean(BarSeries barSeries) {
-        this.label = barSeries.getLabel();
-        this.color = barSeries.getColor();
-        this.values = barSeries.getValues();
+    public BarSeriesApiBean(Serie<Double> barSeries) {
+        this.label  = barSeries.getLabel();
+        this.color  = barSeries.getColor();
+        this.value = barSeries.getValue();
     }
 
+    /**
+     * Getter accessor for attribute 'label'.
+     *
+     * @return
+     *       current value of 'label'
+     */
     public String getLabel() {
         return label;
     }
 
+    /**
+     * Setter accessor for attribute 'label'.
+     * @param label
+     * 		new value for 'label '
+     */
+    public void setLabel(String label) {
+        this.label = label;
+    }
+
+    /**
+     * Getter accessor for attribute 'color'.
+     *
+     * @return
+     *       current value of 'color'
+     */
     public String getColor() {
         return color;
     }
 
-    public List<Double> getValues() {
-        return values;
+    /**
+     * Setter accessor for attribute 'color'.
+     * @param color
+     * 		new value for 'color '
+     */
+    public void setColor(String color) {
+        this.color = color;
     }
+
+    /**
+     * Getter accessor for attribute 'value'.
+     *
+     * @return
+     *       current value of 'value'
+     */
+    public Double getValue() {
+        return value;
+    }
+
+    /**
+     * Setter accessor for attribute 'value'.
+     * @param value
+     * 		new value for 'value '
+     */
+    public void setValue(Double value) {
+        this.value = value;
+    }
+
 }
