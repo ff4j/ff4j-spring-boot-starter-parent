@@ -36,6 +36,7 @@ import java.util.Map;
  *
  * @author <a href="mailto:paul58914080@gmail.com">Paul Williams</a>
  */
+// TODO : start by commenting this class
 @Service
 public class FeatureServices {
     @Autowired
