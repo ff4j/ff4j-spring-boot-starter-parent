@@ -12,13 +12,15 @@
  * Copyright 2013-2016 the original author or authors.
  */
 
-package org.ff4j.services.exceptions;
+package org.ff4j.services.exceptions
 
 /**
  * Created by Paul
  *
- * @author <a href="mailto:paul58914080@gmail.com">Paul Williams</a>
+ * @author [Paul Williams](mailto:paul58914080@gmail.com)
  */
-public class FeatureIdBlankException extends RuntimeException {
-    private static final long serialVersionUID = 3036248900520208331L;
+class FeatureIdNotMatchException : RuntimeException() {
+    companion object {
+        private const val serialVersionUID = -2878761447146656187L
+    }
 }

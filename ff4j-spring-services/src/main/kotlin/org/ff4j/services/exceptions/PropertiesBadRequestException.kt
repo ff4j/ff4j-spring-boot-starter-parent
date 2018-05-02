@@ -12,13 +12,15 @@
  * Copyright 2013-2016 the original author or authors.
  */
 
-package org.ff4j.services.exceptions;
+package org.ff4j.services.exceptions
 
 /**
  * Created by Paul
  *
- * @author <a href="mailto:paul58914080@gmail.com">Paul Williams</a>
+ * @author [Paul Williams](mailto:paul58914080@gmail.com)
  */
-public class GroupExistsException extends RuntimeException {
-    private static final long serialVersionUID = 8560277437073933250L;
+class PropertiesBadRequestException(cause: Throwable) : RuntimeException(cause) {
+    companion object {
+        private const val serialVersionUID = -3239022865148294488L
+    }
 }
