@@ -1,6 +1,10 @@
 package org.ff4j.services.domain
 
 import org.ff4j.core.Feature
+import org.ff4j.exception.FeatureAccessException
+import org.ff4j.services.exceptions.FlippingStrategyBadRequestException
+import org.ff4j.services.exceptions.PropertiesBadRequestException
+import org.ff4j.utils.MappingUtil
 import java.io.Serializable
 
 /**
@@ -18,7 +22,7 @@ class FeatureApiBean : Serializable {
     var description: String? = null
     var group: String? = null
     var flippingStrategy: FlippingStrategyApiBean? = null
-    var permissions: MutableList<String> = ArrayList()
+    var permissions: MutableSet<String> = HashSet()
     var customProperties: MutableMap<String, PropertyApiBean> = HashMap()
     var enable: Boolean = false
 
@@ -28,7 +32,8 @@ class FeatureApiBean : Serializable {
         this.uid = feature.uid
         this.enable = feature.isEnable
         this.description = feature.description
-        this.permissions = ArrayList(feature.permissions)
+        this.permissions = feature.permissions
+        this.group= feature.group
         feature.flippingStrategy?.let {
             this.flippingStrategy = FlippingStrategyApiBean(it)
         }
@@ -36,6 +41,41 @@ class FeatureApiBean : Serializable {
             it.values.forEach { property ->
                 run {
                     this.customProperties.put(property.name, PropertyApiBean(property))
+                }
+            }
+        }
+    }
+
+    fun toFeature(): Feature {
+        val feature = Feature(uid)
+        feature.description = description
+        feature.isEnable = enable
+        feature.group = group
+        feature.permissions = permissions
+        initFlippingStrategy(feature)
+        initProperties(feature)
+        return feature
+    }
+
+    private fun initFlippingStrategy(feature: Feature) {
+        flippingStrategy?.let {
+            try {
+                feature.flippingStrategy = MappingUtil.instanceFlippingStrategy(uid, it.type, it.initParams)
+            } catch (exception: FeatureAccessException) {
+                throw FlippingStrategyBadRequestException(exception)
+            }
+        }
+    }
+
+    private fun initProperties(feature: Feature) {
+        customProperties.let {
+            it.values.forEach { propertyApiBean ->
+                run {
+                    try {
+                        feature.addProperty(propertyApiBean.asProperty())
+                    } catch (exception: IllegalArgumentException) {
+                        throw PropertiesBadRequestException(exception)
+                    }
                 }
             }
         }

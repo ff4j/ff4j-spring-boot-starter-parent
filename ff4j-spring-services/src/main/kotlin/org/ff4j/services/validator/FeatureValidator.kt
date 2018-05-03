@@ -11,13 +11,13 @@ class FeatureValidator {
     @Autowired
     lateinit var ff4j: FF4j
 
-    fun assertFeatureIdsMatch(featureUID: String, featureApiUID: String) {
+    fun assertFeatureIdsMatch(featureUID: String?, featureApiUID: String?) {
         if (featureUID != featureApiUID) {
             throw FeatureIdNotMatchException()
         }
     }
 
-    fun assertFeatureUIDIsNotBlank(featureUID: String) {
+    fun assertFeatureUIDIsNotBlank(featureUID: String?) {
         if (StringUtils.isBlank(featureUID)) {
             throw FeatureIdBlankException()
         }
