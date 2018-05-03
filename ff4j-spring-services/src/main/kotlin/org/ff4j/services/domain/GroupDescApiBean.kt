@@ -15,11 +15,11 @@ class GroupDescApiBean : Serializable {
     }
 
     var groupName: String? = null
-    var features: List<String> = ArrayList()
+    var features: MutableList<String> = ArrayList()
 
     constructor() : super()
 
-    constructor(groupName: String, names: List<String>) {
+    constructor(groupName: String, names: MutableList<String>) {
         this.groupName = groupName
         this.features = names
     }
