@@ -41,10 +41,9 @@
     </properties>
     <modules>
         <module>ff4j-spring-services</module>
-        <!--
         <module>ff4j-spring-boot-web-api</module>
         <module>ff4j-spring-boot-autoconfigure</module>
-        <module>ff4j-spring-boot-starter</module>-->
+        <module>ff4j-spring-boot-starter</module>
     </modules>
     <dependencyManagement>
         <dependencies>

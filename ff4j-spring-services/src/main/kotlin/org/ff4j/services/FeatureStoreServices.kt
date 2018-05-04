@@ -36,7 +36,7 @@ class FeatureStoreServices(@Autowired val fF4j: FF4j) {
         }
     }
 
-    fun getAllGroups(): Any {
+    fun getAllGroups(): MutableCollection<GroupDescApiBean> {
         val groups = HashMap<String, GroupDescApiBean>()
         val allFeatures = fF4j.featureStore.readAll()
         allFeatures?.let {

@@ -51,6 +51,8 @@ public class MonitoringResource {
             @ApiResponse(code = 404, message = "No event repository defined", response = String.class)
     })
     public EventRepositoryApiBean getMonitoringStatus(@RequestParam(value = PARAM_START, required = false) Long start, @RequestParam(value = PARAM_END, required = false) Long end) {
+        start = null == start ? 0 : start;
+        end = null == end ? 0 : end;
         return monitoringServices.getMonitoringStatus(start, end);
     }
 }

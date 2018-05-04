@@ -19,11 +19,11 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>ff4j-spring-boot-starter</artifactId>
     <packaging>jar</packaging>
-    <version>AMIGOS-SNAPSHOT</version>
+    <version>AVENGERS-SNAPSHOT</version>
     <parent>
         <groupId>org.ff4j</groupId>
         <artifactId>ff4j-spring-boot-starter-parent</artifactId>
-        <version>AMIGOS-SNAPSHOT</version>
+        <version>AVENGERS-SNAPSHOT</version>
     </parent>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -46,31 +46,5 @@
     </dependencies>
     <build>
         <finalName>fff4j-spring-boot-starter</finalName>
-        <plugins>
-            <plugin>
-                <groupId>org.jacoco</groupId>
-                <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.7.5.201505241946</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>prepare-agent</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>report</id>
-                        <phase>test</phase>
-                        <goals>
-                            <goal>report</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.eluder.coveralls</groupId>
-                <artifactId>coveralls-maven-plugin</artifactId>
-                <version>4.1.0</version>
-            </plugin>
-        </plugins>
     </build>
 </project>
