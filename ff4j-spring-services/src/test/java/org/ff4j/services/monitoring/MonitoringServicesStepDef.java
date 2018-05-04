@@ -19,6 +19,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.ff4j.services.AbstractStepDef;
 import org.ff4j.services.MonitoringServices;
+import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -34,32 +35,32 @@ public class MonitoringServicesStepDef extends AbstractStepDef {
     private MonitoringServices monitoringServices;
 
     @Given("^the feature store is cleared$")
-    public void the_feature_store_is_cleared() throws Throwable {
+    public void the_feature_store_is_cleared() {
         clearFeatureStore();
     }
 
     @Given("^the following features exists in the feature store$")
-    public void the_following_features_exists_in_the_feature_store(List<FeaturePojo> features) throws Throwable {
+    public void the_following_features_exists_in_the_feature_store(List<FeaturePojo> features) {
         createFeatures(features);
     }
 
     @Given("^the property store is cleared$")
-    public void the_property_store_is_cleared() throws Throwable {
+    public void the_property_store_is_cleared() {
         clearPropertyStore();
     }
 
     @Given("^the following properties exists in the property store$")
-    public void the_following_properties_exists_in_the_property_store(List<PropertyPojo> properties) throws Throwable {
+    public void the_following_properties_exists_in_the_property_store(List<PropertyPojo> properties) {
         createProperties(properties);
     }
 
     @When("^the user requests for the feature monitoring information$")
-    public void the_user_requests_for_the_feature_monitoring_information() throws Throwable {
-        actualResponse = monitoringServices.getMonitoringStatus(null, null);
+    public void the_user_requests_for_the_feature_monitoring_information() {
+        actualResponse = monitoringServices.getMonitoringStatus();
     }
 
     @Then("^the user gets the response as$")
-    public void the_user_gets_the_response_as(String expectedResponse) throws Throwable {
+    public void the_user_gets_the_response_as(String expectedResponse) throws JSONException {
         assertLenientResponse(expectedResponse);
     }
 }

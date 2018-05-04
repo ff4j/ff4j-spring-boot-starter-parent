@@ -16,7 +16,8 @@ class BarChartApiBean : Serializable {
     }
 
     var title: String = EMPTY
-    var labels: MutableList<BarSeriesApiBean> = ArrayList()
+    var labels: MutableList<String> = ArrayList()
+    var series: MutableList<BarSeriesApiBean> = ArrayList()
 
     constructor() : super()
 

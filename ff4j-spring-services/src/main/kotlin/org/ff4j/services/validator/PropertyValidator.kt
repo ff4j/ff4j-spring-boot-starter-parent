@@ -19,13 +19,13 @@ class PropertyValidator {
         }
     }
 
-    fun assertPropertyNameNotBlank(name: String) {
+    fun assertPropertyNameNotBlank(name: String?) {
         if (StringUtils.isBlank(name)) {
             throw PropertyNameBlankException()
         }
     }
 
-    fun assertPropertyNameMatch(propertyName: String, propertyApiBeanName: String) {
+    fun assertPropertyNameMatch(propertyName: String, propertyApiBeanName: String?) {
         if (!propertyName.equals(propertyApiBeanName, ignoreCase = true)) {
             throw PropertyNameNotMatchException()
         }

@@ -16,9 +16,6 @@ package org.ff4j.services.constants;
 
 import org.junit.Test;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
@@ -27,18 +24,6 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author <a href="mailto:paul58914080@gmail.com">Paul Williams</a>
  */
 public class FeatureConstantsTest {
-    @Test
-    public void constructorInvocation() {
-        try {
-            final Constructor<FeatureConstants> c = FeatureConstants.class.getDeclaredConstructor();
-            c.setAccessible(true);
-            final FeatureConstants newInstance = c.newInstance();
-            assertThat(newInstance).isNull();
-        } catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException
-                | InvocationTargetException e) {
-            assertThat(e).hasCauseExactlyInstanceOf(UnsupportedOperationException.class);
-        }
-    }
 
     @Test
     public void constantValuesTest() {

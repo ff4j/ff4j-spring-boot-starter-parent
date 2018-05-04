@@ -35,7 +35,7 @@ class CacheApiBean : Serializable {
         if (propertyStore is FF4jCacheProxy) {
             this.cacheStore = propertyStore.cachedTargetStore
             this.cacheProvider = propertyStore.cacheProvider
-            this.featureNames = propertyStore.cacheManager.listCachedFeatureNames()
+            this.propertyNames = propertyStore.cacheManager.listCachedPropertyNames()
         }
     }
 }
