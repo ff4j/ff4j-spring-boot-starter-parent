@@ -90,7 +90,6 @@ class FeatureResource(@Autowired val featureServices: FeatureServices) {
         return ResponseEntity(ACCEPTED)
     }
 
-
     @ApiOperation(value = "Grant a permission to a feature", response = ResponseEntity::class)
     @ApiResponses(
             ApiResponse(code = 202, message = "Permission has been granted"),
@@ -124,7 +123,9 @@ class FeatureResource(@Autowired val featureServices: FeatureServices) {
     }
 
     @ApiOperation(value = "Remove the group of the feature", response = ResponseEntity::class)
-    @ApiResponses(ApiResponse(code = 204, message = "Group has been removed"), ApiResponse(code = 404, message = "Feature not found"))
+    @ApiResponses(
+            ApiResponse(code = 204, message = "Group has been removed"),
+            ApiResponse(code = 404, message = "Feature not found"))
     @PostMapping(value = [(ROOT + OPERATION_REMOVEGROUP + ROOT + PATH_PARAM_GROUP)], consumes = [APPLICATION_JSON_VALUE])
     fun removeGroupFromFeature(@PathVariable(value = PARAM_UID) featureUID: String, @PathVariable(value = PARAM_GROUP) groupName: String): ResponseEntity<Any> {
         featureServices.removeGroupFromFeature(featureUID, groupName)
