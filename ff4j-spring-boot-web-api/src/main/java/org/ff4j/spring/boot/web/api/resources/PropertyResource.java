@@ -19,7 +19,7 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.ff4j.services.PropertyServices;
 import org.ff4j.services.domain.PropertyApiBean;
-import org.ff4j.spring.boot.web.api.utilts.FeatureWebUtils;
+import org.ff4j.spring.boot.web.api.utils.FeatureWebUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -62,7 +62,7 @@ public class PropertyResource {
             @ApiResponse(code = 202, message = "Property has been updated"),
             @ApiResponse(code = 204, message = "No content, no changes made to the feature")})
     public ResponseEntity createOrUpdateProperty(@PathVariable(value = PARAM_NAME) String propertyName, @RequestBody PropertyApiBean propertyApiBean) {
-        return FeatureWebUtils.getBooleanResponseEntityByHttpStatus(propertyServices.createOrUpdateProperty(propertyName, propertyApiBean));
+        return FeatureWebUtils.INSTANCE.getBooleanResponseEntityByHttpStatus(propertyServices.createOrUpdateProperty(propertyName, propertyApiBean));
     }
 
     @RequestMapping(method = DELETE, produces = APPLICATION_JSON_VALUE)

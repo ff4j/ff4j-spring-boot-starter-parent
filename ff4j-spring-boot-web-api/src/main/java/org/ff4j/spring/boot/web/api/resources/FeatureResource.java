@@ -19,7 +19,7 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.ff4j.services.FeatureServices;
 import org.ff4j.services.domain.FeatureApiBean;
-import org.ff4j.spring.boot.web.api.utilts.FeatureWebUtils;
+import org.ff4j.spring.boot.web.api.utils.FeatureWebUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -60,7 +60,7 @@ public class FeatureResource {
             @ApiResponse(code = 202, message = "Feature has been updated"),
             @ApiResponse(code = 204, message = "No content, no changes made to the feature")})
     public ResponseEntity<Boolean> createOrUpdateFeature(@PathVariable(value = PARAM_UID) String featureUID, @RequestBody FeatureApiBean featureApiBean) {
-        return FeatureWebUtils.getBooleanResponseEntityByHttpStatus(featureServices.createOrUpdateFeature(featureUID, featureApiBean));
+        return FeatureWebUtils.INSTANCE.getBooleanResponseEntityByHttpStatus(featureServices.createOrUpdateFeature(featureUID, featureApiBean));
     }
 
     @RequestMapping(method = DELETE, consumes = APPLICATION_JSON_VALUE)
