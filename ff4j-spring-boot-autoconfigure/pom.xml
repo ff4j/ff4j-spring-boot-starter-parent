@@ -56,11 +56,5 @@
         <finalName>ff4j-spring-boot-autoconfigure</finalName>
         <directory>target</directory>
         <outputDirectory>target/classes</outputDirectory>
-        <sourceDirectory>src/main/java</sourceDirectory>
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-            </resource>
-        </resources>
     </build>
 </project>
