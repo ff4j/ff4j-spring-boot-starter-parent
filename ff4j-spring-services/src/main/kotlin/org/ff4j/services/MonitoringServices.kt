@@ -17,7 +17,7 @@ class MonitoringServices(@Autowired val fF4j: FF4j) {
         return EventRepositoryApiBean(fF4j.eventRepository)
     }
 
-    fun getMonitoringStatus(start: Long = 0, end: Long = 0): EventRepositoryApiBean {
+    fun getMonitoringStatus(start: Long, end: Long): EventRepositoryApiBean {
         return EventRepositoryApiBean(fF4j.eventRepository, start, end)
     }
 }
