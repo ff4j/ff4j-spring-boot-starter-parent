@@ -22,6 +22,7 @@ import org.ff4j.property.store.InMemoryPropertyStore;
 import org.ff4j.property.util.PropertyFactory;
 import org.ff4j.services.model.FeatureActions;
 import org.ff4j.store.InMemoryFeatureStore;
+import org.json.JSONException;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -97,7 +98,7 @@ public class AbstractStepDef {
         assertThat(actualResponse).isEqualTo(FeatureActions.CREATED);
     }
 
-    protected void assertStrictResponse(String expectedResponse) {
+    protected void assertStrictResponse(String expectedResponse) throws JSONException {
         JSONAssert.assertEquals(expectedResponse, GSON.toJson(actualResponse), true);
     }
 
@@ -109,7 +110,7 @@ public class AbstractStepDef {
         assertThat(Boolean.parseBoolean(actualResponse.toString())).isTrue();
     }
 
-    protected void assertLenientResponse(String expectedResponse) {
+    protected void assertLenientResponse(String expectedResponse) throws JSONException {
         JSONAssert.assertEquals(expectedResponse, GSON.toJson(actualResponse), false);
     }
 

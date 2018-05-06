@@ -20,21 +20,23 @@
     <groupId>org.ff4j</groupId>
     <artifactId>ff4j-spring-boot-starter-parent</artifactId>
     <packaging>pom</packaging>
-    <version>AMIGOS-SNAPSHOT</version>
+    <version>AVENGERS-SNAPSHOT</version>
     <name>ff4j-spring-boot-starter-parent</name>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
-        <ff4j.version>1.6.4</ff4j.version>
-        <spring-boot.version>1.5.3.RELEASE</spring-boot.version>
-        <commons.lang>3.0</commons.lang>
-        <cucumber.version>1.2.4</cucumber.version>
+        <ff4j.version>1.7.1</ff4j.version>
+        <spring-boot.version>2.0.1.RELEASE</spring-boot.version>
+        <kotlin.version>1.2.41</kotlin.version>
+        <commons3.lang>3.7</commons3.lang>
+        <commons.collection.version>3.2.2</commons.collection.version>
+        <cucumber.version>1.2.5</cucumber.version>
         <gson.version>2.2.4</gson.version>
         <assertj.version>3.2.0</assertj.version>
         <jsonassert.version>1.2.3</jsonassert.version>
         <easymock.version>3.1</easymock.version>
-        <swagger.version>2.5.0</swagger.version>
-        <version.jacoco>0.7.5.201505241946</version.jacoco>
+        <swagger.version>2.8.0</swagger.version>
+        <version.jacoco>0.7.9</version.jacoco>
         <meanbean.version>2.0.3</meanbean.version>
     </properties>
     <modules>
@@ -64,7 +66,7 @@
             </dependency>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-web</artifactId>
+                <artifactId>spring-boot-starter-webflux</artifactId>
                 <version>${spring-boot.version}</version>
             </dependency>
             <dependency>
@@ -90,12 +92,12 @@
             <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-lang3</artifactId>
-                <version>${commons.lang}</version>
+                <version>${commons3.lang}</version>
             </dependency>
             <dependency>
                 <groupId>commons-collections</groupId>
                 <artifactId>commons-collections</artifactId>
-                <version>${commons.lang}</version>
+                <version>${commons.collection.version}</version>
             </dependency>
             <!-- Swagger -->
             <dependency>
@@ -110,21 +112,33 @@
             </dependency>
             <!-- Test dependency -->
             <dependency>
-                <groupId>com.google.code.gson</groupId>
-                <artifactId>gson</artifactId>
-                <version>${gson.version}</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.assertj</groupId>
-                <artifactId>assertj-core</artifactId>
-                <version>${assertj.version}</version>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-test</artifactId>
+                <version>${spring-boot.version}</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>org.skyscreamer</groupId>
                 <artifactId>jsonassert</artifactId>
                 <version>${jsonassert.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.easymock</groupId>
+                <artifactId>easymock</artifactId>
+                <version>${easymock.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.meanbean</groupId>
+                <artifactId>meanbean</artifactId>
+                <version>${meanbean.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>info.cukes</groupId>
+                <artifactId>cucumber-java8</artifactId>
+                <version>${cucumber.version}</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
@@ -139,33 +153,30 @@
                 <version>${cucumber.version}</version>
                 <scope>test</scope>
             </dependency>
-            <dependency>
-                <groupId>org.easymock</groupId>
-                <artifactId>easymock</artifactId>
-                <version>${easymock.version}</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-test</artifactId>
-                <version>${spring-boot.version}</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.meanbean</groupId>
-                <artifactId>meanbean</artifactId>
-                <version>${meanbean.version}</version>
-                <scope>test</scope>
-            </dependency>
         </dependencies>
     </dependencyManagement>
+    <dependencies>
+        <!-- Kotlin -->
+        <dependency>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-reflect</artifactId>
+            <version>${kotlin.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-stdlib-jdk8</artifactId>
+            <version>${kotlin.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-test</artifactId>
+            <version>${kotlin.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
     <build>
         <finalName>ff4j-spring-boot-starter-parent</finalName>
         <directory>target</directory>
-        <outputDirectory>target/classes</outputDirectory>
-        <testOutputDirectory>target/test-classes</testOutputDirectory>
-        <sourceDirectory>src/main/java</sourceDirectory>
-        <testSourceDirectory>src/test/java</testSourceDirectory>
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
@@ -178,15 +189,49 @@
         </testResources>
         <plugins>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.1</version>
+                <artifactId>kotlin-maven-plugin</artifactId>
+                <groupId>org.jetbrains.kotlin</groupId>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                    <testSource>1.8</testSource>
-                    <testTarget>1.8</testTarget>
+                    <compilerPlugins>
+                        <plugin>spring</plugin>
+                    </compilerPlugins>
+                    <jvmTarget>1.8</jvmTarget>
                 </configuration>
+                <executions>
+                    <execution>
+                        <id>compile</id>
+                        <phase>process-sources</phase>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                        <configuration>
+                            <sourceDirs>
+                                <sourceDir>${project.basedir}/src/main/kotlin</sourceDir>
+                                <sourceDir>${project.basedir}/src/main/java</sourceDir>
+                            </sourceDirs>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>test-compile</id>
+                        <phase>test-compile</phase>
+                        <goals>
+                            <goal>test-compile</goal>
+                        </goals>
+                        <configuration>
+                            <sourceDirs>
+                                <sourceDir>${project.basedir}/src/test/kotlin</sourceDir>
+                                <sourceDir>${project.basedir}/src/test/java</sourceDir>
+                            </sourceDirs>
+                        </configuration>
+                    </execution>
+                </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.jetbrains.kotlin</groupId>
+                        <artifactId>kotlin-maven-allopen</artifactId>
+                        <version>${kotlin.version}</version>
+                    </dependency>
+                </dependencies>
             </plugin>
             <plugin>
                 <groupId>org.jacoco</groupId>
@@ -211,6 +256,14 @@
                 <groupId>org.eluder.coveralls</groupId>
                 <artifactId>coveralls-maven-plugin</artifactId>
                 <version>4.1.0</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>8</source>
+                    <target>8</target>
+                </configuration>
             </plugin>
         </plugins>
     </build>

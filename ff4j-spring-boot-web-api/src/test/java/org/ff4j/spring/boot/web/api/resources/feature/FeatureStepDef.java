@@ -25,6 +25,7 @@ import org.ff4j.spring.boot.web.api.resources.AbstractStepDef;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -85,7 +86,7 @@ public class FeatureStepDef extends AbstractStepDef {
         featureApiBean.setEnable(Boolean.valueOf(expectedEnabled));
         featureApiBean.setDescription(expectedDescription);
         featureApiBean.setGroup(expectedGroup);
-        featureApiBean.setPermissions(Arrays.asList(expectedPermissions.split(",")));
+        featureApiBean.setPermissions(new HashSet<>(Arrays.asList(expectedPermissions.split(","))));
         assertJsonResponse(new Gson().toJson(featureApiBean));
     }
 

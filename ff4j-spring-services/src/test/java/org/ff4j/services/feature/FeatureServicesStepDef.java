@@ -40,23 +40,23 @@ public class FeatureServicesStepDef extends AbstractStepDef {
     private FeatureServices featureServices;
 
     @Given("^the feature store is cleared$")
-    public void the_feature_store_is_cleared() throws Throwable {
+    public void the_feature_store_is_cleared() {
         clearFeatureStore();
     }
 
     @Given("^the feature with \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\" and \"([^\"]*)\" exists in the feature store$")
-    public void the_feature_with_and_exists_in_the_feature_store(String uid, String enabled, String description, String group, String csvPermissions) throws Throwable {
+    public void the_feature_with_and_exists_in_the_feature_store(String uid, String enabled, String description, String group, String csvPermissions) {
         Feature feature = new Feature(uid, Boolean.valueOf(enabled), description, group, Arrays.asList(csvPermissions.split(",")));
         createFeature(feature);
     }
 
     @Given("^the following features exists in the feature store$")
-    public void the_following_features_exists_in_the_feature_store(List<FeaturePojo> features) throws Throwable {
+    public void the_following_features_exists_in_the_feature_store(List<FeaturePojo> features) {
         createFeatures(features);
     }
 
     @When("^the user requests for a feature by feature id as \"([^\"]*)\"$")
-    public void the_user_requests_for_a_feature_by_feature_id_as(String featureUID) throws Throwable {
+    public void the_user_requests_for_a_feature_by_feature_id_as(String featureUID) {
         try {
             actualResponse = featureServices.getFeature(featureUID);
         } catch (Throwable t) {
@@ -65,7 +65,7 @@ public class FeatureServicesStepDef extends AbstractStepDef {
     }
 
     @When("^the user requests to create or update a feature with feature id as \"([^\"]*)\" and feature spec as$")
-    public void the_user_requests_to_create_or_update_a_feature_with_feature_id_as_and_feature_spec_as(String featureUID, String featureSpec) throws Throwable {
+    public void the_user_requests_to_create_or_update_a_feature_with_feature_id_as_and_feature_spec_as(String featureUID, String featureSpec) {
         FeatureApiBean featureApiBean = GSON.fromJson(featureSpec, FeatureApiBean.class);
         try {
             actualResponse = featureServices.createOrUpdateFeature(featureUID, featureApiBean);
@@ -75,7 +75,7 @@ public class FeatureServicesStepDef extends AbstractStepDef {
     }
 
     @When("^the user requests to delete a feature with feature id as \"([^\"]*)\"$")
-    public void the_user_requests_to_delete_a_feature_with_feature_id_as(String featureUID) throws Throwable {
+    public void the_user_requests_to_delete_a_feature_with_feature_id_as(String featureUID) {
         try {
             featureServices.deleteFeature(featureUID);
         } catch (Throwable t) {
@@ -84,7 +84,7 @@ public class FeatureServicesStepDef extends AbstractStepDef {
     }
 
     @When("^the user requests to disable a feature with feature id as \"([^\"]*)\"$")
-    public void the_user_requests_to_disable_a_feature_with_feature_id_as(String featureUID) throws Throwable {
+    public void the_user_requests_to_disable_a_feature_with_feature_id_as(String featureUID) {
         try {
             featureServices.disableFeature(featureUID);
         } catch (Throwable t) {
@@ -93,7 +93,7 @@ public class FeatureServicesStepDef extends AbstractStepDef {
     }
 
     @When("^the user requests to enable a feature with feature id as \"([^\"]*)\"$")
-    public void the_user_requests_to_enable_a_feature_with_feature_id_as(String featureUID) throws Throwable {
+    public void the_user_requests_to_enable_a_feature_with_feature_id_as(String featureUID) {
         try {
             featureServices.enableFeature(featureUID);
         } catch (Throwable t) {
@@ -102,7 +102,7 @@ public class FeatureServicesStepDef extends AbstractStepDef {
     }
 
     @When("^the user requests to grant role \"([^\"]*)\" to a feature with feature id as \"([^\"]*)\"$")
-    public void the_user_requests_to_grant_role_to_a_feature_with_feature_id_as(String roleName, String featureUID) throws Throwable {
+    public void the_user_requests_to_grant_role_to_a_feature_with_feature_id_as(String roleName, String featureUID) {
         try {
             featureServices.grantRoleToFeature(featureUID, roleName);
         } catch (Throwable t) {
@@ -111,7 +111,7 @@ public class FeatureServicesStepDef extends AbstractStepDef {
     }
 
     @When("^the user requests to remove role \"([^\"]*)\" to a feature with feature id as \"([^\"]*)\"$")
-    public void the_user_requests_to_remove_role_to_a_feature_with_feature_id_as(String roleName, String featureUID) throws Throwable {
+    public void the_user_requests_to_remove_role_to_a_feature_with_feature_id_as(String roleName, String featureUID) {
         try {
             featureServices.removeRoleFromFeature(featureUID, roleName);
         } catch (Throwable t) {
@@ -120,7 +120,7 @@ public class FeatureServicesStepDef extends AbstractStepDef {
     }
 
     @When("^the user requests to add group \"([^\"]*)\" to a feature with feature id as \"([^\"]*)\"$")
-    public void the_user_requests_to_add_group_to_a_feature_with_feature_id_as(String groupName, String featureUID) throws Throwable {
+    public void the_user_requests_to_add_group_to_a_feature_with_feature_id_as(String groupName, String featureUID) {
         try {
             featureServices.addGroupToFeature(featureUID, groupName);
         } catch (Throwable t) {
@@ -129,7 +129,7 @@ public class FeatureServicesStepDef extends AbstractStepDef {
     }
 
     @When("^the user requests to remove group \"([^\"]*)\" to a feature with feature id as \"([^\"]*)\"$")
-    public void the_user_requests_to_remove_group_to_a_feature_with_feature_id_as(String groupName, String featureUID) throws Throwable {
+    public void the_user_requests_to_remove_group_to_a_feature_with_feature_id_as(String groupName, String featureUID) {
         try {
             featureServices.removeGroupFromFeature(featureUID, groupName);
         } catch (Throwable t) {
@@ -138,30 +138,30 @@ public class FeatureServicesStepDef extends AbstractStepDef {
     }
 
     @Then("^the user gets an exception \"([^\"]*)\"$")
-    public void the_user_gets_an_exception(String className) throws Throwable {
+    public void the_user_gets_an_exception(String className) throws ClassNotFoundException {
         assertException(className);
     }
 
     @Then("^the user gets the response as \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\" and \"([^\"]*)\"$")
-    public void the_user_gets_the_response_as_and(String expectedUid, String expectedEnabled, String expectedDescription, String expectedGroup, String expectedPermissions) throws Throwable {
+    public void the_user_gets_the_response_as_and(String expectedUid, String expectedEnabled, String expectedDescription, String expectedGroup, String expectedPermissions) {
         Feature expectedFeature = new Feature(expectedUid, Boolean.valueOf(expectedEnabled), expectedDescription, expectedGroup, Arrays.asList(expectedPermissions.split(",")));
         FeatureApiBean expectedFeatureApiBean = new FeatureApiBean(expectedFeature);
         assertThat(actualResponse).isEqualToComparingFieldByField(expectedFeatureApiBean);
     }
 
     @Then("^feature is created$")
-    public void feature_is_created() throws Throwable {
+    public void feature_is_created() {
         assertCreated();
     }
 
     @Then("^the user gets the response as$")
-    public void the_user_gets_the_response_as(String expectedResponse) throws Throwable {
+    public void the_user_gets_the_response_as(String expectedResponse) {
         FeatureApiBean featureApiBean = GSON.fromJson(expectedResponse, FeatureApiBean.class);
-        assertThat(actualResponse).isEqualToComparingOnlyGivenFields(featureApiBean);
+        assertThat(actualResponse).isEqualToComparingOnlyGivenFields(featureApiBean, "uid", "description", "enable", "permissions", "group");
     }
 
     @Then("^feature is updated$")
-    public void feature_is_updated() throws Throwable {
+    public void feature_is_updated() {
         assertUpdated();
     }
 }

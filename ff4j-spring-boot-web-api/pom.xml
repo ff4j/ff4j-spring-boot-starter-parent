@@ -18,14 +18,14 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <artifactId>ff4j-spring-boot-web-api</artifactId>
-    <version>AMIGOS-SNAPSHOT</version>
+    <version>AVENGERS-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>ff4j-spring-boot-web-api</name>
     <description>A spring boot project for feature toggling with ff4j</description>
     <parent>
         <groupId>org.ff4j</groupId>
         <artifactId>ff4j-spring-boot-starter-parent</artifactId>
-        <version>AMIGOS-SNAPSHOT</version>
+        <version>AVENGERS-SNAPSHOT</version>
     </parent>
     <dependencies>
         <dependency>
@@ -110,18 +110,5 @@
                 <directory>src/test/resources</directory>
             </testResource>
         </testResources>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.1</version>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                    <testSource>1.8</testSource>
-                    <testTarget>1.8</testTarget>
-                </configuration>
-            </plugin>
-        </plugins>
     </build>
 </project>

@@ -30,7 +30,7 @@ public class PieSectorApiBeanTest {
     public void testDefault() {
         PieSectorApiBean bean = new PieSectorApiBean();
         assertThat(bean.getColor()).isEqualTo(CommonConstants.HTML_WHITE);
-        assertThat(bean.getValue()).isEqualTo(0.0);
+        assertThat(bean.getValue()).isEqualTo(0);
         assertThat(bean.getLabel()).isEqualTo(CommonConstants.N_A);
     }
 }
