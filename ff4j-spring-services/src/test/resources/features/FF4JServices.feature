@@ -35,11 +35,11 @@ Feature: Provides api's to do the following
         "groups": [
           "admin",
           "user"
-        ],
+        ]
       },
       "eventRepository": {
         "type": "org.ff4j.audit.repository.InMemoryEventRepository",
-        "hitCount": 0,
+        "hitCount": 0
       },
       "authorizationsManager": {
         "permissions": [
