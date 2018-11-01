@@ -59,7 +59,7 @@ Feature: This feature enables in providing the user with RESTful api's where in 
     """
     {
       "uid": "login",
-      "enable": true,
+      "enable": true
     }
     """
     When the user requests for a feature by "/ff4j/store/features/admin" by "GET" http method and content type as "application/json"
@@ -68,7 +68,7 @@ Feature: This feature enables in providing the user with RESTful api's where in 
     """
     {
       "uid": "admin",
-      "enable": true,
+      "enable": true
     }
     """
 
@@ -86,7 +86,7 @@ Feature: This feature enables in providing the user with RESTful api's where in 
     """
     {
       "uid": "login",
-      "enable": false,
+      "enable": false
     }
     """
     When the user requests for a feature by "/ff4j/store/features/admin" by "GET" http method and content type as "application/json"
@@ -95,7 +95,7 @@ Feature: This feature enables in providing the user with RESTful api's where in 
     """
     {
       "uid": "admin",
-      "enable": false,
+      "enable": false
     }
     """
 

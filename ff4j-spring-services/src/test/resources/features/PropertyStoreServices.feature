@@ -25,7 +25,7 @@ Feature: This feature enables in providing the user with api's where in the user
       "properties": [
         "usernameMinLength",
         "usernameMaxLength"
-      ],
+      ]
     }
     """
 
