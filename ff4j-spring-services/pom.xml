@@ -21,9 +21,6 @@
     <packaging>jar</packaging>
     <name>ff4j-spring-services</name>
     <description>A spring oriented services for ff4j</description>
-    <properties>
-        <kotlin.version>1.2.41</kotlin.version>
-    </properties>
     <parent>
         <groupId>org.ff4j</groupId>
         <artifactId>ff4j-spring-boot-starter-parent</artifactId>
