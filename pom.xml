@@ -25,8 +25,8 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
-        <ff4j.version>1.7.1</ff4j.version>
         <spring-boot.version>2.1.0.RELEASE</spring-boot.version>
+        <ff4j.version>1.7.3</ff4j.version>
         <kotlin.version>1.2.41</kotlin.version>
         <commons3.lang>3.7</commons3.lang>
         <commons.collection.version>3.2.2</commons.collection.version>
@@ -36,7 +36,7 @@
         <jsonassert.version>1.2.3</jsonassert.version>
         <easymock.version>3.1</easymock.version>
         <swagger.version>2.8.0</swagger.version>
-        <version.jacoco>0.7.9</version.jacoco>
+        <version.jacoco>0.8.2</version.jacoco>
         <meanbean.version>2.0.3</meanbean.version>
     </properties>
     <modules>
