@@ -36,7 +36,7 @@
         <jsonassert.version>1.5.0</jsonassert.version>
         <easymock.version>4.0.1</easymock.version>
         <swagger.version>2.9.2</swagger.version>
-        <version.jacoco>0.8.2</version.jacoco>
+        <jacoco.version>0.8.2</jacoco.version>
         <meanbean.version>2.0.3</meanbean.version>
     </properties>
     <modules>
@@ -236,7 +236,7 @@
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>${version.jacoco}</version>
+                <version>${jacoco.version}</version>
                 <executions>
                     <execution>
                         <goals>
