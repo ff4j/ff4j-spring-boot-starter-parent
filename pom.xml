@@ -38,6 +38,7 @@
         <swagger.version>2.9.2</swagger.version>
         <jacoco.version>0.8.2</jacoco.version>
         <meanbean.version>2.0.3</meanbean.version>
+        <enforcer.version>3.0.0-M2</enforcer.version>
     </properties>
     <modules>
         <module>ff4j-spring-services</module>
@@ -153,6 +154,12 @@
                 <version>${cucumber.version}</version>
                 <scope>test</scope>
             </dependency>
+            <dependency>
+                <groupId>org.jetbrains.kotlin</groupId>
+                <artifactId>kotlin-test-junit</artifactId>
+                <version>${kotlin.version}</version>
+                <scope>test</scope>
+            </dependency>
         </dependencies>
     </dependencyManagement>
     <dependencies>
@@ -188,6 +195,28 @@
             </testResource>
         </testResources>
         <plugins>
+            <!-- maven enforcer -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <version>${enforcer.version}</version>
+                <executions>
+                    <execution>
+                        <id>enforce-maven</id>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <requireMavenVersion>
+                                    <version>3.0</version>
+                                </requireMavenVersion>
+                            </rules>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- kotlin -->
             <plugin>
                 <artifactId>kotlin-maven-plugin</artifactId>
                 <groupId>org.jetbrains.kotlin</groupId>
