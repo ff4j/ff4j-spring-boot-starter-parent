@@ -30,6 +30,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
         <kotlin.version>1.3.0</kotlin.version>
+        <start-class>org.ff4j.sample.Application</start-class>
     </properties>
     <dependencies>
         <dependency>
