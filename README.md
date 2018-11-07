@@ -26,11 +26,11 @@ Add dependency in your project
 
 ### Sample
 
-A sample project can be found at [ff4j-spring-boot-sample](https://github.com/paul58914080/ff4j-spring-boot-starter-parent/tree/master/ff4j-spring-boot-sample)
+A sample project is located at [ff4j-spring-boot-sample](https://github.com/paul58914080/ff4j-spring-boot-starter-parent/tree/master/ff4j-spring-boot-sample)
 
 Use `mvn spring-boot:run`
 
-Once the sample application is booted use the following curl command
+Once the sample application is booted use the following curl command:
  
 `curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X GET http://localhost:8080/ff4j`
 
@@ -39,10 +39,9 @@ Have a look at [FF4JConfiguration](https://github.com/paul58914080/ff4j-spring-b
 ### What is FF4J ?
 
 FF4J is a proposition of [Feature Toggle](http://martinfowler.com/bliki/FeatureToggle.html). 
-You can enable and disable features through configuration at runtime with dedicated consoles or Web API but also __monitor__ features usage. You can also define any __Property__ and change its value at runtime with 
-the exact same web console.
+Features can be enabled or disabled through configuration at runtime with dedicated consoles, Web API, or __monitor__ features usage. The same web console can also define any __Property__ and change its value at runtime.
 
-More information at [ff4j.org](http://ff4j.org) or [reference guide](https://github.com/clun/ff4j-extra/raw/master/ff4j-reference-guide-1.3.pdf). To access a demo please click [here] (http://cannys.com/ff4j-demo)
+More information can be found at [ff4j.org](http://ff4j.org) or the [reference guide](https://github.com/clun/ff4j-extra/raw/master/ff4j-reference-guide-1.3.pdf). To access a demo please click [here] (http://cannys.com/ff4j-demo)
 
  <p align="center">
   <img src="https://raw.github.com/clun/ff4j/master/src/site/resources/images/ff4j-console.png?raw=true" />
