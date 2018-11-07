@@ -14,6 +14,7 @@
 
 package org.ff4j.spring.boot.web.api.resources
 
+import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
 import io.swagger.annotations.ApiResponse
 import io.swagger.annotations.ApiResponses
@@ -39,6 +40,7 @@ import org.springframework.web.bind.annotation.*
  *
  * @author [Paul Williams](mailto:paul58914080@gmail.com)
  */
+@Api(tags = ["Property"], description = "The API for property related operations")
 @RestController
 @RequestMapping(value = [(RESOURCE_PROPERTIES_STORE_PROPERTIES + ROOT + PATH_PARAM_NAME)])
 class PropertyResource(@Autowired val propertyServices: PropertyServices) {

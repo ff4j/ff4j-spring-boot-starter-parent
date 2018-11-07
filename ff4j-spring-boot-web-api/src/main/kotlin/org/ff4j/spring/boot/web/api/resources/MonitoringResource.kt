@@ -14,6 +14,7 @@
 
 package org.ff4j.spring.boot.web.api.resources
 
+import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
 import io.swagger.annotations.ApiResponse
 import io.swagger.annotations.ApiResponses
@@ -34,11 +35,12 @@ import org.springframework.web.bind.annotation.RestController
  *
  * @author [Paul Williams](mailto:paul58914080@gmail.com)
  */
+@Api(tags = ["Monitoring"], description = "The API for monitoring related operations")
 @RestController
 @RequestMapping(value = [RESOURCE_FF4J_MONITORING])
 class MonitoringResource(@Autowired val monitoringServices: MonitoringServices) {
 
-    @ApiOperation(value = "Display <b>Monitoring</b> information for <b><u>all</u></b> features", notes = "The <b>EventRepository</b> handle to store audit events is not required", response = EventRepositoryApiBean::class)
+    @ApiOperation(value = "Display Monitoring information for all features", notes = "The EventRepository handle to store audit events is not required", response = EventRepositoryApiBean::class)
     @ApiResponses(
             ApiResponse(code = 200, message = "Status of event repository bean", response = EventRepositoryApiBean::class),
             ApiResponse(code = 404, message = "No event repository defined", response = String::class))

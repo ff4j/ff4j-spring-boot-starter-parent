@@ -14,6 +14,7 @@
 
 package org.ff4j.spring.boot.web.api.resources
 
+import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
 import io.swagger.annotations.ApiResponse
 import io.swagger.annotations.ApiResponses
@@ -40,10 +41,12 @@ import org.springframework.web.bind.annotation.*
  *
  * @author [Paul Williams](mailto:paul58914080@gmail.com)
  */
+@Api(tags = ["Feature"], description = "The API for Feature related operations")
 @RestController
 @RequestMapping(value = [(RESOURCE_FF4J_STORE_FEATURES + ROOT + PATH_PARAM_UID)])
 class FeatureResource(@Autowired val featureServices: FeatureServices) {
 
+    @ApiOperation(value = "Get feature by uid", response = FeatureApiBean::class)
     @GetMapping(produces = [APPLICATION_JSON_VALUE])
     fun getFeatureByUID(@PathVariable(value = PARAM_UID) featureUID: String): FeatureApiBean {
         return featureServices.getFeature(featureUID)

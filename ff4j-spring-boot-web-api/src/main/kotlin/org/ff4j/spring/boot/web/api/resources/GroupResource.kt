@@ -14,6 +14,7 @@
 
 package org.ff4j.spring.boot.web.api.resources
 
+import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
 import io.swagger.annotations.ApiResponse
 import io.swagger.annotations.ApiResponses
@@ -34,6 +35,7 @@ import org.springframework.web.bind.annotation.*
  *
  * @author [Paul Williams](mailto:paul58914080@gmail.com)
  */
+@Api(tags = ["Group"], description = "The API for group related operations")
 @RestController
 @RequestMapping(value = [(RESOURCE_FF4J_STORE_GROUPS + ROOT + PATH_PARAM_GROUP)])
 class GroupResource(@Autowired val groupServices: GroupServices) {

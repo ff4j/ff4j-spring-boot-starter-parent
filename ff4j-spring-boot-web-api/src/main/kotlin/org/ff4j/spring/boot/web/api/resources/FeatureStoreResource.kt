@@ -15,6 +15,7 @@
 package org.ff4j.spring.boot.web.api.resources
 
 
+import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
 import io.swagger.annotations.ApiResponse
 import io.swagger.annotations.ApiResponses
@@ -41,36 +42,37 @@ import org.springframework.web.bind.annotation.RestController
  *
  * @author [Paul Williams](mailto:paul58914080@gmail.com)
  */
+@Api(tags = ["FeatureStore"], description = "The API for accessing the store of all features")
 @RestController
 @RequestMapping(value = [RESOURCE_FF4J_STORE])
 class FeatureStoreResource(@Autowired val featureStoreService: FeatureStoreServices) {
 
     val featureStore: FeatureStoreApiBean
         @GetMapping(produces = [APPLICATION_JSON_VALUE])
-        @ApiOperation(value = "Displays information regarding the <b>FeaturesStore</b>", response = FeatureStoreApiBean::class)
+        @ApiOperation(value = "Displays information regarding the FeaturesStore", response = FeatureStoreApiBean::class)
         @ApiResponses(ApiResponse(code = 200, message = "status of current feature store", response = FeatureStoreApiBean::class))
         get() = featureStoreService.getFeatureStore()
 
     val allFeatures: Collection<FeatureApiBean>
         @GetMapping(value = [(ROOT + RESOURCE_FEATURES)], produces = [APPLICATION_JSON_VALUE])
-        @ApiOperation(value = "Displays all the <b>Features</b>", response = FeatureApiBean::class)
+        @ApiOperation(value = "Displays all the Features", response = FeatureApiBean::class)
         @ApiResponses(ApiResponse(code = 200, message = "get all features"))
         get() = featureStoreService.getAllFeatures()
 
     val allGroups: Collection<GroupDescApiBean>
         @GetMapping(value = [(ROOT + RESOURCE_GROUPS)], produces = [APPLICATION_JSON_VALUE])
-        @ApiOperation(value = "Display information regarding <b>Groups</b>", response = GroupDescApiBean::class)
+        @ApiOperation(value = "Display information regarding Groups", response = GroupDescApiBean::class)
         @ApiResponses(ApiResponse(code = 200, message = "Groups resource", response = GroupDescApiBean::class))
         get() = featureStoreService.getAllGroups()
 
     val featuresFromCache: CacheApiBean
         @GetMapping(value = [(ROOT + RESOURCE_CACHE)], produces = [APPLICATION_JSON_VALUE])
-        @ApiOperation(value = "Display information related to <b>Cache</b>")
+        @ApiOperation(value = "Display information related to Cache")
         @ApiResponses(ApiResponse(code = 200, message = "Gets the cached features", response = CacheApiBean::class), ApiResponse(code = 404, message = "feature store is not cached"))
         get() = featureStoreService.getFeaturesFromCache()
 
     @DeleteMapping(value = [(ROOT + STORE_CLEAR)])
-    @ApiOperation(value = "Delete all <b>Features</b> in store")
+    @ApiOperation(value = "Delete all Features in store")
     @ApiResponses(ApiResponse(code = 204, message = "all feature have been deleted"))
     fun deleteAllFeatures(): ResponseEntity<Any> {
         featureStoreService.deleteAllFeatures()

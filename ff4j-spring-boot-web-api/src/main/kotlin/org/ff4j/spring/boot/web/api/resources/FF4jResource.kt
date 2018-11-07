@@ -14,6 +14,7 @@
 
 package org.ff4j.spring.boot.web.api.resources
 
+import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
 import io.swagger.annotations.ApiResponse
 import io.swagger.annotations.ApiResponses
@@ -37,19 +38,20 @@ import org.springframework.web.bind.annotation.*
  *
  * @author [Paul Williams](mailto:paul58914080@gmail.com)
  */
+@Api(tags = ["FF4J"], description = "The API for global status of FF4J")
 @RestController
 @RequestMapping(value = [RESOURCE_FF4J])
 class FF4jResource(@Autowired val ff4JServices: FF4jServices) {
 
     val status: FF4jStatusApiBean
-        @ApiOperation(value = "Gets <b>ff4j</b> status overview", notes = "Gets information related to <b>Monitoring</b>, <b>Security</b>, <b>Cache</b> and <b>Store</b>")
+        @ApiOperation(value = "Gets ff4j status overview", notes = "Gets information related to Monitoring, Security, Cache and Store")
         @ApiResponses(
                 ApiResponse(code = 200, message = "Success, return status of ff4j instance", response = FF4jStatusApiBean::class))
         @GetMapping(produces = [APPLICATION_JSON_VALUE])
         get() = ff4JServices.getStatus()
 
     val securityInfo: AuthorizationsManagerApiBean
-        @ApiOperation(value = "Gets <b>Security</b> information (permissions manager)", notes = "Security is implemented through dedicated <b>AuthorizationsManager</b> but it's not mandatory")
+        @ApiOperation(value = "Gets Security information (permissions manager)", notes = "Security is implemented through dedicated AuthorizationsManager but it's not mandatory")
         @ApiResponses(
                 ApiResponse(code = 200, message = "Status of current ff4j security bean", response = AuthorizationsManagerApiBean::class),
                 ApiResponse(code = 404, message = "no security has been defined"))
@@ -57,7 +59,7 @@ class FF4jResource(@Autowired val ff4JServices: FF4jServices) {
         get() = ff4JServices.getSecurityInfo()
 
 
-    @ApiOperation(value = "<b>Simple check</b> feature toggle", response = Boolean::class)
+    @ApiOperation(value = "Simple check feature toggle", response = Boolean::class)
     @ApiResponses(
             ApiResponse(code = 200, message = "If feature is flipped"),
             ApiResponse(code = 404, message = "Feature not found"))
@@ -67,7 +69,7 @@ class FF4jResource(@Autowired val ff4JServices: FF4jServices) {
         return ResponseEntity(status, OK)
     }
 
-    @ApiOperation(value = "<b>Advanced check</b> feature toggle (parametrized)", response = Boolean::class)
+    @ApiOperation(value = "Advanced check feature toggle (parametrized)", response = Boolean::class)
     @ApiResponses(
             ApiResponse(code = 200, message = "If feature is flipped"),
             ApiResponse(code = 400, message = "Invalid parameter"),
