@@ -7,6 +7,8 @@
 
 [![Build Status](https://travis-ci.org/paul58914080/ff4j-spring-boot-starter-parent.svg?branch=master)](https://travis-ci.org/paul58914080/ff4j-spring-boot-starter-parent)  [![Codacy Badge](https://api.codacy.com/project/badge/grade/d5e9fee6aef044058f72c41a84a73e6f)](https://www.codacy.com/app/paul58914080/ff4j-spring-boot-starter-parent) [![codecov](https://codecov.io/gh/paul58914080/ff4j-spring-boot-starter-parent/branch/master/graph/badge.svg)](https://codecov.io/gh/paul58914080/ff4j-spring-boot-starter-parent) [![License Apache2](http://img.shields.io/badge/license-APACHE2-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0.html) [![Join the chat at https://gitter.im/paul58914080/ff4j-spring-boot-starter-parent](https://badges.gitter.im/paul58914080/ff4j-spring-boot-starter-parent.svg)](https://gitter.im/paul58914080/ff4j-spring-boot-starter-parent?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) 
 
+[Swagger Documentation](https://ff4j.herokuapp.com/swagger-ui.html)
+
 This project aims in providing a bootable starter which provides RESTful apis for FF4J. 
 
 Create a bootable jar with 
