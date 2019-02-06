@@ -13,7 +13,6 @@
  */
 package org.ff4j.sample;
 
-import org.ff4j.spring.boot.autoconfigure.FF4JWebConfiguration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -22,7 +21,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  *
  * @author <a href="mailto:paul58914080@gmail.com">Paul Williams</a>
  */
-@SpringBootApplication(exclude = FF4JWebConfiguration.class)
+@SpringBootApplication
 public class Application {
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);

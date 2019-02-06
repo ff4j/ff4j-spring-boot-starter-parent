@@ -47,5 +47,18 @@ class FF4JWebConfiguration : SpringBootServletInitializer() {
         ff4jConsoleServlet.ff4j = ff4j
         return ff4jConsoleServlet
     }
+
+    @Bean
+    fun ff4jDispatcherServletRegistrationBean(ff4jDispatcherServlet: FF4jDispatcherServlet): ServletRegistrationBean<*> {
+        return ServletRegistrationBean(ff4jDispatcherServlet, "/ff4j-web-console/*")
+    }
+
+    @Bean
+    @ConditionalOnMissingBean
+    fun getFF4jDispatcherServlet(ff4j: FF4j): FF4jDispatcherServlet {
+        val ff4jConsoleServlet = FF4jDispatcherServlet()
+        ff4jConsoleServlet.ff4j = ff4j
+        return ff4jConsoleServlet
+    }
 }
 
