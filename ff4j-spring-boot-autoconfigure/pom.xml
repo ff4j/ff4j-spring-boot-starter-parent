@@ -26,6 +26,7 @@
         <version>AVENGERS-SNAPSHOT</version>
     </parent>
     <properties>
+        <thymeleaf.version>2.1.4.RELEASE</thymeleaf.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <dependencies>
@@ -50,6 +51,12 @@
             <groupId>org.ff4j</groupId>
             <artifactId>ff4j-web</artifactId>
             <optional>true</optional>
+        </dependency>
+        <!-- Needed to work with older thymeleaf. To be removed later -->
+        <dependency>
+            <groupId>org.thymeleaf</groupId>
+            <artifactId>thymeleaf</artifactId>
+            <version>${thymeleaf.version}</version>
         </dependency>
     </dependencies>
     <build>
