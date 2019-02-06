@@ -39,15 +39,6 @@
             <artifactId>ff4j-spring-boot-web-api</artifactId>
             <version>${project.version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.ff4j</groupId>
-            <artifactId>ff4j-web</artifactId>
-        </dependency>
-        <!-- to resolve the dependency -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-thymeleaf</artifactId>
-        </dependency>
     </dependencies>
     <build>
         <finalName>fff4j-spring-boot-starter</finalName>
