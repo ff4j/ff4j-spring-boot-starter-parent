@@ -15,13 +15,14 @@ package org.ff4j.sample;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.thymeleaf.ThymeleafAutoConfiguration;
 
 /**
  * Created by Paul
  *
  * @author <a href="mailto:paul58914080@gmail.com">Paul Williams</a>
  */
-@SpringBootApplication
+@SpringBootApplication(exclude = ThymeleafAutoConfiguration.class)
 public class Application {
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
