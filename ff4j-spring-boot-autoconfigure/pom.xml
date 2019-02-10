@@ -47,17 +47,6 @@
             <artifactId>ff4j-core</artifactId>
             <optional>true</optional>
         </dependency>
-        <dependency>
-            <groupId>org.ff4j</groupId>
-            <artifactId>ff4j-web</artifactId>
-            <optional>true</optional>
-        </dependency>
-        <!-- Needed to work with older thymeleaf. To be removed later -->
-        <dependency>
-            <groupId>org.thymeleaf</groupId>
-            <artifactId>thymeleaf</artifactId>
-            <version>${thymeleaf.version}</version>
-        </dependency>
     </dependencies>
     <build>
         <finalName>ff4j-spring-boot-autoconfigure</finalName>
