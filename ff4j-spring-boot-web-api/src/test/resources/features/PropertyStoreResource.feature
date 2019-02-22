@@ -133,87 +133,87 @@ Feature: This feature enables in providing the user with RESTful api's where in 
     When the user requests for a feature by "/api/ff4j/propertyStore/clearCache" by "DELETE" http method and content type as "application/json"
     Then the user gets an error response with code "404" and error message as "property store is not cached"
 
-#  Scenario: When the user tries to clear all the cached feature from the feature store
-#    Given the property store is cached
-#    And the following properties are cached
-#      | name | description            | type | value | fixedValueCSV |
-#      | port | The application's port | int  | 8080  |               |
-#    When the user requests for a feature by "/api/ff4j/propertyStore/cache" by "GET" http method and content type as "application/json"
-#    Then the user gets the response with response code "200"
-#    And the response body as
-#    """
-#    {
-#      "cacheProvider": "InMemory",
-#      "cacheStore": "org.ff4j.store.InMemoryFeatureStore",
-#      "featureNames": [],
-#      "propertyNames": ["port"]
-#    }
-#    """
-#    When the user requests for a feature by "/api/ff4j/propertyStore/properties" by "GET" http method and content type as "application/json"
-#    Then the user gets the response with response code "200"
-#    And the response body as
-#    """
-#    [
-#      {
-#        "name": "usernameMinLength",
-#        "description": "The minimum length for a username",
-#        "type": "org.ff4j.property.PropertyInt",
-#        "value": "4",
-#        "fixedValues": []
-#      },
-#      {
-#        "name": "usernameMaxLength",
-#        "description": "The maximum length for a username",
-#        "type": "org.ff4j.property.PropertyInt",
-#        "value": "15",
-#        "fixedValues": []
-#      }
-#    ]
-#    """
-#    When the user requests for a feature by "/api/ff4j/propertyStore/clearCache" by "DELETE" http method and content type as "application/json"
-#    Then the user gets the response with response code "204"
-#    When the user requests for a feature by "/api/ff4j/propertyStore/cache" by "GET" http method and content type as "application/json"
-#    Then the user gets the response with response code "200"
-#    And the response body as
-#    """
-#    {
-#      "cacheProvider": "InMemory",
-#      "cacheStore": "org.ff4j.store.InMemoryFeatureStore",
-#      "featureNames": [],
-#      "propertyNames": []
-#    }
-#    """
-#    When the user requests for a feature by "/api/ff4j/propertyStore/properties" by "GET" http method and content type as "application/json"
-#    Then the user gets the response with response code "200"
-#    And the response body as
-#    """
-#    [
-#      {
-#        "name": "usernameMinLength",
-#        "description": "The minimum length for a username",
-#        "type": "org.ff4j.property.PropertyInt",
-#        "value": "4",
-#        "fixedValues": []
-#      },
-#      {
-#        "name": "usernameMaxLength",
-#        "description": "The maximum length for a username",
-#        "type": "org.ff4j.property.PropertyInt",
-#        "value": "15",
-#        "fixedValues": []
-#      }
-#    ]
-#    """
-#    When the user requests for a feature by "/api/ff4j/propertyStore" by "GET" http method and content type as "application/json"
-#    Then the user gets the response with response code "200"
-#    And the response body as
-#    """
-#    {
-#      "cache": {
-#        "cacheProvider": "InMemory",
-#        "cacheStore": "org.ff4j.store.InMemoryFeatureStore",
-#        "featureNames": [],
-#        "propertyNames": []
-#      }
-#    }
-#    """
+  Scenario: When the user tries to clear all the cached feature from the feature store
+    Given the property store is cached
+    And the following properties are cached
+      | name | description            | type | value | fixedValueCSV |
+      | port | The application's port | int  | 8080  |               |
+    When the user requests for a feature by "/api/ff4j/propertyStore/cache" by "GET" http method and content type as "application/json"
+    Then the user gets the response with response code "200"
+    And the response body as
+    """
+    {
+      "cacheProvider": "InMemory",
+      "cacheStore": "org.ff4j.store.InMemoryFeatureStore",
+      "featureNames": [],
+      "propertyNames": ["port"]
+    }
+    """
+    When the user requests for a feature by "/api/ff4j/propertyStore/properties" by "GET" http method and content type as "application/json"
+    Then the user gets the response with response code "200"
+    And the response body as
+    """
+    [
+      {
+        "name": "usernameMinLength",
+        "description": "The minimum length for a username",
+        "type": "org.ff4j.property.PropertyInt",
+        "value": "4",
+        "fixedValues": []
+      },
+      {
+        "name": "usernameMaxLength",
+        "description": "The maximum length for a username",
+        "type": "org.ff4j.property.PropertyInt",
+        "value": "15",
+        "fixedValues": []
+      }
+    ]
+    """
+    When the user requests for a feature by "/api/ff4j/propertyStore/clearCache" by "DELETE" http method and content type as "application/json"
+    Then the user gets the response with response code "204"
+    When the user requests for a feature by "/api/ff4j/propertyStore/cache" by "GET" http method and content type as "application/json"
+    Then the user gets the response with response code "200"
+    And the response body as
+    """
+    {
+      "cacheProvider": "InMemory",
+      "cacheStore": "org.ff4j.store.InMemoryFeatureStore",
+      "featureNames": [],
+      "propertyNames": []
+    }
+    """
+    When the user requests for a feature by "/api/ff4j/propertyStore/properties" by "GET" http method and content type as "application/json"
+    Then the user gets the response with response code "200"
+    And the response body as
+    """
+    [
+      {
+        "name": "usernameMinLength",
+        "description": "The minimum length for a username",
+        "type": "org.ff4j.property.PropertyInt",
+        "value": "4",
+        "fixedValues": []
+      },
+      {
+        "name": "usernameMaxLength",
+        "description": "The maximum length for a username",
+        "type": "org.ff4j.property.PropertyInt",
+        "value": "15",
+        "fixedValues": []
+      }
+    ]
+    """
+    When the user requests for a feature by "/api/ff4j/propertyStore" by "GET" http method and content type as "application/json"
+    Then the user gets the response with response code "200"
+    And the response body as
+    """
+    {
+      "cache": {
+        "cacheProvider": "InMemory",
+        "cacheStore": "org.ff4j.store.InMemoryFeatureStore",
+        "featureNames": [],
+        "propertyNames": []
+      }
+    }
+    """
