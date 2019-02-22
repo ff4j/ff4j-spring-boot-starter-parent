@@ -22,9 +22,6 @@ package org.ff4j.services.constants;
 
 import org.junit.Test;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
