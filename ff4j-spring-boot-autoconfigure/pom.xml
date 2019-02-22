@@ -45,7 +45,6 @@
         <dependency>
             <groupId>org.ff4j</groupId>
             <artifactId>ff4j-core</artifactId>
-            <optional>true</optional>
         </dependency>
     </dependencies>
     <build>

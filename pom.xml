@@ -39,6 +39,7 @@
         <jacoco.version>0.8.3</jacoco.version>
         <meanbean.version>2.0.3</meanbean.version>
         <enforcer.version>3.0.0-M2</enforcer.version>
+        <jackson-module-kotlin>2.9.5</jackson-module-kotlin>
     </properties>
     <modules>
         <module>ff4j-spring-services</module>
@@ -168,6 +169,11 @@
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-stdlib</artifactId>
             <version>${kotlin.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.module</groupId>
+            <artifactId>jackson-module-kotlin</artifactId>
+            <version>${jackson-module-kotlin}</version>
         </dependency>
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
