@@ -22,7 +22,7 @@ import org.springframework.boot.autoconfigure.thymeleaf.ThymeleafAutoConfigurati
  *
  * @author <a href="mailto:paul58914080@gmail.com">Paul Williams</a>
  */
-@SpringBootApplication(exclude = ThymeleafAutoConfiguration.class)
+@SpringBootApplication
 public class Application {
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);

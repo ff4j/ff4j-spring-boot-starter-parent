@@ -1,3 +1,4 @@
+/*
 package org.ff4j.sample.config;
 
 import org.ff4j.FF4j;
@@ -11,11 +12,13 @@ import org.springframework.context.annotation.Configuration;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 
+*/
 /**
  * Created by Paul
  *
  * @author <a href="mailto:paul58914080@gmail.com">Paul Williams</a>
- */
+ *//*
+
 @Configuration
 public class FF4JWebConfiguration extends SpringBootServletInitializer {
 
@@ -37,3 +40,4 @@ public class FF4JWebConfiguration extends SpringBootServletInitializer {
         return consoleServlet;
     }
 }
+*/
