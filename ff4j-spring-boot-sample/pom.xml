@@ -38,6 +38,16 @@
             <artifactId>ff4j-spring-boot-starter</artifactId>
             <version>AVENGERS-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>org.ff4j</groupId>
+            <artifactId>ff4j-web</artifactId>
+            <version>1.7.3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.thymeleaf</groupId>
+            <artifactId>thymeleaf</artifactId>
+            <version>2.1.4.RELEASE</version>
+        </dependency>
     </dependencies>
     <build>
         <resources>
