@@ -64,11 +64,14 @@ public abstract class AbstractStepDef {
 
     protected void clearFeatureStore() {
         ff4j.setFeatureStore(new InMemoryFeatureStore());
+        ff4j.setPropertiesStore(new InMemoryPropertyStore());
     }
 
     protected void clearPropertyStore() {
+        ff4j.setFeatureStore(new InMemoryFeatureStore());
         ff4j.setPropertiesStore(new InMemoryPropertyStore());
     }
+
 
     protected void constructRequestBuilder(String path, String httpMethod, String contentType) {
         switch (HttpMethod.getHttpMethod(httpMethod)) {

@@ -21,7 +21,6 @@ import io.swagger.annotations.ApiResponses
 import org.ff4j.services.FF4jServices
 import org.ff4j.services.constants.FeatureConstants.PATH_PARAM_UID
 import org.ff4j.services.constants.FeatureConstants.RESOURCE_FF4J
-import org.ff4j.services.constants.FeatureConstants.ROOT
 import org.ff4j.services.domain.AuthorizationsManagerApiBean
 import org.ff4j.services.domain.FF4jStatusApiBean
 import org.ff4j.web.FF4jWebConstants.*
@@ -43,27 +42,25 @@ import org.springframework.web.bind.annotation.*
 @RequestMapping(value = [RESOURCE_FF4J])
 class FF4jResource(@Autowired val ff4JServices: FF4jServices) {
 
-    val status: FF4jStatusApiBean
-        @ApiOperation(value = "Gets ff4j status overview", notes = "Gets information related to Monitoring, Security, Cache and Store")
-        @ApiResponses(
-                ApiResponse(code = 200, message = "Success, return status of ff4j instance", response = FF4jStatusApiBean::class))
-        @GetMapping(produces = [APPLICATION_JSON_VALUE])
-        get() = ff4JServices.getStatus()
+    @ApiOperation(value = "Gets ff4j status overview", notes = "Gets information related to Monitoring, Security, Cache and Store")
+    @ApiResponses(
+            ApiResponse(code = 200, message = "Success, return status of ff4j instance", response = FF4jStatusApiBean::class))
+    @GetMapping(produces = [APPLICATION_JSON_VALUE])
+    fun getStatus(): FF4jStatusApiBean = ff4JServices.getStatus()
 
-    val securityInfo: AuthorizationsManagerApiBean
-        @ApiOperation(value = "Gets Security information (permissions manager)", notes = "Security is implemented through dedicated AuthorizationsManager but it's not mandatory")
-        @ApiResponses(
-                ApiResponse(code = 200, message = "Status of current ff4j security bean", response = AuthorizationsManagerApiBean::class),
-                ApiResponse(code = 404, message = "no security has been defined"))
-        @GetMapping(value = [(ROOT + RESOURCE_SECURITY)], produces = [APPLICATION_JSON_VALUE])
-        get() = ff4JServices.getSecurityInfo()
+    @ApiOperation(value = "Gets Security information (permissions manager)", notes = "Security is implemented through dedicated AuthorizationsManager but it's not mandatory")
+    @ApiResponses(
+            ApiResponse(code = 200, message = "Status of current ff4j security bean", response = AuthorizationsManagerApiBean::class),
+            ApiResponse(code = 404, message = "no security has been defined"))
+    @GetMapping(value = [("/$RESOURCE_SECURITY")], produces = [APPLICATION_JSON_VALUE])
+    fun getSecurityInfo(): AuthorizationsManagerApiBean = ff4JServices.getSecurityInfo()
 
 
     @ApiOperation(value = "Simple check feature toggle", response = Boolean::class)
     @ApiResponses(
             ApiResponse(code = 200, message = "If feature is flipped"),
             ApiResponse(code = 404, message = "Feature not found"))
-    @GetMapping(value = [(ROOT + OPERATION_CHECK + ROOT + PATH_PARAM_UID)])
+    @GetMapping(value = [("/$OPERATION_CHECK/$PATH_PARAM_UID")])
     fun check(@PathVariable(value = PARAM_UID) featureUID: String): ResponseEntity<Boolean> {
         val status = ff4JServices.check(featureUID)
         return ResponseEntity(status, OK)
@@ -74,7 +71,7 @@ class FF4jResource(@Autowired val ff4JServices: FF4jServices) {
             ApiResponse(code = 200, message = "If feature is flipped"),
             ApiResponse(code = 400, message = "Invalid parameter"),
             ApiResponse(code = 404, message = "Feature not found"))
-    @PostMapping(value = [(ROOT + OPERATION_CHECK + ROOT + PATH_PARAM_UID)], consumes = [APPLICATION_FORM_URLENCODED_VALUE])
+    @PostMapping(value = [("/$OPERATION_CHECK/$PATH_PARAM_UID")], consumes = [APPLICATION_FORM_URLENCODED_VALUE])
     fun check(@PathVariable(value = PARAM_UID) featureUID: String, @RequestParam formParams: MultiValueMap<String, String>): ResponseEntity<Boolean> {
         val map = formParams.toSingleValueMap()
         val status = ff4JServices.check(featureUID, map)

@@ -2,7 +2,6 @@ package org.ff4j.services
 
 import org.ff4j.FF4j
 import org.ff4j.cache.FF4jCacheProxy
-import org.ff4j.property.store.PropertyStore
 import org.ff4j.services.domain.CacheApiBean
 import org.ff4j.services.domain.PropertyApiBean
 import org.ff4j.services.domain.PropertyStoreApiBean
@@ -24,7 +23,7 @@ class PropertyStoreServices(@Autowired val ff4j: FF4j) {
     }
 
     fun getAllProperties(): List<PropertyApiBean> {
-        val allProperties = ff4j.propertiesStore.readAllProperties();
+        val allProperties = ff4j.propertiesStore.readAllProperties()
         return if (CollectionUtils.isEmpty(allProperties)) {
             ArrayList(0)
         } else {
@@ -37,18 +36,12 @@ class PropertyStoreServices(@Autowired val ff4j: FF4j) {
     }
 
     fun getPropertiesFromCache(): CacheApiBean {
-        return if (ff4j.propertiesStore is FF4jCacheProxy) {
-            CacheApiBean(ff4j.propertiesStore as PropertyStore)
-        } else {
-            throw PropertyStoreNotCached()
-        }
+        ff4j.cacheProxy ?: throw PropertyStoreNotCached()
+        return CacheApiBean(ff4j.propertiesStore)
     }
 
     fun clearCachedPropertyStore() {
-        return if (ff4j.propertiesStore is FF4jCacheProxy) {
-            (ff4j.propertiesStore as FF4jCacheProxy).cacheManager.clearProperties()
-        } else {
-            throw PropertyStoreNotCached()
-        }
+        val cacheProxy = ff4j.cacheProxy ?: throw PropertyStoreNotCached()
+        cacheProxy.cacheManager.clearProperties()
     }
 }

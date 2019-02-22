@@ -22,7 +22,6 @@ import org.ff4j.services.GroupServices
 import org.ff4j.services.constants.FeatureConstants.PARAM_GROUP
 import org.ff4j.services.constants.FeatureConstants.PATH_PARAM_GROUP
 import org.ff4j.services.constants.FeatureConstants.RESOURCE_FF4J_STORE_GROUPS
-import org.ff4j.services.constants.FeatureConstants.ROOT
 import org.ff4j.services.domain.FeatureApiBean
 import org.ff4j.web.FF4jWebConstants.OPERATION_DISABLE
 import org.ff4j.web.FF4jWebConstants.OPERATION_ENABLE
@@ -37,27 +36,21 @@ import org.springframework.web.bind.annotation.*
  */
 @Api(tags = ["Group"], description = "The API for group related operations")
 @RestController
-@RequestMapping(value = [(RESOURCE_FF4J_STORE_GROUPS + ROOT + PATH_PARAM_GROUP)])
+@RequestMapping(value = [("$RESOURCE_FF4J_STORE_GROUPS/$PATH_PARAM_GROUP")])
 class GroupResource(@Autowired val groupServices: GroupServices) {
 
     @ApiOperation(value = "Get all the features belonging to the group", response = FeatureApiBean::class)
     @ApiResponses(ApiResponse(code = 200, message = "features belonging to the group"), ApiResponse(code = 404, message = "Group not found"))
     @GetMapping(produces = [APPLICATION_JSON_VALUE])
-    fun getFeaturesByGroup(@PathVariable(value = PARAM_GROUP) groupName: String): Collection<FeatureApiBean> {
-        return groupServices.getFeaturesByGroup(groupName)
-    }
+    fun getFeaturesByGroup(@PathVariable(value = PARAM_GROUP) groupName: String): Collection<FeatureApiBean> = groupServices.getFeaturesByGroup(groupName)
 
     @ApiOperation(value = "Enable a group", response = Void::class)
     @ApiResponses(ApiResponse(code = 200, message = "Group has been enabled"), ApiResponse(code = 404, message = "Group not found"))
-    @PostMapping(value = [(ROOT + OPERATION_ENABLE)], produces = [APPLICATION_JSON_VALUE])
-    fun enableGroup(@PathVariable(value = PARAM_GROUP) groupName: String) {
-        groupServices.enableGroup(groupName)
-    }
+    @PostMapping(value = [("/$OPERATION_ENABLE")], produces = [APPLICATION_JSON_VALUE])
+    fun enableGroup(@PathVariable(value = PARAM_GROUP) groupName: String) = groupServices.enableGroup(groupName)
 
     @ApiOperation(value = "Disable a group", response = Void::class)
     @ApiResponses(ApiResponse(code = 200, message = "Group has been disabled"), ApiResponse(code = 404, message = "Group not found"))
-    @PostMapping(value = [(ROOT + OPERATION_DISABLE)], produces = [APPLICATION_JSON_VALUE])
-    fun disableGroup(@PathVariable(value = PARAM_GROUP) groupName: String) {
-        groupServices.disableGroup(groupName)
-    }
+    @PostMapping(value = [("/$OPERATION_DISABLE")], produces = [APPLICATION_JSON_VALUE])
+    fun disableGroup(@PathVariable(value = PARAM_GROUP) groupName: String) = groupServices.disableGroup(groupName)
 }

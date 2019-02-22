@@ -31,7 +31,7 @@ class FeatureStoreServices(@Autowired val fF4j: FF4j) {
             ArrayList(0)
         } else {
             val features = ArrayList<FeatureApiBean>(allFeatures.size)
-            features.addAll(allFeatures.values.stream().map { it -> FeatureApiBean(it) }.collect(Collectors.toList()))
+            features.addAll(allFeatures.values.stream().map { FeatureApiBean(it) }.collect(Collectors.toList()))
             features
         }
     }
@@ -47,13 +47,13 @@ class FeatureStoreServices(@Autowired val fF4j: FF4j) {
         return groups.values
     }
 
-    private fun initGroup(groups: HashMap<String, GroupDescApiBean>, uid: String?, groupName: String?) {
+    private fun initGroup(groups: HashMap<String, GroupDescApiBean>, uid: String, groupName: String?) {
         groupName?.let {
             if (StringUtils.isNotBlank(groupName)) {
                 if (!groups.containsKey(groupName)) {
                     groups[groupName] = GroupDescApiBean(groupName, ArrayList())
                 }
-                groups[groupName]?.features?.add(uid!!)
+                groups[groupName]?.features?.add(uid)
             }
         }
     }
@@ -63,18 +63,13 @@ class FeatureStoreServices(@Autowired val fF4j: FF4j) {
     }
 
     fun getFeaturesFromCache(): CacheApiBean {
-        return if (fF4j.featureStore is FF4jCacheProxy) {
-            CacheApiBean(fF4j.featureStore as FeatureStore)
-        } else {
-            throw FeatureStoreNotCached()
-        }
+        fF4j.cacheProxy ?: throw FeatureStoreNotCached()
+        return CacheApiBean(fF4j.featureStore)
     }
 
     fun clearCachedFeatureStore() {
-        if (fF4j.featureStore is FF4jCacheProxy) {
-            (fF4j.featureStore as FF4jCacheProxy).cacheManager.clearFeatures()
-        } else {
-            throw FeatureStoreNotCached()
-        }
+        // Fixing #218 : If audit is enabled, cannot clear cache.
+        val cacheProxy = fF4j.cacheProxy ?: throw FeatureStoreNotCached()
+        cacheProxy.cacheManager.clearFeatures()
     }
 }

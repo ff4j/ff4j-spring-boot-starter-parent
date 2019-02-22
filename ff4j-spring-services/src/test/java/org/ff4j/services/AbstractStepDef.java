@@ -1,17 +1,3 @@
-/*
- *
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
- * the License. You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on
- * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
- * specific language governing permissions and limitations under the License.
- *
- * Copyright 2013-2016 the original author or authors.
- */
-
 package org.ff4j.services;
 
 import org.apache.commons.lang3.StringUtils;
@@ -35,9 +21,27 @@ import java.util.Set;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.ff4j.services.utils.JsonUtils.GSON;
 
+/*
+ * #%L
+ * ff4j-spring-services
+ * %%
+ * Copyright (C) 2013 - 2016 FF4J
+ * %%
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * #L%
+ */
+
 /**
- * Created by Paul
- *
  * @author <a href="mailto:paul58914080@gmail.com">Paul Williams</a>
  */
 @ContextConfiguration(classes = {CucumberConfiguration.class})
@@ -59,14 +63,14 @@ public class AbstractStepDef {
 
     protected void createProperties(List<PropertyPojo> properties) {
         for (PropertyPojo propertyPojo : properties) {
-            Property property = asProperty(propertyPojo.getName(), propertyPojo.getType(), propertyPojo.getValue(),
+            Property<?> property = asProperty(propertyPojo.getName(), propertyPojo.getType(), propertyPojo.getValue(),
                     propertyPojo.getDescription(),
                     StringUtils.isNotBlank(propertyPojo.getFixedValueCSV()) ? new HashSet<>(Arrays.asList(propertyPojo.getFixedValueCSV().split(","))) : null);
             createProperty(property);
         }
     }
 
-    private void createProperty(Property property) {
+    private void createProperty(Property<?> property) {
         ff4j.createProperty(property);
     }
 
@@ -75,14 +79,16 @@ public class AbstractStepDef {
     }
 
     protected void clearFeatureStore() {
+        ff4j.setPropertiesStore(new InMemoryPropertyStore());
         ff4j.setFeatureStore(new InMemoryFeatureStore());
     }
 
     protected void clearPropertyStore() {
         ff4j.setPropertiesStore(new InMemoryPropertyStore());
+        ff4j.setFeatureStore(new InMemoryFeatureStore());
     }
 
-    protected Property asProperty(String name, String type, String value, String description, Set<String> fixedValues) {
+    protected Property<?> asProperty(String name, String type, String value, String description, Set<String> fixedValues) {
         return PropertyFactory.createProperty(name, getType(type), value, description, fixedValues);
     }
 

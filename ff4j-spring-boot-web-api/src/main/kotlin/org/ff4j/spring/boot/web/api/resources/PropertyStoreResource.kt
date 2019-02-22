@@ -22,7 +22,6 @@ import org.ff4j.services.PropertyStoreServices
 import org.ff4j.services.constants.FeatureConstants.RESOURCE_CLEAR_CACHE
 import org.ff4j.services.constants.FeatureConstants.RESOURCE_FF4J_PROPERTY_STORE
 import org.ff4j.services.constants.FeatureConstants.RESOURCE_PROPERTIES
-import org.ff4j.services.constants.FeatureConstants.ROOT
 import org.ff4j.services.domain.CacheApiBean
 import org.ff4j.services.domain.PropertyApiBean
 import org.ff4j.services.domain.PropertyStoreApiBean
@@ -47,29 +46,26 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping(value = [RESOURCE_FF4J_PROPERTY_STORE])
 class PropertyStoreResource(@Autowired val propertyStoreServices: PropertyStoreServices) {
 
-    val propertyStore: PropertyStoreApiBean
-        @ApiOperation(value = "Display information regarding Properties Store", response = PropertyStoreApiBean::class)
-        @ApiResponses(ApiResponse(code = 200, message = "status of current properties store"))
-        @GetMapping(produces = [APPLICATION_JSON_VALUE])
-        get() = propertyStoreServices.getPropertyStore()
+    @ApiOperation(value = "Display information regarding Properties Store", response = PropertyStoreApiBean::class)
+    @ApiResponses(ApiResponse(code = 200, message = "status of current properties store"))
+    @GetMapping(produces = [APPLICATION_JSON_VALUE])
+    fun getPropertyStore(): PropertyStoreApiBean = propertyStoreServices.getPropertyStore()
 
-    val allProperties: List<PropertyApiBean>
-        @ApiOperation(value = "Display all the Properties", response = PropertyApiBean::class)
-        @ApiResponses(ApiResponse(code = 200, message = "get all Properties"))
-        @GetMapping(value = [RESOURCE_PROPERTIES], produces = [APPLICATION_JSON_VALUE])
-        get() = propertyStoreServices.getAllProperties()
+    @ApiOperation(value = "Display all the Properties", response = PropertyApiBean::class)
+    @ApiResponses(ApiResponse(code = 200, message = "get all Properties"))
+    @GetMapping(value = ["/$RESOURCE_PROPERTIES"], produces = [APPLICATION_JSON_VALUE])
+    fun getAllProperties(): List<PropertyApiBean> = propertyStoreServices.getAllProperties()
 
-    val propertiesFromCache: CacheApiBean
-        @ApiOperation(value = "Display information related to Cache")
-        @ApiResponses(
-                ApiResponse(code = 200, message = "Gets the cached properties", response = CacheApiBean::class),
-                ApiResponse(code = 404, message = "property store is not cached"))
-        @GetMapping(value = [(ROOT + RESOURCE_CACHE)], produces = [APPLICATION_JSON_VALUE])
-        get() = propertyStoreServices.getPropertiesFromCache()
+    @ApiOperation(value = "Display information related to Cache")
+    @ApiResponses(
+            ApiResponse(code = 200, message = "Gets the cached properties", response = CacheApiBean::class),
+            ApiResponse(code = 404, message = "property store is not cached"))
+    @GetMapping(value = [("/$RESOURCE_CACHE")], produces = [APPLICATION_JSON_VALUE])
+    fun getPropertiesFromCache(): CacheApiBean = propertyStoreServices.getPropertiesFromCache()
 
     @ApiOperation(value = "Delete all Properties in store")
     @ApiResponses(ApiResponse(code = 204, message = "all properties have been deleted", response = ResponseEntity::class))
-    @DeleteMapping(value = [(ROOT + STORE_CLEAR)])
+    @DeleteMapping(value = [("/$STORE_CLEAR")])
     fun deleteAllProperties(): ResponseEntity<Any> {
         propertyStoreServices.deleteAllProperties()
         return ResponseEntity(NO_CONTENT)

@@ -33,7 +33,7 @@ class FeatureApiBean : Serializable {
         this.enable = feature.isEnable
         this.description = feature.description
         this.permissions = feature.permissions
-        this.group= feature.group
+        this.group = feature.group
         feature.flippingStrategy?.let {
             this.flippingStrategy = FlippingStrategyApiBean(it)
         }
@@ -68,14 +68,16 @@ class FeatureApiBean : Serializable {
     }
 
     private fun initProperties(feature: Feature) {
-        customProperties.let {
-            it.values.forEach { propertyApiBean ->
-                run {
-                    try {
-                        feature.addProperty(propertyApiBean.asProperty())
-                    } catch (exception: IllegalArgumentException) {
-                        throw PropertiesBadRequestException(exception)
-                    }
+        addProperty(customProperties.values, feature)
+    }
+
+    private fun addProperty(values: MutableCollection<PropertyApiBean>, feature: Feature) {
+        values.forEach { propertyApiBean ->
+            run {
+                try {
+                    feature.addProperty(propertyApiBean.asProperty())
+                } catch (exception: IllegalArgumentException) {
+                    throw PropertiesBadRequestException(exception)
                 }
             }
         }

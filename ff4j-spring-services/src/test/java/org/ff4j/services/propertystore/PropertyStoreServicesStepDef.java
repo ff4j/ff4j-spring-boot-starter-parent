@@ -1,18 +1,24 @@
-/*
- *
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
- * the License. You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on
- * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
- * specific language governing permissions and limitations under the License.
- *
- * Copyright 2013-2016 the original author or authors.
- */
-
 package org.ff4j.services.propertystore;
+
+/*
+ * #%L
+ * ff4j-spring-services
+ * %%
+ * Copyright (C) 2013 - 2016 FF4J
+ * %%
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * #L%
+ */
 
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -30,8 +36,6 @@ import java.util.HashSet;
 import java.util.List;
 
 /**
- * Created by Paul
- *
  * @author <a href="mailto:paul58914080@gmail.com">Paul Williams</a>
  */
 public class PropertyStoreServicesStepDef extends AbstractStepDef {
@@ -63,14 +67,15 @@ public class PropertyStoreServicesStepDef extends AbstractStepDef {
     public void the_property_store_is_cached() throws Throwable {
         FF4jCacheProxy proxy = new FF4jCacheProxy(ff4j.getFeatureStore(), ff4j.getPropertiesStore(), new InMemoryCacheManager());
         ff4j.setPropertiesStore(proxy);
+        ff4j.setFeatureStore(proxy);
     }
 
     @Given("^the following properties are cached$")
     public void the_following_properties_are_cached(List<PropertyPojo> properties) throws Throwable {
         for (PropertyPojo propertyPojo : properties) {
-            Property property = asProperty(propertyPojo.getName(), propertyPojo.getType(), propertyPojo.getValue(),
+            Property<?> property = asProperty(propertyPojo.getName(), propertyPojo.getType(), propertyPojo.getValue(),
                     propertyPojo.getDescription(),
-                    StringUtils.isNotBlank(propertyPojo.getFixedValueCSV()) ? new HashSet<>(Arrays.asList(propertyPojo.getFixedValueCSV().split(","))) : null);
+                    StringUtils.isNotBlank(propertyPojo.getFixedValueCSV()) ? new HashSet<String>(Arrays.asList(propertyPojo.getFixedValueCSV().split(","))) : null);
             ((FF4jCacheProxy) ff4j.getPropertiesStore()).getCacheManager().putProperty(property);
         }
     }

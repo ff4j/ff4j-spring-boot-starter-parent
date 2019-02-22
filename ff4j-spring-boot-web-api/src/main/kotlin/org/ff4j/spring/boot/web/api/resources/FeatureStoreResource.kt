@@ -22,7 +22,6 @@ import io.swagger.annotations.ApiResponses
 import org.ff4j.services.FeatureStoreServices
 import org.ff4j.services.constants.FeatureConstants.RESOURCE_CLEAR_CACHE
 import org.ff4j.services.constants.FeatureConstants.RESOURCE_FF4J_STORE
-import org.ff4j.services.constants.FeatureConstants.ROOT
 import org.ff4j.services.domain.CacheApiBean
 import org.ff4j.services.domain.FeatureApiBean
 import org.ff4j.services.domain.FeatureStoreApiBean
@@ -47,31 +46,27 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping(value = [RESOURCE_FF4J_STORE])
 class FeatureStoreResource(@Autowired val featureStoreService: FeatureStoreServices) {
 
-    val featureStore: FeatureStoreApiBean
-        @GetMapping(produces = [APPLICATION_JSON_VALUE])
-        @ApiOperation(value = "Displays information regarding the FeaturesStore", response = FeatureStoreApiBean::class)
-        @ApiResponses(ApiResponse(code = 200, message = "status of current feature store", response = FeatureStoreApiBean::class))
-        get() = featureStoreService.getFeatureStore()
+    @GetMapping(produces = [APPLICATION_JSON_VALUE])
+    @ApiOperation(value = "Displays information regarding the FeaturesStore", response = FeatureStoreApiBean::class)
+    @ApiResponses(ApiResponse(code = 200, message = "status of current feature store", response = FeatureStoreApiBean::class))
+    fun getFeatureStore(): FeatureStoreApiBean = featureStoreService.getFeatureStore()
 
-    val allFeatures: Collection<FeatureApiBean>
-        @GetMapping(value = [(ROOT + RESOURCE_FEATURES)], produces = [APPLICATION_JSON_VALUE])
-        @ApiOperation(value = "Displays all the Features", response = FeatureApiBean::class)
-        @ApiResponses(ApiResponse(code = 200, message = "get all features"))
-        get() = featureStoreService.getAllFeatures()
+    @GetMapping(value = [("/$RESOURCE_FEATURES")], produces = [APPLICATION_JSON_VALUE])
+    @ApiOperation(value = "Displays all the Features", response = FeatureApiBean::class)
+    @ApiResponses(ApiResponse(code = 200, message = "get all features"))
+    fun getAllFeatures(): Collection<FeatureApiBean> = featureStoreService.getAllFeatures()
 
-    val allGroups: Collection<GroupDescApiBean>
-        @GetMapping(value = [(ROOT + RESOURCE_GROUPS)], produces = [APPLICATION_JSON_VALUE])
-        @ApiOperation(value = "Display information regarding Groups", response = GroupDescApiBean::class)
-        @ApiResponses(ApiResponse(code = 200, message = "Groups resource", response = GroupDescApiBean::class))
-        get() = featureStoreService.getAllGroups()
+    @GetMapping(value = [("/$RESOURCE_GROUPS")], produces = [APPLICATION_JSON_VALUE])
+    @ApiOperation(value = "Display information regarding Groups", response = GroupDescApiBean::class)
+    @ApiResponses(ApiResponse(code = 200, message = "Groups resource", response = GroupDescApiBean::class))
+    fun getAllGroups(): Collection<GroupDescApiBean> = featureStoreService.getAllGroups()
 
-    val featuresFromCache: CacheApiBean
-        @GetMapping(value = [(ROOT + RESOURCE_CACHE)], produces = [APPLICATION_JSON_VALUE])
-        @ApiOperation(value = "Display information related to Cache")
-        @ApiResponses(ApiResponse(code = 200, message = "Gets the cached features", response = CacheApiBean::class), ApiResponse(code = 404, message = "feature store is not cached"))
-        get() = featureStoreService.getFeaturesFromCache()
+    @GetMapping(value = [("/$RESOURCE_CACHE")], produces = [APPLICATION_JSON_VALUE])
+    @ApiOperation(value = "Display information related to Cache")
+    @ApiResponses(ApiResponse(code = 200, message = "Gets the cached features", response = CacheApiBean::class), ApiResponse(code = 404, message = "feature store is not cached"))
+    fun getFeaturesFromCache(): CacheApiBean = featureStoreService.getFeaturesFromCache()
 
-    @DeleteMapping(value = [(ROOT + STORE_CLEAR)])
+    @DeleteMapping(value = [("/$STORE_CLEAR")])
     @ApiOperation(value = "Delete all Features in store")
     @ApiResponses(ApiResponse(code = 204, message = "all feature have been deleted"))
     fun deleteAllFeatures(): ResponseEntity<Any> {
@@ -79,7 +74,7 @@ class FeatureStoreResource(@Autowired val featureStoreService: FeatureStoreServi
         return ResponseEntity(NO_CONTENT)
     }
 
-    @DeleteMapping(value = [(ROOT + RESOURCE_CLEAR_CACHE)])
+    @DeleteMapping(value = [("/$RESOURCE_CLEAR_CACHE")])
     @ApiOperation(value = "Clear cache", response = ResponseEntity::class)
     @ApiResponses(ApiResponse(code = 204, message = "cache is cleared"), ApiResponse(code = 404, message = "feature store is not cached"))
     fun clearCachedFeatureStore(): ResponseEntity<Any> {

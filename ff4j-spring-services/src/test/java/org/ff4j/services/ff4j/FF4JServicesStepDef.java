@@ -1,18 +1,24 @@
-/*
- *
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
- * the License. You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on
- * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
- * specific language governing permissions and limitations under the License.
- *
- * Copyright 2013-2016 the original author or authors.
- */
-
 package org.ff4j.services.ff4j;
+
+/*
+ * #%L
+ * ff4j-spring-services
+ * %%
+ * Copyright (C) 2013 - 2016 FF4J
+ * %%
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * #L%
+ */
 
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -32,8 +38,6 @@ import java.util.*;
 import static org.ff4j.services.utils.JsonUtils.GSON;
 
 /**
- * Created by Paul
- *
  * @author <a href="mailto:paul58914080@gmail.com">Paul Williams</a>
  */
 public class FF4JServicesStepDef extends AbstractStepDef {
@@ -108,7 +112,7 @@ public class FF4JServicesStepDef extends AbstractStepDef {
 
     @When("^the user requests to check if the feature is flipped with feature uid as \"([^\"]*)\" and parameters$")
     public void the_user_requests_to_check_if_the_feature_is_flipped_with_feature_uid_as_and_parameters(String featureUID, Map<String, String> params) throws Throwable {
-        Map<String, String> hashedParams = new HashMap<>(params);
+        Map<String, String> hashedParams = new HashMap<String, String>(params);
         Set<String> keys = hashedParams.keySet();
         for (String key : keys) {
             hashedParams.replace(key, hashedParams.get(key).replace("or", "|"));
@@ -169,12 +173,12 @@ public class FF4JServicesStepDef extends AbstractStepDef {
 
         @Override
         public Set<String> getCurrentUserPermissions() {
-            return StringUtils.isBlank(currentUserPermissions) ? null : new HashSet<>(Arrays.asList(currentUserPermissions.split(",")));
+            return StringUtils.isBlank(currentUserPermissions) ? null : new HashSet<String>(Arrays.asList(currentUserPermissions.split(",")));
         }
 
         @Override
         public Set<String> listAllPermissions() {
-            return StringUtils.isBlank(allPermissions) ? null : new HashSet<>(Arrays.asList(allPermissions.split(",")));
+            return StringUtils.isBlank(allPermissions) ? null : new HashSet<String>(Arrays.asList(allPermissions.split(",")));
         }
     }
 }

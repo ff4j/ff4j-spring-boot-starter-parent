@@ -45,7 +45,6 @@ class MonitoringResource(@Autowired val monitoringServices: MonitoringServices) 
             ApiResponse(code = 200, message = "Status of event repository bean", response = EventRepositoryApiBean::class),
             ApiResponse(code = 404, message = "No event repository defined", response = String::class))
     @GetMapping(produces = [APPLICATION_JSON_VALUE])
-    fun getMonitoringStatus(@RequestParam(value = PARAM_START, required = false, defaultValue = "0") start: Long, @RequestParam(value = PARAM_END, required = false, defaultValue = "0") end: Long): EventRepositoryApiBean {
-        return monitoringServices.getMonitoringStatus(start, end)
-    }
+    fun getMonitoringStatus(@RequestParam(value = PARAM_START, required = false, defaultValue = "0") start: Long, @RequestParam(value = PARAM_END, required = false, defaultValue = "0") end: Long): EventRepositoryApiBean =
+            monitoringServices.getMonitoringStatus(start, end)
 }
