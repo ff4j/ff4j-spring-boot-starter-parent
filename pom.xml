@@ -22,6 +22,24 @@
     <packaging>pom</packaging>
     <version>AVENGERS-SNAPSHOT</version>
     <name>ff4j-spring-boot-starter-parent</name>
+    <inceptionYear>2013</inceptionYear>
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+    <!-- ~ LICENSE (APACHE2) ~ -->
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+    <licenses>
+        <license>
+            <name>Apache 2</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+    <!-- ~ ORGANIZATION ~ -->
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+    <organization>
+        <name>FF4J</name>
+        <url>http://ff4j.org</url>
+    </organization>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
@@ -39,7 +57,8 @@
         <jacoco.version>0.8.3</jacoco.version>
         <meanbean.version>2.0.3</meanbean.version>
         <enforcer.version>3.0.0-M2</enforcer.version>
-        <jackson-module-kotlin>2.9.5</jackson-module-kotlin>
+        <jackson-module-kotlin.version>2.9.5</jackson-module-kotlin.version>
+        <license-maven-plugin.version>1.17</license-maven-plugin.version>
     </properties>
     <modules>
         <module>ff4j-spring-services</module>
@@ -173,7 +192,7 @@
         <dependency>
             <groupId>com.fasterxml.jackson.module</groupId>
             <artifactId>jackson-module-kotlin</artifactId>
-            <version>${jackson-module-kotlin}</version>
+            <version>${jackson-module-kotlin.version}</version>
         </dependency>
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
@@ -295,6 +314,35 @@
                     <source>8</source>
                     <target>8</target>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>license-maven-plugin</artifactId>
+                <version>${license-maven-plugin.version}</version>
+                <configuration>
+                    <verbose>false</verbose>
+                    <extraExtensions>
+                        <myProprietaryExtension>kt</myProprietaryExtension>
+                        <myProprietaryExtension>java</myProprietaryExtension>
+                    </extraExtensions>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>add-license</id>
+                        <goals>
+                            <goal>update-file-header</goal>
+                        </goals>
+                        <phase>process-sources</phase>
+                        <configuration>
+                            <licenseName>apache_v2</licenseName>
+                            <roots>
+                                <root>src/main/kotlin</root>
+                                <root>src/main/java</root>
+                                <root>src/test/java</root>
+                            </roots>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
