@@ -87,6 +87,7 @@
         <enforcer.version>3.0.0-M2</enforcer.version>
         <jackson-module-kotlin.version>2.9.5</jackson-module-kotlin.version>
         <license-maven-plugin.version>1.17</license-maven-plugin.version>
+        <maven-resources-plugin.version>3.1.0</maven-resources-plugin.version>
     </properties>
     <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
     <!-- ~ CHILD MODULES            ~ -->
@@ -336,11 +337,13 @@
                     </execution>
                 </executions>
             </plugin>
+            <!-- Coveralls.io -->
             <plugin>
                 <groupId>org.eluder.coveralls</groupId>
                 <artifactId>coveralls-maven-plugin</artifactId>
                 <version>4.3.0</version>
             </plugin>
+            <!-- Compiler -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -349,6 +352,7 @@
                     <target>8</target>
                 </configuration>
             </plugin>
+            <!-- license -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>license-maven-plugin</artifactId>
@@ -378,6 +382,44 @@
                     </execution>
                 </executions>
             </plugin>
+            <!-- Force UTF-8 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>${maven-resources-plugin.version}</version>
+                <configuration>
+                    <escapeString>\</escapeString>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+    <!-- ~ Project Stuff ~ -->
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~ -->
+    <developers>
+        <developer>
+            <id>paul58914080</id>
+            <name>Paul WILLIAMS</name>
+            <email>paul58914080@gmail.com</email>
+            <url>https://github.com/paul58914080</url>
+            <organization>ff4j</organization>
+            <organizationUrl>https://ff4j.github.io</organizationUrl>
+            <roles>
+                <role>architect</role>
+                <role>developer</role>
+            </roles>
+            <timezone>GMT+5:30</timezone>
+            <properties>
+                <picUrl></picUrl>
+            </properties>
+        </developer>
+    </developers>
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+    <!-- ~ Issue Management ~ -->
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~ -->
+    <issueManagement>
+        <system>IssueTracking@Github</system>
+        <url><![CDATA[https://github.com/ff4j/ff4j-spring-boot-starter-parent/issues?sort=created&direction=desc&state=open]]></url>
+    </issueManagement>
 </project>
