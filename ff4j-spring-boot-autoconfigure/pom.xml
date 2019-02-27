@@ -53,6 +53,7 @@
     <build>
         <finalName>ff4j-spring-boot-autoconfigure</finalName>
         <directory>target</directory>
+        <sourceDirectory>src/main/kotlin</sourceDirectory>
         <outputDirectory>target/classes</outputDirectory>
     </build>
 </project>

@@ -85,6 +85,7 @@
         <jacoco.version>0.8.3</jacoco.version>
         <meanbean.version>2.0.3</meanbean.version>
         <enforcer.version>3.0.0-M2</enforcer.version>
+        <dokka.version>0.9.17</dokka.version>
         <jackson-module-kotlin.version>2.9.8</jackson-module-kotlin.version>
         <license-maven-plugin.version>1.18</license-maven-plugin.version>
         <maven-resources-plugin.version>3.1.0</maven-resources-plugin.version>
@@ -409,6 +410,43 @@
                     <autoReleaseAfterClose>true</autoReleaseAfterClose>
                 </configuration>
             </plugin>
+
+           
+
+            <plugin>
+                <groupId>org.jetbrains.dokka</groupId>
+                <artifactId>dokka-maven-plugin</artifactId>
+                <version>${dokka.version}</version>
+                <executions>
+                    <execution>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>dokka</goal>
+                            <goal>javadoc</goal>
+                            <goal>javadocJar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <includes>
+                        <file>packages.md</file>
+                    </includes>
+                </configuration>
+            </plugin>
+
+         <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-source-plugin</artifactId>
+                        <version>${version.maven.plugin.source}</version>
+                        <executions>
+                            <execution>
+                                <id>attach-sources</id>
+                                <goals>
+                                    <goal>jar-no-fork</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>           
         </plugins>
 		<pluginManagement>
 			<plugins>
@@ -505,6 +543,16 @@
 			</build>
 		</profile>
 	</profiles>
+    <repositories>
+        <repository>
+            <id>maven-central</id>
+            <url>http://repo1.maven.org/maven2</url>
+        </repository>
+        <repository>
+            <id>spring-repo-plugins</id>
+            <url>http://repo.spring.io/plugins-release/</url>
+        </repository>     
+    </repositories>
     <developers>
         <developer>
             <id>paul58914080</id>

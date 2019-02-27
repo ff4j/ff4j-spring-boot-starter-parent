@@ -97,6 +97,7 @@
     <build>
         <finalName>ff4j-spring-services</finalName>
         <directory>target</directory>
+        <sourceDirectory>src/main/kotlin</sourceDirectory>
         <outputDirectory>target/classes</outputDirectory>
         <testOutputDirectory>target/test-classes</testOutputDirectory>
         <resources>
