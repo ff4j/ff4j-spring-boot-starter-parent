@@ -86,7 +86,7 @@
         <meanbean.version>2.0.3</meanbean.version>
         <enforcer.version>3.0.0-M2</enforcer.version>
         <jackson-module-kotlin.version>2.9.8</jackson-module-kotlin.version>
-        <license-maven-plugin.version>1.17</license-maven-plugin.version>
+        <license-maven-plugin.version>1.18</license-maven-plugin.version>
         <maven-resources-plugin.version>3.1.0</maven-resources-plugin.version>
     </properties>
     <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
