@@ -6,3 +6,20 @@
 *.ipr
 *.iws
 *.log
+
+# eclipse conf file
+.settings
+.classpath
+.project
+.cache
+
+# building
+target
+build
+tmp
+dist
+
+# misc
+.DS_Store
+
+
