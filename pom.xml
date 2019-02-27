@@ -22,7 +22,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.ff4j</groupId>
     <artifactId>ff4j-spring-boot-starter-parent</artifactId>
-    <version>AVENGERS-SNAPSHOT</version>
+    <version>1.8-SNAPSHOT</version>
     <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
     <!-- ~ MAIN INFO ~ -->
     <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
@@ -72,7 +72,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
         <spring-boot.version>2.1.3.RELEASE</spring-boot.version>
-        <ff4j.version>1.7.3</ff4j.version>
+        <ff4j.version>1.8</ff4j.version>
         <kotlin.version>1.3.21</kotlin.version>
         <commons3.lang>3.8.1</commons3.lang>
         <commons.collection.version>3.2.2</commons.collection.version>
@@ -88,6 +88,7 @@
         <jackson-module-kotlin.version>2.9.8</jackson-module-kotlin.version>
         <license-maven-plugin.version>1.17</license-maven-plugin.version>
         <maven-resources-plugin.version>3.1.0</maven-resources-plugin.version>
+        <version.maven.plugin.nexus>1.6.8</version.maven.plugin.nexus>
     </properties>
     <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
     <!-- ~ CHILD MODULES            ~ -->
@@ -392,11 +393,114 @@
                     <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
+            <!-- Deploy to nexus -->
+            <plugin>
+                <groupId>org.sonatype.plugins</groupId>
+                <artifactId>nexus-staging-maven-plugin</artifactId>
+                <version>${version.maven.plugin.nexus}</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <serverId>ossrh</serverId>
+                    <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                </configuration>
+            </plugin>
         </plugins>
+		<pluginManagement>
+			<plugins>
+				<!-- release through SCM -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-release-plugin</artifactId>
+					<version>${version.maven.plugin.release}</version>
+					<configuration>
+						<autoVersionSubmodules>true</autoVersionSubmodules>
+						<useReleaseProfile>false</useReleaseProfile>
+						<releaseProfiles>release</releaseProfiles>
+						<arguments>-Dgpg.passphrase=${gpg.passphrase}</arguments>
+						<goals>deploy</goals>
+					</configuration>
+				</plugin>
+	
+			</plugins>
+		</pluginManagement>
     </build>
-    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-    <!-- ~ Project Stuff ~ -->
-    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<profiles>
+		<profile>
+			<id>doclint-java8-disable</id>
+			<activation>
+				<jdk>[1.8,)</jdk>
+			</activation>
+			<!-- Global Properties -->
+			<properties>
+				<additionalparam>-Xdoclint:none</additionalparam>
+			</properties>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-javadoc-plugin</artifactId>
+						<configuration>
+							<additionalparam>-Xdoclint:none</additionalparam>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>release</id>
+			<activation>
+				<property>
+					<name>performRelease</name>
+					<value>true</value>
+				</property>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-source-plugin</artifactId>
+						<version>${version.maven.plugin.source}</version>
+						<executions>
+							<execution>
+								<id>attach-sources</id>
+								<goals>
+									<goal>jar-no-fork</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-javadoc-plugin</artifactId>
+						<version>${version.maven.plugin.javadoc}</version>
+						<executions>
+							<execution>
+								<id>attach-javadocs</id>
+								<goals>
+									<goal>jar</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-gpg-plugin</artifactId>
+						<version>${version.maven.plugin.gpg}</version>
+						<executions>
+							<execution>
+								<id>sign-artifacts</id>
+								<phase>verify</phase>
+								<goals>
+									<goal>sign</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
     <developers>
         <developer>
             <id>paul58914080</id>

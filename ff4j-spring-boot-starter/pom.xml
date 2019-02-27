@@ -19,11 +19,10 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>ff4j-spring-boot-starter</artifactId>
     <packaging>jar</packaging>
-    <version>AVENGERS-SNAPSHOT</version>
     <parent>
         <groupId>org.ff4j</groupId>
         <artifactId>ff4j-spring-boot-starter-parent</artifactId>
-        <version>AVENGERS-SNAPSHOT</version>
+        <version>1.8-SNAPSHOT</version>
     </parent>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
