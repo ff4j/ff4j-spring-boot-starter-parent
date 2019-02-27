@@ -32,7 +32,7 @@ import org.springframework.web.bind.annotation.ResponseStatus
  *
  * @author [Paul Williams](mailto:paul58914080@gmail.com)
  */
-@ControllerAdvice(basePackages = arrayOf("org.ff4j.spring.boot.web.api.resources"))
+@ControllerAdvice(basePackages = ["org.ff4j.spring.boot.web.api.resources"])
 class FF4jExceptionHandler {
     @ExceptionHandler(value = [(IllegalArgumentException::class)])
     @ResponseStatus(value = HttpStatus.BAD_REQUEST, reason = "bad request")
