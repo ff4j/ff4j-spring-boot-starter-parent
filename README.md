@@ -22,7 +22,7 @@ Add dependency in your project
 <dependency>
 	<groupId>org.ff4j</groupId>
 	<artifactId>ff4j-spring-boot-starter</artifactId>
-	<version>1.6</version>
+	<version>1.8</version>
 </dependency>
 ~~~
 
