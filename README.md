@@ -18,13 +18,13 @@ Create a bootable jar with
 
 Add dependency in your project
 
-~~~
+```xml
 <dependency>
-	<groupId>org.ff4j</groupId>
-	<artifactId>ff4j-spring-boot-starter</artifactId>
-	<version>1.8</version>
+    <groupId>org.ff4j</groupId>
+    <artifactId>ff4j-spring-boot-starter</artifactId>
+    <version>1.8</version>
 </dependency>
-~~~
+```
 
 
 ### Sample
