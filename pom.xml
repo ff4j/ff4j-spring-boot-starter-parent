@@ -559,6 +559,30 @@
 			<layout>default</layout>
 		</repository>
 	</repositories>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>1_maven.apache.org</id>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+			<url>https://repo.maven.apache.org/maven2</url>
+			<layout>default</layout>
+		</pluginRepository>
+		<pluginRepository>
+			<id>2_spring.repo</id>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<url>http://repo.spring.io/plugins-release/</url>
+			<layout>default</layout>
+		</pluginRepository>
+	</pluginRepositories>
 	<developers>
         <developer>
             <id>paul58914080</id>
