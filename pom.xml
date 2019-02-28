@@ -88,7 +88,7 @@
         <license-maven-plugin.version>1.18</license-maven-plugin.version>
         <maven-resources-plugin.version>3.1.0</maven-resources-plugin.version>
         <version.maven.plugin.nexus>1.6.8</version.maven.plugin.nexus>
-        <version.maven.plugin.release>2.5.2</version.maven.plugin.release>
+        <version.maven.plugin.release>2.5.3</version.maven.plugin.release>
         <version.maven.plugin.gpg>1.6</version.maven.plugin.gpg>
         <version.maven.plugin.javadoc>3.0.1</version.maven.plugin.javadoc>
         <version.maven.plugin.source>3.0.1</version.maven.plugin.source>
