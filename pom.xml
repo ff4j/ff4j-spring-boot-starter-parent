@@ -414,7 +414,7 @@
 				<version>${dokka.version}</version>
 				<executions>
 					<execution>
-						<phase>prepare-package</phase>
+						<phase>pre-site</phase>
 						<goals>
 							<goal>javadocJar</goal>
 						</goals>
