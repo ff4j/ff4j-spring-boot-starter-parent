@@ -20,37 +20,42 @@
 
 package org.ff4j.spring.boot.web.api.config
 
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.context.annotation.Bean
-import org.springframework.context.annotation.Configuration
+import org.springframework.context.annotation.Import
 import springfox.documentation.builders.PathSelectors
 import springfox.documentation.builders.RequestHandlerSelectors
 import springfox.documentation.service.ApiInfo
 import springfox.documentation.service.Contact
 import springfox.documentation.spi.DocumentationType
 import springfox.documentation.spring.web.plugins.Docket
-import springfox.documentation.swagger2.annotations.EnableSwagger2
+import springfox.documentation.swagger2.configuration.Swagger2DocumentationConfiguration
 
 /**
  * Created by Paul
  *
  * @author [Paul Williams](mailto:paul58914080@gmail.com)
  */
-@Configuration
-@EnableSwagger2
-class SwaggerConfig {
+@ConditionalOnClass(Swagger2DocumentationConfiguration::class)
+@Import(Swagger2DocumentationConfiguration::class)
+open class FF4jSwaggerConfig {
     @Bean
-    fun api(): Docket {
+    @ConditionalOnMissingBean
+    open fun api(): Docket {
         return Docket(DocumentationType.SWAGGER_2)
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("org.ff4j.spring.boot.web.api.resources"))
                 .paths(PathSelectors.any())
-                .build().apiInfo(apiInfo()).useDefaultResponseMessages(false)
+                .build()
+                .apiInfo(apiInfo())
+                .useDefaultResponseMessages(false)
     }
 
     private fun apiInfo(): ApiInfo {
         return ApiInfo("FF4J (ff4j.org) WebAPI",
                 "Administrate and operate all tasks on your features through this api.",
-                "1.7",
+                "1.8",
                 "Terms of service",
                 Contact("Paul WILLIAMS", "", "paul58914080@gmail.com"),
                 "Apache 2.0",
