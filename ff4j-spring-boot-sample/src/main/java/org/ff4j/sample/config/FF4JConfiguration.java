@@ -15,6 +15,7 @@
 package org.ff4j.sample.config;
 
 import org.ff4j.FF4j;
+import org.ff4j.spring.boot.web.api.config.EnableFF4jSwagger;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -24,6 +25,7 @@ import org.springframework.context.annotation.Configuration;
  * @author <a href="mailto:paul58914080@gmail.com">Paul Williams</a>
  */
 @Configuration
+@EnableFF4jSwagger
 public class FF4JConfiguration {
     @Bean
     public FF4j getFF4j() {
