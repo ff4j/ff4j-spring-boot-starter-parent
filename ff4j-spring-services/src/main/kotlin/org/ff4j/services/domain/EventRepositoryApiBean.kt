@@ -35,11 +35,12 @@ class EventRepositoryApiBean : Serializable {
     }
 
     var type: String? = null
-    var eventsPie: PieChartApiBean? = null
-    var barChart: BarChartApiBean? = null
+    lateinit var eventsPie: PieChartApiBean
+    lateinit var barChart: BarChartApiBean
     var hitCount: Int = 0
 
-    constructor() : super()
+    // for DomainTest
+    constructor()
 
     constructor(eventRepository: EventRepository) {
         initialize(eventRepository, EventQueryDefinition())
@@ -53,8 +54,6 @@ class EventRepositoryApiBean : Serializable {
         this.type = eventRepository.javaClass.canonicalName
         this.eventsPie = PieChartApiBean(eventRepository.getFeatureUsagePieChart(query))
         this.barChart = BarChartApiBean(eventRepository.getFeatureUsageBarChart(query))
-        for (sector: PieSectorApiBean in eventsPie?.sectors!!) {
-            this.hitCount.plus(sector.value)
-        }
+        eventsPie.sectors.forEach { hitCount.plus(it.value) }
     }
 }
