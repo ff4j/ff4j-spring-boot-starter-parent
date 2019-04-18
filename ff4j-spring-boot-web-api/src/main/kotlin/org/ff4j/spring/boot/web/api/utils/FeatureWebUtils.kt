@@ -23,8 +23,6 @@ package org.ff4j.spring.boot.web.api.utils
 import org.ff4j.services.model.FeatureActions
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
-
-import java.lang.Boolean.FALSE
 import java.lang.Boolean.TRUE
 
 /**
@@ -38,7 +36,6 @@ object FeatureWebUtils {
         return when (featureActions) {
             FeatureActions.CREATED -> ResponseEntity(TRUE, HttpStatus.CREATED)
             FeatureActions.UPDATED -> ResponseEntity(TRUE, HttpStatus.ACCEPTED)
-            else -> ResponseEntity(FALSE, HttpStatus.NO_CONTENT)
         }
     }
 }

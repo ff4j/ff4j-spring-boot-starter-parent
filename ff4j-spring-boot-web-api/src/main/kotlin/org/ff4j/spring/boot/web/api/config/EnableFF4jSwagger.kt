@@ -21,6 +21,13 @@ package org.ff4j.spring.boot.web.api.config
 
 import org.springframework.context.annotation.Import
 
+/**
+ * Indicates that Swagger should be enabled.
+ *
+ * This should be applied to a spring java config and should have an accompanying '@Configuration' annotation.
+ *
+ * Loads all the required beans defined in @see FF4jSwaggerConfig
+ */
 @Retention(AnnotationRetention.RUNTIME)
 @Target(AnnotationTarget.CLASS)
 @MustBeDocumented

@@ -45,12 +45,14 @@ class FeatureStoreApiBean : Serializable {
 
     constructor(featureStore: FeatureStore) {
         type = featureStore.javaClass.canonicalName
-        if (featureStore is FF4jCacheProxy) {
-            cache = CacheApiBean(featureStore as FeatureStore)
+        if (isInstanceOfCache(featureStore)) {
+            cache = CacheApiBean(featureStore)
         }
         features = ArrayList(featureStore.readAll().keys)
         groups = ArrayList(featureStore.readAllGroups())
         numberOfFeatures = features.size
         numberOfGroups = groups.size
     }
+
+    private fun isInstanceOfCache(featureStore: FeatureStore) = featureStore is FF4jCacheProxy
 }

@@ -36,7 +36,7 @@ class PieChartApiBean : Serializable {
     }
 
     var title: String? = null
-    var sectors: MutableList<PieSectorApiBean> = ArrayList()
+    val sectors: MutableList<PieSectorApiBean> = mutableListOf()
 
     constructor() : super()
 
