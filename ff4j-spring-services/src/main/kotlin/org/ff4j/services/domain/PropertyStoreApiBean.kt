@@ -44,10 +44,12 @@ class PropertyStoreApiBean : Serializable {
 
     constructor(propertyStore: PropertyStore) {
         this.type = propertyStore.javaClass.canonicalName
-        if (propertyStore is FF4jCacheProxy) {
-            this.cache = CacheApiBean(propertyStore as PropertyStore)
+        if (isInstanceOfCache(propertyStore)) {
+            this.cache = CacheApiBean(propertyStore)
         }
         this.properties = propertyStore.listPropertyNames()
         this.numberOfProperties = properties.size
     }
+
+    private fun isInstanceOfCache(propertyStore: PropertyStore) = propertyStore is FF4jCacheProxy
 }
