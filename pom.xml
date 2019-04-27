@@ -232,13 +232,25 @@
             <groupId>com.fasterxml.jackson.module</groupId>
             <artifactId>jackson-module-kotlin</artifactId>
             <version>${jackson-module-kotlin.version}</version>
-        </dependency>
+			<exclusions>
+				<exclusion>
+					<artifactId>kotlin-stdlib</artifactId>
+					<groupId>org.jetbrains.kotlin</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-test</artifactId>
             <version>${kotlin.version}</version>
             <scope>test</scope>
-        </dependency>
+			<exclusions>
+				<exclusion>
+					<artifactId>kotlin-stdlib</artifactId>
+					<groupId>org.jetbrains.kotlin</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
     </dependencies>
 	<build>
 		<finalName>ff4j-spring-boot-starter-parent</finalName>
