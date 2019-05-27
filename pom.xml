@@ -431,12 +431,6 @@
                             <goal>javadocJar</goal>
                         </goals>
                     </execution>
-					<execution>
-						<phase>pre-site</phase>
-						<goals>
-							<goal>javadocJar</goal>
-						</goals>
-					</execution>
 				</executions>
 				<configuration>
 					<includes>
