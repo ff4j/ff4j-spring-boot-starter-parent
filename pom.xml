@@ -20,7 +20,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.ff4j</groupId>
     <artifactId>ff4j-spring-boot-starter-parent</artifactId>
-    <version>1.8.1-SNAPHOT</version>
+    <version>1.8.1-SNAPSHOT</version>
     <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
     <!-- ~ MAIN INFO ~ -->
     <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
