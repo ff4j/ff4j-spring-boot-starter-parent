@@ -8,3 +8,8 @@ notifications:
   # See http://about.travis-ci.org/docs/user/build-configuration/ to learn more
   # about configuring notification recipients and more.
   email: false
+# only build for commits/pr targeted to master branch
+# this avoid duplicate builds for push+PR
+branches:
+  only:
+    - master
