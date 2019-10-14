@@ -80,7 +80,7 @@
         <jsonassert.version>1.5.0</jsonassert.version>
         <easymock.version>4.0.2</easymock.version>
         <swagger.version>2.9.2</swagger.version>
-        <jacoco.version>0.8.4</jacoco.version>
+        <jacoco.version>0.8.5</jacoco.version>
         <meanbean.version>2.0.3</meanbean.version>
         <enforcer.version>3.0.0-M2</enforcer.version>
         <dokka.version>0.10.0</dokka.version>
