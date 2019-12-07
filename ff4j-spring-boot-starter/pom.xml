@@ -38,6 +38,6 @@
         </dependency>
     </dependencies>
     <build>
-        <finalName>fff4j-spring-boot-starter</finalName>
+        <finalName>${project.artifactId}</finalName>
     </build>
 </project>
