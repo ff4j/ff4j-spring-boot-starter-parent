@@ -420,13 +420,14 @@
 					<autoReleaseAfterClose>true</autoReleaseAfterClose>
 				</configuration>
 			</plugin>
+			<!-- TODO : to be fixed
 			<plugin>
 				<groupId>org.jetbrains.dokka</groupId>
 				<artifactId>dokka-maven-plugin</artifactId>
 				<version>${dokka.version}</version>
 				<executions>
                      <execution>
-                        <phase>prepare-package</phase>
+                        <phase>pre-site</phase>
                         <goals>
                             <goal>javadocJar</goal>
                         </goals>
@@ -437,7 +438,7 @@
 						<file>packages.md</file>
 					</includes>
 				</configuration>
-			</plugin>
+			</plugin>-->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
