@@ -90,7 +90,7 @@
         <version.maven.plugin.nexus>1.6.8</version.maven.plugin.nexus>
         <version.maven.plugin.release>2.5.3</version.maven.plugin.release>
         <version.maven.plugin.gpg>1.6</version.maven.plugin.gpg>
-        <version.maven.plugin.javadoc>3.1.1</version.maven.plugin.javadoc>
+        <version.maven.plugin.javadoc>3.2.0</version.maven.plugin.javadoc>
         <version.maven.plugin.source>3.2.1</version.maven.plugin.source>
     </properties>
     <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
