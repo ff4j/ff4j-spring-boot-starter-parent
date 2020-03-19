@@ -20,7 +20,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.ff4j</groupId>
     <artifactId>ff4j-spring-boot-starter-parent</artifactId>
-    <version>1.8.3</version>
+    <version>1.8.4-SNAPSHOT</version>
     <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
     <!-- ~ MAIN INFO ~ -->
     <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
@@ -44,7 +44,7 @@
         <connection>scm:git:git@github.com:ff4j/ff4j-spring-boot-starter-parent.git</connection>
         <developerConnection>scm:git:git@github.com:ff4j/ff4j-spring-boot-starter-parent.git</developerConnection>
         <url>git@github.com:ff4j/ff4j-spring-boot-starter-parent.git</url>
-        <tag>1.8.3</tag>
+        <tag>HEAD</tag>
     </scm>
     <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
     <!-- ~ LICENSE (APACHE2) ~ -->
