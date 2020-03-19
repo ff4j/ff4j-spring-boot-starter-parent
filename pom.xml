@@ -92,6 +92,7 @@
         <version.maven.plugin.gpg>1.6</version.maven.plugin.gpg>
         <version.maven.plugin.javadoc>3.2.0</version.maven.plugin.javadoc>
         <version.maven.plugin.source>3.2.1</version.maven.plugin.source>
+        <version.maven.plugin.dokka>0.9.18</version.maven.plugin.dokka>
     </properties>
     <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
     <!-- ~ CHILD MODULES            ~ -->
@@ -570,6 +571,22 @@
 							</execution>
 						</executions>
 					</plugin>
+                    <!-- Maven need dokka to produce the javadoc files -->
+                    <plugin>
+                        <groupId>org.jetbrains.dokka</groupId>
+                        <artifactId>dokka-maven-plugin</artifactId>
+                        <version>${version.maven.plugin.dokka}</version>
+                        <executions>
+                            <execution>
+                                <phase>prepare-package</phase>
+                                <goals>
+                                    <goal>dokka</goal>
+                                    <goal>javadoc</goal>
+                                    <goal>javadocJar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
 				</plugins>
 			</build>
 		</profile>
@@ -647,4 +664,18 @@
         <system>IssueTracking@Github</system>
         <url><![CDATA[https://github.com/ff4j/ff4j-spring-boot-starter-parent/issues?sort=created&direction=desc&state=open]]></url>
     </issueManagement>
+
+    <!-- Mandatory for releasing to central -->
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
+
+
 </project>
