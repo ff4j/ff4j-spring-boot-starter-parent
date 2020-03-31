@@ -20,7 +20,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.ff4j</groupId>
     <artifactId>ff4j-spring-boot-starter-parent</artifactId>
-    <version>1.8.3-SNAPSHOT</version>
+    <version>1.8.5-SNAPSHOT</version>
     <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
     <!-- ~ MAIN INFO ~ -->
     <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
@@ -70,7 +70,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
         <spring-boot.version>2.2.5.RELEASE</spring-boot.version>
-        <ff4j.version>1.8.3</ff4j.version>
+        <ff4j.version>1.8.4</ff4j.version>
         <kotlin.version>1.3.70</kotlin.version>
         <commons3.lang>3.9</commons3.lang>
         <commons.collection.version>3.2.2</commons.collection.version>
@@ -90,8 +90,9 @@
         <version.maven.plugin.nexus>1.6.8</version.maven.plugin.nexus>
         <version.maven.plugin.release>2.5.3</version.maven.plugin.release>
         <version.maven.plugin.gpg>1.6</version.maven.plugin.gpg>
-        <version.maven.plugin.javadoc>3.1.1</version.maven.plugin.javadoc>
+        <version.maven.plugin.javadoc>3.2.0</version.maven.plugin.javadoc>
         <version.maven.plugin.source>3.2.1</version.maven.plugin.source>
+        <version.maven.plugin.dokka>0.9.18</version.maven.plugin.dokka>
     </properties>
     <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
     <!-- ~ CHILD MODULES            ~ -->
@@ -570,6 +571,22 @@
 							</execution>
 						</executions>
 					</plugin>
+                    <!-- Maven need dokka to produce the javadoc files -->
+                    <plugin>
+                        <groupId>org.jetbrains.dokka</groupId>
+                        <artifactId>dokka-maven-plugin</artifactId>
+                        <version>${version.maven.plugin.dokka}</version>
+                        <executions>
+                            <execution>
+                                <phase>prepare-package</phase>
+                                <goals>
+                                    <goal>dokka</goal>
+                                    <goal>javadoc</goal>
+                                    <goal>javadocJar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
 				</plugins>
 			</build>
 		</profile>
@@ -647,4 +664,18 @@
         <system>IssueTracking@Github</system>
         <url><![CDATA[https://github.com/ff4j/ff4j-spring-boot-starter-parent/issues?sort=created&direction=desc&state=open]]></url>
     </issueManagement>
+
+    <!-- Mandatory for releasing to central -->
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
+
+
 </project>
