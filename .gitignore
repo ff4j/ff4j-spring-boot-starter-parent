@@ -22,4 +22,7 @@ dist
 # misc
 .DS_Store
 
+.gradle/
+!gradle/wrapper/gradle-wrapper.jar
+
 
