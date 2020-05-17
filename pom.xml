@@ -636,7 +636,7 @@
       <snapshots>
         <enabled>false</enabled>
       </snapshots>
-      <url>http://repo.spring.io/plugins-release/</url>
+      <url>https://repo.spring.io/plugins-release/</url>
       <layout>default</layout>
     </pluginRepository>
   </pluginRepositories>
