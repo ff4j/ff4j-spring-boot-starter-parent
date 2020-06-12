@@ -40,7 +40,8 @@ import springfox.documentation.swagger2.configuration.Swagger2DocumentationConfi
 @ConditionalOnClass(Swagger2DocumentationConfiguration::class)
 @Import(Swagger2DocumentationConfiguration::class)
 open class FF4jSwaggerConfig {
-    @Bean
+    
+	@Bean
     @ConditionalOnMissingBean
     open fun api(): Docket {
         return Docket(DocumentationType.SWAGGER_2)
