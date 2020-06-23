@@ -79,7 +79,7 @@
     <assertj.version>3.2.0</assertj.version>
     <jsonassert.version>1.5.0</jsonassert.version>
     <easymock.version>4.2</easymock.version>
-    <swagger.version>2.9.2</swagger.version>
+    <swagger.version>2.10.0</swagger.version>
     <jacoco.version>0.8.5</jacoco.version>
     <meanbean.version>2.0.3</meanbean.version>
     <enforcer.version>3.0.0-M3</enforcer.version>
