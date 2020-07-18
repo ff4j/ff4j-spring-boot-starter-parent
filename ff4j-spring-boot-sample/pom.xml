@@ -24,12 +24,12 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.2.1.RELEASE</version>
+        <version>2.3.1.RELEASE</version>
     </parent>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
-        <kotlin.version>1.3.61</kotlin.version>
+        <kotlin.version>1.3.72</kotlin.version>
         <start-class>org.ff4j.sample.Application</start-class>
         <maven.compiler.target>1.8</maven.compiler.target>
         <maven.compiler.source>1.8</maven.compiler.source>
@@ -38,18 +38,18 @@
         <dependency>
             <groupId>org.ff4j</groupId>
             <artifactId>ff4j-spring-boot-starter</artifactId>
-            <version>1.8.3-SNAPSHOT</version>
+            <version>1.8.8-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>org.ff4j</groupId>
             <artifactId>ff4j-web</artifactId>
-            <version>1.8.2</version>
+            <version>1.8.7</version>
         </dependency>
-        <dependency>
+        <!--<dependency>
             <groupId>org.thymeleaf</groupId>
             <artifactId>thymeleaf</artifactId>
             <version>2.1.4.RELEASE</version>
-        </dependency>
+        </dependency>-->
     </dependencies>
     <build>
         <resources>
