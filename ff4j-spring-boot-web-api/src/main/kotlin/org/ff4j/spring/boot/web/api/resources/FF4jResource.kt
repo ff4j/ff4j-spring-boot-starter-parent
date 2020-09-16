@@ -83,4 +83,18 @@ class FF4jResource(@Autowired val ff4JServices: FF4jServices) {
         val status = ff4JServices.check(featureUID, map)
         return ResponseEntity(status, OK)
     }
+
+    @ApiOperation(value = "Check feature toggles", response = Map::class)
+    @ApiResponses(
+            ApiResponse(code = 200, message = "Map of featureUId/flipped"),
+            ApiResponse(code = 400, message = "Invalid parameter"))
+    @PostMapping(value = [("/$OPERATION_CHECK")])
+    fun check(@RequestBody featureUIDs: Set<String>): ResponseEntity<Map<String,Boolean>> {
+        val featureUIDToEnableMap = HashMap<String, Boolean>()
+        for (featureUID in featureUIDs) {
+            val status = ff4JServices.check(featureUID)
+            featureUIDToEnableMap[featureUID] = status
+        }
+        return ResponseEntity(featureUIDToEnableMap, OK)
+    }
 }
