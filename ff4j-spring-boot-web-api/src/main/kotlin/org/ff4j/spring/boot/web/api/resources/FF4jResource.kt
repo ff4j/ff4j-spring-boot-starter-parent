@@ -24,6 +24,7 @@ import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
 import io.swagger.annotations.ApiResponse
 import io.swagger.annotations.ApiResponses
+import org.ff4j.services.exceptions.FeatureNotFoundException
 import org.ff4j.services.FF4jServices
 import org.ff4j.services.constants.FeatureConstants.PATH_PARAM_UID
 import org.ff4j.services.constants.FeatureConstants.RESOURCE_FF4J
@@ -89,11 +90,15 @@ class FF4jResource(@Autowired val ff4JServices: FF4jServices) {
             ApiResponse(code = 200, message = "Map of featureUId/flipped"),
             ApiResponse(code = 400, message = "Invalid parameter"))
     @PostMapping(value = [("/$OPERATION_CHECK")])
-    fun check(@RequestBody featureUIDs: Set<String>): ResponseEntity<Map<String,Boolean>> {
+    fun check(@RequestBody featureUIDs: Set<String>, @RequestParam formParams: MultiValueMap<String, String>): ResponseEntity<Map<String,Boolean>> {
         val featureUIDToEnableMap = HashMap<String, Boolean>()
         for (featureUID in featureUIDs) {
-            val status = ff4JServices.check(featureUID)
-            featureUIDToEnableMap[featureUID] = status
+            try {
+                val status = ff4JServices.check(featureUID, formParams.toSingleValueMap())
+                featureUIDToEnableMap[featureUID] = status
+            } catch (e : FeatureNotFoundException) {
+                featureUIDToEnableMap[featureUID] = false
+            }
         }
         return ResponseEntity(featureUIDToEnableMap, OK)
     }
