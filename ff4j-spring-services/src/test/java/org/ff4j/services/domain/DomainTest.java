@@ -20,7 +20,6 @@ package org.ff4j.services.domain;
  * #L%
  */
 
-import org.assertj.core.api.Assertions;
 import org.junit.Assert;
 import org.junit.Test;
 import org.meanbean.test.BeanTester;
