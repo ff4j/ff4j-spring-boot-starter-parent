@@ -1,9 +1,20 @@
 package org.ff4j.services;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.ff4j.services.utils.JsonUtils.GSON;
+
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import org.apache.commons.lang3.StringUtils;
 import org.ff4j.FF4j;
 import org.ff4j.core.Feature;
-import org.ff4j.property.*;
+import org.ff4j.property.Property;
+import org.ff4j.property.PropertyBoolean;
+import org.ff4j.property.PropertyInt;
+import org.ff4j.property.PropertyLong;
+import org.ff4j.property.PropertyString;
 import org.ff4j.property.store.InMemoryPropertyStore;
 import org.ff4j.property.util.PropertyFactory;
 import org.ff4j.services.model.FeatureActions;
@@ -12,14 +23,6 @@ import org.json.JSONException;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
-
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.ff4j.services.utils.JsonUtils.GSON;
 
 /*
  * #%L
