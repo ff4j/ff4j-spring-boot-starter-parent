@@ -34,6 +34,7 @@ package org.ff4j.spring.boot.web.api.resources.ff4j;
  * #L%
  */
 
+import com.google.gson.Gson;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -89,6 +90,11 @@ public class FF4JStepDef extends AbstractStepDef {
     @When("^the user requests for a feature by \"([^\"]*)\" by \"([^\"]*)\" http method and content type as \"([^\"]*)\"$")
     public void the_user_requests_for_a_feature_by_by_http_method_and_content_type_as(String path, String httpMethod, String contentType) throws Throwable {
         constructRequestBuilder(path, httpMethod, contentType);
+    }
+
+    @When("^the following feature uids$")
+    public void the_following_feature_uids(List<String> featureUids) throws Throwable {
+        requestBuilder.content(new Gson().toJson(featureUids));
     }
 
     @When("^the following form param$")

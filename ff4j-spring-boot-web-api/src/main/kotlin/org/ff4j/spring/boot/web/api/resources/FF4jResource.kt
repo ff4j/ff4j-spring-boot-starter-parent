@@ -33,8 +33,7 @@ import org.ff4j.services.domain.FF4jStatusApiBean
 import org.ff4j.web.FF4jWebConstants.*
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus.OK
-import org.springframework.http.MediaType.APPLICATION_FORM_URLENCODED_VALUE
-import org.springframework.http.MediaType.APPLICATION_JSON_VALUE
+import org.springframework.http.MediaType.*
 import org.springframework.http.ResponseEntity
 import org.springframework.util.MultiValueMap
 import org.springframework.web.bind.annotation.*
@@ -90,11 +89,11 @@ class FF4jResource(@Autowired val ff4JServices: FF4jServices) {
             ApiResponse(code = 200, message = "Map of featureUId/flipped"),
             ApiResponse(code = 400, message = "Invalid parameter"))
     @PostMapping(value = [("/$OPERATION_CHECK")])
-    fun check(@RequestBody featureUIDs: Set<String>, @RequestParam formParams: MultiValueMap<String, String>): ResponseEntity<Map<String,Boolean>> {
+    fun check(@RequestBody featureUIDs: Set<String>): ResponseEntity<Map<String,Boolean>> {
         val featureUIDToEnableMap = HashMap<String, Boolean>()
         for (featureUID in featureUIDs) {
             try {
-                val status = ff4JServices.check(featureUID, formParams.toSingleValueMap())
+                val status = ff4JServices.check(featureUID)
                 featureUIDToEnableMap[featureUID] = status
             } catch (e : FeatureNotFoundException) {
                 featureUIDToEnableMap[featureUID] = false

@@ -56,7 +56,7 @@ class FF4jServices(@Autowired val fF4j: FF4j, @Autowired val ff4jValidator: Feat
     fun check(featureUID: String, params: MutableMap<String, String>): Boolean {
         ff4jValidator.assertFeatureExists(featureUID)
         val flipExecCtx = FlippingExecutionContext()
-        params.entries.forEach({ flipExecCtx.putString(it.key, it.value) })
+        params.entries.forEach { flipExecCtx.putString(it.key, it.value) }
         return fF4j.check(featureUID, flipExecCtx)
     }
 }

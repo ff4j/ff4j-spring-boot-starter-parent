@@ -148,6 +148,18 @@ Feature: Provides RESTful api's to do the following
     When the user requests for a feature by "/api/ff4j/check/cart" by "POST" http method and content type as "application/x-www-form-urlencoded"
     Then the user gets an error response with code "404" and error message as "feature not found"
 
+  Scenario: When the user tries to initialize multiple features of its flipping strategy with an execution strategy
+    When the user requests for a feature by "/api/ff4j/check" by "POST" http method and content type as "application/json"
+    And the following feature uids
+      | login   |
+      | admin   |
+      | invalid |
+    Then the user gets the response with response code "200"
+    And the response body as
+   """
+    {"invalid":false,"admin":false,"login":true}
+    """
+
   Scenario: When the user tries to initialize a feature of its flipping strategy with an execution strategy which is wrong
     When the user requests for a feature by "/api/ff4j/store/features/login" by "PUT" http method and content type as "application/json"
     And request body as
