@@ -13,36 +13,38 @@
   ~ Copyright 2013-2016 the original author or authors.
   -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-    <artifactId>ff4j-spring-boot-starter</artifactId>
-    <packaging>jar</packaging>
-    <parent>
-        <groupId>org.ff4j</groupId>
-        <artifactId>ff4j-spring-boot-starter-parent</artifactId>
-        <version>1.8.10-SNAPSHOT</version>
-    </parent>
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
-    <dependencies>
-        <dependency>
-            <groupId>org.ff4j</groupId>
-            <artifactId>ff4j-spring-boot-autoconfigure</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.ff4j</groupId>
-            <artifactId>ff4j-spring-boot-web-api</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <!-- Allowing the starter as a single dependency even for web console -->
-        <dependency>
-            <groupId>org.ff4j</groupId>
-            <artifactId>ff4j-web</artifactId>
-        </dependency>
-    </dependencies>
-    <build>
-        <finalName>${project.artifactId}</finalName>
-    </build>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>ff4j-spring-boot-starter</artifactId>
+  <packaging>jar</packaging>
+  <parent>
+    <groupId>org.ff4j</groupId>
+    <artifactId>ff4j-spring-boot-starter-parent</artifactId>
+    <version>1.8.10-SNAPSHOT</version>
+  </parent>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <dependencies>
+    <dependency>
+      <groupId>org.ff4j</groupId>
+      <artifactId>ff4j-spring-boot-autoconfigure</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.ff4j</groupId>
+      <artifactId>ff4j-spring-boot-web-api</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <!-- Allowing the starter as a single dependency even for web console -->
+    <dependency>
+      <groupId>org.ff4j</groupId>
+      <artifactId>ff4j-web</artifactId>
+    </dependency>
+  </dependencies>
+  <build>
+    <finalName>${project.artifactId}</finalName>
+  </build>
 </project>

@@ -27,9 +27,10 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @EnableFF4jSwagger
 public class FF4JConfiguration {
-    @Bean
-    public FF4j getFF4j() {
-        return new FF4j("ff4j-features.xml");
-    }
+
+  @Bean
+  public FF4j getFF4j() {
+    return new FF4j("ff4j-features.xml");
+  }
 }
 

@@ -31,11 +31,13 @@ object FeatureConstants {
     const val PATH_PARAM_ROLE = "{role}"
     const val PATH_PARAM_VALUE = "{value}"
     const val PATH_PARAM_UID = "{uid}"
+
     // PARAM
     const val PARAM_ROLE = "role"
     const val PARAM_GROUP = "groupName"
     const val PARAM_NAME = "name"
     const val PARAM_VALUE = "value"
+
     // RESOURCE
     const val ROOT = "/api/"
     const val RESOURCE_FF4J = ROOT + "ff4j"
