@@ -9,9 +9,9 @@ package org.ff4j.services.monitoring;
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -34,37 +34,39 @@ import java.util.List;
  */
 public class MonitoringServicesStepDef extends AbstractStepDef {
 
-    @Autowired
-    private MonitoringServices monitoringServices;
+  @Autowired
+  private MonitoringServices monitoringServices;
 
-    @Given("^the feature store is cleared$")
-    public void the_feature_store_is_cleared() throws Throwable {
-        clearFeatureStore();
-    }
+  @Given("^the feature store is cleared$")
+  public void the_feature_store_is_cleared() throws Throwable {
+    clearFeatureStore();
+  }
 
-    @Given("^the following features exists in the feature store$")
-    public void the_following_features_exists_in_the_feature_store(List<FeaturePojo> features) throws Throwable {
-        createFeatures(features);
-    }
+  @Given("^the following features exists in the feature store$")
+  public void the_following_features_exists_in_the_feature_store(List<FeaturePojo> features)
+      throws Throwable {
+    createFeatures(features);
+  }
 
-    @Given("^the property store is cleared$")
-    public void the_property_store_is_cleared() throws Throwable {
-        clearPropertyStore();
-    }
+  @Given("^the property store is cleared$")
+  public void the_property_store_is_cleared() throws Throwable {
+    clearPropertyStore();
+  }
 
-    @Given("^the following properties exists in the property store$")
-    public void the_following_properties_exists_in_the_property_store(List<PropertyPojo> properties) throws Throwable {
-        createProperties(properties);
-    }
+  @Given("^the following properties exists in the property store$")
+  public void the_following_properties_exists_in_the_property_store(List<PropertyPojo> properties)
+      throws Throwable {
+    createProperties(properties);
+  }
 
-    @When("^the user requests for the feature monitoring information$")
-    public void the_user_requests_for_the_feature_monitoring_information() {
-        actualResponse = monitoringServices.getMonitoringStatus();
-    }
+  @When("^the user requests for the feature monitoring information$")
+  public void the_user_requests_for_the_feature_monitoring_information() {
+    actualResponse = monitoringServices.getMonitoringStatus();
+  }
 
-    @Then("^the user gets the response as$")
-    public void the_user_gets_the_response_as(String expectedResponse) throws Throwable {
-        assertLenientResponse(expectedResponse);
-    }
+  @Then("^the user gets the response as$")
+  public void the_user_gets_the_response_as(String expectedResponse) throws Throwable {
+    assertLenientResponse(expectedResponse);
+  }
 }
 

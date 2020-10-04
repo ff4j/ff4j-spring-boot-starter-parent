@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 @Api(value = "greeting", tags = "operations pertaining to greeting")
 public class Greeting {
 
-    @GetMapping()
-    @ApiOperation(value = "Get a greeting")
-    @ApiResponses({@ApiResponse(code = 200, message = "got a greeting message")})
-    public String sayHello() {
-        return "Hello world";
-    }
+  @GetMapping()
+  @ApiOperation(value = "Get a greeting")
+  @ApiResponses({@ApiResponse(code = 200, message = "got a greeting message")})
+  public String sayHello() {
+    return "Hello world";
+  }
 }

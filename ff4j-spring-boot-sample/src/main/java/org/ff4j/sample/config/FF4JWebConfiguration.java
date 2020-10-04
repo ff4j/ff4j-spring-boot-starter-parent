@@ -16,16 +16,17 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @AutoConfigureAfter(FF4JConfiguration.class)
 public class FF4JWebConfiguration extends SpringBootServletInitializer implements WebMvcConfigurer {
 
-    @Bean
-    public ServletRegistrationBean ff4jDispatcherServletRegistrationBean(FF4jDispatcherServlet ff4jDispatcherServlet) {
-        return new ServletRegistrationBean(ff4jDispatcherServlet, "/ff4j-web-console/*");
-    }
+  @Bean
+  public ServletRegistrationBean ff4jDispatcherServletRegistrationBean(
+      FF4jDispatcherServlet ff4jDispatcherServlet) {
+    return new ServletRegistrationBean(ff4jDispatcherServlet, "/ff4j-web-console/*");
+  }
 
-    @Bean
-    @ConditionalOnMissingBean
-    public FF4jDispatcherServlet getFF4jDispatcherServlet(FF4j ff4j) {
-        FF4jDispatcherServlet ff4jConsoleServlet = new FF4jDispatcherServlet();
-        ff4jConsoleServlet.setFf4j(ff4j);
-        return ff4jConsoleServlet;
-    }
+  @Bean
+  @ConditionalOnMissingBean
+  public FF4jDispatcherServlet getFF4jDispatcherServlet(FF4j ff4j) {
+    FF4jDispatcherServlet ff4jConsoleServlet = new FF4jDispatcherServlet();
+    ff4jConsoleServlet.setFf4j(ff4j);
+    return ff4jConsoleServlet;
+  }
 }
