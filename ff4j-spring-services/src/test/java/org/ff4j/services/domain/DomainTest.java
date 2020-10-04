@@ -21,6 +21,7 @@ package org.ff4j.services.domain;
  */
 
 import org.assertj.core.api.Assertions;
+import org.junit.Assert;
 import org.junit.Test;
 import org.meanbean.test.BeanTester;
 
@@ -33,7 +34,7 @@ public class DomainTest {
 
   @Test
   public void getterAndSetterCorrectness() {
-    Assertions.assertThat(true).isTrue();
+    Assert.assertTrue(true);
     BEAN_TESTER.testBean(FeatureApiBean.class);
     BEAN_TESTER.testBean(FeatureStoreApiBean.class);
     BEAN_TESTER.testBean(PropertyStoreApiBean.class);
