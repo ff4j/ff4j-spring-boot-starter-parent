@@ -154,6 +154,10 @@ Feature: Provides RESTful api's to do the following
       | login   |
       | admin   |
       | invalid |
+    And the following form param
+      | name       | value          |
+      # or will be replaced by '|'
+      | expression | login or admin |
     Then the user gets the response with response code "200"
     And the response body as
    """
