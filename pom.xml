@@ -84,7 +84,7 @@
     <meanbean.version>2.0.3</meanbean.version>
     <enforcer.version>3.0.0-M3</enforcer.version>
     <dokka.version>0.10.0</dokka.version>
-    <jackson-module-kotlin.version>2.11.3</jackson-module-kotlin.version>
+    <jackson-module-kotlin.version>2.12.0</jackson-module-kotlin.version>
     <license-maven-plugin.version>1.20</license-maven-plugin.version>
     <maven-resources-plugin.version>3.2.0</maven-resources-plugin.version>
     <version.maven.plugin.nexus>1.6.8</version.maven.plugin.nexus>
