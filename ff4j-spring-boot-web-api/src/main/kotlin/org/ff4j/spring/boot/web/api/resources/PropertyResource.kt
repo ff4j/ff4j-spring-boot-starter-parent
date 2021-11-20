@@ -62,8 +62,7 @@ class PropertyResource(@Autowired val propertyServices: PropertyServices) {
     @ApiResponses(
             ApiResponse(code = 400, message = "Property name is blank (or) property name did not match with the requested property name to be created or updated"),
             ApiResponse(code = 201, message = "Property has been created"),
-            ApiResponse(code = 202, message = "Property has been updated"),
-            ApiResponse(code = 204, message = "No content, no changes made to the feature"))
+            ApiResponse(code = 202, message = "Property has been updated"))
     @PutMapping(produces = [APPLICATION_JSON_VALUE])
     fun createOrUpdateProperty(@PathVariable(value = PARAM_NAME) propertyName: String, @RequestBody propertyApiBean: PropertyApiBean): ResponseEntity<*> =
             FeatureWebUtils.getBooleanResponseEntityByHttpStatus(propertyServices.createOrUpdateProperty(propertyName, propertyApiBean))

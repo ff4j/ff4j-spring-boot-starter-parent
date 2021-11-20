@@ -59,8 +59,7 @@ class FeatureResource(@Autowired val featureServices: FeatureServices) {
     @ApiResponses(
             ApiResponse(code = 400, message = "Feature uid is blank (or) feature uid did not match with the requested feature uid to be created or updated"),
             ApiResponse(code = 201, message = "Feature has been created"),
-            ApiResponse(code = 202, message = "Feature has been updated"),
-            ApiResponse(code = 204, message = "No content, no changes made to the feature"))
+            ApiResponse(code = 204, message = "Feature has been updated"))
     @PutMapping(consumes = [APPLICATION_JSON_VALUE], produces = [APPLICATION_JSON_VALUE])
     fun createOrUpdateFeature(@PathVariable(value = PARAM_UID) featureUID: String, @RequestBody featureApiBean: FeatureApiBean): ResponseEntity<Boolean> =
             FeatureWebUtils.getBooleanResponseEntityByHttpStatus(featureServices.createOrUpdateFeature(featureUID, featureApiBean))
