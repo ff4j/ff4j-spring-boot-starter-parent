@@ -80,7 +80,7 @@ class FeatureStoreResource(@Autowired val featureStoreService: FeatureStoreServi
         return ResponseEntity(NO_CONTENT)
     }
 
-    @DeleteMapping(value = [("/$RESOURCE_CLEAR_CACHE")])
+    @DeleteMapping(value = [(RESOURCE_CLEAR_CACHE)])
     @ApiOperation(value = "Clear cache", response = ResponseEntity::class)
     @ApiResponses(ApiResponse(code = 204, message = "cache is cleared"), ApiResponse(code = 404, message = "feature store is not cached"))
     fun clearCachedFeatureStore(): ResponseEntity<Any> {

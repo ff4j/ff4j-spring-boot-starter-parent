@@ -59,7 +59,7 @@ class PropertyStoreResource(@Autowired val propertyStoreServices: PropertyStoreS
 
     @ApiOperation(value = "Display all the Properties", response = PropertyApiBean::class)
     @ApiResponses(ApiResponse(code = 200, message = "get all Properties"))
-    @GetMapping(value = ["/$RESOURCE_PROPERTIES"], produces = [APPLICATION_JSON_VALUE])
+    @GetMapping(value = [RESOURCE_PROPERTIES], produces = [APPLICATION_JSON_VALUE])
     fun getAllProperties(): List<PropertyApiBean> = propertyStoreServices.getAllProperties()
 
     @ApiOperation(value = "Display information related to Cache")
