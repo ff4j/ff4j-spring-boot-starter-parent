@@ -72,7 +72,7 @@ class PropertyStoreResource(@Autowired val propertyStoreServices: PropertyStoreS
     @ApiOperation(value = "Delete all Properties in store")
     @ApiResponses(ApiResponse(code = 204, message = "all properties have been deleted", response = ResponseEntity::class))
     @DeleteMapping(value = [("/$STORE_CLEAR")])
-    fun deleteAllProperties(): ResponseEntity<Any> {
+    fun deleteAllProperties(): ResponseEntity<Void> {
         propertyStoreServices.deleteAllProperties()
         return ResponseEntity(NO_CONTENT)
     }
@@ -82,7 +82,7 @@ class PropertyStoreResource(@Autowired val propertyStoreServices: PropertyStoreS
             ApiResponse(code = 204, message = "cache is cleared"),
             ApiResponse(code = 404, message = "property store is not cached"))
     @DeleteMapping(value = [RESOURCE_CLEAR_CACHE])
-    fun clearCachedPropertyStore(): ResponseEntity<Any> {
+    fun clearCachedPropertyStore(): ResponseEntity<Void> {
         propertyStoreServices.clearCachedPropertyStore()
         return ResponseEntity(NO_CONTENT)
     }

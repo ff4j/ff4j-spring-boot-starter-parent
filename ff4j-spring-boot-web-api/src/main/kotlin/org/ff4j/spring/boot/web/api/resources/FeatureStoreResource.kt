@@ -75,7 +75,7 @@ class FeatureStoreResource(@Autowired val featureStoreService: FeatureStoreServi
     @DeleteMapping(value = [("/$STORE_CLEAR")])
     @ApiOperation(value = "Delete all Features in store")
     @ApiResponses(ApiResponse(code = 204, message = "all feature have been deleted"))
-    fun deleteAllFeatures(): ResponseEntity<Any> {
+    fun deleteAllFeatures(): ResponseEntity<Void> {
         featureStoreService.deleteAllFeatures()
         return ResponseEntity(NO_CONTENT)
     }
@@ -83,7 +83,7 @@ class FeatureStoreResource(@Autowired val featureStoreService: FeatureStoreServi
     @DeleteMapping(value = [(RESOURCE_CLEAR_CACHE)])
     @ApiOperation(value = "Clear cache", response = ResponseEntity::class)
     @ApiResponses(ApiResponse(code = 204, message = "cache is cleared"), ApiResponse(code = 404, message = "feature store is not cached"))
-    fun clearCachedFeatureStore(): ResponseEntity<Any> {
+    fun clearCachedFeatureStore(): ResponseEntity<Void> {
         featureStoreService.clearCachedFeatureStore()
         return ResponseEntity(NO_CONTENT)
     }

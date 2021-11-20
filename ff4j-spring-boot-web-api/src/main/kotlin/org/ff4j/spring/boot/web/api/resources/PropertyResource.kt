@@ -73,7 +73,7 @@ class PropertyResource(@Autowired val propertyServices: PropertyServices) {
             ApiResponse(code = 204, message = "No content, property is deleted"),
             ApiResponse(code = 404, message = "Property not found"))
     @DeleteMapping(produces = [APPLICATION_JSON_VALUE])
-    fun deleteProperty(@PathVariable(value = PARAM_NAME) propertyName: String): ResponseEntity<Any> {
+    fun deleteProperty(@PathVariable(value = PARAM_NAME) propertyName: String): ResponseEntity<Void> {
         propertyServices.deleteProperty(propertyName)
         return ResponseEntity(NO_CONTENT)
     }
@@ -84,7 +84,7 @@ class PropertyResource(@Autowired val propertyServices: PropertyServices) {
             ApiResponse(code = 404, message = "Property not found"),
             ApiResponse(code = 400, message = "Invalid new value"))
     @PostMapping(value = [("/$OPERATION_UPDATE/$PATH_PARAM_VALUE")], produces = [APPLICATION_JSON_VALUE])
-    fun updatePropertyName(@PathVariable(value = PARAM_NAME) propertyName: String, @PathVariable(value = PARAM_VALUE) newPropertyName: String): ResponseEntity<Any> {
+    fun updatePropertyName(@PathVariable(value = PARAM_NAME) propertyName: String, @PathVariable(value = PARAM_VALUE) newPropertyName: String): ResponseEntity<Void> {
         propertyServices.updatePropertyName(propertyName, newPropertyName)
         return ResponseEntity(HttpStatus.ACCEPTED)
     }

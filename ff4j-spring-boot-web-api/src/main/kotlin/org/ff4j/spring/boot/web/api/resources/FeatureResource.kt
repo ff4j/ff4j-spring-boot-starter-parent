@@ -70,7 +70,7 @@ class FeatureResource(@Autowired val featureServices: FeatureServices) {
             ApiResponse(code = 204, message = "No content, feature is deleted"),
             ApiResponse(code = 404, message = "Feature not found"))
     @DeleteMapping
-    fun deleteFeature(@PathVariable(value = PARAM_UID) featureUID: String): ResponseEntity<Any> {
+    fun deleteFeature(@PathVariable(value = PARAM_UID) featureUID: String): ResponseEntity<Void> {
         featureServices.deleteFeature(featureUID)
         return ResponseEntity(NO_CONTENT)
     }
@@ -80,7 +80,7 @@ class FeatureResource(@Autowired val featureServices: FeatureServices) {
             ApiResponse(code = 202, message = "Features has been enabled"),
             ApiResponse(code = 404, message = "Feature not found"))
     @PostMapping(value = [("/$OPERATION_ENABLE")], consumes = [APPLICATION_JSON_VALUE])
-    fun enableFeature(@PathVariable(value = PARAM_UID) featureUID: String): ResponseEntity<Any> {
+    fun enableFeature(@PathVariable(value = PARAM_UID) featureUID: String): ResponseEntity<Void> {
         featureServices.enableFeature(featureUID)
         return ResponseEntity(ACCEPTED)
     }
@@ -90,7 +90,7 @@ class FeatureResource(@Autowired val featureServices: FeatureServices) {
             ApiResponse(code = 202, message = "Features has been disabled"),
             ApiResponse(code = 404, message = "Feature not found"))
     @PostMapping(value = [("/$OPERATION_DISABLE")], consumes = [APPLICATION_JSON_VALUE])
-    fun disableFeature(@PathVariable(value = PARAM_UID) featureUID: String): ResponseEntity<Any> {
+    fun disableFeature(@PathVariable(value = PARAM_UID) featureUID: String): ResponseEntity<Void> {
         featureServices.disableFeature(featureUID)
         return ResponseEntity(ACCEPTED)
     }
@@ -101,7 +101,7 @@ class FeatureResource(@Autowired val featureServices: FeatureServices) {
             ApiResponse(code = 404, message = "Feature not found"),
             ApiResponse(code = 304, message = "Role already exists, nothing to update"))
     @PostMapping(value = [("/$OPERATION_GRANTROLE/$PATH_PARAM_ROLE")], consumes = [APPLICATION_JSON_VALUE])
-    fun grantRoleToFeature(@PathVariable(value = PARAM_UID) featureUID: String, @PathVariable(value = PARAM_ROLE) role: String): ResponseEntity<Any> {
+    fun grantRoleToFeature(@PathVariable(value = PARAM_UID) featureUID: String, @PathVariable(value = PARAM_ROLE) role: String): ResponseEntity<Void> {
         featureServices.grantRoleToFeature(featureUID, role)
         return ResponseEntity(ACCEPTED)
     }
@@ -111,7 +111,7 @@ class FeatureResource(@Autowired val featureServices: FeatureServices) {
             ApiResponse(code = 202, message = "Permission has been granted"),
             ApiResponse(code = 404, message = "Feature not found"))
     @PostMapping(value = [("/$OPERATION_REMOVEROLE/$PATH_PARAM_ROLE")], consumes = [APPLICATION_JSON_VALUE])
-    fun removeRoleFromFeature(@PathVariable(value = PARAM_UID) featureUID: String, @PathVariable(value = PARAM_ROLE) role: String): ResponseEntity<Any> {
+    fun removeRoleFromFeature(@PathVariable(value = PARAM_UID) featureUID: String, @PathVariable(value = PARAM_ROLE) role: String): ResponseEntity<Void> {
         featureServices.removeRoleFromFeature(featureUID, role)
         return ResponseEntity(ACCEPTED)
     }
@@ -122,7 +122,7 @@ class FeatureResource(@Autowired val featureServices: FeatureServices) {
             ApiResponse(code = 404, message = "Feature not found"),
             ApiResponse(code = 304, message = "Group already exists, nothing to update"))
     @PostMapping(value = [("/$OPERATION_ADDGROUP/$PATH_PARAM_GROUP")], consumes = [APPLICATION_JSON_VALUE])
-    fun addGroupToFeature(@PathVariable(value = PARAM_UID) featureUID: String, @PathVariable(value = PARAM_GROUP) groupName: String): ResponseEntity<Any> {
+    fun addGroupToFeature(@PathVariable(value = PARAM_UID) featureUID: String, @PathVariable(value = PARAM_GROUP) groupName: String): ResponseEntity<Void> {
         featureServices.addGroupToFeature(featureUID, groupName)
         return ResponseEntity(ACCEPTED)
     }
@@ -132,7 +132,7 @@ class FeatureResource(@Autowired val featureServices: FeatureServices) {
             ApiResponse(code = 204, message = "Group has been removed"),
             ApiResponse(code = 404, message = "Feature not found"))
     @PostMapping(value = [("/$OPERATION_REMOVEGROUP/$PATH_PARAM_GROUP")], consumes = [APPLICATION_JSON_VALUE])
-    fun removeGroupFromFeature(@PathVariable(value = PARAM_UID) featureUID: String, @PathVariable(value = PARAM_GROUP) groupName: String): ResponseEntity<Any> {
+    fun removeGroupFromFeature(@PathVariable(value = PARAM_UID) featureUID: String, @PathVariable(value = PARAM_GROUP) groupName: String): ResponseEntity<Void> {
         featureServices.removeGroupFromFeature(featureUID, groupName)
         return ResponseEntity(ACCEPTED)
     }
