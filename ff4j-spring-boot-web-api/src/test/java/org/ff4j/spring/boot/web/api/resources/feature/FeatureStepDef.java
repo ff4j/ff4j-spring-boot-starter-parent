@@ -111,7 +111,7 @@ public class FeatureStepDef extends AbstractStepDef {
     assertStatus(responseCode);
     FeatureApiBean featureApiBean = new FeatureApiBean();
     featureApiBean.setUid(expectedUid);
-    featureApiBean.setEnable(Boolean.valueOf(expectedEnabled));
+    featureApiBean.setEnable(Boolean.parseBoolean(expectedEnabled));
     featureApiBean.setDescription(expectedDescription);
     featureApiBean.setGroup(expectedGroup);
     featureApiBean.setPermissions(new HashSet<>(Arrays.asList(expectedPermissions.split(","))));

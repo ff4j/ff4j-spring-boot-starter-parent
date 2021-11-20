@@ -110,7 +110,7 @@ Feature: Provides RESTful api's to do the following
       }
     }
     """
-    Then the user gets the response with response code "202"
+    Then the user gets the response with response code "204"
     And the response body has content to be "true"
     When the user requests for a feature by "/api/ff4j/store/features/login" by "GET" http method and content type as "application/json"
     Then the user gets the response with response code "200"
@@ -184,7 +184,7 @@ Feature: Provides RESTful api's to do the following
       }
     }
     """
-    Then the user gets the response with response code "202"
+    Then the user gets the response with response code "204"
     And the response body has content to be "true"
     When the user requests for a feature by "/api/ff4j/check/login" by "POST" http method and content type as "application/x-www-form-urlencoded"
     And the following form param

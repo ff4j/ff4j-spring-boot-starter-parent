@@ -40,6 +40,6 @@ public class FeatureWebUtilsTest {
   public void giveTheActionIsUpdateWhenAskedForHttpStatusShouldReturn202_ACCEPTED() {
     ResponseEntity<Boolean> actualResponse = FeatureWebUtils.INSTANCE
         .getBooleanResponseEntityByHttpStatus(FeatureActions.UPDATED);
-    assertThat(actualResponse.getStatusCode()).isEqualTo(HttpStatus.ACCEPTED);
+    assertThat(actualResponse.getStatusCode()).isEqualTo(HttpStatus.NO_CONTENT);
   }
 }

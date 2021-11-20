@@ -35,7 +35,7 @@ object FeatureWebUtils {
     fun getBooleanResponseEntityByHttpStatus(featureActions: FeatureActions): ResponseEntity<Boolean> {
         return when (featureActions) {
             FeatureActions.CREATED -> ResponseEntity(TRUE, HttpStatus.CREATED)
-            FeatureActions.UPDATED -> ResponseEntity(TRUE, HttpStatus.ACCEPTED)
+            FeatureActions.UPDATED -> ResponseEntity(TRUE, HttpStatus.NO_CONTENT)
         }
     }
 }
