@@ -78,7 +78,7 @@ class FeatureResource(@Autowired val featureServices: FeatureServices) {
     @ApiResponses(
             ApiResponse(code = 202, message = "Features has been enabled"),
             ApiResponse(code = 404, message = "Feature not found"))
-    @PostMapping(value = [("/$OPERATION_ENABLE")], consumes = [APPLICATION_JSON_VALUE])
+    @PostMapping(value = [("/$OPERATION_ENABLE")])
     fun enableFeature(@PathVariable(value = PARAM_UID) featureUID: String): ResponseEntity<Void> {
         featureServices.enableFeature(featureUID)
         return ResponseEntity(ACCEPTED)
@@ -88,7 +88,7 @@ class FeatureResource(@Autowired val featureServices: FeatureServices) {
     @ApiResponses(
             ApiResponse(code = 202, message = "Features has been disabled"),
             ApiResponse(code = 404, message = "Feature not found"))
-    @PostMapping(value = [("/$OPERATION_DISABLE")], consumes = [APPLICATION_JSON_VALUE])
+    @PostMapping(value = [("/$OPERATION_DISABLE")])
     fun disableFeature(@PathVariable(value = PARAM_UID) featureUID: String): ResponseEntity<Void> {
         featureServices.disableFeature(featureUID)
         return ResponseEntity(ACCEPTED)
@@ -99,7 +99,7 @@ class FeatureResource(@Autowired val featureServices: FeatureServices) {
             ApiResponse(code = 202, message = "Permission has been granted"),
             ApiResponse(code = 404, message = "Feature not found"),
             ApiResponse(code = 304, message = "Role already exists, nothing to update"))
-    @PostMapping(value = [("/$OPERATION_GRANTROLE/$PATH_PARAM_ROLE")], consumes = [APPLICATION_JSON_VALUE])
+    @PostMapping(value = [("/$OPERATION_GRANTROLE/$PATH_PARAM_ROLE")])
     fun grantRoleToFeature(@PathVariable(value = PARAM_UID) featureUID: String, @PathVariable(value = PARAM_ROLE) role: String): ResponseEntity<Void> {
         featureServices.grantRoleToFeature(featureUID, role)
         return ResponseEntity(ACCEPTED)
@@ -109,7 +109,7 @@ class FeatureResource(@Autowired val featureServices: FeatureServices) {
     @ApiResponses(
             ApiResponse(code = 202, message = "Permission has been granted"),
             ApiResponse(code = 404, message = "Feature not found"))
-    @PostMapping(value = [("/$OPERATION_REMOVEROLE/$PATH_PARAM_ROLE")], consumes = [APPLICATION_JSON_VALUE])
+    @PostMapping(value = [("/$OPERATION_REMOVEROLE/$PATH_PARAM_ROLE")])
     fun removeRoleFromFeature(@PathVariable(value = PARAM_UID) featureUID: String, @PathVariable(value = PARAM_ROLE) role: String): ResponseEntity<Void> {
         featureServices.removeRoleFromFeature(featureUID, role)
         return ResponseEntity(ACCEPTED)
@@ -120,7 +120,7 @@ class FeatureResource(@Autowired val featureServices: FeatureServices) {
             ApiResponse(code = 202, message = "Group has been defined"),
             ApiResponse(code = 404, message = "Feature not found"),
             ApiResponse(code = 304, message = "Group already exists, nothing to update"))
-    @PostMapping(value = [("/$OPERATION_ADDGROUP/$PATH_PARAM_GROUP")], consumes = [APPLICATION_JSON_VALUE])
+    @PostMapping(value = [("/$OPERATION_ADDGROUP/$PATH_PARAM_GROUP")])
     fun addGroupToFeature(@PathVariable(value = PARAM_UID) featureUID: String, @PathVariable(value = PARAM_GROUP) groupName: String): ResponseEntity<Void> {
         featureServices.addGroupToFeature(featureUID, groupName)
         return ResponseEntity(ACCEPTED)
@@ -130,7 +130,7 @@ class FeatureResource(@Autowired val featureServices: FeatureServices) {
     @ApiResponses(
             ApiResponse(code = 204, message = "Group has been removed"),
             ApiResponse(code = 404, message = "Feature not found"))
-    @PostMapping(value = [("/$OPERATION_REMOVEGROUP/$PATH_PARAM_GROUP")], consumes = [APPLICATION_JSON_VALUE])
+    @PostMapping(value = [("/$OPERATION_REMOVEGROUP/$PATH_PARAM_GROUP")])
     fun removeGroupFromFeature(@PathVariable(value = PARAM_UID) featureUID: String, @PathVariable(value = PARAM_GROUP) groupName: String): ResponseEntity<Void> {
         featureServices.removeGroupFromFeature(featureUID, groupName)
         return ResponseEntity(ACCEPTED)
