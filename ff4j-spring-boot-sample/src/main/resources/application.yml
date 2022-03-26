@@ -1,2 +1,11 @@
 server:
   port: ${PORT:5000}
+#springdoc:
+#  paths-to-exclude: "/api/ff4j/**"
+ff4j:
+  springdoc:
+    enabled: true
+springdoc:
+  swagger-ui:
+    tags-sorter: "alpha"
+    operations-sorter: "alpha"
