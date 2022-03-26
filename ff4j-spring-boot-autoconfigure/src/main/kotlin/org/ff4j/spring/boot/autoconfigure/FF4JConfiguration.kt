@@ -20,6 +20,7 @@
 package org.ff4j.spring.boot.autoconfigure
 
 import org.ff4j.FF4j
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.context.annotation.Bean
@@ -36,7 +37,14 @@ import org.springframework.context.annotation.Configuration
 @ComponentScan(value = ["org.ff4j.spring.boot.web.api", "org.ff4j.services", "org.ff4j.aop", "org.ff4j.spring"])
 class FF4JConfiguration {
 
-    @Bean
-    @ConditionalOnMissingBean
-    fun getFF4J(): FF4j = FF4j()
+  @Value("\${ff4j.audit.enabled:false}")
+  private val auditEnabled: Boolean = false
+
+  @Bean
+  @ConditionalOnMissingBean
+  fun getFF4J(): FF4j {
+    val ff4j = FF4j()
+    ff4j.audit(auditEnabled)
+    return ff4j
+  }
 }
