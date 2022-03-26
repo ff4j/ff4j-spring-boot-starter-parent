@@ -1,2 +1,9 @@
 server:
   port: ${PORT:5000}
+ff4j:
+  springdoc:
+    enabled: true
+springdoc:
+  swagger-ui:
+    tags-sorter: "alpha"
+    operations-sorter: "alpha"

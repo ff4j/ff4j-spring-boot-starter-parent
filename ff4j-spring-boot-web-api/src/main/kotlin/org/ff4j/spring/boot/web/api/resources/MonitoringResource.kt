@@ -20,10 +20,12 @@
 
 package org.ff4j.spring.boot.web.api.resources
 
-import io.swagger.annotations.Api
-import io.swagger.annotations.ApiOperation
-import io.swagger.annotations.ApiResponse
-import io.swagger.annotations.ApiResponses
+import io.swagger.v3.oas.annotations.Operation
+import io.swagger.v3.oas.annotations.media.Content
+import io.swagger.v3.oas.annotations.media.Schema
+import io.swagger.v3.oas.annotations.responses.ApiResponse
+import io.swagger.v3.oas.annotations.responses.ApiResponses
+import io.swagger.v3.oas.annotations.tags.Tag
 import org.ff4j.services.MonitoringServices
 import org.ff4j.services.constants.FeatureConstants.RESOURCE_FF4J_MONITORING
 import org.ff4j.services.domain.EventRepositoryApiBean
@@ -41,16 +43,29 @@ import org.springframework.web.bind.annotation.RestController
  *
  * @author [Paul Williams](mailto:paul58914080@gmail.com)
  */
-@Api(tags = ["Monitoring"], description = "The API for monitoring related operations")
+@Tag(name = "Monitoring", description = "The API for monitoring related operations")
 @RestController
 @RequestMapping(value = [RESOURCE_FF4J_MONITORING])
 class MonitoringResource(@Autowired val monitoringServices: MonitoringServices) {
 
-    @ApiOperation(value = "Display Monitoring information for all features", notes = "The EventRepository handle to store audit events is not required", response = EventRepositoryApiBean::class)
-    @ApiResponses(
-            ApiResponse(code = 200, message = "Status of event repository bean", response = EventRepositoryApiBean::class),
-            ApiResponse(code = 404, message = "No event repository defined", response = String::class))
-    @GetMapping(produces = [APPLICATION_JSON_VALUE])
-    fun getMonitoringStatus(@RequestParam(value = PARAM_START, required = false, defaultValue = "0") start: Long, @RequestParam(value = PARAM_END, required = false, defaultValue = "0") end: Long): EventRepositoryApiBean =
-            monitoringServices.getMonitoringStatus(start, end)
+  @Operation(
+    summary = "Display Monitoring information for all features",
+    description = "The EventRepository handle to store audit events is not required",
+    tags = ["Monitoring"]
+  )
+  @ApiResponses(
+    value = [ApiResponse(
+      responseCode = "200",
+      description = "Status of event repository bean",
+      content = arrayOf(Content(schema = Schema(implementation = EventRepositoryApiBean::class)))
+    ), ApiResponse(responseCode = "404", description = "No event repository defined")]
+  )
+  @GetMapping(produces = [APPLICATION_JSON_VALUE])
+  fun getMonitoringStatus(
+    @RequestParam(
+      value = PARAM_START,
+      required = false,
+      defaultValue = "0"
+    ) start: Long, @RequestParam(value = PARAM_END, required = false, defaultValue = "0") end: Long
+  ): EventRepositoryApiBean = monitoringServices.getMonitoringStatus(start, end)
 }
