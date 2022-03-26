@@ -20,20 +20,23 @@
 
 package org.ff4j.spring.boot.web.api.resources
 
-import io.swagger.annotations.Api
-import io.swagger.annotations.ApiOperation
-import io.swagger.annotations.ApiResponse
-import io.swagger.annotations.ApiResponses
-import org.ff4j.services.exceptions.FeatureNotFoundException
+import io.swagger.v3.oas.annotations.Operation
+import io.swagger.v3.oas.annotations.media.Content
+import io.swagger.v3.oas.annotations.media.Schema
+import io.swagger.v3.oas.annotations.responses.ApiResponse
+import io.swagger.v3.oas.annotations.responses.ApiResponses
+import io.swagger.v3.oas.annotations.tags.Tag
 import org.ff4j.services.FF4jServices
 import org.ff4j.services.constants.FeatureConstants.PATH_PARAM_UID
 import org.ff4j.services.constants.FeatureConstants.RESOURCE_FF4J
 import org.ff4j.services.domain.AuthorizationsManagerApiBean
 import org.ff4j.services.domain.FF4jStatusApiBean
+import org.ff4j.services.exceptions.FeatureNotFoundException
 import org.ff4j.web.FF4jWebConstants.*
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus.OK
-import org.springframework.http.MediaType.*
+import org.springframework.http.MediaType.APPLICATION_FORM_URLENCODED_VALUE
+import org.springframework.http.MediaType.APPLICATION_JSON_VALUE
 import org.springframework.http.ResponseEntity
 import org.springframework.util.MultiValueMap
 import org.springframework.web.bind.annotation.*
@@ -43,62 +46,101 @@ import org.springframework.web.bind.annotation.*
  *
  * @author [Paul Williams](mailto:paul58914080@gmail.com)
  */
-@Api(tags = ["FF4J"], description = "The API for global status of FF4J")
+@Tag(name = "FF4J", description = "The API for global status of FF4J")
 @RestController
 @RequestMapping(value = [RESOURCE_FF4J])
 class FF4jResource(@Autowired val ff4JServices: FF4jServices) {
 
-    @ApiOperation(value = "Gets ff4j status overview", notes = "Gets information related to Monitoring, Security, Cache and Store")
-    @ApiResponses(
-            ApiResponse(code = 200, message = "Success, return status of ff4j instance", response = FF4jStatusApiBean::class))
-    @GetMapping(produces = [APPLICATION_JSON_VALUE])
-    fun getStatus(): FF4jStatusApiBean = ff4JServices.getStatus()
+  @Operation(
+    summary = "Gets ff4j status overview",
+    description = "Gets information related to Monitoring, Security, Cache and Store",
+    tags = ["FF4J"]
+  )
+  @ApiResponses(
+    value = [ApiResponse(
+      responseCode = "200",
+      description = "Success, return status of ff4j instance",
+      content = arrayOf(Content(schema = Schema(implementation = FF4jStatusApiBean::class)))
+    )]
+  )
+  @GetMapping(produces = [APPLICATION_JSON_VALUE])
+  fun getStatus(): FF4jStatusApiBean = ff4JServices.getStatus()
 
-    @ApiOperation(value = "Gets Security information (permissions manager)", notes = "Security is implemented through dedicated AuthorizationsManager but it's not mandatory")
-    @ApiResponses(
-            ApiResponse(code = 200, message = "Status of current ff4j security bean", response = AuthorizationsManagerApiBean::class),
-            ApiResponse(code = 404, message = "no security has been defined"))
-    @GetMapping(value = [("/$RESOURCE_SECURITY")], produces = [APPLICATION_JSON_VALUE])
-    fun getSecurityInfo(): AuthorizationsManagerApiBean = ff4JServices.getSecurityInfo()
+  @Operation(
+    summary = "Gets Security information (permissions manager)",
+    description = "Security is implemented through dedicated AuthorizationsManager but it's not mandatory",
+    tags = ["FF4J"]
+  )
+  @ApiResponses(
+    value = [ApiResponse(
+      responseCode = "200",
+      description = "Status of current ff4j security bean",
+      content = arrayOf(Content(schema = Schema(implementation = AuthorizationsManagerApiBean::class)))
+    ), ApiResponse(responseCode = "404", description = "no security has been defined")]
+  )
+  @GetMapping(value = [("/$RESOURCE_SECURITY")], produces = [APPLICATION_JSON_VALUE])
+  fun getSecurityInfo(): AuthorizationsManagerApiBean = ff4JServices.getSecurityInfo()
 
+  @Operation(summary = "Simple check feature toggle", tags = ["FF4J"])
+  @ApiResponses(
+    value = [ApiResponse(
+      responseCode = "200",
+      description = "If feature is flipped",
+      content = arrayOf(Content(schema = Schema(implementation = Boolean::class)))
+    ), ApiResponse(responseCode = "404", description = "Feature not found")]
+  )
+  @GetMapping(value = [("/$OPERATION_CHECK/$PATH_PARAM_UID")])
+  fun check(@PathVariable(value = PARAM_UID) featureUID: String): ResponseEntity<Boolean> {
+    val status = ff4JServices.check(featureUID)
+    return ResponseEntity(status, OK)
+  }
 
-    @ApiOperation(value = "Simple check feature toggle", response = Boolean::class)
-    @ApiResponses(
-            ApiResponse(code = 200, message = "If feature is flipped"),
-            ApiResponse(code = 404, message = "Feature not found"))
-    @GetMapping(value = [("/$OPERATION_CHECK/$PATH_PARAM_UID")])
-    fun check(@PathVariable(value = PARAM_UID) featureUID: String): ResponseEntity<Boolean> {
-        val status = ff4JServices.check(featureUID)
-        return ResponseEntity(status, OK)
+  @Operation(summary = "Advanced check feature toggle (parametrized)", tags = ["FF4J"])
+  @ApiResponses(
+    value = [ApiResponse(
+      responseCode = "200",
+      description = "If feature is flipped",
+      content = arrayOf(Content(schema = Schema(implementation = Boolean::class)))
+    ), ApiResponse(responseCode = "400", description = "Invalid parameter"), ApiResponse(
+      responseCode = "404",
+      description = "Feature not found"
+    )]
+  )
+  @PostMapping(
+    value = [("/$OPERATION_CHECK/$PATH_PARAM_UID")],
+    consumes = [APPLICATION_FORM_URLENCODED_VALUE]
+  )
+  fun check(
+    @PathVariable(value = PARAM_UID) featureUID: String,
+    @RequestParam formParams: MultiValueMap<String, String>
+  ): ResponseEntity<Boolean> {
+    val map = formParams.toSingleValueMap()
+    val status = ff4JServices.check(featureUID, map)
+    return ResponseEntity(status, OK)
+  }
+
+  @Operation(summary = "Check feature toggles", tags = ["FF4J"])
+  @ApiResponses(
+    value = [ApiResponse(
+      responseCode = "200",
+      description = "Map of featureUId/flipped",
+      content = arrayOf(Content(schema = Schema(implementation = Map::class)))
+    ), ApiResponse(responseCode = "400", description = "Invalid parameter")]
+  )
+  @PostMapping(value = [("/$OPERATION_CHECK")])
+  fun check(
+    @RequestBody featureUIDs: Set<String>,
+    @RequestParam formParams: MultiValueMap<String, String>
+  ): ResponseEntity<Map<String, Boolean>> {
+    val featureUIDToEnableMap = HashMap<String, Boolean>()
+    for (featureUID in featureUIDs) {
+      try {
+        val status = ff4JServices.check(featureUID, formParams.toSingleValueMap())
+        featureUIDToEnableMap[featureUID] = status
+      } catch (e: FeatureNotFoundException) {
+        featureUIDToEnableMap[featureUID] = false
+      }
     }
-
-    @ApiOperation(value = "Advanced check feature toggle (parametrized)", response = Boolean::class)
-    @ApiResponses(
-            ApiResponse(code = 200, message = "If feature is flipped"),
-            ApiResponse(code = 400, message = "Invalid parameter"),
-            ApiResponse(code = 404, message = "Feature not found"))
-    @PostMapping(value = [("/$OPERATION_CHECK/$PATH_PARAM_UID")], consumes = [APPLICATION_FORM_URLENCODED_VALUE])
-    fun check(@PathVariable(value = PARAM_UID) featureUID: String, @RequestParam formParams: MultiValueMap<String, String>): ResponseEntity<Boolean> {
-        val map = formParams.toSingleValueMap()
-        val status = ff4JServices.check(featureUID, map)
-        return ResponseEntity(status, OK)
-    }
-
-    @ApiOperation(value = "Check feature toggles", response = Map::class)
-    @ApiResponses(
-            ApiResponse(code = 200, message = "Map of featureUId/flipped"),
-            ApiResponse(code = 400, message = "Invalid parameter"))
-    @PostMapping(value = [("/$OPERATION_CHECK")])
-    fun check(@RequestBody featureUIDs: Set<String>, @RequestParam formParams: MultiValueMap<String, String>): ResponseEntity<Map<String,Boolean>> {
-        val featureUIDToEnableMap = HashMap<String, Boolean>()
-        for (featureUID in featureUIDs) {
-            try {
-                val status = ff4JServices.check(featureUID, formParams.toSingleValueMap())
-                featureUIDToEnableMap[featureUID] = status
-            } catch (e : FeatureNotFoundException) {
-                featureUIDToEnableMap[featureUID] = false
-            }
-        }
-        return ResponseEntity(featureUIDToEnableMap, OK)
-    }
+    return ResponseEntity(featureUIDToEnableMap, OK)
+  }
 }
