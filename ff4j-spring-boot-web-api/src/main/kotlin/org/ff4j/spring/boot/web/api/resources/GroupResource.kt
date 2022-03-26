@@ -20,10 +20,12 @@
 
 package org.ff4j.spring.boot.web.api.resources
 
-import io.swagger.annotations.Api
-import io.swagger.annotations.ApiOperation
-import io.swagger.annotations.ApiResponse
-import io.swagger.annotations.ApiResponses
+import io.swagger.v3.oas.annotations.Operation
+import io.swagger.v3.oas.annotations.media.Content
+import io.swagger.v3.oas.annotations.media.Schema
+import io.swagger.v3.oas.annotations.responses.ApiResponse
+import io.swagger.v3.oas.annotations.responses.ApiResponses
+import io.swagger.v3.oas.annotations.tags.Tag
 import org.ff4j.services.GroupServices
 import org.ff4j.services.constants.FeatureConstants.PARAM_GROUP
 import org.ff4j.services.constants.FeatureConstants.PATH_PARAM_GROUP
@@ -40,23 +42,42 @@ import org.springframework.web.bind.annotation.*
  *
  * @author [Paul Williams](mailto:paul58914080@gmail.com)
  */
-@Api(tags = ["Group"], description = "The API for group related operations")
+@Tag(name = "Groups", description = "The API for group related operations")
 @RestController
 @RequestMapping(value = [("$RESOURCE_FF4J_STORE_GROUPS/$PATH_PARAM_GROUP")])
 class GroupResource(@Autowired val groupServices: GroupServices) {
 
-    @ApiOperation(value = "Get all the features belonging to the group", response = FeatureApiBean::class)
-    @ApiResponses(ApiResponse(code = 200, message = "features belonging to the group"), ApiResponse(code = 404, message = "Group not found"))
-    @GetMapping(produces = [APPLICATION_JSON_VALUE])
-    fun getFeaturesByGroup(@PathVariable(value = PARAM_GROUP) groupName: String): Collection<FeatureApiBean> = groupServices.getFeaturesByGroup(groupName)
+  @Operation(summary = "Get all the features belonging to the group", tags = ["Groups"])
+  @ApiResponses(
+    value = [ApiResponse(
+      responseCode = "200",
+      description = "features belonging to the group",
+      content = arrayOf(Content(schema = Schema(implementation = FeatureApiBean::class)))
+    ), ApiResponse(responseCode = "404", description = "Group not found")]
+  )
+  @GetMapping(produces = [APPLICATION_JSON_VALUE])
+  fun getFeaturesByGroup(@PathVariable(value = PARAM_GROUP) groupName: String): Collection<FeatureApiBean> =
+    groupServices.getFeaturesByGroup(groupName)
 
-    @ApiOperation(value = "Enable a group", response = Void::class)
-    @ApiResponses(ApiResponse(code = 200, message = "Group has been enabled"), ApiResponse(code = 404, message = "Group not found"))
-    @PostMapping(value = [("/$OPERATION_ENABLE")], produces = [APPLICATION_JSON_VALUE])
-    fun enableGroup(@PathVariable(value = PARAM_GROUP) groupName: String) = groupServices.enableGroup(groupName)
+  @Operation(summary = "Enable a group", tags = ["Groups"])
+  @ApiResponses(
+    value = [ApiResponse(
+      responseCode = "200",
+      description = "Group has been enabled"
+    ), ApiResponse(responseCode = "404", description = "Group not found")]
+  )
+  @PostMapping(value = [("/$OPERATION_ENABLE")], produces = [APPLICATION_JSON_VALUE])
+  fun enableGroup(@PathVariable(value = PARAM_GROUP) groupName: String) =
+    groupServices.enableGroup(groupName)
 
-    @ApiOperation(value = "Disable a group", response = Void::class)
-    @ApiResponses(ApiResponse(code = 200, message = "Group has been disabled"), ApiResponse(code = 404, message = "Group not found"))
-    @PostMapping(value = [("/$OPERATION_DISABLE")], produces = [APPLICATION_JSON_VALUE])
-    fun disableGroup(@PathVariable(value = PARAM_GROUP) groupName: String) = groupServices.disableGroup(groupName)
+  @Operation(summary = "Disable a group", tags = ["Groups"])
+  @ApiResponses(
+    value = [ApiResponse(
+      responseCode = "200",
+      description = "Group has been disabled"
+    ), ApiResponse(responseCode = "404", description = "Group not found")]
+  )
+  @PostMapping(value = [("/$OPERATION_DISABLE")], produces = [APPLICATION_JSON_VALUE])
+  fun disableGroup(@PathVariable(value = PARAM_GROUP) groupName: String) =
+    groupServices.disableGroup(groupName)
 }

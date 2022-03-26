@@ -20,10 +20,12 @@
 
 package org.ff4j.spring.boot.web.api.resources
 
-import io.swagger.annotations.Api
-import io.swagger.annotations.ApiOperation
-import io.swagger.annotations.ApiResponse
-import io.swagger.annotations.ApiResponses
+import io.swagger.v3.oas.annotations.Operation
+import io.swagger.v3.oas.annotations.media.Content
+import io.swagger.v3.oas.annotations.media.Schema
+import io.swagger.v3.oas.annotations.responses.ApiResponse
+import io.swagger.v3.oas.annotations.responses.ApiResponses
+import io.swagger.v3.oas.annotations.tags.Tag
 import org.ff4j.services.PropertyServices
 import org.ff4j.services.constants.FeatureConstants.PARAM_NAME
 import org.ff4j.services.constants.FeatureConstants.PARAM_VALUE
@@ -45,46 +47,73 @@ import org.springframework.web.bind.annotation.*
  *
  * @author [Paul Williams](mailto:paul58914080@gmail.com)
  */
-@Api(tags = ["Property"], description = "The API for property related operations")
+@Tag(name = "Property", description = "The API for property related operations")
 @RestController
 @RequestMapping(value = [("$RESOURCE_PROPERTIES_STORE_PROPERTIES/$PATH_PARAM_NAME")])
 class PropertyResource(@Autowired val propertyServices: PropertyServices) {
 
-    @ApiOperation(value = "Read information about a property", response = PropertyApiBean::class)
-    @ApiResponses(
-            ApiResponse(code = 200, message = "Information about property"),
-            ApiResponse(code = 404, message = "Property not found"))
-    @GetMapping(produces = [APPLICATION_JSON_VALUE])
-    fun getProperty(@PathVariable(value = PARAM_NAME) propertyName: String): PropertyApiBean =
-            propertyServices.getProperty(propertyName)
+  @Operation(summary = "Read information about a property", tags = ["Property"])
+  @ApiResponses(
+    value = [ApiResponse(
+      responseCode = "200",
+      description = "Information about property",
+      content = arrayOf(Content(schema = Schema(implementation = PropertyApiBean::class)))
+    ), ApiResponse(responseCode = "404", description = "Property not found")]
+  )
+  @GetMapping(produces = [APPLICATION_JSON_VALUE])
+  fun getProperty(@PathVariable(value = PARAM_NAME) propertyName: String): PropertyApiBean =
+    propertyServices.getProperty(propertyName)
 
-    @ApiOperation(value = "Create or update a property", response = ResponseEntity::class)
-    @ApiResponses(
-            ApiResponse(code = 400, message = "Property name is blank (or) property name did not match with the requested property name to be created or updated"),
-            ApiResponse(code = 201, message = "Property has been created"),
-            ApiResponse(code = 202, message = "Property has been updated"))
-    @PutMapping(produces = [APPLICATION_JSON_VALUE])
-    fun createOrUpdateProperty(@PathVariable(value = PARAM_NAME) propertyName: String, @RequestBody propertyApiBean: PropertyApiBean): ResponseEntity<*> =
-            FeatureWebUtils.getBooleanResponseEntityByHttpStatus(propertyServices.createOrUpdateProperty(propertyName, propertyApiBean))
+  @Operation(summary = "Create or update a property", tags = ["Property"])
+  @ApiResponses(
+    value = [ApiResponse(
+      responseCode = "201",
+      description = "Property has been created"
+    ), ApiResponse(responseCode = "202", description = "Property has been updated"), ApiResponse(
+      responseCode = "400",
+      description = "Property name is blank (or) property name did not match with the requested property name to be created or updated"
+    )]
+  )
+  @PutMapping(produces = [APPLICATION_JSON_VALUE])
+  fun createOrUpdateProperty(
+    @PathVariable(value = PARAM_NAME) propertyName: String,
+    @RequestBody propertyApiBean: PropertyApiBean
+  ): ResponseEntity<*> = FeatureWebUtils.getBooleanResponseEntityByHttpStatus(
+    propertyServices.createOrUpdateProperty(propertyName, propertyApiBean)
+  )
 
-    @ApiOperation(value = "Delete a property", response = ResponseEntity::class)
-    @ApiResponses(
-            ApiResponse(code = 204, message = "No content, property is deleted"),
-            ApiResponse(code = 404, message = "Property not found"))
-    @DeleteMapping(produces = [APPLICATION_JSON_VALUE])
-    fun deleteProperty(@PathVariable(value = PARAM_NAME) propertyName: String): ResponseEntity<Void> {
-        propertyServices.deleteProperty(propertyName)
-        return ResponseEntity(NO_CONTENT)
-    }
+  @Operation(summary = "Delete a property", tags = ["Property"])
+  @ApiResponses(
+    value = [ApiResponse(
+      responseCode = "204",
+      description = "No content, property is deleted"
+    ), ApiResponse(responseCode = "404", description = "Property not found")]
+  )
+  @DeleteMapping(produces = [APPLICATION_JSON_VALUE])
+  fun deleteProperty(@PathVariable(value = PARAM_NAME) propertyName: String): ResponseEntity<Void> {
+    propertyServices.deleteProperty(propertyName)
+    return ResponseEntity(NO_CONTENT)
+  }
 
-    @ApiOperation(value = "Update value of a property", response = ResponseEntity::class)
-    @ApiResponses(
-            ApiResponse(code = 202, message = "Property has been updated"),
-            ApiResponse(code = 404, message = "Property not found"),
-            ApiResponse(code = 400, message = "Invalid new value"))
-    @PostMapping(value = [("/$OPERATION_UPDATE/$PATH_PARAM_VALUE")], produces = [APPLICATION_JSON_VALUE])
-    fun updatePropertyName(@PathVariable(value = PARAM_NAME) propertyName: String, @PathVariable(value = PARAM_VALUE) newPropertyName: String): ResponseEntity<Void> {
-        propertyServices.updatePropertyName(propertyName, newPropertyName)
-        return ResponseEntity(HttpStatus.ACCEPTED)
-    }
+  @Operation(summary = "Update value of a property", tags = ["Property"])
+  @ApiResponses(
+    value = [ApiResponse(
+      responseCode = "202",
+      description = "Property has been updated"
+    ), ApiResponse(responseCode = "404", description = "Property not found"), ApiResponse(
+      responseCode = "400",
+      description = "Invalid new value"
+    )]
+  )
+  @PostMapping(
+    value = [("/$OPERATION_UPDATE/$PATH_PARAM_VALUE")],
+    produces = [APPLICATION_JSON_VALUE]
+  )
+  fun updatePropertyName(
+    @PathVariable(value = PARAM_NAME) propertyName: String,
+    @PathVariable(value = PARAM_VALUE) newPropertyName: String
+  ): ResponseEntity<Void> {
+    propertyServices.updatePropertyName(propertyName, newPropertyName)
+    return ResponseEntity(HttpStatus.ACCEPTED)
+  }
 }
