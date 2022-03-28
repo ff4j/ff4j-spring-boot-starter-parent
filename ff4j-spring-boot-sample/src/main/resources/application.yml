@@ -1,6 +1,8 @@
 server:
   port: ${PORT:5000}
 ff4j:
+  audit:
+    enabled: true
   web-console:
     enabled: true
     context-path: /ff4j-web
