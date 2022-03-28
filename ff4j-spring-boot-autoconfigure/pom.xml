@@ -43,6 +43,10 @@
       <artifactId>ff4j-core</artifactId>
     </dependency>
     <dependency>
+      <artifactId>ff4j-web</artifactId>
+      <groupId>org.ff4j</groupId>
+    </dependency>
+    <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-autoconfigure-processor</artifactId>
       <optional>true</optional>
