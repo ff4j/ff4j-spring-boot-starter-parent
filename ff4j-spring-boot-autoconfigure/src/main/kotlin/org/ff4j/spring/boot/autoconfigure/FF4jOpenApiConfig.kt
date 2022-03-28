@@ -18,7 +18,7 @@
  * #L%
  */
 
-package org.ff4j.spring.boot.web.api.config
+package org.ff4j.spring.boot.autoconfigure
 
 import io.swagger.v3.oas.annotations.OpenAPIDefinition
 import io.swagger.v3.oas.annotations.info.Contact

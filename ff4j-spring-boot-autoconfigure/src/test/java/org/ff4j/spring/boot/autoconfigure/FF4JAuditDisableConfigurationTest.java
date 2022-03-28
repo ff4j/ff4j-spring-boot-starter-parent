@@ -1,4 +1,4 @@
-package org.ff4j.spring.boot.web.api.config;
+package org.ff4j.spring.boot.autoconfigure;
 
 /*-
  * #%L
@@ -23,8 +23,6 @@ package org.ff4j.spring.boot.web.api.config;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.ff4j.FF4j;
-import org.ff4j.spring.boot.autoconfigure.FF4JConfiguration;
-import org.ff4j.spring.boot.web.api.Application;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
