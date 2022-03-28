@@ -24,17 +24,10 @@ import io.swagger.v3.oas.annotations.OpenAPIDefinition
 import io.swagger.v3.oas.annotations.info.Contact
 import io.swagger.v3.oas.annotations.info.Info
 import io.swagger.v3.oas.annotations.info.License
-import io.swagger.v3.oas.models.OpenAPI
-import io.swagger.v3.oas.models.Operation
-import io.swagger.v3.oas.models.PathItem
 import org.springdoc.core.GroupedOpenApi
-import org.springdoc.core.customizers.OpenApiCustomiser
 import org.springframework.beans.factory.annotation.Value
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import java.util.*
-import java.util.stream.Stream
 
 
 /**
@@ -60,7 +53,7 @@ import java.util.stream.Stream
   )
 )
 @Configuration
-open class FF4jOpenApiConfig {
+open class FF4JOpenApiConfiguration {
 
   @Value("\${ff4j.springdoc.enabled:false}")
   private val springDocEnabled: Boolean = false
