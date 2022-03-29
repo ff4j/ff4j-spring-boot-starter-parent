@@ -2,7 +2,7 @@ package org.ff4j.spring.boot.autoconfigure;
 
 /*-
  * #%L
- * ff4j-spring-boot-web-api
+ * ff4j-spring-boot-autoconfigure
  * %%
  * Copyright (C) 2013 - 2022 FF4J
  * %%

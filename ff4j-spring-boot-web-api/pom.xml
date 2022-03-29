@@ -24,6 +24,9 @@
     <artifactId>ff4j-spring-boot-starter-parent</artifactId>
     <version>1.8.13-SNAPSHOT</version>
   </parent>
+  <properties>
+    <license.path>${project.baseUri}../src/license</license.path>
+  </properties>
   <dependencies>
     <dependency>
       <groupId>org.springframework.boot</groupId>
