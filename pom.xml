@@ -94,6 +94,7 @@
     <version.maven.plugin.javadoc>3.3.2</version.maven.plugin.javadoc>
     <version.maven.plugin.source>3.2.1</version.maven.plugin.source>
     <version.maven.plugin.dokka>1.6.10</version.maven.plugin.dokka>
+    <license.path>${project.baseUri}/src/license</license.path>
   </properties>
   <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
   <!-- ~ CHILD MODULES            ~ -->
@@ -372,6 +373,8 @@
         <version>${license-maven-plugin.version}</version>
         <configuration>
           <verbose>false</verbose>
+          <licenseName>apache_v2</licenseName>
+          <licenseResolver>${license.path}</licenseResolver>
           <extraExtensions>
             <myProprietaryExtension>kt</myProprietaryExtension>
             <myProprietaryExtension>java</myProprietaryExtension>

@@ -24,6 +24,7 @@
   </parent>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <license.path>${project.baseUri}../src/license</license.path>
   </properties>
   <dependencies>
     <dependency>
