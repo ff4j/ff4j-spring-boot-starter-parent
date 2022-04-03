@@ -3,9 +3,15 @@ server:
 ff4j:
   audit:
     enabled: true
+  security:
+    enabled: true
   web-console:
     enabled: true
     context-path: /ff4j-web
+    security:
+      enabled: true
+      username: admin
+      password: admin
   springdoc:
     enabled: true
 springdoc:
