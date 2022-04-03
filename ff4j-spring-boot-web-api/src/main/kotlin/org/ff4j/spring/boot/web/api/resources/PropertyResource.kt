@@ -61,32 +61,28 @@ class PropertyResource(@Autowired val propertyServices: PropertyServices) {
     ), ApiResponse(responseCode = "404", description = "Property not found")]
   )
   @GetMapping(produces = [APPLICATION_JSON_VALUE])
-  fun getProperty(@PathVariable(value = PARAM_NAME) propertyName: String): PropertyApiBean =
-    propertyServices.getProperty(propertyName)
+  fun getProperty(@PathVariable(value = PARAM_NAME) propertyName: String): PropertyApiBean = propertyServices.getProperty(propertyName)
 
   @Operation(summary = "Create or update a property", tags = ["Property"])
   @ApiResponses(
     value = [ApiResponse(
-      responseCode = "201",
-      description = "Property has been created"
+      responseCode = "201", description = "Property has been created"
     ), ApiResponse(responseCode = "202", description = "Property has been updated"), ApiResponse(
       responseCode = "400",
       description = "Property name is blank (or) property name did not match with the requested property name to be created or updated"
     )]
   )
   @PutMapping(produces = [APPLICATION_JSON_VALUE])
-  fun createOrUpdateProperty(
-    @PathVariable(value = PARAM_NAME) propertyName: String,
-    @RequestBody propertyApiBean: PropertyApiBean
-  ): ResponseEntity<*> = FeatureWebUtils.getBooleanResponseEntityByHttpStatus(
-    propertyServices.createOrUpdateProperty(propertyName, propertyApiBean)
-  )
+  fun createOrUpdateProperty(@PathVariable(value = PARAM_NAME) propertyName: String,
+                             @RequestBody propertyApiBean: PropertyApiBean): ResponseEntity<*> =
+    FeatureWebUtils.getBooleanResponseEntityByHttpStatus(
+      propertyServices.createOrUpdateProperty(propertyName, propertyApiBean)
+    )
 
   @Operation(summary = "Delete a property", tags = ["Property"])
   @ApiResponses(
     value = [ApiResponse(
-      responseCode = "204",
-      description = "No content, property is deleted"
+      responseCode = "204", description = "No content, property is deleted"
     ), ApiResponse(responseCode = "404", description = "Property not found")]
   )
   @DeleteMapping(produces = [APPLICATION_JSON_VALUE])
@@ -98,21 +94,16 @@ class PropertyResource(@Autowired val propertyServices: PropertyServices) {
   @Operation(summary = "Update value of a property", tags = ["Property"])
   @ApiResponses(
     value = [ApiResponse(
-      responseCode = "202",
-      description = "Property has been updated"
+      responseCode = "202", description = "Property has been updated"
     ), ApiResponse(responseCode = "404", description = "Property not found"), ApiResponse(
-      responseCode = "400",
-      description = "Invalid new value"
+      responseCode = "400", description = "Invalid new value"
     )]
   )
   @PostMapping(
-    value = [("/$OPERATION_UPDATE/$PATH_PARAM_VALUE")],
-    produces = [APPLICATION_JSON_VALUE]
+    value = [("/$OPERATION_UPDATE/$PATH_PARAM_VALUE")], produces = [APPLICATION_JSON_VALUE]
   )
-  fun updatePropertyName(
-    @PathVariable(value = PARAM_NAME) propertyName: String,
-    @PathVariable(value = PARAM_VALUE) newPropertyName: String
-  ): ResponseEntity<Void> {
+  fun updatePropertyName(@PathVariable(value = PARAM_NAME) propertyName: String,
+                         @PathVariable(value = PARAM_VALUE) newPropertyName: String): ResponseEntity<Void> {
     propertyServices.updatePropertyName(propertyName, newPropertyName)
     return ResponseEntity(HttpStatus.ACCEPTED)
   }

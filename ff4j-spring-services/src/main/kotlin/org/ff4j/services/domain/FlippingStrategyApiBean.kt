@@ -29,17 +29,17 @@ import java.io.Serializable
  */
 class FlippingStrategyApiBean : Serializable {
 
-    companion object {
-        private const val serialVersionUID = 2257391205134600598L
-    }
+  companion object {
+    private const val serialVersionUID = 2257391205134600598L
+  }
 
-    var type: String? = null
-    var initParams: MutableMap<String, String> = HashMap()
+  var type: String? = null
+  var initParams: MutableMap<String, String> = HashMap()
 
-    constructor() : super()
+  constructor() : super()
 
-    constructor(flippingStrategy: FlippingStrategy) {
-        type = flippingStrategy.javaClass.canonicalName
-        initParams = flippingStrategy.initParams
-    }
+  constructor(flippingStrategy: FlippingStrategy) {
+    type = flippingStrategy.javaClass.canonicalName
+    initParams = flippingStrategy.initParams
+  }
 }

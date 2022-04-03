@@ -35,19 +35,19 @@ import java.util.stream.Collectors
 @Service
 class GroupServices(@Autowired val fF4j: FF4j, @Autowired val ff4jValidator: FeatureValidator) {
 
-    fun getFeaturesByGroup(groupName: String): Collection<FeatureApiBean> {
-        ff4jValidator.assertGroupExist(groupName)
-        return fF4j.featureStore.readGroup(groupName).values.stream().map { feature: Feature -> FeatureApiBean(feature) }
-                .collect(Collectors.toList())
-    }
+  fun getFeaturesByGroup(groupName: String): Collection<FeatureApiBean> {
+    ff4jValidator.assertGroupExist(groupName)
+    return fF4j.featureStore.readGroup(groupName).values.stream().map { feature: Feature -> FeatureApiBean(feature) }
+      .collect(Collectors.toList())
+  }
 
-    fun enableGroup(groupName: String) {
-        ff4jValidator.assertGroupExist(groupName)
-        fF4j.featureStore.enableGroup(groupName)
-    }
+  fun enableGroup(groupName: String) {
+    ff4jValidator.assertGroupExist(groupName)
+    fF4j.featureStore.enableGroup(groupName)
+  }
 
-    fun disableGroup(groupName: String) {
-        ff4jValidator.assertGroupExist(groupName)
-        fF4j.featureStore.disableGroup(groupName)
-    }
+  fun disableGroup(groupName: String) {
+    ff4jValidator.assertGroupExist(groupName)
+    fF4j.featureStore.disableGroup(groupName)
+  }
 }

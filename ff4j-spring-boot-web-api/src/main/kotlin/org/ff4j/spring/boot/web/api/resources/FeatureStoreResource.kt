@@ -57,9 +57,7 @@ class FeatureStoreResource(@Autowired val featureStoreService: FeatureStoreServi
   @Operation(summary = "Displays information regarding the FeaturesStore", tags = ["FeatureStore"])
   @ApiResponses(
     value = [ApiResponse(
-      responseCode = "200",
-      description = "OK",
-      content = arrayOf(Content(schema = Schema(implementation = FeatureApiBean::class)))
+      responseCode = "200", description = "OK", content = arrayOf(Content(schema = Schema(implementation = FeatureApiBean::class)))
     )]
   )
   @GetMapping(produces = [APPLICATION_JSON_VALUE])
@@ -102,8 +100,7 @@ class FeatureStoreResource(@Autowired val featureStoreService: FeatureStoreServi
   @DeleteMapping(value = [("/$STORE_CLEAR")])
   @ApiResponses(
     value = [ApiResponse(
-      responseCode = "204",
-      description = "all feature have been deleted"
+      responseCode = "204", description = "all feature have been deleted"
     )]
   )
   fun deleteAllFeatures(): ResponseEntity<Void> {
@@ -115,8 +112,7 @@ class FeatureStoreResource(@Autowired val featureStoreService: FeatureStoreServi
   @DeleteMapping(value = [(RESOURCE_CLEAR_CACHE)])
   @ApiResponses(
     value = [ApiResponse(
-      responseCode = "204",
-      description = "Gcache is cleared"
+      responseCode = "204", description = "Gcache is cleared"
     ), ApiResponse(responseCode = "404", description = "feature store is not cached")]
   )
   fun clearCachedFeatureStore(): ResponseEntity<Void> {

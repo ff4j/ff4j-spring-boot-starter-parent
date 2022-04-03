@@ -30,30 +30,30 @@ import java.io.Serializable
  */
 class EventRepositoryApiBean : Serializable {
 
-    companion object {
-        private const val serialVersionUID = -3365322115944400241L
-    }
+  companion object {
+    private const val serialVersionUID = -3365322115944400241L
+  }
 
-    var type: String? = null
-    lateinit var eventsPie: PieChartApiBean
-    lateinit var barChart: BarChartApiBean
-    var hitCount: Int = 0
+  var type: String? = null
+  lateinit var eventsPie: PieChartApiBean
+  lateinit var barChart: BarChartApiBean
+  var hitCount: Int = 0
 
-    // for DomainTest
-    constructor()
+  // for DomainTest
+  constructor()
 
-    constructor(eventRepository: EventRepository) {
-        initialize(eventRepository, EventQueryDefinition())
-    }
+  constructor(eventRepository: EventRepository) {
+    initialize(eventRepository, EventQueryDefinition())
+  }
 
-    constructor(eventRepository: EventRepository, start: Long, end: Long) {
-        initialize(eventRepository, EventQueryDefinition(start, end))
-    }
+  constructor(eventRepository: EventRepository, start: Long, end: Long) {
+    initialize(eventRepository, EventQueryDefinition(start, end))
+  }
 
-    private fun initialize(eventRepository: EventRepository, query: EventQueryDefinition) {
-        this.type = eventRepository.javaClass.canonicalName
-        this.eventsPie = PieChartApiBean(eventRepository.getFeatureUsagePieChart(query))
-        this.barChart = BarChartApiBean(eventRepository.getFeatureUsageBarChart(query))
-        eventsPie.sectors.forEach { hitCount.plus(it.value) }
-    }
+  private fun initialize(eventRepository: EventRepository, query: EventQueryDefinition) {
+    this.type = eventRepository.javaClass.canonicalName
+    this.eventsPie = PieChartApiBean(eventRepository.getFeatureUsagePieChart(query))
+    this.barChart = BarChartApiBean(eventRepository.getFeatureUsageBarChart(query))
+    eventsPie.sectors.forEach { hitCount.plus(it.value) }
+  }
 }

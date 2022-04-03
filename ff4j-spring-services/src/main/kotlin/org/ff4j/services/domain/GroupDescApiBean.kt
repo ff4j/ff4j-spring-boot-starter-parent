@@ -29,17 +29,17 @@ import java.io.Serializable
 class GroupDescApiBean : Serializable {
 
 
-    companion object {
-        private const val serialVersionUID = -7339190302097692175L
-    }
+  companion object {
+    private const val serialVersionUID = -7339190302097692175L
+  }
 
-    var groupName: String? = null
-    var features: MutableList<String> = ArrayList()
+  var groupName: String? = null
+  var features: MutableList<String> = ArrayList()
 
-    constructor() : super()
+  constructor() : super()
 
-    constructor(groupName: String, names: MutableList<String>) {
-        this.groupName = groupName
-        this.features = names
-    }
+  constructor(groupName: String, names: MutableList<String>) {
+    this.groupName = groupName
+    this.features = names
+  }
 }

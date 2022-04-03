@@ -30,29 +30,29 @@ import java.io.Serializable
  */
 class FeatureStoreApiBean : Serializable {
 
-    companion object {
-        private const val serialVersionUID = 1868920596870427435L
+  companion object {
+    private const val serialVersionUID = 1868920596870427435L
+  }
+
+  var type: String? = null
+  var numberOfFeatures: Int = 0
+  var numberOfGroups: Int = 0
+  var features: MutableList<String> = ArrayList()
+  var groups: MutableList<String> = ArrayList()
+  var cache: CacheApiBean? = null
+
+  constructor() : super()
+
+  constructor(featureStore: FeatureStore) {
+    type = featureStore.javaClass.canonicalName
+    if (isInstanceOfCache(featureStore)) {
+      cache = CacheApiBean(featureStore)
     }
+    features = ArrayList(featureStore.readAll().keys)
+    groups = ArrayList(featureStore.readAllGroups())
+    numberOfFeatures = features.size
+    numberOfGroups = groups.size
+  }
 
-    var type: String? = null
-    var numberOfFeatures: Int = 0
-    var numberOfGroups: Int = 0
-    var features: MutableList<String> = ArrayList()
-    var groups: MutableList<String> = ArrayList()
-    var cache: CacheApiBean? = null
-
-    constructor() : super()
-
-    constructor(featureStore: FeatureStore) {
-        type = featureStore.javaClass.canonicalName
-        if (isInstanceOfCache(featureStore)) {
-            cache = CacheApiBean(featureStore)
-        }
-        features = ArrayList(featureStore.readAll().keys)
-        groups = ArrayList(featureStore.readAllGroups())
-        numberOfFeatures = features.size
-        numberOfGroups = groups.size
-    }
-
-    private fun isInstanceOfCache(featureStore: FeatureStore) = featureStore is FF4jCacheProxy
+  private fun isInstanceOfCache(featureStore: FeatureStore) = featureStore is FF4jCacheProxy
 }

@@ -64,6 +64,7 @@ class PropertyStoreResource(@Autowired val propertyStoreServices: PropertyStoreS
   )
   @GetMapping(produces = [APPLICATION_JSON_VALUE])
   fun getPropertyStore(): PropertyStoreApiBean = propertyStoreServices.getPropertyStore()
+
   @Operation(summary = "Display all the Properties", tags = ["PropertyStore"])
   @ApiResponses(
     value = [ApiResponse(
@@ -74,6 +75,7 @@ class PropertyStoreResource(@Autowired val propertyStoreServices: PropertyStoreS
   )
   @GetMapping(value = [RESOURCE_PROPERTIES], produces = [APPLICATION_JSON_VALUE])
   fun getAllProperties(): List<PropertyApiBean> = propertyStoreServices.getAllProperties()
+
   @Operation(summary = "Display information related to Cache", tags = ["PropertyStore"])
   @ApiResponses(
     value = [ApiResponse(
@@ -84,11 +86,11 @@ class PropertyStoreResource(@Autowired val propertyStoreServices: PropertyStoreS
   )
   @GetMapping(value = [("/$RESOURCE_CACHE")], produces = [APPLICATION_JSON_VALUE])
   fun getPropertiesFromCache(): CacheApiBean = propertyStoreServices.getPropertiesFromCache()
+
   @Operation(summary = "Delete all Properties in store", tags = ["PropertyStore"])
   @ApiResponses(
     value = [ApiResponse(
-      responseCode = "204",
-      description = "all properties have been deleted"
+      responseCode = "204", description = "all properties have been deleted"
     )]
   )
   @DeleteMapping(value = [("/$STORE_CLEAR")])
@@ -100,8 +102,7 @@ class PropertyStoreResource(@Autowired val propertyStoreServices: PropertyStoreS
   @Operation(summary = "Clear cache", tags = ["PropertyStore"])
   @ApiResponses(
     value = [ApiResponse(
-      responseCode = "204",
-      description = "cache is cleared"
+      responseCode = "204", description = "cache is cleared"
     ), ApiResponse(responseCode = "404", description = "property store is not cached")]
   )
   @DeleteMapping(value = [RESOURCE_CLEAR_CACHE])

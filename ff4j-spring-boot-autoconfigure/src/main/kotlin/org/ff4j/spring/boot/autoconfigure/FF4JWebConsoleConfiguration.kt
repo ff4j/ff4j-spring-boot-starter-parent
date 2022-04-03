@@ -39,9 +39,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
 @ConditionalOnClass(FF4jDispatcherServlet::class)
 @AutoConfigureAfter(FF4JConfiguration::class)
 @ConditionalOnProperty(
-  value = ["ff4j.web-console.enabled"],
-  havingValue = "true",
-  matchIfMissing = false
+  value = ["ff4j.web-console.enabled"], havingValue = "true", matchIfMissing = false
 )
 class FF4JWebConsoleConfiguration : SpringBootServletInitializer(), WebMvcConfigurer {
 

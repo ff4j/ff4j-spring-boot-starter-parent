@@ -26,7 +26,7 @@ package org.ff4j.services.exceptions
  * @author [Paul Williams](mailto:paul58914080@gmail.com)
  */
 class PropertyNameBlankException : RuntimeException() {
-    companion object {
-        private const val serialVersionUID = 4686094650191120593L
-    }
+  companion object {
+    private const val serialVersionUID = 4686094650191120593L
+  }
 }

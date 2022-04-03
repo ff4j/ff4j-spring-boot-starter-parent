@@ -32,11 +32,11 @@ import org.springframework.stereotype.Service
 @Service
 class MonitoringServices(@Autowired val fF4j: FF4j) {
 
-    fun getMonitoringStatus(): EventRepositoryApiBean {
-        return EventRepositoryApiBean(fF4j.eventRepository)
-    }
+  fun getMonitoringStatus(): EventRepositoryApiBean {
+    return EventRepositoryApiBean(fF4j.eventRepository)
+  }
 
-    fun getMonitoringStatus(start: Long, end: Long): EventRepositoryApiBean {
-        return EventRepositoryApiBean(fF4j.eventRepository, start, end)
-    }
+  fun getMonitoringStatus(start: Long, end: Long): EventRepositoryApiBean {
+    return EventRepositoryApiBean(fF4j.eventRepository, start, end)
+  }
 }

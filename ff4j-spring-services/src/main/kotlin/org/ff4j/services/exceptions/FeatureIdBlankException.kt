@@ -26,7 +26,7 @@ package org.ff4j.services.exceptions
  * @author [Paul Williams](mailto:paul58914080@gmail.com)
  */
 class FeatureIdBlankException : RuntimeException() {
-    companion object {
-        private const val serialVersionUID = 3036248900520208331L
-    }
+  companion object {
+    private const val serialVersionUID = 3036248900520208331L
+  }
 }

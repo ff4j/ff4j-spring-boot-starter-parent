@@ -30,17 +30,17 @@ import java.io.Serializable
  */
 class BarChartApiBean : Serializable {
 
-    companion object {
-        private const val serialVersionUID = -4014082937210867980L
-    }
+  companion object {
+    private const val serialVersionUID = -4014082937210867980L
+  }
 
-    var title: String = EMPTY
-    var labels: MutableList<String> = ArrayList()
-    var series: MutableList<BarSeriesApiBean> = ArrayList()
+  var title: String = EMPTY
+  var labels: MutableList<String> = ArrayList()
+  var series: MutableList<BarSeriesApiBean> = ArrayList()
 
-    constructor() : super()
+  constructor() : super()
 
-    constructor(barChart: BarChart) {
-        this.title = barChart.title
-    }
+  constructor(barChart: BarChart) {
+    this.title = barChart.title
+  }
 }

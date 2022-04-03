@@ -31,19 +31,19 @@ import java.io.Serializable
  */
 class BarSeriesApiBean : Serializable {
 
-    companion object {
-        private const val serialVersionUID = 8703972617439641703L
-    }
+  companion object {
+    private const val serialVersionUID = 8703972617439641703L
+  }
 
-    var label: String = N_A
-    var color: String = HTML_WHITE
-    var value: Double = 0.0
+  var label: String = N_A
+  var color: String = HTML_WHITE
+  var value: Double = 0.0
 
-    constructor() : super()
+  constructor() : super()
 
-    constructor(barSeries: Serie<Double>) {
-        this.label = barSeries.label
-        this.color = barSeries.color
-        this.value = barSeries.value
-    }
+  constructor(barSeries: Serie<Double>) {
+    this.label = barSeries.label
+    this.color = barSeries.color
+    this.value = barSeries.value
+  }
 }
