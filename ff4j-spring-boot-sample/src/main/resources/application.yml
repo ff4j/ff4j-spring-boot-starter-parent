@@ -1,6 +1,8 @@
 server:
   port: ${PORT:5000}
 ff4j:
+  api:
+    context-path: /api/v2/ff4j
   audit:
     enabled: true
   security:

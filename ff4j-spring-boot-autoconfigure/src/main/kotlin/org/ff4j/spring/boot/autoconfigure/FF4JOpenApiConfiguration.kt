@@ -55,11 +55,17 @@ open class FF4JOpenApiConfiguration {
   @Value("\${ff4j.springdoc.enabled:false}")
   private val springDocEnabled: Boolean = false
 
+  @Value("\${ff4j.springdoc.group:ff4j}")
+  private val springDocGroup: String = "ff4j"
+
+  @Value("\${ff4j.api.context-path:/api/ff4j}")
+  private val apiContextPath: String = "/api/ff4j"
+
   @Bean
   fun groupApiEnabled(): GroupedOpenApi {
     return when (springDocEnabled) {
-      true -> GroupedOpenApi.builder().group("ff4j").pathsToMatch("/api/ff4j/**").build()
-      else -> GroupedOpenApi.builder().group("ff4j").pathsToExclude("/api/ff4j/**").build()
+      true -> GroupedOpenApi.builder().group(springDocGroup).pathsToMatch("$apiContextPath/**").build()
+      else -> GroupedOpenApi.builder().group(springDocGroup).pathsToExclude("$apiContextPath/**").build()
     }
   }
 }
