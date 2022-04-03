@@ -62,22 +62,18 @@ class GroupResource(@Autowired val groupServices: GroupServices) {
   @Operation(summary = "Enable a group", tags = ["Groups"])
   @ApiResponses(
     value = [ApiResponse(
-      responseCode = "200",
-      description = "Group has been enabled"
+      responseCode = "200", description = "Group has been enabled"
     ), ApiResponse(responseCode = "404", description = "Group not found")]
   )
   @PostMapping(value = [("/$OPERATION_ENABLE")], produces = [APPLICATION_JSON_VALUE])
-  fun enableGroup(@PathVariable(value = PARAM_GROUP) groupName: String) =
-    groupServices.enableGroup(groupName)
+  fun enableGroup(@PathVariable(value = PARAM_GROUP) groupName: String) = groupServices.enableGroup(groupName)
 
   @Operation(summary = "Disable a group", tags = ["Groups"])
   @ApiResponses(
     value = [ApiResponse(
-      responseCode = "200",
-      description = "Group has been disabled"
+      responseCode = "200", description = "Group has been disabled"
     ), ApiResponse(responseCode = "404", description = "Group not found")]
   )
   @PostMapping(value = [("/$OPERATION_DISABLE")], produces = [APPLICATION_JSON_VALUE])
-  fun disableGroup(@PathVariable(value = PARAM_GROUP) groupName: String) =
-    groupServices.disableGroup(groupName)
+  fun disableGroup(@PathVariable(value = PARAM_GROUP) groupName: String) = groupServices.disableGroup(groupName)
 }

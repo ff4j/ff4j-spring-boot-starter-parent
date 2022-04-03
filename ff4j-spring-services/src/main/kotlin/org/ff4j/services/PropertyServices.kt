@@ -35,31 +35,31 @@ import org.springframework.stereotype.Service
  */
 @Service
 class PropertyServices(@Autowired val fF4j: FF4j, @Autowired val propertyValidator: PropertyValidator) {
-    fun getProperty(propertyUID: String): PropertyApiBean {
-        propertyValidator.assertPropertyExist(propertyUID)
-        return PropertyApiBean(fF4j.propertiesStore.readProperty(propertyUID))
-    }
+  fun getProperty(propertyUID: String): PropertyApiBean {
+    propertyValidator.assertPropertyExist(propertyUID)
+    return PropertyApiBean(fF4j.propertiesStore.readProperty(propertyUID))
+  }
 
-    fun createOrUpdateProperty(propertyUID: String, propertyApiBean: PropertyApiBean): FeatureActions {
-        propertyValidator.assertPropertyNameNotBlank(propertyApiBean.name)
-        propertyValidator.assertPropertyNameMatch(propertyUID, propertyApiBean.name)
-        val property = propertyApiBean.asProperty()
-        return if (fF4j.propertiesStore.existProperty(propertyUID)) {
-            fF4j.propertiesStore.updateProperty(property)
-            UPDATED
-        } else {
-            fF4j.propertiesStore.createProperty(property)
-            CREATED
-        }
+  fun createOrUpdateProperty(propertyUID: String, propertyApiBean: PropertyApiBean): FeatureActions {
+    propertyValidator.assertPropertyNameNotBlank(propertyApiBean.name)
+    propertyValidator.assertPropertyNameMatch(propertyUID, propertyApiBean.name)
+    val property = propertyApiBean.asProperty()
+    return if (fF4j.propertiesStore.existProperty(propertyUID)) {
+      fF4j.propertiesStore.updateProperty(property)
+      UPDATED
+    } else {
+      fF4j.propertiesStore.createProperty(property)
+      CREATED
     }
+  }
 
-    fun deleteProperty(propertyUID: String) {
-        propertyValidator.assertPropertyExist(propertyUID)
-        fF4j.propertiesStore.deleteProperty(propertyUID)
-    }
+  fun deleteProperty(propertyUID: String) {
+    propertyValidator.assertPropertyExist(propertyUID)
+    fF4j.propertiesStore.deleteProperty(propertyUID)
+  }
 
-    fun updatePropertyName(propertyUID: String, newPropertyName: String) {
-        propertyValidator.assertPropertyExist(propertyUID)
-        fF4j.propertiesStore.updateProperty(propertyUID, newPropertyName)
-    }
+  fun updatePropertyName(propertyUID: String, newPropertyName: String) {
+    propertyValidator.assertPropertyExist(propertyUID)
+    fF4j.propertiesStore.updateProperty(propertyUID, newPropertyName)
+  }
 }

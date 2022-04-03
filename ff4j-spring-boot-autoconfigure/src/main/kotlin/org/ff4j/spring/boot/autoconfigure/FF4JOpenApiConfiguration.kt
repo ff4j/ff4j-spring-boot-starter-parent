@@ -41,13 +41,10 @@ import org.springframework.context.annotation.Configuration
     version = "1.8",
     description = "Administer and operate all tasks on your features through this api.",
     license = License(
-      name = "Apache 2.0",
-      url = "http://www.apache.org/licenses/LICENSE-2.0.html"
+      name = "Apache 2.0", url = "http://www.apache.org/licenses/LICENSE-2.0.html"
     ),
     contact = Contact(
-      name = "Paul Williams",
-      email = "paul58914080@gmail.com",
-      url = "paul-williams.me"
+      name = "Paul Williams", email = "paul58914080@gmail.com", url = "paul-williams.me"
     ),
     termsOfService = "http://www.ff4j.org/terms-of-service"
   )

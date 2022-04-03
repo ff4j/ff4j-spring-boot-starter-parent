@@ -22,7 +22,6 @@ package org.ff4j.services.domain
 import org.ff4j.cache.FF4jCacheProxy
 import org.ff4j.property.store.PropertyStore
 import java.io.Serializable
-import java.util.*
 
 /**
  * Created by Paul
@@ -31,25 +30,25 @@ import java.util.*
  */
 class PropertyStoreApiBean : Serializable {
 
-    companion object {
-        private const val serialVersionUID = 5459281574635411541L
+  companion object {
+    private const val serialVersionUID = 5459281574635411541L
+  }
+
+  var type: String? = null
+  var numberOfProperties: Int = 0
+  var properties: Set<String> = HashSet()
+  var cache: CacheApiBean? = null
+
+  constructor() : super()
+
+  constructor(propertyStore: PropertyStore) {
+    this.type = propertyStore.javaClass.canonicalName
+    if (isInstanceOfCache(propertyStore)) {
+      this.cache = CacheApiBean(propertyStore)
     }
+    this.properties = propertyStore.listPropertyNames()
+    this.numberOfProperties = properties.size
+  }
 
-    var type: String? = null
-    var numberOfProperties: Int = 0
-    var properties: Set<String> = HashSet()
-    var cache: CacheApiBean? = null
-
-    constructor() : super()
-
-    constructor(propertyStore: PropertyStore) {
-        this.type = propertyStore.javaClass.canonicalName
-        if (isInstanceOfCache(propertyStore)) {
-            this.cache = CacheApiBean(propertyStore)
-        }
-        this.properties = propertyStore.listPropertyNames()
-        this.numberOfProperties = properties.size
-    }
-
-    private fun isInstanceOfCache(propertyStore: PropertyStore) = propertyStore is FF4jCacheProxy
+  private fun isInstanceOfCache(propertyStore: PropertyStore) = propertyStore is FF4jCacheProxy
 }

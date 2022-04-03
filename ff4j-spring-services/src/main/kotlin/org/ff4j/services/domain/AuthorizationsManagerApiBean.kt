@@ -30,17 +30,17 @@ import java.io.Serializable
  */
 class AuthorizationsManagerApiBean : Serializable {
 
-    companion object {
-        private const val serialVersionUID = 6547399670614500217L
-    }
+  companion object {
+    private const val serialVersionUID = 6547399670614500217L
+  }
 
-    var type: String = EMPTY
-    var permissions: MutableSet<String> = HashSet()
+  var type: String = EMPTY
+  var permissions: MutableSet<String> = HashSet()
 
-    constructor() : super()
+  constructor() : super()
 
-    constructor(authorizationsManager: AuthorizationsManager) {
-        this.type = authorizationsManager.javaClass.canonicalName
-        this.permissions.addAll(authorizationsManager.listAllPermissions())
-    }
+  constructor(authorizationsManager: AuthorizationsManager) {
+    this.type = authorizationsManager.javaClass.canonicalName
+    this.permissions.addAll(authorizationsManager.listAllPermissions())
+  }
 }

@@ -21,8 +21,6 @@ package org.ff4j.services
 
 import org.apache.commons.lang3.StringUtils
 import org.ff4j.FF4j
-import org.ff4j.cache.FF4jCacheProxy
-import org.ff4j.core.FeatureStore
 import org.ff4j.services.domain.CacheApiBean
 import org.ff4j.services.domain.FeatureApiBean
 import org.ff4j.services.domain.FeatureStoreApiBean
@@ -40,55 +38,54 @@ import java.util.stream.Collectors
  */
 @Service
 class FeatureStoreServices(@Autowired val fF4j: FF4j) {
-    fun getFeatureStore(): FeatureStoreApiBean {
-        return FeatureStoreApiBean(this.fF4j.featureStore)
-    }
+  fun getFeatureStore(): FeatureStoreApiBean {
+    return FeatureStoreApiBean(this.fF4j.featureStore)
+  }
 
-    fun getAllFeatures(): Collection<FeatureApiBean> {
-        val allFeatures = fF4j.featureStore.readAll()
-        return if (CollectionUtils.isEmpty(allFeatures)) {
-            ArrayList(0)
-        } else {
-            val features = ArrayList<FeatureApiBean>(allFeatures.size)
-            features.addAll(allFeatures.values.stream().map { FeatureApiBean(it) }.collect(Collectors.toList()))
-            features
+  fun getAllFeatures(): Collection<FeatureApiBean> {
+    val allFeatures = fF4j.featureStore.readAll()
+    return if (CollectionUtils.isEmpty(allFeatures)) {
+      ArrayList(0)
+    } else {
+      val features = ArrayList<FeatureApiBean>(allFeatures.size)
+      features.addAll(allFeatures.values.stream().map { FeatureApiBean(it) }.collect(Collectors.toList()))
+      features
+    }
+  }
+
+  fun getAllGroups(): MutableCollection<GroupDescApiBean> {
+    val groups = HashMap<String, GroupDescApiBean>()
+    val allFeatures = fF4j.featureStore.readAll()
+    allFeatures?.let {
+      allFeatures.values.forEach {
+        initGroup(groups, it.uid, it.group)
+      }
+    }
+    return groups.values
+  }
+
+  private fun initGroup(groups: HashMap<String, GroupDescApiBean>, uid: String, groupName: String?) {
+    groupName?.let {
+      if (StringUtils.isNotBlank(groupName)) {
+        if (!groups.containsKey(groupName)) {
+          groups[groupName] = GroupDescApiBean(groupName, ArrayList())
         }
+        groups[groupName]?.features?.add(uid)
+      }
     }
+  }
 
-    fun getAllGroups(): MutableCollection<GroupDescApiBean> {
-        val groups = HashMap<String, GroupDescApiBean>()
-        val allFeatures = fF4j.featureStore.readAll()
-        allFeatures?.let {
-            allFeatures.values.forEach {
-                initGroup(groups, it.uid, it.group)
-            }
-        }
-        return groups.values
-    }
+  fun deleteAllFeatures() {
+    fF4j.featureStore.clear()
+  }
 
-    private fun initGroup(groups: HashMap<String, GroupDescApiBean>, uid: String, groupName: String?) {
-        groupName?.let {
-            if (StringUtils.isNotBlank(groupName)) {
-                if (!groups.containsKey(groupName)) {
-                    groups[groupName] = GroupDescApiBean(groupName, ArrayList())
-                }
-                groups[groupName]?.features?.add(uid)
-            }
-        }
-    }
+  fun getFeaturesFromCache(): CacheApiBean {
+    fF4j.cacheProxy ?: throw FeatureStoreNotCached()
+    return CacheApiBean(fF4j.featureStore)
+  }
 
-    fun deleteAllFeatures() {
-        fF4j.featureStore.clear()
-    }
-
-    fun getFeaturesFromCache(): CacheApiBean {
-        fF4j.cacheProxy ?: throw FeatureStoreNotCached()
-        return CacheApiBean(fF4j.featureStore)
-    }
-
-    fun clearCachedFeatureStore() {
-        // Fixing #218 : If audit is enabled, cannot clear cache.
-        val cacheProxy = fF4j.cacheProxy ?: throw FeatureStoreNotCached()
-        cacheProxy.cacheManager.clearFeatures()
-    }
+  fun clearCachedFeatureStore() { // Fixing #218 : If audit is enabled, cannot clear cache.
+    val cacheProxy = fF4j.cacheProxy ?: throw FeatureStoreNotCached()
+    cacheProxy.cacheManager.clearFeatures()
+  }
 }

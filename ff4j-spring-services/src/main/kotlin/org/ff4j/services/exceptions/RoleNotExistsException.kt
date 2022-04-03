@@ -26,7 +26,7 @@ package org.ff4j.services.exceptions
  * @author [Paul Williams](mailto:paul58914080@gmail.com)
  */
 class RoleNotExistsException : RuntimeException() {
-    companion object {
-        private const val serialVersionUID = 462059777328874022L
-    }
+  companion object {
+    private const val serialVersionUID = 462059777328874022L
+  }
 }

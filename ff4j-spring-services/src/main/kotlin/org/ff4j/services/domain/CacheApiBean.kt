@@ -31,30 +31,30 @@ import java.io.Serializable
  */
 class CacheApiBean : Serializable {
 
-    companion object {
-        private const val serialVersionUID = -2564221971597313125L
+  companion object {
+    private const val serialVersionUID = -2564221971597313125L
+  }
+
+  var cacheProvider: String? = null
+  var cacheStore: String? = null
+  var featureNames: MutableSet<String> = HashSet()
+  var propertyNames: MutableSet<String> = HashSet()
+
+  constructor() : super()
+
+  constructor(featureStore: FeatureStore) {
+    if (featureStore is FF4jCacheProxy) {
+      this.cacheStore = featureStore.cachedTargetStore
+      this.cacheProvider = featureStore.cacheProvider
+      this.featureNames = featureStore.cacheManager.listCachedFeatureNames()
     }
+  }
 
-    var cacheProvider: String? = null
-    var cacheStore: String? = null
-    var featureNames: MutableSet<String> = HashSet()
-    var propertyNames: MutableSet<String> = HashSet()
-
-    constructor() : super()
-
-    constructor(featureStore: FeatureStore) {
-        if (featureStore is FF4jCacheProxy) {
-            this.cacheStore = featureStore.cachedTargetStore
-            this.cacheProvider = featureStore.cacheProvider
-            this.featureNames = featureStore.cacheManager.listCachedFeatureNames()
-        }
+  constructor(propertyStore: PropertyStore) {
+    if (propertyStore is FF4jCacheProxy) {
+      this.cacheStore = propertyStore.cachedTargetStore
+      this.cacheProvider = propertyStore.cacheProvider
+      this.propertyNames = propertyStore.cacheManager.listCachedPropertyNames()
     }
-
-    constructor(propertyStore: PropertyStore) {
-        if (propertyStore is FF4jCacheProxy) {
-            this.cacheStore = propertyStore.cachedTargetStore
-            this.cacheProvider = propertyStore.cacheProvider
-            this.propertyNames = propertyStore.cacheManager.listCachedPropertyNames()
-        }
-    }
+  }
 }

@@ -102,18 +102,14 @@ class FF4jResource(@Autowired val ff4JServices: FF4jServices) {
       description = "If feature is flipped",
       content = arrayOf(Content(schema = Schema(implementation = Boolean::class)))
     ), ApiResponse(responseCode = "400", description = "Invalid parameter"), ApiResponse(
-      responseCode = "404",
-      description = "Feature not found"
+      responseCode = "404", description = "Feature not found"
     )]
   )
   @PostMapping(
-    value = [("/$OPERATION_CHECK/$PATH_PARAM_UID")],
-    consumes = [APPLICATION_FORM_URLENCODED_VALUE]
+    value = [("/$OPERATION_CHECK/$PATH_PARAM_UID")], consumes = [APPLICATION_FORM_URLENCODED_VALUE]
   )
-  fun check(
-    @PathVariable(value = PARAM_UID) featureUID: String,
-    @RequestParam formParams: MultiValueMap<String, String>
-  ): ResponseEntity<Boolean> {
+  fun check(@PathVariable(value = PARAM_UID) featureUID: String,
+            @RequestParam formParams: MultiValueMap<String, String>): ResponseEntity<Boolean> {
     val map = formParams.toSingleValueMap()
     val status = ff4JServices.check(featureUID, map)
     return ResponseEntity(status, OK)
@@ -128,10 +124,8 @@ class FF4jResource(@Autowired val ff4JServices: FF4jServices) {
     ), ApiResponse(responseCode = "400", description = "Invalid parameter")]
   )
   @PostMapping(value = [("/$OPERATION_CHECK")])
-  fun check(
-    @RequestBody featureUIDs: Set<String>,
-    @RequestParam formParams: MultiValueMap<String, String>
-  ): ResponseEntity<Map<String, Boolean>> {
+  fun check(@RequestBody featureUIDs: Set<String>,
+            @RequestParam formParams: MultiValueMap<String, String>): ResponseEntity<Map<String, Boolean>> {
     val featureUIDToEnableMap = HashMap<String, Boolean>()
     for (featureUID in featureUIDs) {
       try {

@@ -20,7 +20,6 @@
 package org.ff4j.services
 
 import org.ff4j.FF4j
-import org.ff4j.cache.FF4jCacheProxy
 import org.ff4j.services.domain.CacheApiBean
 import org.ff4j.services.domain.PropertyApiBean
 import org.ff4j.services.domain.PropertyStoreApiBean
