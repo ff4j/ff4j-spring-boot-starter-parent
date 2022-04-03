@@ -29,9 +29,10 @@ import io.swagger.v3.oas.annotations.tags.Tag
 import org.ff4j.services.PropertyServices
 import org.ff4j.services.constants.FeatureConstants.PARAM_NAME
 import org.ff4j.services.constants.FeatureConstants.PARAM_VALUE
-import org.ff4j.services.constants.FeatureConstants.PATH_PARAM_NAME
 import org.ff4j.services.constants.FeatureConstants.PATH_PARAM_VALUE
-import org.ff4j.services.constants.FeatureConstants.RESOURCE_PROPERTIES_STORE_PROPERTIES
+import org.ff4j.services.constants.FeatureConstants.RESOURCE_FF4J
+import org.ff4j.services.constants.FeatureConstants.RESOURCE_PROPERTIES
+import org.ff4j.services.constants.FeatureConstants.RESOURCE_PROPERTY_STORE
 import org.ff4j.services.domain.PropertyApiBean
 import org.ff4j.spring.boot.web.api.utils.FeatureWebUtils
 import org.ff4j.web.FF4jWebConstants.OPERATION_UPDATE
@@ -49,7 +50,7 @@ import org.springframework.web.bind.annotation.*
  */
 @Tag(name = "Property", description = "The API for property related operations")
 @RestController
-@RequestMapping(value = [("$RESOURCE_PROPERTIES_STORE_PROPERTIES/$PATH_PARAM_NAME")])
+@RequestMapping(value = ["\${ff4j.api.context-path:$RESOURCE_FF4J}/$RESOURCE_PROPERTY_STORE/$RESOURCE_PROPERTIES"])
 class PropertyResource(@Autowired val propertyServices: PropertyServices) {
 
   @Operation(summary = "Read information about a property", tags = ["Property"])

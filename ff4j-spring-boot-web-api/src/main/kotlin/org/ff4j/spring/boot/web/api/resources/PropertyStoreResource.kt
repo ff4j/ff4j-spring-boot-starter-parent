@@ -28,8 +28,9 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses
 import io.swagger.v3.oas.annotations.tags.Tag
 import org.ff4j.services.PropertyStoreServices
 import org.ff4j.services.constants.FeatureConstants.RESOURCE_CLEAR_CACHE
-import org.ff4j.services.constants.FeatureConstants.RESOURCE_FF4J_PROPERTY_STORE
+import org.ff4j.services.constants.FeatureConstants.RESOURCE_FF4J
 import org.ff4j.services.constants.FeatureConstants.RESOURCE_PROPERTIES
+import org.ff4j.services.constants.FeatureConstants.RESOURCE_PROPERTY_STORE
 import org.ff4j.services.domain.CacheApiBean
 import org.ff4j.services.domain.PropertyApiBean
 import org.ff4j.services.domain.PropertyStoreApiBean
@@ -51,7 +52,7 @@ import org.springframework.web.bind.annotation.RestController
  */
 @Tag(name = "PropertyStore", description = "The API for accessing the store for all properties")
 @RestController
-@RequestMapping(value = [RESOURCE_FF4J_PROPERTY_STORE])
+@RequestMapping(value = ["\${ff4j.api.context-path:$RESOURCE_FF4J}/$RESOURCE_PROPERTY_STORE"])
 class PropertyStoreResource(@Autowired val propertyStoreServices: PropertyStoreServices) {
 
   @Operation(summary = "Display information regarding Properties Store", tags = ["PropertyStore"])

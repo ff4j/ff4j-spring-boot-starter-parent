@@ -29,7 +29,8 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses
 import io.swagger.v3.oas.annotations.tags.Tag
 import org.ff4j.services.FeatureStoreServices
 import org.ff4j.services.constants.FeatureConstants.RESOURCE_CLEAR_CACHE
-import org.ff4j.services.constants.FeatureConstants.RESOURCE_FF4J_STORE
+import org.ff4j.services.constants.FeatureConstants.RESOURCE_FF4J
+import org.ff4j.services.constants.FeatureConstants.RESOURCE_STORE
 import org.ff4j.services.domain.CacheApiBean
 import org.ff4j.services.domain.FeatureApiBean
 import org.ff4j.services.domain.FeatureStoreApiBean
@@ -51,7 +52,7 @@ import org.springframework.web.bind.annotation.RestController
  */
 @Tag(name = "FeatureStore", description = "The API for accessing the store of all features")
 @RestController
-@RequestMapping(value = [RESOURCE_FF4J_STORE])
+@RequestMapping(value = ["\${ff4j.api.context-path:$RESOURCE_FF4J}/$RESOURCE_STORE"])
 class FeatureStoreResource(@Autowired val featureStoreService: FeatureStoreServices) {
 
   @Operation(summary = "Displays information regarding the FeaturesStore", tags = ["FeatureStore"])

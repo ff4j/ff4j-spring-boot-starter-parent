@@ -48,7 +48,7 @@ import org.springframework.web.bind.annotation.*
  */
 @Tag(name = "FF4J", description = "The API for global status of FF4J")
 @RestController
-@RequestMapping(value = [RESOURCE_FF4J])
+@RequestMapping(value = ["\${ff4j.api.context-path:$RESOURCE_FF4J}"])
 class FF4jResource(@Autowired val ff4JServices: FF4jServices) {
 
   @Operation(

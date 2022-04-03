@@ -32,7 +32,9 @@ import org.ff4j.services.constants.FeatureConstants.PARAM_ROLE
 import org.ff4j.services.constants.FeatureConstants.PATH_PARAM_GROUP
 import org.ff4j.services.constants.FeatureConstants.PATH_PARAM_ROLE
 import org.ff4j.services.constants.FeatureConstants.PATH_PARAM_UID
-import org.ff4j.services.constants.FeatureConstants.RESOURCE_FF4J_STORE_FEATURES
+import org.ff4j.services.constants.FeatureConstants.RESOURCE_FEATURES
+import org.ff4j.services.constants.FeatureConstants.RESOURCE_FF4J
+import org.ff4j.services.constants.FeatureConstants.RESOURCE_STORE
 import org.ff4j.services.domain.FeatureApiBean
 import org.ff4j.spring.boot.web.api.utils.FeatureWebUtils
 import org.ff4j.web.FF4jWebConstants.*
@@ -50,7 +52,7 @@ import org.springframework.web.bind.annotation.*
  */
 @Tag(name = "Feature", description = "The API for feature related operations")
 @RestController
-@RequestMapping(value = [("$RESOURCE_FF4J_STORE_FEATURES/$PATH_PARAM_UID")])
+@RequestMapping(value = ["\${ff4j.api.context-path:$RESOURCE_FF4J}/$RESOURCE_STORE/$RESOURCE_FEATURES/$PATH_PARAM_UID"])
 class FeatureResource(@Autowired val featureServices: FeatureServices) {
 
   @Operation(summary = "Get feature by uid", description = "Get feature by uid", tags = ["Feature"])
