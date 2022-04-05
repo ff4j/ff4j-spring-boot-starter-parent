@@ -1,21 +1,37 @@
 server:
   port: ${PORT:5000}
+#ff4j:
+#  api:
+#    context-path: /api/v2/ff4j
+#  audit:
+#    enabled: true
+#  security:
+#    enabled: true
+#  web-console:
+#    enabled: true
+#    context-path: /ff4j-web
+#    security:
+#      enabled: true
+#      username: admin
+#      password: admin
+#  springdoc:
+#    enabled: true
 ff4j:
   api:
     context-path: /api/v2/ff4j
+    spring-doc:
+      enabled: false
   audit:
     enabled: true
   security:
     enabled: true
   web-console:
-    enabled: true
     context-path: /ff4j-web
-    security:
-      enabled: true
-      username: admin
-      password: admin
-  springdoc:
     enabled: true
+#    security:
+#      enabled: true
+#      username: admin
+#      password: admin
 springdoc:
   swagger-ui:
     tags-sorter: "alpha"

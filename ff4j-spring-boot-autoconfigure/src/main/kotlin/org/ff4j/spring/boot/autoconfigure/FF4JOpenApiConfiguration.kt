@@ -25,7 +25,6 @@ import io.swagger.v3.oas.annotations.info.Contact
 import io.swagger.v3.oas.annotations.info.Info
 import io.swagger.v3.oas.annotations.info.License
 import org.springdoc.core.GroupedOpenApi
-import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 
@@ -50,22 +49,13 @@ import org.springframework.context.annotation.Configuration
   )
 )
 @Configuration
-open class FF4JOpenApiConfiguration {
-
-  @Value("\${ff4j.springdoc.enabled:false}")
-  private val springDocEnabled: Boolean = false
-
-  @Value("\${ff4j.springdoc.group:ff4j}")
-  private val springDocGroup: String = "ff4j"
-
-  @Value("\${ff4j.api.context-path:/api/ff4j}")
-  private val apiContextPath: String = "/api/ff4j"
+class FF4JOpenApiConfiguration(private val config: FF4JConfigurationProperties) {
 
   @Bean
   fun groupApiEnabled(): GroupedOpenApi {
-    return when (springDocEnabled) {
-      true -> GroupedOpenApi.builder().group(springDocGroup).pathsToMatch("$apiContextPath/**").build()
-      else -> GroupedOpenApi.builder().group(springDocGroup).pathsToExclude("$apiContextPath/**").build()
+    return when (config.api.springDoc.enabled) {
+      true -> GroupedOpenApi.builder().group(config.api.springDoc.group).pathsToMatch("${config.api.contextPath}/**").build()
+      else -> GroupedOpenApi.builder().group(config.api.springDoc.group).pathsToExclude("${config.api.contextPath}/**").build()
     }
   }
 }
