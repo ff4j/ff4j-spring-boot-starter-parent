@@ -46,7 +46,7 @@ import org.springframework.web.bind.annotation.*
  */
 @Tag(name = "Groups", description = "The API for group related operations")
 @RestController
-@RequestMapping(value = ["\${ff4j.api.context-path:$RESOURCE_FF4J}/$RESOURCE_STORE/$RESOURCE_GROUPS/$PATH_PARAM_GROUP"])
+@RequestMapping(value = ["\${ff4j.api.context-path:$RESOURCE_FF4J}$RESOURCE_STORE$RESOURCE_GROUPS/$PATH_PARAM_GROUP"])
 class GroupResource(@Autowired val groupServices: GroupServices) {
 
   @Operation(summary = "Get all the features belonging to the group", tags = ["Groups"])

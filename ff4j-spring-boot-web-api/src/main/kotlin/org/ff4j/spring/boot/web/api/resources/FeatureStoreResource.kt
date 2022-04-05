@@ -52,7 +52,7 @@ import org.springframework.web.bind.annotation.RestController
  */
 @Tag(name = "FeatureStore", description = "The API for accessing the store of all features")
 @RestController
-@RequestMapping(value = ["\${ff4j.api.context-path:$RESOURCE_FF4J}/$RESOURCE_STORE"])
+@RequestMapping(value = ["\${ff4j.api.context-path:$RESOURCE_FF4J}$RESOURCE_STORE"])
 class FeatureStoreResource(@Autowired val featureStoreService: FeatureStoreServices) {
 
   @Operation(summary = "Displays information regarding the FeaturesStore", tags = ["FeatureStore"])

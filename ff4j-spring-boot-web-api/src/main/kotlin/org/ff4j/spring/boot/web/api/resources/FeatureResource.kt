@@ -52,7 +52,7 @@ import org.springframework.web.bind.annotation.*
  */
 @Tag(name = "Feature", description = "The API for feature related operations")
 @RestController
-@RequestMapping(value = ["\${ff4j.api.context-path:$RESOURCE_FF4J}/$RESOURCE_STORE/$RESOURCE_FEATURES/$PATH_PARAM_UID"])
+@RequestMapping(value = ["\${ff4j.api.context-path:$RESOURCE_FF4J}$RESOURCE_STORE$RESOURCE_FEATURES/$PATH_PARAM_UID"])
 class FeatureResource(@Autowired val featureServices: FeatureServices) {
 
   @Operation(summary = "Get feature by uid", description = "Get feature by uid", tags = ["Feature"])
