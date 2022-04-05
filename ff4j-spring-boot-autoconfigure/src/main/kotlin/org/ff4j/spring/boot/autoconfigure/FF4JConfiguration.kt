@@ -21,9 +21,9 @@ package org.ff4j.spring.boot.autoconfigure
 
 import org.ff4j.FF4j
 import org.ff4j.security.SpringSecurityAuthorisationManager
-import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
+import org.springframework.boot.context.properties.ConfigurationPropertiesScan
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.ComponentScan
 import org.springframework.context.annotation.Configuration
@@ -36,20 +36,15 @@ import org.springframework.context.annotation.Configuration
 @Configuration
 @ConditionalOnClass(FF4j::class)
 @ComponentScan(value = ["org.ff4j.spring.boot.web.api", "org.ff4j.services", "org.ff4j.aop", "org.ff4j.spring"])
-class FF4JConfiguration {
-
-  @Value("\${ff4j.audit.enabled:false}")
-  private val auditEnabled: Boolean = false
-
-  @Value("\${ff4j.security.enabled:false}")
-  private val securityEnabled: Boolean = false
+@ConfigurationPropertiesScan
+class FF4JConfiguration(private val config: FF4JConfigurationProperties) {
 
   @Bean
   @ConditionalOnMissingBean
   fun getFF4J(): FF4j {
     val ff4j = FF4j()
-    ff4j.audit(auditEnabled)
-    if (securityEnabled) {
+    ff4j.audit(config.audit.enabled)
+    if (config.security.enabled) {
       ff4j.authorizationsManager = SpringSecurityAuthorisationManager()
     }
     return ff4j
