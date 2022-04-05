@@ -46,7 +46,7 @@ import org.springframework.web.bind.annotation.RestController
  */
 @Tag(name = "Monitoring", description = "The API for monitoring related operations")
 @RestController
-@RequestMapping(value = ["\${ff4j.api.context-path:$RESOURCE_FF4J}/$RESOURCE_MONITORING"])
+@RequestMapping(value = ["\${ff4j.api.context-path:$RESOURCE_FF4J}$RESOURCE_MONITORING"])
 class MonitoringResource(@Autowired val monitoringServices: MonitoringServices) {
 
   @Operation(

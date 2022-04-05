@@ -52,7 +52,7 @@ import org.springframework.web.bind.annotation.RestController
  */
 @Tag(name = "PropertyStore", description = "The API for accessing the store for all properties")
 @RestController
-@RequestMapping(value = ["\${ff4j.api.context-path:$RESOURCE_FF4J}/$RESOURCE_PROPERTY_STORE"])
+@RequestMapping(value = ["\${ff4j.api.context-path:$RESOURCE_FF4J}$RESOURCE_PROPERTY_STORE"])
 class PropertyStoreResource(@Autowired val propertyStoreServices: PropertyStoreServices) {
 
   @Operation(summary = "Display information regarding Properties Store", tags = ["PropertyStore"])
