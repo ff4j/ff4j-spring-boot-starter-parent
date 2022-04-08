@@ -26,7 +26,7 @@ package org.ff4j.services.exceptions
  * @author [Paul Williams](mailto:paul58914080@gmail.com)
  */
 class PropertiesBadRequestException(cause: Throwable) : RuntimeException(cause) {
-    companion object {
-        private const val serialVersionUID = -3239022865148294488L
-    }
+  companion object {
+    private const val serialVersionUID = -3239022865148294488L
+  }
 }

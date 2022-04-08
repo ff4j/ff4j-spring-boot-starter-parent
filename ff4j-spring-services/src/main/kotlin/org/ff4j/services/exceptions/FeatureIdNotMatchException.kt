@@ -26,7 +26,7 @@ package org.ff4j.services.exceptions
  * @author [Paul Williams](mailto:paul58914080@gmail.com)
  */
 class FeatureIdNotMatchException : RuntimeException() {
-    companion object {
-        private const val serialVersionUID = -2878761447146656187L
-    }
+  companion object {
+    private const val serialVersionUID = -2878761447146656187L
+  }
 }

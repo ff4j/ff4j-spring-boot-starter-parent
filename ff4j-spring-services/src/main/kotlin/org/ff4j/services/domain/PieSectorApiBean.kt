@@ -30,19 +30,19 @@ import java.io.Serializable
  */
 class PieSectorApiBean : Serializable {
 
-    companion object {
-        private const val serialVersionUID = -8998722757094848417L
-    }
+  companion object {
+    private const val serialVersionUID = -8998722757094848417L
+  }
 
-    var label = CommonConstants.N_A
-    var value = 0
-    var color = CommonConstants.HTML_WHITE
+  var label = CommonConstants.N_A
+  var value = 0
+  var color = CommonConstants.HTML_WHITE
 
-    constructor() : super()
+  constructor() : super()
 
-    constructor(sector: Serie<Int>) {
-        this.label = sector.label
-        this.value = sector.value
-        this.color = sector.color
-    }
+  constructor(sector: Serie<Int>) {
+    this.label = sector.label
+    this.value = sector.value
+    this.color = sector.color
+  }
 }

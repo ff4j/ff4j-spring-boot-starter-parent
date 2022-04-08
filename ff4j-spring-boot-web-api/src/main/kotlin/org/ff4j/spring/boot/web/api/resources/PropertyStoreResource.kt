@@ -28,8 +28,9 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses
 import io.swagger.v3.oas.annotations.tags.Tag
 import org.ff4j.services.PropertyStoreServices
 import org.ff4j.services.constants.FeatureConstants.RESOURCE_CLEAR_CACHE
-import org.ff4j.services.constants.FeatureConstants.RESOURCE_FF4J_PROPERTY_STORE
+import org.ff4j.services.constants.FeatureConstants.RESOURCE_FF4J
 import org.ff4j.services.constants.FeatureConstants.RESOURCE_PROPERTIES
+import org.ff4j.services.constants.FeatureConstants.RESOURCE_PROPERTY_STORE
 import org.ff4j.services.domain.CacheApiBean
 import org.ff4j.services.domain.PropertyApiBean
 import org.ff4j.services.domain.PropertyStoreApiBean
@@ -51,7 +52,7 @@ import org.springframework.web.bind.annotation.RestController
  */
 @Tag(name = "PropertyStore", description = "The API for accessing the store for all properties")
 @RestController
-@RequestMapping(value = [RESOURCE_FF4J_PROPERTY_STORE])
+@RequestMapping(value = ["\${ff4j.api.context-path:$RESOURCE_FF4J}$RESOURCE_PROPERTY_STORE"])
 class PropertyStoreResource(@Autowired val propertyStoreServices: PropertyStoreServices) {
 
   @Operation(summary = "Display information regarding Properties Store", tags = ["PropertyStore"])
@@ -64,6 +65,7 @@ class PropertyStoreResource(@Autowired val propertyStoreServices: PropertyStoreS
   )
   @GetMapping(produces = [APPLICATION_JSON_VALUE])
   fun getPropertyStore(): PropertyStoreApiBean = propertyStoreServices.getPropertyStore()
+
   @Operation(summary = "Display all the Properties", tags = ["PropertyStore"])
   @ApiResponses(
     value = [ApiResponse(
@@ -74,6 +76,7 @@ class PropertyStoreResource(@Autowired val propertyStoreServices: PropertyStoreS
   )
   @GetMapping(value = [RESOURCE_PROPERTIES], produces = [APPLICATION_JSON_VALUE])
   fun getAllProperties(): List<PropertyApiBean> = propertyStoreServices.getAllProperties()
+
   @Operation(summary = "Display information related to Cache", tags = ["PropertyStore"])
   @ApiResponses(
     value = [ApiResponse(
@@ -84,11 +87,11 @@ class PropertyStoreResource(@Autowired val propertyStoreServices: PropertyStoreS
   )
   @GetMapping(value = [("/$RESOURCE_CACHE")], produces = [APPLICATION_JSON_VALUE])
   fun getPropertiesFromCache(): CacheApiBean = propertyStoreServices.getPropertiesFromCache()
+
   @Operation(summary = "Delete all Properties in store", tags = ["PropertyStore"])
   @ApiResponses(
     value = [ApiResponse(
-      responseCode = "204",
-      description = "all properties have been deleted"
+      responseCode = "204", description = "all properties have been deleted"
     )]
   )
   @DeleteMapping(value = [("/$STORE_CLEAR")])
@@ -100,8 +103,7 @@ class PropertyStoreResource(@Autowired val propertyStoreServices: PropertyStoreS
   @Operation(summary = "Clear cache", tags = ["PropertyStore"])
   @ApiResponses(
     value = [ApiResponse(
-      responseCode = "204",
-      description = "cache is cleared"
+      responseCode = "204", description = "cache is cleared"
     ), ApiResponse(responseCode = "404", description = "property store is not cached")]
   )
   @DeleteMapping(value = [RESOURCE_CLEAR_CACHE])

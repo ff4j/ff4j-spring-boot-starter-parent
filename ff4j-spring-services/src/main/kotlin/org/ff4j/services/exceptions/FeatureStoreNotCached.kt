@@ -26,7 +26,7 @@ package org.ff4j.services.exceptions
  * @author [Paul Williams](mailto:paul58914080@gmail.com)
  */
 class FeatureStoreNotCached : RuntimeException() {
-    companion object {
-        private const val serialVersionUID = -5715736146662783416L
-    }
+  companion object {
+    private const val serialVersionUID = -5715736146662783416L
+  }
 }

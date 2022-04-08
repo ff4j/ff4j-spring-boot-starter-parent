@@ -153,6 +153,11 @@
         <version>${ff4j.version}</version>
       </dependency>
       <dependency>
+        <groupId>org.ff4j</groupId>
+        <artifactId>ff4j-security-spring</artifactId>
+        <version>${ff4j.version}</version>
+      </dependency>
+      <dependency>
         <groupId>org.apache.commons</groupId>
         <artifactId>commons-lang3</artifactId>
         <version>${commons3.lang}</version>

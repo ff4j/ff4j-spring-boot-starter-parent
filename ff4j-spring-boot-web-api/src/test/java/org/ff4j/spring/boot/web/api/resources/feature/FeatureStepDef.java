@@ -1,4 +1,3 @@
-
 package org.ff4j.spring.boot.web.api.resources.feature;
 
 /*-
@@ -10,9 +9,9 @@ package org.ff4j.spring.boot.web.api.resources.feature;
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -26,14 +25,13 @@ import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
 import org.ff4j.core.Feature;
 import org.ff4j.services.domain.FeatureApiBean;
 import org.ff4j.spring.boot.web.api.resources.AbstractStepDef;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
 
 /**
  * Created by Paul

@@ -23,6 +23,7 @@ package org.ff4j.spring.boot.autoconfigure;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.ff4j.FF4j;
+import org.ff4j.security.SpringSecurityAuthorisationManager;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -31,8 +32,8 @@ import org.springframework.test.context.TestPropertySource;
 @SpringBootTest(
     webEnvironment = SpringBootTest.WebEnvironment.MOCK,
     classes = {Application.class, FF4JConfiguration.class})
-@TestPropertySource(properties = {"ff4j.audit.enabled=true"})
-public class FF4JAuditEnableConfigurationTest {
+@TestPropertySource(properties = {"ff4j.security.enabled=true"})
+public class FF4JSecurityEnableConfigurationTest {
 
   @Autowired
   private FF4j ff4j;
@@ -44,6 +45,6 @@ public class FF4JAuditEnableConfigurationTest {
 
   @Test
   void testAuditEnable() {
-    assertThat(ff4j.isEnableAudit()).isTrue();
+    assertThat(ff4j.getAuthorizationsManager()).isInstanceOf(SpringSecurityAuthorisationManager.class);
   }
 }

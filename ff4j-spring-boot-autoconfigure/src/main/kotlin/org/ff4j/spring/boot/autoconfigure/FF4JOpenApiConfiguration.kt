@@ -25,7 +25,9 @@ import io.swagger.v3.oas.annotations.info.Contact
 import io.swagger.v3.oas.annotations.info.Info
 import io.swagger.v3.oas.annotations.info.License
 import org.springdoc.core.GroupedOpenApi
-import org.springframework.beans.factory.annotation.Value
+import org.springdoc.core.SpringDocConfiguration
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass
+import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 
@@ -41,28 +43,24 @@ import org.springframework.context.annotation.Configuration
     version = "1.8",
     description = "Administer and operate all tasks on your features through this api.",
     license = License(
-      name = "Apache 2.0",
-      url = "http://www.apache.org/licenses/LICENSE-2.0.html"
+      name = "Apache 2.0", url = "http://www.apache.org/licenses/LICENSE-2.0.html"
     ),
     contact = Contact(
-      name = "Paul Williams",
-      email = "paul58914080@gmail.com",
-      url = "paul-williams.me"
+      name = "Paul Williams", email = "paul58914080@gmail.com", url = "paul-williams.me"
     ),
     termsOfService = "http://www.ff4j.org/terms-of-service"
   )
 )
+@ConditionalOnClass(SpringDocConfiguration::class)
+@ConditionalOnWebApplication
 @Configuration
-open class FF4JOpenApiConfiguration {
-
-  @Value("\${ff4j.springdoc.enabled:false}")
-  private val springDocEnabled: Boolean = false
+class FF4JOpenApiConfiguration(private val config: FF4JConfigurationProperties) {
 
   @Bean
   fun groupApiEnabled(): GroupedOpenApi {
-    return when (springDocEnabled) {
-      true -> GroupedOpenApi.builder().group("ff4j").pathsToMatch("/api/ff4j/**").build()
-      else -> GroupedOpenApi.builder().group("ff4j").pathsToExclude("/api/ff4j/**").build()
+    return when (config.api.springDoc.enabled) {
+      true -> GroupedOpenApi.builder().group(config.api.springDoc.group).pathsToMatch("${config.api.contextPath}/**").build()
+      else -> GroupedOpenApi.builder().group(config.api.springDoc.group).pathsToExclude("${config.api.contextPath}/**").build()
     }
   }
 }

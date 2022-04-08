@@ -15,6 +15,7 @@ package org.ff4j.sample;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.boot.autoconfigure.thymeleaf.ThymeleafAutoConfiguration;
 
 /**
@@ -22,7 +23,7 @@ import org.springframework.boot.autoconfigure.thymeleaf.ThymeleafAutoConfigurati
  *
  * @author <a href="mailto:paul58914080@gmail.com">Paul Williams</a>
  */
-@SpringBootApplication(exclude = ThymeleafAutoConfiguration.class)
+@SpringBootApplication(exclude = {SecurityAutoConfiguration.class})
 public class Application {
 
   public static void main(String[] args) {
