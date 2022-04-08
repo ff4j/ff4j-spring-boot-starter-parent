@@ -32,7 +32,9 @@ import org.ff4j.services.constants.FeatureConstants.PARAM_ROLE
 import org.ff4j.services.constants.FeatureConstants.PATH_PARAM_GROUP
 import org.ff4j.services.constants.FeatureConstants.PATH_PARAM_ROLE
 import org.ff4j.services.constants.FeatureConstants.PATH_PARAM_UID
-import org.ff4j.services.constants.FeatureConstants.RESOURCE_FF4J_STORE_FEATURES
+import org.ff4j.services.constants.FeatureConstants.RESOURCE_FEATURES
+import org.ff4j.services.constants.FeatureConstants.RESOURCE_FF4J
+import org.ff4j.services.constants.FeatureConstants.RESOURCE_STORE
 import org.ff4j.services.domain.FeatureApiBean
 import org.ff4j.spring.boot.web.api.utils.FeatureWebUtils
 import org.ff4j.web.FF4jWebConstants.*
@@ -50,48 +52,41 @@ import org.springframework.web.bind.annotation.*
  */
 @Tag(name = "Feature", description = "The API for feature related operations")
 @RestController
-@RequestMapping(value = [("$RESOURCE_FF4J_STORE_FEATURES/$PATH_PARAM_UID")])
+@RequestMapping(value = ["\${ff4j.api.context-path:$RESOURCE_FF4J}$RESOURCE_STORE$RESOURCE_FEATURES/$PATH_PARAM_UID"])
 class FeatureResource(@Autowired val featureServices: FeatureServices) {
 
   @Operation(summary = "Get feature by uid", description = "Get feature by uid", tags = ["Feature"])
   @ApiResponses(
     value = [ApiResponse(
-      responseCode = "200",
-      description = "OK",
-      content = arrayOf(Content(schema = Schema(implementation = FeatureApiBean::class)))
+      responseCode = "200", description = "OK", content = arrayOf(Content(schema = Schema(implementation = FeatureApiBean::class)))
     ), ApiResponse(responseCode = "404", description = "Feature not found")]
   )
   @GetMapping(produces = [APPLICATION_JSON_VALUE])
-  fun getFeatureByUID(@PathVariable(value = PARAM_UID) featureUID: String): FeatureApiBean =
-    featureServices.getFeature(featureUID)
+  fun getFeatureByUID(@PathVariable(value = PARAM_UID) featureUID: String): FeatureApiBean = featureServices.getFeature(featureUID)
 
   @Operation(summary = "Create or update a feature", tags = ["Feature"])
   @ApiResponses(
     ApiResponse(
       responseCode = "400",
       description = "Feature uid is blank (or) feature uid did not match with the requested feature uid to be created or updated"
-    ),
-    ApiResponse(
+    ), ApiResponse(
       responseCode = "201",
       description = "Feature has been created",
       content = arrayOf(Content(schema = Schema(implementation = Boolean::class)))
-    ),
-    ApiResponse(
+    ), ApiResponse(
       responseCode = "204",
       description = "Feature has been updated",
       content = arrayOf(Content(schema = Schema(implementation = Boolean::class)))
     )
   )
   @PutMapping(consumes = [APPLICATION_JSON_VALUE], produces = [APPLICATION_JSON_VALUE])
-  fun createOrUpdateFeature(
-    @PathVariable(value = PARAM_UID) featureUID: String,
-    @RequestBody featureApiBean: FeatureApiBean
-  ): ResponseEntity<Boolean> = FeatureWebUtils.getBooleanResponseEntityByHttpStatus(
-    featureServices.createOrUpdateFeature(
-      featureUID,
-      featureApiBean
+  fun createOrUpdateFeature(@PathVariable(value = PARAM_UID) featureUID: String,
+                            @RequestBody featureApiBean: FeatureApiBean): ResponseEntity<Boolean> =
+    FeatureWebUtils.getBooleanResponseEntityByHttpStatus(
+      featureServices.createOrUpdateFeature(
+        featureUID, featureApiBean
+      )
     )
-  )
 
   @Operation(summary = "Delete a feature", tags = ["Feature"])
   @ApiResponses(
@@ -133,10 +128,8 @@ class FeatureResource(@Autowired val featureServices: FeatureServices) {
     ApiResponse(responseCode = "304", description = "Role already exists, nothing to update")
   )
   @PostMapping(value = [("/$OPERATION_GRANTROLE/$PATH_PARAM_ROLE")])
-  fun grantRoleToFeature(
-    @PathVariable(value = PARAM_UID) featureUID: String,
-    @PathVariable(value = PARAM_ROLE) role: String
-  ): ResponseEntity<Void> {
+  fun grantRoleToFeature(@PathVariable(value = PARAM_UID) featureUID: String,
+                         @PathVariable(value = PARAM_ROLE) role: String): ResponseEntity<Void> {
     featureServices.grantRoleToFeature(featureUID, role)
     return ResponseEntity(ACCEPTED)
   }
@@ -147,10 +140,8 @@ class FeatureResource(@Autowired val featureServices: FeatureServices) {
     ApiResponse(responseCode = "404", description = "Feature not found")
   )
   @PostMapping(value = [("/$OPERATION_REMOVEROLE/$PATH_PARAM_ROLE")])
-  fun removeRoleFromFeature(
-    @PathVariable(value = PARAM_UID) featureUID: String,
-    @PathVariable(value = PARAM_ROLE) role: String
-  ): ResponseEntity<Void> {
+  fun removeRoleFromFeature(@PathVariable(value = PARAM_UID) featureUID: String,
+                            @PathVariable(value = PARAM_ROLE) role: String): ResponseEntity<Void> {
     featureServices.removeRoleFromFeature(featureUID, role)
     return ResponseEntity(ACCEPTED)
   }
@@ -162,10 +153,8 @@ class FeatureResource(@Autowired val featureServices: FeatureServices) {
     ApiResponse(responseCode = "304", description = "Group already exists, nothing to update")
   )
   @PostMapping(value = [("/$OPERATION_ADDGROUP/$PATH_PARAM_GROUP")])
-  fun addGroupToFeature(
-    @PathVariable(value = PARAM_UID) featureUID: String,
-    @PathVariable(value = PARAM_GROUP) groupName: String
-  ): ResponseEntity<Void> {
+  fun addGroupToFeature(@PathVariable(value = PARAM_UID) featureUID: String,
+                        @PathVariable(value = PARAM_GROUP) groupName: String): ResponseEntity<Void> {
     featureServices.addGroupToFeature(featureUID, groupName)
     return ResponseEntity(ACCEPTED)
   }
@@ -176,10 +165,8 @@ class FeatureResource(@Autowired val featureServices: FeatureServices) {
     ApiResponse(responseCode = "404", description = "Feature not found")
   )
   @PostMapping(value = [("/$OPERATION_REMOVEGROUP/$PATH_PARAM_GROUP")])
-  fun removeGroupFromFeature(
-    @PathVariable(value = PARAM_UID) featureUID: String,
-    @PathVariable(value = PARAM_GROUP) groupName: String
-  ): ResponseEntity<Void> {
+  fun removeGroupFromFeature(@PathVariable(value = PARAM_UID) featureUID: String,
+                             @PathVariable(value = PARAM_GROUP) groupName: String): ResponseEntity<Void> {
     featureServices.removeGroupFromFeature(featureUID, groupName)
     return ResponseEntity(ACCEPTED)
   }

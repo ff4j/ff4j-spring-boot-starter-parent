@@ -29,7 +29,9 @@ import io.swagger.v3.oas.annotations.tags.Tag
 import org.ff4j.services.GroupServices
 import org.ff4j.services.constants.FeatureConstants.PARAM_GROUP
 import org.ff4j.services.constants.FeatureConstants.PATH_PARAM_GROUP
-import org.ff4j.services.constants.FeatureConstants.RESOURCE_FF4J_STORE_GROUPS
+import org.ff4j.services.constants.FeatureConstants.RESOURCE_FF4J
+import org.ff4j.services.constants.FeatureConstants.RESOURCE_GROUPS
+import org.ff4j.services.constants.FeatureConstants.RESOURCE_STORE
 import org.ff4j.services.domain.FeatureApiBean
 import org.ff4j.web.FF4jWebConstants.OPERATION_DISABLE
 import org.ff4j.web.FF4jWebConstants.OPERATION_ENABLE
@@ -44,7 +46,7 @@ import org.springframework.web.bind.annotation.*
  */
 @Tag(name = "Groups", description = "The API for group related operations")
 @RestController
-@RequestMapping(value = [("$RESOURCE_FF4J_STORE_GROUPS/$PATH_PARAM_GROUP")])
+@RequestMapping(value = ["\${ff4j.api.context-path:$RESOURCE_FF4J}$RESOURCE_STORE$RESOURCE_GROUPS/$PATH_PARAM_GROUP"])
 class GroupResource(@Autowired val groupServices: GroupServices) {
 
   @Operation(summary = "Get all the features belonging to the group", tags = ["Groups"])
@@ -62,22 +64,18 @@ class GroupResource(@Autowired val groupServices: GroupServices) {
   @Operation(summary = "Enable a group", tags = ["Groups"])
   @ApiResponses(
     value = [ApiResponse(
-      responseCode = "200",
-      description = "Group has been enabled"
+      responseCode = "200", description = "Group has been enabled"
     ), ApiResponse(responseCode = "404", description = "Group not found")]
   )
   @PostMapping(value = [("/$OPERATION_ENABLE")], produces = [APPLICATION_JSON_VALUE])
-  fun enableGroup(@PathVariable(value = PARAM_GROUP) groupName: String) =
-    groupServices.enableGroup(groupName)
+  fun enableGroup(@PathVariable(value = PARAM_GROUP) groupName: String) = groupServices.enableGroup(groupName)
 
   @Operation(summary = "Disable a group", tags = ["Groups"])
   @ApiResponses(
     value = [ApiResponse(
-      responseCode = "200",
-      description = "Group has been disabled"
+      responseCode = "200", description = "Group has been disabled"
     ), ApiResponse(responseCode = "404", description = "Group not found")]
   )
   @PostMapping(value = [("/$OPERATION_DISABLE")], produces = [APPLICATION_JSON_VALUE])
-  fun disableGroup(@PathVariable(value = PARAM_GROUP) groupName: String) =
-    groupServices.disableGroup(groupName)
+  fun disableGroup(@PathVariable(value = PARAM_GROUP) groupName: String) = groupServices.disableGroup(groupName)
 }

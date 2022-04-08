@@ -25,4 +25,6 @@ dist
 .gradle/
 !gradle/wrapper/gradle-wrapper.jar
 
+.java-version
+
 

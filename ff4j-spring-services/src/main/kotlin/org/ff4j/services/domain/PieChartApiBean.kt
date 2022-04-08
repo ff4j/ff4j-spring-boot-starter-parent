@@ -22,7 +22,6 @@ package org.ff4j.services.domain
 import org.ff4j.audit.chart.PieChart
 import org.ff4j.audit.chart.Serie
 import java.io.Serializable
-import java.util.*
 
 /**
  * Created by Paul
@@ -31,19 +30,19 @@ import java.util.*
  */
 class PieChartApiBean : Serializable {
 
-    companion object {
-        private const val serialVersionUID = 3177966921214178831L
+  companion object {
+    private const val serialVersionUID = 3177966921214178831L
+  }
+
+  var title: String? = null
+  val sectors: MutableList<PieSectorApiBean> = mutableListOf()
+
+  constructor() : super()
+
+  constructor(pieChart: PieChart) {
+    this.title = pieChart.title
+    for (sector: Serie<Int> in pieChart.sectors) {
+      this.sectors.add(PieSectorApiBean(sector))
     }
-
-    var title: String? = null
-    val sectors: MutableList<PieSectorApiBean> = mutableListOf()
-
-    constructor() : super()
-
-    constructor(pieChart: PieChart) {
-        this.title = pieChart.title
-        for (sector: Serie<Int> in pieChart.sectors) {
-            this.sectors.add(PieSectorApiBean(sector))
-        }
-    }
+  }
 }
