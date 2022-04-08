@@ -20,6 +20,7 @@
 package org.ff4j.spring.boot.autoconfigure
 
 import org.springframework.boot.autoconfigure.AutoConfigureAfter
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
@@ -32,7 +33,8 @@ import org.springframework.security.crypto.factory.PasswordEncoderFactories
 @ConditionalOnProperty(
   value = ["ff4j.web-console.security.enabled"], havingValue = "true", matchIfMissing = false
 )
-@AutoConfigureAfter(FF4JConfiguration::class)
+@ConditionalOnBean(FF4JWebConsoleConfiguration::class)
+@AutoConfigureAfter(FF4JWebConsoleConfiguration::class)
 @EnableWebSecurity
 class FF4JSecurityConfiguration(private val config: FF4JConfigurationProperties) : WebSecurityConfigurerAdapter() {
 
