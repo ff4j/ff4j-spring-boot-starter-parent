@@ -20,25 +20,22 @@
 package org.ff4j.spring.boot.autoconfigure
 
 import org.ff4j.FF4j
+import org.ff4j.security.SpringSecurityAuthorisationManager
+import org.springframework.boot.autoconfigure.AutoConfigureAfter
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
-import org.springframework.boot.context.properties.ConfigurationPropertiesScan
-import org.springframework.context.annotation.Bean
-import org.springframework.context.annotation.ComponentScan
 import org.springframework.context.annotation.Configuration
+import javax.annotation.PostConstruct
 
-/**
- * Created by Paul
- *
- * @author [Paul Williams](mailto:paul58914080@gmail.com)
- */
 @Configuration
+@AutoConfigureAfter(FF4JConfiguration::class)
 @ConditionalOnClass(FF4j::class)
-@ComponentScan(value = ["org.ff4j.spring.boot.web.api", "org.ff4j.services", "org.ff4j.aop", "org.ff4j.spring"])
-@ConfigurationPropertiesScan
-class FF4JConfiguration {
+class FF4JInitializationConfiguration(private val config: FF4JConfigurationProperties, val ff4j: FF4j) {
 
-  @Bean
-  @ConditionalOnMissingBean
-  fun getFF4J(): FF4j = FF4j()
+  @PostConstruct
+  fun init() {
+   ff4j.audit(config.audit.enabled)
+    if (config.security.enabled) {
+      ff4j.authorizationsManager = SpringSecurityAuthorisationManager()
+    }
+  }
 }
