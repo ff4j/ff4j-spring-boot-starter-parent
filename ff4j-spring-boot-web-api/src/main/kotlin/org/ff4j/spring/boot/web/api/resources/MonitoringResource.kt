@@ -27,7 +27,8 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse
 import io.swagger.v3.oas.annotations.responses.ApiResponses
 import io.swagger.v3.oas.annotations.tags.Tag
 import org.ff4j.services.MonitoringServices
-import org.ff4j.services.constants.FeatureConstants.RESOURCE_FF4J_MONITORING
+import org.ff4j.services.constants.FeatureConstants.RESOURCE_FF4J
+import org.ff4j.services.constants.FeatureConstants.RESOURCE_MONITORING
 import org.ff4j.services.domain.EventRepositoryApiBean
 import org.ff4j.web.FF4jWebConstants.PARAM_END
 import org.ff4j.web.FF4jWebConstants.PARAM_START
@@ -45,7 +46,7 @@ import org.springframework.web.bind.annotation.RestController
  */
 @Tag(name = "Monitoring", description = "The API for monitoring related operations")
 @RestController
-@RequestMapping(value = [RESOURCE_FF4J_MONITORING])
+@RequestMapping(value = ["\${ff4j.api.context-path:$RESOURCE_FF4J}$RESOURCE_MONITORING"])
 class MonitoringResource(@Autowired val monitoringServices: MonitoringServices) {
 
   @Operation(
@@ -61,11 +62,8 @@ class MonitoringResource(@Autowired val monitoringServices: MonitoringServices) 
     ), ApiResponse(responseCode = "404", description = "No event repository defined")]
   )
   @GetMapping(produces = [APPLICATION_JSON_VALUE])
-  fun getMonitoringStatus(
-    @RequestParam(
-      value = PARAM_START,
-      required = false,
-      defaultValue = "0"
-    ) start: Long, @RequestParam(value = PARAM_END, required = false, defaultValue = "0") end: Long
-  ): EventRepositoryApiBean = monitoringServices.getMonitoringStatus(start, end)
+  fun getMonitoringStatus(@RequestParam(
+    value = PARAM_START, required = false, defaultValue = "0"
+  ) start: Long, @RequestParam(value = PARAM_END, required = false, defaultValue = "0") end: Long): EventRepositoryApiBean =
+    monitoringServices.getMonitoringStatus(start, end)
 }

@@ -29,7 +29,8 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses
 import io.swagger.v3.oas.annotations.tags.Tag
 import org.ff4j.services.FeatureStoreServices
 import org.ff4j.services.constants.FeatureConstants.RESOURCE_CLEAR_CACHE
-import org.ff4j.services.constants.FeatureConstants.RESOURCE_FF4J_STORE
+import org.ff4j.services.constants.FeatureConstants.RESOURCE_FF4J
+import org.ff4j.services.constants.FeatureConstants.RESOURCE_STORE
 import org.ff4j.services.domain.CacheApiBean
 import org.ff4j.services.domain.FeatureApiBean
 import org.ff4j.services.domain.FeatureStoreApiBean
@@ -51,15 +52,13 @@ import org.springframework.web.bind.annotation.RestController
  */
 @Tag(name = "FeatureStore", description = "The API for accessing the store of all features")
 @RestController
-@RequestMapping(value = [RESOURCE_FF4J_STORE])
+@RequestMapping(value = ["\${ff4j.api.context-path:$RESOURCE_FF4J}$RESOURCE_STORE"])
 class FeatureStoreResource(@Autowired val featureStoreService: FeatureStoreServices) {
 
   @Operation(summary = "Displays information regarding the FeaturesStore", tags = ["FeatureStore"])
   @ApiResponses(
     value = [ApiResponse(
-      responseCode = "200",
-      description = "OK",
-      content = arrayOf(Content(schema = Schema(implementation = FeatureApiBean::class)))
+      responseCode = "200", description = "OK", content = arrayOf(Content(schema = Schema(implementation = FeatureApiBean::class)))
     )]
   )
   @GetMapping(produces = [APPLICATION_JSON_VALUE])
@@ -102,8 +101,7 @@ class FeatureStoreResource(@Autowired val featureStoreService: FeatureStoreServi
   @DeleteMapping(value = [("/$STORE_CLEAR")])
   @ApiResponses(
     value = [ApiResponse(
-      responseCode = "204",
-      description = "all feature have been deleted"
+      responseCode = "204", description = "all feature have been deleted"
     )]
   )
   fun deleteAllFeatures(): ResponseEntity<Void> {
@@ -115,8 +113,7 @@ class FeatureStoreResource(@Autowired val featureStoreService: FeatureStoreServi
   @DeleteMapping(value = [(RESOURCE_CLEAR_CACHE)])
   @ApiResponses(
     value = [ApiResponse(
-      responseCode = "204",
-      description = "Gcache is cleared"
+      responseCode = "204", description = "Gcache is cleared"
     ), ApiResponse(responseCode = "404", description = "feature store is not cached")]
   )
   fun clearCachedFeatureStore(): ResponseEntity<Void> {

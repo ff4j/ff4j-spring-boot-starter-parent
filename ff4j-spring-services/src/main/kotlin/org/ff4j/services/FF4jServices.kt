@@ -36,27 +36,27 @@ import org.springframework.stereotype.Service
 @Service
 class FF4jServices(@Autowired val fF4j: FF4j, @Autowired val ff4jValidator: FeatureValidator) {
 
-    fun getStatus(): FF4jStatusApiBean {
-        return FF4jStatusApiBean(this.fF4j)
-    }
+  fun getStatus(): FF4jStatusApiBean {
+    return FF4jStatusApiBean(this.fF4j)
+  }
 
-    fun getSecurityInfo(): AuthorizationsManagerApiBean {
-        return fF4j.authorizationsManager?.let {
-            AuthorizationsManagerApiBean(it)
-        } ?: run {
-            throw AuthorizationNotExistsException()
-        }
+  fun getSecurityInfo(): AuthorizationsManagerApiBean {
+    return fF4j.authorizationsManager?.let {
+      AuthorizationsManagerApiBean(it)
+    } ?: run {
+      throw AuthorizationNotExistsException()
     }
+  }
 
-    fun check(featureUID: String): Boolean {
-        ff4jValidator.assertFeatureExists(featureUID)
-        return fF4j.check(featureUID)
-    }
+  fun check(featureUID: String): Boolean {
+    ff4jValidator.assertFeatureExists(featureUID)
+    return fF4j.check(featureUID)
+  }
 
-    fun check(featureUID: String, params: MutableMap<String, String>): Boolean {
-        ff4jValidator.assertFeatureExists(featureUID)
-        val flipExecCtx = FlippingExecutionContext()
-        params.entries.forEach { flipExecCtx.putString(it.key, it.value) }
-        return fF4j.check(featureUID, flipExecCtx)
-    }
+  fun check(featureUID: String, params: MutableMap<String, String>): Boolean {
+    ff4jValidator.assertFeatureExists(featureUID)
+    val flipExecCtx = FlippingExecutionContext()
+    params.entries.forEach { flipExecCtx.putString(it.key, it.value) }
+    return fF4j.check(featureUID, flipExecCtx)
+  }
 }
