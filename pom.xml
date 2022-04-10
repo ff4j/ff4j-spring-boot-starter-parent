@@ -222,6 +222,12 @@
         <version>${kotlin.version}</version>
         <scope>test</scope>
       </dependency>
+      <dependency>
+        <groupId>org.assertj</groupId>
+        <artifactId>assertj-core</artifactId>
+        <version>${assertj.version}</version>
+        <scope>test</scope>
+      </dependency>
     </dependencies>
   </dependencyManagement>
   <dependencies>
@@ -518,6 +524,7 @@
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-javadoc-plugin</artifactId>
+            <version>${version.maven.plugin.javadoc}</version>
             <configuration>
               <additionalparam>-Xdoclint:none</additionalparam>
             </configuration>
