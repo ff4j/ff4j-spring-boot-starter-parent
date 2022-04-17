@@ -28,11 +28,13 @@ import cucumber.api.java.en.When;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 import org.apache.commons.lang3.StringUtils;
 import org.ff4j.security.AbstractAuthorizationManager;
 import org.ff4j.spring.boot.web.api.resources.AbstractStepDef;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.test.web.servlet.client.MockMvcWebTestClient;
 
 /**
  * Created by Paul
@@ -44,7 +46,7 @@ public class FF4JStepDef extends AbstractStepDef {
   @Before
   @Override
   public void init() {
-    this.mockMvc = MockMvcBuilders.webAppContextSetup(context).build();
+    this.webTestClient = MockMvcWebTestClient.bindToApplicationContext(context).build();
   }
 
   @Given("^the feature store is cleared$")
@@ -78,19 +80,19 @@ public class FF4JStepDef extends AbstractStepDef {
   @When("^the user requests for a feature by \"([^\"]*)\" by \"([^\"]*)\" http method and content type as \"([^\"]*)\"$")
   public void the_user_requests_for_a_feature_by_by_http_method_and_content_type_as(String path,
       String httpMethod, String contentType) throws Throwable {
-    constructRequestBuilder(path, httpMethod, contentType);
+    createRequestBodyRec(path, httpMethod, contentType);
+  }
+
+  @When("^the user requests for a feature by \"([^\"]*)\" by \"([^\"]*)\" http method and content type as \"([^\"]*)\" and the following form param$")
+  public void the_user_requests_for_a_feature_by_by_http_method_and_content_type_as_and_the_following_form_param(String path,
+      String httpMethod, String contentType, List<FormParam> formParams) throws Throwable {
+    Map<String, String> formParamMap = formParams.stream().collect(Collectors.toMap(FormParam::getName, FormParam::getValue));
+    createRequestBodyRecWithParameter(path, httpMethod, contentType, formParamMap);
   }
 
   @When("^the following feature uids$")
   public void the_following_feature_uids(List<String> featureUids) throws Throwable {
-    requestBuilder.content(new Gson().toJson(featureUids));
-  }
-
-  @When("^the following form param$")
-  public void the_following_form_param(List<FormParam> formParams) throws Throwable {
-    for (FormParam formParam : formParams) {
-      requestBuilder.param(formParam.getName(), formParam.getValue().replace("or", "|"));
-    }
+    setRequestBody(new Gson().toJson(featureUids));
   }
 
   @When("^request body as$")
@@ -157,7 +159,7 @@ public class FF4JStepDef extends AbstractStepDef {
 
 
     public String getValue() {
-      return value;
+      return value.replace("or", "|");
     }
   }
 }

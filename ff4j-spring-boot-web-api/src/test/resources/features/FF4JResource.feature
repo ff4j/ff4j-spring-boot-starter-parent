@@ -132,14 +132,12 @@ Feature: Provides RESTful api's to do the following
       }
     }
     """
-    When the user requests for a feature by "/api/ff4j/check/login" by "POST" http method and content type as "application/x-www-form-urlencoded"
-    And the following form param
+    When the user requests for a feature by "/api/ff4j/check/login" by "POST" http method and content type as "application/x-www-form-urlencoded" and the following form param
       | name       | value         |
       | expression | login & admin |
     Then the user gets the response with response code "200"
     And the response body has content to be "false"
-    When the user requests for a feature by "/api/ff4j/check/login" by "POST" http method and content type as "application/x-www-form-urlencoded"
-    And the following form param
+    When the user requests for a feature by "/api/ff4j/check/login" by "POST" http method and content type as "application/x-www-form-urlencoded" and the following form param
       | name       | value          |
       # or will be replaced by '|'
       | expression | login or admin |
@@ -149,15 +147,14 @@ Feature: Provides RESTful api's to do the following
     Then the user gets an error response with code "404" and error message as "feature not found"
 
   Scenario: When the user tries to initialize multiple features of its flipping strategy with an execution strategy
-    When the user requests for a feature by "/api/ff4j/check" by "POST" http method and content type as "application/json"
+    When the user requests for a feature by "/api/ff4j/check" by "POST" http method and content type as "application/json" and the following form param
+      | name       | value          |
+      # or will be replaced by '|'
+      | expression | login or admin |
     And the following feature uids
       | login   |
       | admin   |
       | invalid |
-    And the following form param
-      | name       | value          |
-      # or will be replaced by '|'
-      | expression | login or admin |
     Then the user gets the response with response code "200"
     And the response body as
    """
@@ -186,8 +183,7 @@ Feature: Provides RESTful api's to do the following
     """
     Then the user gets the response with response code "204"
     And the response body has content to be "true"
-    When the user requests for a feature by "/api/ff4j/check/login" by "POST" http method and content type as "application/x-www-form-urlencoded"
-    And the following form param
+    When the user requests for a feature by "/api/ff4j/check/login" by "POST" http method and content type as "application/x-www-form-urlencoded" and the following form param
       | name         | value |
       | InvalidParam | c2    |
     Then the user gets an error response with code "400" and error message as "bad request"

@@ -20,9 +20,11 @@
 
 package org.ff4j.spring.boot.web.api.utils
 
+import org.apache.catalina.Server
 import org.ff4j.services.model.FeatureActions
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.web.servlet.function.ServerResponse
 import java.lang.Boolean.TRUE
 
 /**
