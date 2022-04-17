@@ -38,6 +38,7 @@ import org.ff4j.web.FF4jWebConstants.OPERATION_ENABLE
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.MediaType.APPLICATION_JSON_VALUE
 import org.springframework.web.bind.annotation.*
+import reactor.core.publisher.Flux
 
 /**
  * Created by Paul
@@ -58,8 +59,8 @@ class GroupResource(@Autowired val groupServices: GroupServices) {
     ), ApiResponse(responseCode = "404", description = "Group not found")]
   )
   @GetMapping(produces = [APPLICATION_JSON_VALUE])
-  fun getFeaturesByGroup(@PathVariable(value = PARAM_GROUP) groupName: String): Collection<FeatureApiBean> =
-    groupServices.getFeaturesByGroup(groupName)
+  fun getFeaturesByGroup(@PathVariable(value = PARAM_GROUP) groupName: String): Flux<FeatureApiBean> =
+    Flux.fromIterable(groupServices.getFeaturesByGroup(groupName))
 
   @Operation(summary = "Enable a group", tags = ["Groups"])
   @ApiResponses(

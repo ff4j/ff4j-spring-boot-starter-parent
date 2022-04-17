@@ -44,6 +44,7 @@ import org.springframework.http.HttpStatus.NO_CONTENT
 import org.springframework.http.MediaType.APPLICATION_JSON_VALUE
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
+import reactor.core.publisher.Mono
 
 /**
  * Created by Paul
@@ -62,7 +63,7 @@ class FeatureResource(@Autowired val featureServices: FeatureServices) {
     ), ApiResponse(responseCode = "404", description = "Feature not found")]
   )
   @GetMapping(produces = [APPLICATION_JSON_VALUE])
-  fun getFeatureByUID(@PathVariable(value = PARAM_UID) featureUID: String): FeatureApiBean = featureServices.getFeature(featureUID)
+  fun getFeatureByUID(@PathVariable(value = PARAM_UID) featureUID: String): Mono<FeatureApiBean> = Mono.just(featureServices.getFeature(featureUID))
 
   @Operation(summary = "Create or update a feature", tags = ["Feature"])
   @ApiResponses(
@@ -81,12 +82,12 @@ class FeatureResource(@Autowired val featureServices: FeatureServices) {
   )
   @PutMapping(consumes = [APPLICATION_JSON_VALUE], produces = [APPLICATION_JSON_VALUE])
   fun createOrUpdateFeature(@PathVariable(value = PARAM_UID) featureUID: String,
-                            @RequestBody featureApiBean: FeatureApiBean): ResponseEntity<Boolean> =
-    FeatureWebUtils.getBooleanResponseEntityByHttpStatus(
+                            @RequestBody featureApiBean: FeatureApiBean): Mono<ResponseEntity<Boolean>> =
+    Mono.just(FeatureWebUtils.getBooleanResponseEntityByHttpStatus(
       featureServices.createOrUpdateFeature(
         featureUID, featureApiBean
       )
-    )
+    ))
 
   @Operation(summary = "Delete a feature", tags = ["Feature"])
   @ApiResponses(
@@ -94,9 +95,9 @@ class FeatureResource(@Autowired val featureServices: FeatureServices) {
     ApiResponse(responseCode = "404", description = "Feature not found")
   )
   @DeleteMapping
-  fun deleteFeature(@PathVariable(value = PARAM_UID) featureUID: String): ResponseEntity<Void> {
+  fun deleteFeature(@PathVariable(value = PARAM_UID) featureUID: String): Mono<ResponseEntity<Void>> {
     featureServices.deleteFeature(featureUID)
-    return ResponseEntity(NO_CONTENT)
+    return Mono.just(ResponseEntity(NO_CONTENT))
   }
 
   @Operation(summary = "Enable a feature", tags = ["Feature"])
@@ -105,9 +106,9 @@ class FeatureResource(@Autowired val featureServices: FeatureServices) {
     ApiResponse(responseCode = "404", description = "Feature not found")
   )
   @PostMapping(value = [("/$OPERATION_ENABLE")])
-  fun enableFeature(@PathVariable(value = PARAM_UID) featureUID: String): ResponseEntity<Void> {
+  fun enableFeature(@PathVariable(value = PARAM_UID) featureUID: String): Mono<ResponseEntity<Void>> {
     featureServices.enableFeature(featureUID)
-    return ResponseEntity(ACCEPTED)
+    return Mono.just(ResponseEntity(ACCEPTED))
   }
 
   @Operation(summary = "Disable a feature", tags = ["Feature"])
@@ -116,9 +117,9 @@ class FeatureResource(@Autowired val featureServices: FeatureServices) {
     ApiResponse(responseCode = "404", description = "Feature not found")
   )
   @PostMapping(value = [("/$OPERATION_DISABLE")])
-  fun disableFeature(@PathVariable(value = PARAM_UID) featureUID: String): ResponseEntity<Void> {
+  fun disableFeature(@PathVariable(value = PARAM_UID) featureUID: String): Mono<ResponseEntity<Void>> {
     featureServices.disableFeature(featureUID)
-    return ResponseEntity(ACCEPTED)
+    return Mono.just(ResponseEntity(ACCEPTED))
   }
 
   @Operation(summary = "Grant a permission to a feature", tags = ["Feature"])
@@ -129,9 +130,9 @@ class FeatureResource(@Autowired val featureServices: FeatureServices) {
   )
   @PostMapping(value = [("/$OPERATION_GRANTROLE/$PATH_PARAM_ROLE")])
   fun grantRoleToFeature(@PathVariable(value = PARAM_UID) featureUID: String,
-                         @PathVariable(value = PARAM_ROLE) role: String): ResponseEntity<Void> {
+                         @PathVariable(value = PARAM_ROLE) role: String): Mono<ResponseEntity<Void>> {
     featureServices.grantRoleToFeature(featureUID, role)
-    return ResponseEntity(ACCEPTED)
+    return Mono.just(ResponseEntity(ACCEPTED))
   }
 
   @Operation(summary = "Revoke a permission from a feature", tags = ["Feature"])
@@ -141,9 +142,9 @@ class FeatureResource(@Autowired val featureServices: FeatureServices) {
   )
   @PostMapping(value = [("/$OPERATION_REMOVEROLE/$PATH_PARAM_ROLE")])
   fun removeRoleFromFeature(@PathVariable(value = PARAM_UID) featureUID: String,
-                            @PathVariable(value = PARAM_ROLE) role: String): ResponseEntity<Void> {
+                            @PathVariable(value = PARAM_ROLE) role: String): Mono<ResponseEntity<Void>> {
     featureServices.removeRoleFromFeature(featureUID, role)
-    return ResponseEntity(ACCEPTED)
+    return Mono.just(ResponseEntity(ACCEPTED))
   }
 
   @Operation(summary = "Define the group of the feature", tags = ["Feature"])
@@ -154,9 +155,9 @@ class FeatureResource(@Autowired val featureServices: FeatureServices) {
   )
   @PostMapping(value = [("/$OPERATION_ADDGROUP/$PATH_PARAM_GROUP")])
   fun addGroupToFeature(@PathVariable(value = PARAM_UID) featureUID: String,
-                        @PathVariable(value = PARAM_GROUP) groupName: String): ResponseEntity<Void> {
+                        @PathVariable(value = PARAM_GROUP) groupName: String): Mono<ResponseEntity<Void>> {
     featureServices.addGroupToFeature(featureUID, groupName)
-    return ResponseEntity(ACCEPTED)
+    return Mono.just(ResponseEntity(ACCEPTED))
   }
 
   @Operation(summary = "Remove the group of the feature", tags = ["Feature"])
@@ -166,8 +167,8 @@ class FeatureResource(@Autowired val featureServices: FeatureServices) {
   )
   @PostMapping(value = [("/$OPERATION_REMOVEGROUP/$PATH_PARAM_GROUP")])
   fun removeGroupFromFeature(@PathVariable(value = PARAM_UID) featureUID: String,
-                             @PathVariable(value = PARAM_GROUP) groupName: String): ResponseEntity<Void> {
+                             @PathVariable(value = PARAM_GROUP) groupName: String): Mono<ResponseEntity<Void>> {
     featureServices.removeGroupFromFeature(featureUID, groupName)
-    return ResponseEntity(ACCEPTED)
+    return Mono.just(ResponseEntity(ACCEPTED))
   }
 }
