@@ -31,7 +31,7 @@ import java.util.List;
 import org.ff4j.core.Feature;
 import org.ff4j.services.domain.FeatureApiBean;
 import org.ff4j.spring.boot.web.api.resources.AbstractStepDef;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.test.web.servlet.client.MockMvcWebTestClient;
 
 /**
  * Created by Paul
@@ -43,7 +43,7 @@ public class FeatureStepDef extends AbstractStepDef {
   @Before
   @Override
   public void init() {
-    this.mockMvc = MockMvcBuilders.webAppContextSetup(context).build();
+    this.webTestClient = MockMvcWebTestClient.bindToApplicationContext(context).build();
   }
 
   @Given("^the feature store is cleared$")
@@ -68,13 +68,13 @@ public class FeatureStepDef extends AbstractStepDef {
   @When("^the user requests for a feature by \"([^\"]*)\" by \"([^\"]*)\" http method and content type as \"([^\"]*)\"$")
   public void the_user_requests_for_a_feature_by_by_http_method_and_content_type_as(String path,
       String httpMethod, String contentType) throws Throwable {
-    constructRequestBuilder(path, httpMethod, contentType);
+    createRequestBodyRec(path, httpMethod, contentType);
   }
 
   @When("^the user requests for a feature by \"([^\"]*)\" appended with \"([^\"]*)\" by \"([^\"]*)\" http method and content type as \"([^\"]*)\"$")
   public void the_user_requests_for_a_feature_by_appended_with_by_http_method_and_content_type_as(
       String path, String appendToPath, String httpMethod, String contentType) throws Throwable {
-    constructRequestBuilder(path + appendToPath, httpMethod, contentType);
+    createRequestBodyRec(path + appendToPath, httpMethod, contentType);
   }
 
   @When("^request body as$")
@@ -86,10 +86,10 @@ public class FeatureStepDef extends AbstractStepDef {
   @Then("^the user gets an error response with code \"([^\"]*)\" and error message as \"([^\"]*)\"$")
   public void the_user_gets_an_error_response_with_code_and_error_message_as(int statusCode,
       String expectedErrorResponse) throws Throwable {
-    assertErrorCodeAndMessage(statusCode, expectedErrorResponse);
+      assertErrorCodeAndMessage(statusCode, expectedErrorResponse);
   }
 
-  @Then("^the user gets the response with response code as (\\d+) and content as \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\" and \"([^\"]*)\"$")
+ @Then("^the user gets the response with response code as (\\d+) and content as \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\" and \"([^\"]*)\"$")
   public void the_user_gets_the_response_with_response_code_as_and_content_as_and(int responseCode,
       String expectedUid, String expectedEnabled, String expectedDescription, String expectedGroup,
       String expectedPermissions) throws Throwable {
@@ -102,7 +102,6 @@ public class FeatureStepDef extends AbstractStepDef {
     featureApiBean.setPermissions(new HashSet<>(Arrays.asList(expectedPermissions.split(","))));
     assertJsonResponse(new Gson().toJson(featureApiBean));
   }
-
   @Then("^the user gets the response with response code \"([^\"]*)\"$")
   public void the_user_gets_the_response_with_response_code(int expectedStatusCode)
       throws Throwable {
@@ -113,7 +112,6 @@ public class FeatureStepDef extends AbstractStepDef {
   public void the_response_body_as(String expectedResponse) throws Throwable {
     assertJsonResponse(expectedResponse);
   }
-
   @Then("^the response body has content to be \"([^\"]*)\"$")
   public void the_response_body_has_content_to_be(String expectedResponse) throws Throwable {
     assertContent(expectedResponse);

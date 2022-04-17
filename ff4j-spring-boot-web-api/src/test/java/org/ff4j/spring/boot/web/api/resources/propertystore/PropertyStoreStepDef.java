@@ -32,7 +32,7 @@ import org.ff4j.cache.FF4jCacheProxy;
 import org.ff4j.cache.InMemoryCacheManager;
 import org.ff4j.property.Property;
 import org.ff4j.spring.boot.web.api.resources.AbstractStepDef;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.test.web.servlet.client.MockMvcWebTestClient;
 
 /**
  * Created by Paul
@@ -44,7 +44,7 @@ public class PropertyStoreStepDef extends AbstractStepDef {
   @Before
   @Override
   public void init() {
-    this.mockMvc = MockMvcBuilders.webAppContextSetup(context).build();
+    this.webTestClient = MockMvcWebTestClient.bindToApplicationContext(context).build();
   }
 
   @Given("^the property store is cleared$")
@@ -81,7 +81,7 @@ public class PropertyStoreStepDef extends AbstractStepDef {
   @When("^the user requests for a feature by \"([^\"]*)\" by \"([^\"]*)\" http method and content type as \"([^\"]*)\"$")
   public void the_user_requests_for_a_feature_by_by_http_method_and_content_type_as(String path,
       String httpMethod, String contentType) throws Throwable {
-    constructRequestBuilder(path, httpMethod, contentType);
+    createRequestBodyRec(path, httpMethod, contentType);
   }
 
   @When("^request body as$")

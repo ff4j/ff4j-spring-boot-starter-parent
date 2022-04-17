@@ -43,6 +43,7 @@ import org.springframework.http.HttpStatus.NO_CONTENT
 import org.springframework.http.MediaType.APPLICATION_JSON_VALUE
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
+import reactor.core.publisher.Mono
 
 /**
  * Created by Paul
@@ -63,7 +64,7 @@ class PropertyResource(@Autowired val propertyServices: PropertyServices) {
     ), ApiResponse(responseCode = "404", description = "Property not found")]
   )
   @GetMapping(produces = [APPLICATION_JSON_VALUE])
-  fun getProperty(@PathVariable(value = PARAM_NAME) propertyName: String): PropertyApiBean = propertyServices.getProperty(propertyName)
+  fun getProperty(@PathVariable(value = PARAM_NAME) propertyName: String): Mono<PropertyApiBean> = Mono.just(propertyServices.getProperty(propertyName))
 
   @Operation(summary = "Create or update a property", tags = ["Property"])
   @ApiResponses(
@@ -76,10 +77,10 @@ class PropertyResource(@Autowired val propertyServices: PropertyServices) {
   )
   @PutMapping(produces = [APPLICATION_JSON_VALUE])
   fun createOrUpdateProperty(@PathVariable(value = PARAM_NAME) propertyName: String,
-                             @RequestBody propertyApiBean: PropertyApiBean): ResponseEntity<*> =
-    FeatureWebUtils.getBooleanResponseEntityByHttpStatus(
+                             @RequestBody propertyApiBean: PropertyApiBean): Mono<ResponseEntity<*>> =
+    Mono.just(FeatureWebUtils.getBooleanResponseEntityByHttpStatus(
       propertyServices.createOrUpdateProperty(propertyName, propertyApiBean)
-    )
+    ))
 
   @Operation(summary = "Delete a property", tags = ["Property"])
   @ApiResponses(
@@ -88,9 +89,9 @@ class PropertyResource(@Autowired val propertyServices: PropertyServices) {
     ), ApiResponse(responseCode = "404", description = "Property not found")]
   )
   @DeleteMapping(produces = [APPLICATION_JSON_VALUE])
-  fun deleteProperty(@PathVariable(value = PARAM_NAME) propertyName: String): ResponseEntity<Void> {
+  fun deleteProperty(@PathVariable(value = PARAM_NAME) propertyName: String): Mono<ResponseEntity<Void>> {
     propertyServices.deleteProperty(propertyName)
-    return ResponseEntity(NO_CONTENT)
+    return Mono.just(ResponseEntity(NO_CONTENT))
   }
 
   @Operation(summary = "Update value of a property", tags = ["Property"])
@@ -105,8 +106,8 @@ class PropertyResource(@Autowired val propertyServices: PropertyServices) {
     value = [("/$OPERATION_UPDATE/$PATH_PARAM_VALUE")], produces = [APPLICATION_JSON_VALUE]
   )
   fun updatePropertyName(@PathVariable(value = PARAM_NAME) propertyName: String,
-                         @PathVariable(value = PARAM_VALUE) newPropertyName: String): ResponseEntity<Void> {
+                         @PathVariable(value = PARAM_VALUE) newPropertyName: String): Mono<ResponseEntity<Void>> {
     propertyServices.updatePropertyName(propertyName, newPropertyName)
-    return ResponseEntity(HttpStatus.ACCEPTED)
+    return Mono.just(ResponseEntity(HttpStatus.ACCEPTED))
   }
 }

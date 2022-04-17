@@ -44,6 +44,8 @@ import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
+import reactor.core.publisher.Flux
+import reactor.core.publisher.Mono
 
 /**
  * Created by Paul
@@ -62,7 +64,7 @@ class FeatureStoreResource(@Autowired val featureStoreService: FeatureStoreServi
     )]
   )
   @GetMapping(produces = [APPLICATION_JSON_VALUE])
-  fun getFeatureStore(): FeatureStoreApiBean = featureStoreService.getFeatureStore()
+  fun getFeatureStore(): Mono<FeatureStoreApiBean> = Mono.just(featureStoreService.getFeatureStore())
 
   @Operation(summary = "Displays all the Features", tags = ["FeatureStore"])
   @GetMapping(value = [("/$RESOURCE_FEATURES")], produces = [APPLICATION_JSON_VALUE])
@@ -73,7 +75,7 @@ class FeatureStoreResource(@Autowired val featureStoreService: FeatureStoreServi
       content = arrayOf(Content(schema = Schema(implementation = FeatureApiBean::class)))
     )]
   )
-  fun getAllFeatures(): Collection<FeatureApiBean> = featureStoreService.getAllFeatures()
+  fun getAllFeatures(): Flux<FeatureApiBean> = Flux.fromIterable(featureStoreService.getAllFeatures())
 
   @Operation(summary = "Display information regarding Groups", tags = ["FeatureStore"])
   @GetMapping(value = [("/$RESOURCE_GROUPS")], produces = [APPLICATION_JSON_VALUE])
@@ -84,7 +86,7 @@ class FeatureStoreResource(@Autowired val featureStoreService: FeatureStoreServi
       content = arrayOf(Content(schema = Schema(implementation = GroupDescApiBean::class)))
     )]
   )
-  fun getAllGroups(): Collection<GroupDescApiBean> = featureStoreService.getAllGroups()
+  fun getAllGroups(): Flux<GroupDescApiBean> = Flux.fromIterable(featureStoreService.getAllGroups())
 
   @Operation(summary = "Display information related to Cache", tags = ["FeatureStore"])
   @GetMapping(value = [("/$RESOURCE_CACHE")], produces = [APPLICATION_JSON_VALUE])
@@ -95,7 +97,7 @@ class FeatureStoreResource(@Autowired val featureStoreService: FeatureStoreServi
       content = arrayOf(Content(schema = Schema(implementation = CacheApiBean::class)))
     ), ApiResponse(responseCode = "404", description = "feature store is not cached")]
   )
-  fun getFeaturesFromCache(): CacheApiBean = featureStoreService.getFeaturesFromCache()
+  fun getFeaturesFromCache(): Mono<CacheApiBean> = Mono.just(featureStoreService.getFeaturesFromCache())
 
   @Operation(summary = "Delete all Features in store", tags = ["FeatureStore"])
   @DeleteMapping(value = [("/$STORE_CLEAR")])
@@ -104,9 +106,9 @@ class FeatureStoreResource(@Autowired val featureStoreService: FeatureStoreServi
       responseCode = "204", description = "all feature have been deleted"
     )]
   )
-  fun deleteAllFeatures(): ResponseEntity<Void> {
+  fun deleteAllFeatures(): Mono<ResponseEntity<Void>> {
     featureStoreService.deleteAllFeatures()
-    return ResponseEntity(NO_CONTENT)
+    return Mono.just(ResponseEntity(NO_CONTENT))
   }
 
   @Operation(summary = "Clear cache", tags = ["FeatureStore"])
@@ -116,8 +118,8 @@ class FeatureStoreResource(@Autowired val featureStoreService: FeatureStoreServi
       responseCode = "204", description = "Gcache is cleared"
     ), ApiResponse(responseCode = "404", description = "feature store is not cached")]
   )
-  fun clearCachedFeatureStore(): ResponseEntity<Void> {
+  fun clearCachedFeatureStore(): Mono<ResponseEntity<Void>> {
     featureStoreService.clearCachedFeatureStore()
-    return ResponseEntity(NO_CONTENT)
+    return Mono.just(ResponseEntity(NO_CONTENT))
   }
 }

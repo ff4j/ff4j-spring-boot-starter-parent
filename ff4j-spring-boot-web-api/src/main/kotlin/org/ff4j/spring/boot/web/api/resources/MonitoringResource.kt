@@ -38,6 +38,7 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
+import reactor.core.publisher.Mono
 
 /**
  * Created by Paul
@@ -64,6 +65,6 @@ class MonitoringResource(@Autowired val monitoringServices: MonitoringServices) 
   @GetMapping(produces = [APPLICATION_JSON_VALUE])
   fun getMonitoringStatus(@RequestParam(
     value = PARAM_START, required = false, defaultValue = "0"
-  ) start: Long, @RequestParam(value = PARAM_END, required = false, defaultValue = "0") end: Long): EventRepositoryApiBean =
-    monitoringServices.getMonitoringStatus(start, end)
+  ) start: Long, @RequestParam(value = PARAM_END, required = false, defaultValue = "0") end: Long): Mono<EventRepositoryApiBean> =
+    Mono.just(monitoringServices.getMonitoringStatus(start, end))
 }

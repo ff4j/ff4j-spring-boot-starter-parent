@@ -23,9 +23,11 @@ package org.ff4j.spring.boot.web.api.resources;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.io.UnsupportedEncodingException;
+import java.net.URI;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import org.apache.commons.lang3.StringUtils;
 import org.ff4j.FF4j;
@@ -41,17 +43,16 @@ import org.ff4j.spring.boot.web.api.Application;
 import org.ff4j.spring.boot.web.api.utils.HttpMethod;
 import org.ff4j.store.InMemoryFeatureStore;
 import org.json.JSONException;
-import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootContextLoader;
 import org.springframework.http.MediaType;
-import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.web.WebAppConfiguration;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.reactive.server.WebTestClient;
+import org.springframework.test.web.reactive.server.WebTestClient.RequestBodySpec;
+import org.springframework.test.web.reactive.server.WebTestClient.ResponseSpec;
 import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.util.UriBuilder;
 
 /**
  * Created by Paul
@@ -62,11 +63,11 @@ import org.springframework.web.context.WebApplicationContext;
 @WebAppConfiguration
 public abstract class AbstractStepDef {
 
-  protected MockMvc mockMvc;
+  protected WebTestClient webTestClient;
   @Autowired
   protected WebApplicationContext context;
-  protected MockHttpServletRequestBuilder requestBuilder;
-  protected MockHttpServletResponse response;
+  protected RequestBodySpec requestBodySpec;
+  protected ResponseSpec response;
   @Autowired
   protected FF4j ff4j;
 
@@ -82,33 +83,21 @@ public abstract class AbstractStepDef {
     ff4j.setPropertiesStore(new InMemoryPropertyStore());
   }
 
+  protected void createRequestBodyRec(String path, String httpMethod, String contentType) {
+    requestBodySpec = webTestClient.method(HttpMethod.getHttpMethod(httpMethod))
+        .uri(path)
+        .contentType(MediaType.valueOf(contentType));
+  }
 
-  protected void constructRequestBuilder(String path, String httpMethod, String contentType) {
-    switch (HttpMethod.getHttpMethod(httpMethod)) {
-      case GET:
-        requestBuilder = MockMvcRequestBuilders.get(path)
-            .contentType(MediaType.valueOf(contentType));
-        break;
-      case PUT:
-        requestBuilder = MockMvcRequestBuilders.put(path)
-            .contentType(MediaType.valueOf(contentType));
-        break;
-      case DELETE:
-        requestBuilder = MockMvcRequestBuilders.delete(path)
-            .contentType(MediaType.valueOf(contentType));
-        break;
-      case POST:
-        requestBuilder = MockMvcRequestBuilders.post(path)
-            .contentType(MediaType.valueOf(contentType));
-        break;
-      default:
-        throw new AssertionError("http method not found");
-    }
+  protected void createRequestBodyRecWithParameter(String path, String httpMethod, String contentType, Map<String, String> formParams) {
+    requestBodySpec = webTestClient.method(HttpMethod.getHttpMethod(httpMethod))
+        .uri(uriBuilder -> buildUrl(uriBuilder, path, formParams))
+        .contentType(MediaType.valueOf(contentType));
   }
 
   protected void createFeatures(List<FeaturePojo> features) {
     for (FeaturePojo featurePojo : features) {
-      Feature feature = new Feature(featurePojo.getUid(), Boolean.valueOf(featurePojo.getEnable()),
+      Feature feature = new Feature(featurePojo.getUid(), Boolean.parseBoolean(featurePojo.getEnable()),
           featurePojo.getDescription(), featurePojo.getGroup(),
           Arrays.asList(featurePojo.getPermissions().split(",")));
       createFeature(feature);
@@ -136,33 +125,40 @@ public abstract class AbstractStepDef {
   }
 
   protected void setRequestBody(String requestBody) {
-    requestBuilder.content(requestBody);
+    requestBodySpec.bodyValue(requestBody);
+  }
+
+  protected void setRequestParameters() {
+    requestBodySpec.attribute("expression", "login | admin");
   }
 
   protected void assertErrorCodeAndMessage(int statusCode, String expectedErrorResponse)
       throws Exception {
-    response = mockMvc.perform(requestBuilder).andReturn().getResponse();
-    assertThat(response.getStatus()).isEqualTo(statusCode);
-    assertThat(response.getErrorMessage()).isEqualTo(expectedErrorResponse);
+    requestBodySpec.exchange().expectStatus().isEqualTo(statusCode);
+//    response.expectBody().json(expectedErrorResponse);
   }
 
   protected void assertStatus(int expectedStatusCode) throws Exception {
-    response = mockMvc.perform(requestBuilder).andReturn().getResponse();
-    assertThat(response.getStatus()).isEqualTo(expectedStatusCode);
+    response = requestBodySpec.exchange().expectStatus().isEqualTo(expectedStatusCode);
   }
 
   protected void assertJsonResponse(String expectedResponse)
       throws UnsupportedEncodingException, JSONException {
-    JSONAssert.assertEquals(expectedResponse, response.getContentAsString(), false);
+    response.expectBody().json(expectedResponse);
   }
 
   protected void assertContent(String expectedResponse) throws UnsupportedEncodingException {
-    assertThat(response.getContentAsString()).contains(expectedResponse);
+    response.expectBody(String.class).value(result -> assertThat(result).isEqualTo(expectedResponse));
   }
 
   protected Property asProperty(String name, String type, String value, String description,
       Set<String> fixedValues) {
     return PropertyFactory.createProperty(name, getType(type), value, description, fixedValues);
+  }
+
+  private URI buildUrl(UriBuilder uriBuilder, String path, Map<String, String> formParams) {
+    formParams.forEach(uriBuilder::queryParam);
+    return uriBuilder.path(path).build();
   }
 
   private String getType(String name) {
