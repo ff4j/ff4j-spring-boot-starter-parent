@@ -20,7 +20,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.ff4j</groupId>
   <artifactId>ff4j-spring-boot-starter-parent</artifactId>
-  <version>1.8.13-SNAPSHOT</version>
+  <version>1.8.14-SNAPSHOT</version>
   <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
   <!-- ~ MAIN INFO ~ -->
   <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
@@ -70,7 +70,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <java.version>1.8</java.version>
     <spring-boot.version>2.6.7</spring-boot.version>
-    <ff4j.version>1.8.12</ff4j.version>
+    <ff4j.version>1.8.13</ff4j.version>
     <kotlin.version>1.6.21</kotlin.version>
     <commons3.lang>3.12.0</commons3.lang>
     <commons.collection.version>3.2.2</commons.collection.version>
