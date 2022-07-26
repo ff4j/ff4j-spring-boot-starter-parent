@@ -87,7 +87,7 @@
     <dokka.version>0.10.0</dokka.version>
     <jackson-module-kotlin.version>2.13.3</jackson-module-kotlin.version>
     <license-maven-plugin.version>1.20</license-maven-plugin.version>
-    <maven-resources-plugin.version>3.2.0</maven-resources-plugin.version>
+    <maven-resources-plugin.version>3.3.0</maven-resources-plugin.version>
     <version.maven.plugin.nexus>1.6.13</version.maven.plugin.nexus>
     <version.maven.plugin.release>2.5.3</version.maven.plugin.release>
     <version.maven.plugin.gpg>3.0.1</version.maven.plugin.gpg>
