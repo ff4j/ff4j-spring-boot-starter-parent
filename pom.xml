@@ -69,7 +69,7 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <java.version>1.8</java.version>
-    <spring-boot.version>2.7.1</spring-boot.version>
+    <spring-boot.version>2.7.2</spring-boot.version>
     <ff4j.version>1.8.13</ff4j.version>
     <kotlin.version>1.7.10</kotlin.version>
     <commons3.lang>3.12.0</commons3.lang>
@@ -93,7 +93,7 @@
     <version.maven.plugin.gpg>3.0.1</version.maven.plugin.gpg>
     <version.maven.plugin.javadoc>3.4.0</version.maven.plugin.javadoc>
     <version.maven.plugin.source>3.2.1</version.maven.plugin.source>
-    <version.maven.plugin.dokka>1.7.0</version.maven.plugin.dokka>
+    <version.maven.plugin.dokka>1.7.10</version.maven.plugin.dokka>
     <license.path>${project.baseUri}/src/license</license.path>
   </properties>
   <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
