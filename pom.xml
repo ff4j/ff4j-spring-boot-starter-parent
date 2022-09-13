@@ -498,7 +498,7 @@
                     </goals>
                   </pluginExecutionFilter>
                   <action>
-                    <ignore />
+                    <ignore/>
                   </action>
                 </pluginExecution>
               </pluginExecutions>
@@ -664,7 +664,7 @@
       </roles>
       <timezone>GMT+5:30</timezone>
       <properties>
-        <picUrl />
+        <picUrl/>
       </properties>
     </developer>
   </developers>
