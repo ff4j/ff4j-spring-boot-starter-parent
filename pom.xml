@@ -93,7 +93,7 @@
     <version.maven.plugin.gpg>3.0.1</version.maven.plugin.gpg>
     <version.maven.plugin.javadoc>3.4.1</version.maven.plugin.javadoc>
     <version.maven.plugin.source>3.2.1</version.maven.plugin.source>
-    <version.maven.plugin.dokka>1.7.10</version.maven.plugin.dokka>
+    <version.maven.plugin.dokka>1.7.20</version.maven.plugin.dokka>
     <license.path>${project.baseUri}/src/license</license.path>
   </properties>
   <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
