@@ -78,7 +78,7 @@
     <gson.version>2.2.4</gson.version>
     <assertj.version>3.23.1</assertj.version>
     <jsonassert.version>1.5.1</jsonassert.version>
-    <easymock.version>4.3</easymock.version>
+    <easymock.version>5.0.0</easymock.version>
     <swagger.version>3.0.0</swagger.version>
     <springdoc-openapi-ui.version>1.6.12</springdoc-openapi-ui.version>
     <jacoco.version>0.8.8</jacoco.version>
