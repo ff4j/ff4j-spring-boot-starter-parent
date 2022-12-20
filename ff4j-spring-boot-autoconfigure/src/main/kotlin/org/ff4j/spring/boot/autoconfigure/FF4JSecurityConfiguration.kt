@@ -45,8 +45,9 @@ class FF4JSecurityConfiguration(private val config: FF4JConfigurationProperties)
   }
 
   override fun configure(http: HttpSecurity?) {
-    http?.authorizeRequests()?.antMatchers("/")?.permitAll()?.antMatchers("${config.webConsole.contextPath}/**")?.hasRole("ADMIN")?.and()
-      ?.formLogin()
+    //http?.authorizeRequests()?.antMatchers("/")?.permitAll()?
+    //?.antMatchers("${config.webConsole.contextPath}/**")?.hasRole("ADMIN")?.and()?.formLogin()
+    http?.csrf()?.disable()?.authorizeRequests()?.anyRequest()?.permitAll();
   }
 }
 
