@@ -1,6 +1,7 @@
 @FeatureStoreServices
 
-Feature: Provides api's to do the following
+Feature: FeatureStoreServices
+  Provides api's to do the following
   - Get information of the feature store
   - Get all the features in the feature store
   - Get all the groups

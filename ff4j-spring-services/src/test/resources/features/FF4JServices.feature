@@ -1,6 +1,7 @@
 @FF4JServices
 
-Feature: Provides api's to do the following
+Feature: FF4JServices
+  Provides api's to do the following
   - Provide core information on ff4J and available sub resources
   - Display security resources
   - Check if a feature is flipped
@@ -75,9 +76,9 @@ Feature: Provides api's to do the following
   # Check if a feature is flipped
   Scenario: When the user tries to know whether the feature is flipped
     When the user requests to check if the feature is flipped with feature uid as "login"
-    Then the user gets a response true
+    Then the user gets a response "true"
     When the user requests to check if the feature is flipped with feature uid as "admin"
-    Then the user gets a response false
+    Then the user gets a response "false"
 
   Scenario: When the user tries to know whether the feature is flipped and the feature does not exist
     When the user requests to check if the feature is flipped with feature uid as "cart"
@@ -126,11 +127,11 @@ Feature: Provides api's to do the following
     """
     When the user requests to check if the feature is flipped with feature uid as "login" and parameters
       | expression | login & admin |
-    Then the user gets a response false
+    Then the user gets a response "false"
     When the user requests to check if the feature is flipped with feature uid as "login" and parameters
       # or will be replaced by '|'
       | expression | login or admin |
-    Then the user gets a response true
+    Then the user gets a response "true"
     When the user requests to check if the feature is flipped with feature uid as "card" and parameters
       | expression | login & admin |
     Then the user gets an exception "org.ff4j.services.exceptions.FeatureNotFoundException"
