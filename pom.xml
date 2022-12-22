@@ -13,7 +13,9 @@
   ~ Copyright 2013-2016 the original author or authors.
   -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
   <!-- ~ COORDONATES ~ -->
   <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
@@ -29,11 +31,14 @@
   <url>https://ff4j.github.io/</url>
   <inceptionYear>2013</inceptionYear>
   <description>
-    FF4J, stands for Feature Flipping for Java, helps you implementing the 'feature toggle' agile development
+    FF4J, stands for Feature Flipping for Java, helps you implementing the 'feature toggle' agile
+    development
     practice.
-    Features (services/behaviour/treatments/screen parts) can be enabled and disabled at runtime but also limited to
+    Features (services/behaviour/treatments/screen parts) can be enabled and disabled at runtime but
+    also limited to
     an authorized
-    sub-set of users (e.g : beta-testers for beta feature). Once the feature is enabled and granted you can
+    sub-set of users (e.g : beta-testers for beta feature). Once the feature is enabled and granted
+    you can
     implement your own strategy
     to flip through custom FlippingStrategy.
   </description>
@@ -42,7 +47,8 @@
   <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
   <scm>
     <connection>scm:git:git@github.com:ff4j/ff4j-spring-boot-starter-parent.git</connection>
-    <developerConnection>scm:git:git@github.com:ff4j/ff4j-spring-boot-starter-parent.git</developerConnection>
+    <developerConnection>scm:git:git@github.com:ff4j/ff4j-spring-boot-starter-parent.git
+    </developerConnection>
     <url>git@github.com:ff4j/ff4j-spring-boot-starter-parent.git</url>
     <tag>HEAD</tag>
   </scm>
@@ -74,8 +80,9 @@
     <kotlin.version>1.7.22</kotlin.version>
     <commons3.lang>3.12.0</commons3.lang>
     <commons.collection.version>3.2.2</commons.collection.version>
-    <cucumber.version>1.2.5</cucumber.version>
+    <cucumber.version>7.9.0</cucumber.version>
     <gson.version>2.2.4</gson.version>
+    <junit-jupiter.version>5.9.1</junit-jupiter.version>
     <assertj.version>3.23.1</assertj.version>
     <jsonassert.version>1.5.1</jsonassert.version>
     <easymock.version>5.0.1</easymock.version>
@@ -101,9 +108,10 @@
   <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
   <modules>
     <module>ff4j-spring-services</module>
+    <!-- todo: uncomment the following
     <module>ff4j-spring-boot-web-api</module>
     <module>ff4j-spring-boot-autoconfigure</module>
-    <module>ff4j-spring-boot-starter</module>
+    <module>ff4j-spring-boot-starter</module>-->
   </modules>
   <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
   <!-- ~ DEPENDENCIES             ~ -->
@@ -198,28 +206,31 @@
         <version>${meanbean.version}</version>
         <scope>test</scope>
       </dependency>
+      <!-- Junit 5 -->
       <dependency>
-        <groupId>info.cukes</groupId>
+        <groupId>org.junit</groupId>
+        <artifactId>junit-bom</artifactId>
+        <version>${junit-jupiter.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <!-- Cucumber dependencies -->
+      <dependency>
+        <groupId>io.cucumber</groupId>
         <artifactId>cucumber-java8</artifactId>
         <version>${cucumber.version}</version>
         <scope>test</scope>
       </dependency>
       <dependency>
-        <groupId>info.cukes</groupId>
-        <artifactId>cucumber-junit</artifactId>
+        <groupId>io.cucumber</groupId>
+        <artifactId>cucumber-junit-platform-engine</artifactId>
         <version>${cucumber.version}</version>
         <scope>test</scope>
       </dependency>
       <dependency>
-        <groupId>info.cukes</groupId>
+        <groupId>io.cucumber</groupId>
         <artifactId>cucumber-spring</artifactId>
         <version>${cucumber.version}</version>
-        <scope>test</scope>
-      </dependency>
-      <dependency>
-        <groupId>org.jetbrains.kotlin</groupId>
-        <artifactId>kotlin-test-junit</artifactId>
-        <version>${kotlin.version}</version>
         <scope>test</scope>
       </dependency>
       <dependency>
@@ -231,6 +242,17 @@
     </dependencies>
   </dependencyManagement>
   <dependencies>
+    <!-- JUnit 5 dependencies -->
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.platform</groupId>
+      <artifactId>junit-platform-suite</artifactId>
+      <scope>test</scope>
+    </dependency>
     <!-- Kotlin -->
     <dependency>
       <groupId>org.jetbrains.kotlin</groupId>
@@ -241,18 +263,6 @@
       <groupId>com.fasterxml.jackson.module</groupId>
       <artifactId>jackson-module-kotlin</artifactId>
       <version>${jackson-module-kotlin.version}</version>
-      <exclusions>
-        <exclusion>
-          <artifactId>kotlin-stdlib</artifactId>
-          <groupId>org.jetbrains.kotlin</groupId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-    <dependency>
-      <groupId>org.jetbrains.kotlin</groupId>
-      <artifactId>kotlin-test</artifactId>
-      <version>${kotlin.version}</version>
-      <scope>test</scope>
       <exclusions>
         <exclusion>
           <artifactId>kotlin-stdlib</artifactId>
@@ -317,7 +327,6 @@
             <configuration>
               <sourceDirs>
                 <sourceDir>${project.basedir}/src/main/kotlin</sourceDir>
-                <sourceDir>${project.basedir}/src/main/java</sourceDir>
               </sourceDirs>
             </configuration>
           </execution>
@@ -330,7 +339,7 @@
             <configuration>
               <sourceDirs>
                 <sourceDir>${project.basedir}/src/test/kotlin</sourceDir>
-                <sourceDir>${project.basedir}/src/test/java</sourceDir>
+                <sourceDir>${project.basedir}/src/test/kotlin</sourceDir>
               </sourceDirs>
             </configuration>
           </execution>
@@ -402,8 +411,7 @@
               <licenseName>apache_v2</licenseName>
               <roots>
                 <root>src/main/kotlin</root>
-                <root>src/main/java</root>
-                <root>src/test/java</root>
+                <root>src/test/kotlin</root>
               </roots>
             </configuration>
           </execution>
@@ -673,7 +681,8 @@
   <!-- ~~~~~~~~~~~~~~~~~~~~~~~~ -->
   <issueManagement>
     <system>IssueTracking@Github</system>
-    <url><![CDATA[https://github.com/ff4j/ff4j-spring-boot-starter-parent/issues?sort=created&direction=desc&state=open]]></url>
+    <url>
+      <![CDATA[https://github.com/ff4j/ff4j-spring-boot-starter-parent/issues?sort=created&direction=desc&state=open]]></url>
   </issueManagement>
 
   <!-- Mandatory for releasing to central -->

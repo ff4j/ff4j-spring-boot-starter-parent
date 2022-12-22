@@ -1,6 +1,7 @@
 @MonitoringServices
 
-Feature: This feature enables in providing the user with api's where in the user is able to do the following:
+Feature: MonitoringServices
+  This feature enables in providing the user with api's where in the user is able to do the following:
   - Get monitoring information pertaining to all features
 
   Background:

@@ -1,6 +1,7 @@
 @PropertyServices
 
-Feature: This feature enables in providing the user with api's where in the user is able to do the following:
+Feature: PropertyServices
+  This feature enables in providing the user with api's where in the user is able to do the following:
   - Read information about a property
   - Create or update a property
   - Delete a property

@@ -1,6 +1,7 @@
 @GroupServices
 
-Feature: This feature enables in providing the user with api's where in the user is able to do the following:
+Feature: GroupServices
+  This feature enables in providing the user with api's where in the user is able to do the following:
   - Read information about all the features belonging to a group
   - Enable a group
   - Disable a group
