@@ -76,7 +76,7 @@
     <commons.collection.version>3.2.2</commons.collection.version>
     <cucumber.version>1.2.5</cucumber.version>
     <gson.version>2.2.4</gson.version>
-    <assertj.version>3.23.1</assertj.version>
+    <assertj.version>3.24.1</assertj.version>
     <jsonassert.version>1.5.1</jsonassert.version>
     <easymock.version>5.0.1</easymock.version>
     <swagger.version>3.0.0</swagger.version>
