@@ -74,13 +74,13 @@
   <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <java.version>1.8</java.version>
-    <spring-boot.version>2.7.6</spring-boot.version>
-    <ff4j.version>1.9</ff4j.version>
-    <kotlin.version>1.7.22</kotlin.version>
+    <java.version>17</java.version>
+    <spring-boot.version>3.0.2</spring-boot.version>
+    <ff4j.version>2.0.0-SNAPSHOT</ff4j.version>
+    <kotlin.version>1.8.0</kotlin.version>
     <commons3.lang>3.12.0</commons3.lang>
     <commons.collection.version>3.2.2</commons.collection.version>
-    <cucumber.version>7.9.0</cucumber.version>
+    <cucumber.version>7.11.0</cucumber.version>
     <gson.version>2.2.4</gson.version>
     <junit-jupiter.version>5.9.1</junit-jupiter.version>
     <assertj.version>3.23.1</assertj.version>
@@ -93,6 +93,8 @@
     <enforcer.version>3.1.0</enforcer.version>
     <dokka.version>0.10.0</dokka.version>
     <jackson-module-kotlin.version>2.14.1</jackson-module-kotlin.version>
+    <!-- plugin -->
+    <maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
     <license-maven-plugin.version>1.20</license-maven-plugin.version>
     <maven-resources-plugin.version>3.3.0</maven-resources-plugin.version>
     <version.maven.plugin.nexus>1.6.13</version.maven.plugin.nexus>
@@ -118,6 +120,15 @@
   <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
   <dependencyManagement>
     <dependencies>
+      <!-- https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-bom -->
+      <dependency>
+        <groupId>org.jetbrains.kotlin</groupId>
+        <artifactId>kotlin-bom</artifactId>
+        <version>${kotlin.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <!-- spring -->
       <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-dependencies</artifactId>
@@ -125,26 +136,7 @@
         <type>pom</type>
         <scope>import</scope>
       </dependency>
-      <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-autoconfigure</artifactId>
-        <version>${spring-boot.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-configuration-processor</artifactId>
-        <version>${spring-boot.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-webflux</artifactId>
-        <version>${spring-boot.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-tomcat</artifactId>
-        <scope>provided</scope>
-      </dependency>
+      <!-- FF4J -->
       <dependency>
         <groupId>org.ff4j</groupId>
         <artifactId>ff4j-core</artifactId>
@@ -183,12 +175,6 @@
       </dependency>
       <!-- Test dependency -->
       <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-test</artifactId>
-        <version>${spring-boot.version}</version>
-        <scope>test</scope>
-      </dependency>
-      <dependency>
         <groupId>org.skyscreamer</groupId>
         <artifactId>jsonassert</artifactId>
         <version>${jsonassert.version}</version>
@@ -214,30 +200,13 @@
         <type>pom</type>
         <scope>import</scope>
       </dependency>
-      <!-- Cucumber dependencies -->
+      <!-- Cucumber -->
       <dependency>
         <groupId>io.cucumber</groupId>
-        <artifactId>cucumber-java8</artifactId>
+        <artifactId>cucumber-bom</artifactId>
         <version>${cucumber.version}</version>
-        <scope>test</scope>
-      </dependency>
-      <dependency>
-        <groupId>io.cucumber</groupId>
-        <artifactId>cucumber-junit-platform-engine</artifactId>
-        <version>${cucumber.version}</version>
-        <scope>test</scope>
-      </dependency>
-      <dependency>
-        <groupId>io.cucumber</groupId>
-        <artifactId>cucumber-spring</artifactId>
-        <version>${cucumber.version}</version>
-        <scope>test</scope>
-      </dependency>
-      <dependency>
-        <groupId>org.assertj</groupId>
-        <artifactId>assertj-core</artifactId>
-        <version>${assertj.version}</version>
-        <scope>test</scope>
+        <type>pom</type>
+        <scope>import</scope>
       </dependency>
     </dependencies>
   </dependencyManagement>
@@ -253,6 +222,11 @@
       <artifactId>junit-platform-suite</artifactId>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>org.assertj</groupId>
+      <artifactId>assertj-core</artifactId>
+      <scope>test</scope>
+    </dependency>
     <!-- Kotlin -->
     <dependency>
       <groupId>org.jetbrains.kotlin</groupId>
@@ -263,12 +237,6 @@
       <groupId>com.fasterxml.jackson.module</groupId>
       <artifactId>jackson-module-kotlin</artifactId>
       <version>${jackson-module-kotlin.version}</version>
-      <exclusions>
-        <exclusion>
-          <artifactId>kotlin-stdlib</artifactId>
-          <groupId>org.jetbrains.kotlin</groupId>
-        </exclusion>
-      </exclusions>
     </dependency>
   </dependencies>
   <build>
@@ -290,19 +258,25 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-enforcer-plugin</artifactId>
         <version>${enforcer.version}</version>
+        <configuration>
+          <rules>
+            <dependencyConvergence/>
+            <requireReleaseDeps>
+              <failWhenParentIsSnapshot>false</failWhenParentIsSnapshot>
+              <excludes>
+                <exclude>${project.groupId}:*</exclude>
+              </excludes>
+            </requireReleaseDeps>
+          </rules>
+          <fail>true</fail>
+        </configuration>
         <executions>
           <execution>
-            <id>enforce-maven</id>
+            <id>enforce-versions</id>
             <goals>
               <goal>enforce</goal>
             </goals>
-            <configuration>
-              <rules>
-                <requireMavenVersion>
-                  <version>3.0</version>
-                </requireMavenVersion>
-              </rules>
-            </configuration>
+            <phase>validate</phase>
           </execution>
         </executions>
       </plugin>
@@ -315,7 +289,7 @@
           <compilerPlugins>
             <plugin>spring</plugin>
           </compilerPlugins>
-          <jvmTarget>1.8</jvmTarget>
+          <jvmTarget>${java.version}</jvmTarget>
         </configuration>
         <executions>
           <execution>
@@ -338,7 +312,6 @@
             </goals>
             <configuration>
               <sourceDirs>
-                <sourceDir>${project.basedir}/src/test/kotlin</sourceDir>
                 <sourceDir>${project.basedir}/src/test/kotlin</sourceDir>
               </sourceDirs>
             </configuration>
@@ -381,9 +354,10 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
+        <version>${maven-compiler-plugin.version}</version>
         <configuration>
-          <source>8</source>
-          <target>8</target>
+          <source>${java.version}</source>
+          <target>${java.version}</target>
         </configuration>
       </plugin>
       <!-- license -->
