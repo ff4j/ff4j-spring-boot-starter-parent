@@ -1,17 +1,15 @@
-package org.ff4j.spring.boot.web.api.resources.featurestore;
-
 /*-
  * #%L
- * ff4j-spring-boot-web-api
+ * ff4j-spring-services
  * %%
  * Copyright (C) 2013 - 2022 FF4J
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ * 
  *      http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -19,21 +17,17 @@ package org.ff4j.spring.boot.web.api.resources.featurestore;
  * limitations under the License.
  * #L%
  */
-
-import cucumber.api.CucumberOptions;
-import cucumber.api.junit.Cucumber;
-import org.junit.runner.RunWith;
+package org.ff4j.spring.boot.web.api.representation
 
 /**
  * Created by Paul
  *
  * @author <a href="mailto:paul58914080@gmail.com">Paul Williams</a>
  */
-@RunWith(Cucumber.class)
-@CucumberOptions(features = "classpath:features/FeatureStoreResource.feature", strict = true,
-    plugin = {"json:target/cucumber/FeatureStoreResource.json",
-        "junit:target/cucumber/FeatureStoreResource.xml"},
-    glue = "classpath:org/ff4j/spring/boot/web/api/resources/featurestore", tags = "@FeatureStoreResource")
-public class RunCucumberFeatureStoreTest {
-
-}
+data class FeaturePojo(
+  val uid: String,
+  val enable: String,
+  val description: String,
+  val group: String,
+  val permissions: String
+)

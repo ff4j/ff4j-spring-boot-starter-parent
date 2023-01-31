@@ -111,8 +111,8 @@
   <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
   <modules>
     <module>ff4j-spring-services</module>
-    <!-- todo: uncomment the following
     <module>ff4j-spring-boot-web-api</module>
+    <!-- todo: uncomment the following
     <module>ff4j-spring-boot-autoconfigure</module>
     <module>ff4j-spring-boot-starter</module>-->
   </modules>

@@ -1,17 +1,15 @@
-package org.ff4j.spring.boot.web.api;
-
 /*-
  * #%L
  * ff4j-spring-boot-web-api
  * %%
- * Copyright (C) 2013 - 2022 FF4J
+ * Copyright (C) 2013 - 2023 FF4J
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ * 
  *      http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -19,19 +17,16 @@ package org.ff4j.spring.boot.web.api;
  * limitations under the License.
  * #L%
  */
+package org.ff4j.spring.boot.web.api
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.SpringApplication
+import org.springframework.boot.autoconfigure.SpringBootApplication
+import org.springframework.context.annotation.ComponentScan
 
-/**
- * Created by Paul
- *
- * @author <a href="mailto:paul58914080@gmail.com">Paul Williams</a>
- */
 @SpringBootApplication
-public class Application {
+@ComponentScan(value = ["org.ff4j.spring.boot.web.api", "org.ff4j.services"])
+class RestTestApplication
 
-  public static void main(String[] args) {
-    SpringApplication.run(Application.class, args);
-  }
+fun main() {
+  SpringApplication.run(RestTestApplication::class.java)
 }
