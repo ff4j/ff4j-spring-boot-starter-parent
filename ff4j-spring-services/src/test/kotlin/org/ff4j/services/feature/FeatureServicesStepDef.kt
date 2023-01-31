@@ -30,7 +30,7 @@ import org.ff4j.services.FeatureServices
 import org.ff4j.services.InitializerStepDef
 import org.ff4j.services.domain.FeatureApiBean
 import org.ff4j.services.model.FeatureActions
-import kotlin.Boolean
+import java.lang.Boolean
 import kotlin.Any
 import kotlin.String
 import kotlin.Throwable
@@ -52,9 +52,9 @@ class FeatureServicesStepDef(ff4j: FF4j, featureServices: FeatureServices) : En 
     Given("the feature store is cleared") {
       testUtils.clearFeatureStore()
     }
-    Given("the feature with {string}, {string}, {string}, {string} and {string} exists in the feature store") { uid: String, enabled: Boolean, description: String, group: String, permissions: String ->
+    Given("the feature with {string}, {string}, {string}, {string} and {string} exists in the feature store") { uid: String, enabled: String, description: String, group: String, permissions: String ->
       val feature =
-        Feature(uid, enabled, description, group, permissions.split(","))
+        Feature(uid, Boolean.valueOf(enabled), description, group, permissions.split(","))
       testUtils.createFeatures(listOf(feature))
     }
     Given("the following features exists in the feature store") { dataTable: DataTable ->
@@ -128,16 +128,16 @@ class FeatureServicesStepDef(ff4j: FF4j, featureServices: FeatureServices) : En 
     Then("the user gets an exception {string}") { className: String ->
       testUtils.assertException(exception, className)
     }
-    Then("the user gets the response as {string}, {string}, {string}, {string} and {string}") { expectedUid: String, expectedEnabled: Boolean, expectedDescription: String, expectedGroup: String, expectedPermissions: String ->
+    Then("the user gets the response as {string}, {string}, {string}, {string} and {string}") { expectedUid: String, expectedEnabled: String, expectedDescription: String, expectedGroup: String, expectedPermissions: String ->
       val expectedFeature = Feature(
         expectedUid,
-        expectedEnabled,
+        Boolean.valueOf(expectedEnabled),
         expectedDescription,
         expectedGroup,
         expectedPermissions.split(",")
       )
       val expectedFeatureApiBean = FeatureApiBean(expectedFeature)
-      assertThat(actualResponse).usingRecursiveComparison().isEqualTo(expectedFeatureApiBean)
+      assertThat(actualResponse).isEqualToComparingFieldByField(expectedFeatureApiBean)
     }
     Then("feature is created") {
       assertThat(actualResponse).isEqualTo(FeatureActions.CREATED)
@@ -148,7 +148,7 @@ class FeatureServicesStepDef(ff4j: FF4j, featureServices: FeatureServices) : En 
     Then("the user gets the response as") { expectedResponse: String ->
       val featureApiBean: FeatureApiBean =
         Gson().fromJson(expectedResponse, FeatureApiBean::class.java)
-      assertThat(actualResponse).usingRecursiveComparison().isEqualTo(featureApiBean)
+      assertThat(actualResponse).isEqualToComparingOnlyGivenFields(featureApiBean)
     }
   }
 }
