@@ -23,6 +23,7 @@ package org.ff4j.spring.boot.web.api.exceptions
 import org.ff4j.exception.InvalidPropertyTypeException
 import org.ff4j.services.exceptions.*
 import org.springframework.http.HttpStatus
+import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.ControllerAdvice
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.ResponseStatus
@@ -34,6 +35,7 @@ import org.springframework.web.bind.annotation.ResponseStatus
  */
 @ControllerAdvice(basePackages = ["org.ff4j.spring.boot.web.api.resources"])
 class FF4jExceptionHandler {
+
   @ExceptionHandler(value = [(IllegalArgumentException::class)])
   @ResponseStatus(value = HttpStatus.BAD_REQUEST, reason = "bad request")
   fun badRequestHandler() { // no-op comment, do nothing
@@ -83,14 +85,12 @@ class FF4jExceptionHandler {
   }
 
   @ExceptionHandler(value = [(GroupNotExistsException::class)])
-  @ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "group does not exist")
-  fun groupNotExistsException() { // no-op comment, do nothing
-  }
+  fun groupNotExistsException(): ResponseEntity<String> =
+    ResponseEntity.status(HttpStatus.NOT_FOUND).body("group does not exist")
 
   @ExceptionHandler(value = [(FeatureStoreNotCached::class)])
-  @ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "feature store is not cached")
-  fun featureStoreNotCached() { // no-op comment, do nothing
-  }
+  fun featureStoreNotCached() =
+    ResponseEntity.status(HttpStatus.NOT_FOUND).body("feature store is not cached")
 
   @ExceptionHandler(value = [(AuthorizationNotExistsException::class)])
   @ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "no security has been defined")
