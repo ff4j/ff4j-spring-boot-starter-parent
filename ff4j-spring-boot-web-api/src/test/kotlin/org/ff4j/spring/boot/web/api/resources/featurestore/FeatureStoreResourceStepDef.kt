@@ -33,11 +33,10 @@ import org.springframework.test.web.reactive.server.WebTestClient
 import org.springframework.test.web.reactive.server.expectBody
 import org.springframework.web.context.WebApplicationContext
 
-class FeatureStoreStepDef(ff4j: FF4j, context: WebApplicationContext) : En {
+class FeatureStoreResourceStepDef(ff4j: FF4j, context: WebApplicationContext) : En {
 
   private val testUtils = FF4JTestHelperUtils(ff4j)
   private lateinit var response: WebTestClient.ResponseSpec
-  private lateinit var exception: Throwable
   private lateinit var webTestClient: WebTestClient
 
   init {
