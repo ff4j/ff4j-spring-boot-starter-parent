@@ -1,6 +1,7 @@
 @FeatureResource
 
-Feature: This feature enables in providing the user with RESTful api's where in the user is able to access the information
+Feature: FeatureResource
+  This feature enables in providing the user with RESTful api's where in the user is able to access the information
   of a feature by its unique identification and be able to modify the behavior of the feature config. The user should be
   able to do the following:
   - Read configuration information about the feature

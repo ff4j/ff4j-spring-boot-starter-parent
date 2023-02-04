@@ -42,47 +42,42 @@ class FF4jExceptionHandler {
   }
 
   @ExceptionHandler(value = [(FeatureNotFoundException::class)])
-  @ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "feature not found")
-  fun featureNotFoundException() { // no-op comment, do nothing
-  }
+  fun featureNotFoundException(): ResponseEntity<String> =
+    ResponseEntity.status(HttpStatus.NOT_FOUND).body("feature not found")
 
   @ExceptionHandler(value = [(FeatureIdBlankException::class)])
-  @ResponseStatus(value = HttpStatus.BAD_REQUEST, reason = "feature uid cannot be blank")
-  fun featureIdBlankException() { // no-op comment, do nothing
-  }
+  fun featureIdBlankException() =
+    ResponseEntity.status(HttpStatus.BAD_REQUEST).body("feature uid cannot be blank")
 
   @ExceptionHandler(value = [(FeatureIdNotMatchException::class)])
-  @ResponseStatus(
-    value = HttpStatus.BAD_REQUEST,
-    reason = "feature uid did not match with the requested feature uid to be created or updated"
-  )
-  fun featureIdNotMatchException() { // no-op comment, do nothing
-  }
+  fun featureIdNotMatchException() =
+    ResponseEntity.status(HttpStatus.BAD_REQUEST)
+      .body("feature uid did not match with the requested feature uid to be created or updated")
 
   @ExceptionHandler(value = [(FlippingStrategyBadRequestException::class)])
-  @ResponseStatus(value = HttpStatus.BAD_REQUEST, reason = "flipping strategy specified wrongly")
-  fun flippingStrategyBadRequestException() { // no-op comment, do nothing
-  }
+  fun flippingStrategyBadRequestException() =
+    ResponseEntity.status(HttpStatus.BAD_REQUEST)
+      .body("flipping strategy specified wrongly")
 
   @ExceptionHandler(value = [(PropertiesBadRequestException::class)])
-  @ResponseStatus(value = HttpStatus.BAD_REQUEST, reason = "properties specified wrongly")
-  fun propertiesBadRequestException() { // no-op comment, do nothing
-  }
+  fun propertiesBadRequestException() =
+    ResponseEntity.status(HttpStatus.BAD_REQUEST)
+      .body("properties specified wrongly")
 
   @ExceptionHandler(value = [(RoleExistsException::class)])
-  @ResponseStatus(value = HttpStatus.NOT_MODIFIED, reason = "role already exists")
-  fun roleExistsException() { // no-op comment, do nothing
-  }
+  fun roleExistsException() =
+    ResponseEntity.status(HttpStatus.NOT_MODIFIED)
+      .body("role already exists")
 
   @ExceptionHandler(value = [(RoleNotExistsException::class)])
-  @ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "role does not exist")
-  fun roleNotExistsException() { // no-op comment, do nothing
-  }
+  fun roleNotExistsException() =
+    ResponseEntity.status(HttpStatus.NOT_FOUND)
+      .body("role does not exist")
 
   @ExceptionHandler(value = [(GroupExistsException::class)])
-  @ResponseStatus(value = HttpStatus.NOT_MODIFIED, reason = "group already exists")
-  fun groupExistsException() { // no-op comment, do nothing
-  }
+  fun groupExistsException() =
+    ResponseEntity.status(HttpStatus.NOT_MODIFIED)
+      .body("group already exists")
 
   @ExceptionHandler(value = [(GroupNotExistsException::class)])
   fun groupNotExistsException(): ResponseEntity<String> =
