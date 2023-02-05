@@ -65,7 +65,7 @@ class FF4jResource(@Autowired val ff4JServices: FF4jServices) {
     )]
   )
   @GetMapping(produces = [APPLICATION_JSON_VALUE])
-  fun getStatus(): Mono<FF4jStatusApiBean> = Mono.just(ff4JServices.getStatus())
+  fun getStatus(): ResponseEntity<Mono<FF4jStatusApiBean>> = ResponseEntity.ok(Mono.just(ff4JServices.getStatus()))
 
   @Operation(
     summary = "Gets Security information (permissions manager)",
@@ -80,7 +80,7 @@ class FF4jResource(@Autowired val ff4JServices: FF4jServices) {
     ), ApiResponse(responseCode = "404", description = "no security has been defined")]
   )
   @GetMapping(value = [("/$RESOURCE_SECURITY")], produces = [APPLICATION_JSON_VALUE])
-  fun getSecurityInfo(): Mono<AuthorizationsManagerApiBean> = Mono.just(ff4JServices.getSecurityInfo())
+  fun getSecurityInfo(): ResponseEntity<Mono<AuthorizationsManagerApiBean>> = ResponseEntity.ok(Mono.just(ff4JServices.getSecurityInfo()))
 
   @Operation(summary = "Simple check feature toggle", tags = ["FF4J"])
   @ApiResponses(
@@ -91,9 +91,9 @@ class FF4jResource(@Autowired val ff4JServices: FF4jServices) {
     ), ApiResponse(responseCode = "404", description = "Feature not found")]
   )
   @GetMapping(value = [("/$OPERATION_CHECK/$PATH_PARAM_UID")])
-  fun check(@PathVariable(value = PARAM_UID) featureUID: String): Mono<ResponseEntity<Boolean>> {
+  fun check(@PathVariable(value = PARAM_UID) featureUID: String): ResponseEntity<Mono<Boolean>> {
     val status = ff4JServices.check(featureUID)
-    return Mono.just(ResponseEntity(status, OK))
+    return ResponseEntity.ok(Mono.just(status))
   }
 
   @Operation(summary = "Advanced check feature toggle (parametrized)", tags = ["FF4J"])
@@ -110,10 +110,10 @@ class FF4jResource(@Autowired val ff4JServices: FF4jServices) {
     value = [("/$OPERATION_CHECK/$PATH_PARAM_UID")], consumes = [APPLICATION_FORM_URLENCODED_VALUE]
   )
   fun check(@PathVariable(value = PARAM_UID) featureUID: String,
-            @RequestParam formParams: MultiValueMap<String, String>): Mono<ResponseEntity<Boolean>> {
+            @RequestParam formParams: MultiValueMap<String, String>): ResponseEntity<Mono<Boolean>> {
     val map = formParams.toSingleValueMap()
     val status = ff4JServices.check(featureUID, map)
-    return Mono.just(ResponseEntity(status, OK))
+    return ResponseEntity.ok(Mono.just(status))
   }
 
   @Operation(summary = "Check feature toggles", tags = ["FF4J"])
@@ -126,7 +126,7 @@ class FF4jResource(@Autowired val ff4JServices: FF4jServices) {
   )
   @PostMapping(value = [("/$OPERATION_CHECK")])
   fun check(@RequestBody featureUIDs: Set<String>,
-            @RequestParam formParams: MultiValueMap<String, String>): Mono<ResponseEntity<Map<String, Boolean>>> {
+            @RequestParam formParams: MultiValueMap<String, String>): ResponseEntity<Mono<Map<String, Boolean>>> {
     val featureUIDToEnableMap = HashMap<String, Boolean>()
     for (featureUID in featureUIDs) {
       try {
@@ -136,6 +136,6 @@ class FF4jResource(@Autowired val ff4JServices: FF4jServices) {
         featureUIDToEnableMap[featureUID] = false
       }
     }
-    return Mono.just(ResponseEntity(featureUIDToEnableMap, OK))
+    return ResponseEntity.ok(Mono.just(featureUIDToEnableMap))
   }
 }

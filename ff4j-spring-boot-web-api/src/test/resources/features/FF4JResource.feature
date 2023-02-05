@@ -1,6 +1,7 @@
 @FF4JResource
 
-Feature: Provides RESTful api's to do the following
+Feature:
+  Provides RESTful api's to do the following
   - Provide core information on ff4J and available sub resources
   - Display security resources
   - Check if a feature is flipped
@@ -140,7 +141,7 @@ Feature: Provides RESTful api's to do the following
     When the user requests for a feature by "/api/ff4j/check/login" by "POST" http method and content type as "application/x-www-form-urlencoded" and the following form param
       | name       | value          |
       # or will be replaced by '|'
-      | expression | login or admin |
+      | expression | login  \| admin |
     Then the user gets the response with response code "200"
     And the response body has content to be "true"
     When the user requests for a feature by "/api/ff4j/check/cart" by "POST" http method and content type as "application/x-www-form-urlencoded"
