@@ -26,7 +26,6 @@ import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.ControllerAdvice
 import org.springframework.web.bind.annotation.ExceptionHandler
-import org.springframework.web.bind.annotation.ResponseStatus
 
 /**
  * Created by Paul
@@ -37,9 +36,8 @@ import org.springframework.web.bind.annotation.ResponseStatus
 class FF4jExceptionHandler {
 
   @ExceptionHandler(value = [(IllegalArgumentException::class)])
-  @ResponseStatus(value = HttpStatus.BAD_REQUEST, reason = "bad request")
-  fun badRequestHandler() { // no-op comment, do nothing
-  }
+  fun badRequestHandler() : ResponseEntity<String> =
+    ResponseEntity.status(HttpStatus.BAD_REQUEST).body("bad request")
 
   @ExceptionHandler(value = [(FeatureNotFoundException::class)])
   fun featureNotFoundException(): ResponseEntity<String> =
@@ -88,9 +86,8 @@ class FF4jExceptionHandler {
     ResponseEntity.status(HttpStatus.NOT_FOUND).body("feature store is not cached")
 
   @ExceptionHandler(value = [(AuthorizationNotExistsException::class)])
-  @ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "no security has been defined")
-  fun authorizationNotExistsException() { // no-op comment, do nothing
-  }
+  fun authorizationNotExistsException() : ResponseEntity<String> =
+    ResponseEntity.status(HttpStatus.NOT_FOUND).body("no security has been defined")
 
   @ExceptionHandler(value = [(PropertyNotFoundException::class)])
   fun propertyNotFoundException(): ResponseEntity<String> =
