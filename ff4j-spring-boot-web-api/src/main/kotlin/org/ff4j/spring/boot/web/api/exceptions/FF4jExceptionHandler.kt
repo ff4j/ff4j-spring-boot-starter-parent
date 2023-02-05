@@ -46,36 +46,36 @@ class FF4jExceptionHandler {
     ResponseEntity.status(HttpStatus.NOT_FOUND).body("feature not found")
 
   @ExceptionHandler(value = [(FeatureIdBlankException::class)])
-  fun featureIdBlankException() =
+  fun featureIdBlankException(): ResponseEntity<String> =
     ResponseEntity.status(HttpStatus.BAD_REQUEST).body("feature uid cannot be blank")
 
   @ExceptionHandler(value = [(FeatureIdNotMatchException::class)])
-  fun featureIdNotMatchException() =
+  fun featureIdNotMatchException(): ResponseEntity<String> =
     ResponseEntity.status(HttpStatus.BAD_REQUEST)
       .body("feature uid did not match with the requested feature uid to be created or updated")
 
   @ExceptionHandler(value = [(FlippingStrategyBadRequestException::class)])
-  fun flippingStrategyBadRequestException() =
+  fun flippingStrategyBadRequestException(): ResponseEntity<String> =
     ResponseEntity.status(HttpStatus.BAD_REQUEST)
       .body("flipping strategy specified wrongly")
 
   @ExceptionHandler(value = [(PropertiesBadRequestException::class)])
-  fun propertiesBadRequestException() =
+  fun propertiesBadRequestException(): ResponseEntity<String> =
     ResponseEntity.status(HttpStatus.BAD_REQUEST)
       .body("properties specified wrongly")
 
   @ExceptionHandler(value = [(RoleExistsException::class)])
-  fun roleExistsException() =
+  fun roleExistsException(): ResponseEntity<String> =
     ResponseEntity.status(HttpStatus.NOT_MODIFIED)
       .body("role already exists")
 
   @ExceptionHandler(value = [(RoleNotExistsException::class)])
-  fun roleNotExistsException() =
+  fun roleNotExistsException(): ResponseEntity<String> =
     ResponseEntity.status(HttpStatus.NOT_FOUND)
       .body("role does not exist")
 
   @ExceptionHandler(value = [(GroupExistsException::class)])
-  fun groupExistsException() =
+  fun groupExistsException(): ResponseEntity<String> =
     ResponseEntity.status(HttpStatus.NOT_MODIFIED)
       .body("group already exists")
 
@@ -84,7 +84,7 @@ class FF4jExceptionHandler {
     ResponseEntity.status(HttpStatus.NOT_FOUND).body("group does not exist")
 
   @ExceptionHandler(value = [(FeatureStoreNotCached::class)])
-  fun featureStoreNotCached() =
+  fun featureStoreNotCached(): ResponseEntity<String> =
     ResponseEntity.status(HttpStatus.NOT_FOUND).body("feature store is not cached")
 
   @ExceptionHandler(value = [(AuthorizationNotExistsException::class)])
@@ -116,7 +116,6 @@ class FF4jExceptionHandler {
   }
 
   @ExceptionHandler(value = [(PropertyStoreNotCached::class)])
-  @ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "property store is not cached")
-  fun propertyStoreNotCached() { // no-op comment, do nothing
-  }
+  fun propertyStoreNotCached(): ResponseEntity<String> =
+    ResponseEntity.status(HttpStatus.NOT_FOUND).body("property store is not cached")
 }
