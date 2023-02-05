@@ -1,6 +1,7 @@
 @PropertyStoreResource
 
-Feature: This feature enables in providing the user with RESTful api's where in the user is able to do the following:
+Feature:
+  This feature enables in providing the user with RESTful api's where in the user is able to do the following:
   - Get information of the property store
   - Get all the properties in the property store
   - Delete all properties in the property store
