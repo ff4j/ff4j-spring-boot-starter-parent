@@ -66,7 +66,8 @@ class PropertyStoreResource(@Autowired val propertyStoreServices: PropertyStoreS
     )]
   )
   @GetMapping(produces = [APPLICATION_JSON_VALUE])
-  fun getPropertyStore(): Mono<PropertyStoreApiBean> = Mono.just(propertyStoreServices.getPropertyStore())
+  fun getPropertyStore(): ResponseEntity<Mono<PropertyStoreApiBean>> =
+    ResponseEntity.ok(Mono.just(propertyStoreServices.getPropertyStore()))
 
   @Operation(summary = "Display all the Properties", tags = ["PropertyStore"])
   @ApiResponses(
@@ -77,7 +78,8 @@ class PropertyStoreResource(@Autowired val propertyStoreServices: PropertyStoreS
     )]
   )
   @GetMapping(value = [RESOURCE_PROPERTIES], produces = [APPLICATION_JSON_VALUE])
-  fun getAllProperties(): Flux<PropertyApiBean> = Flux.fromIterable(propertyStoreServices.getAllProperties())
+  fun getAllProperties(): ResponseEntity<Flux<PropertyApiBean>> =
+    ResponseEntity.ok(Flux.fromIterable(propertyStoreServices.getAllProperties()))
 
   @Operation(summary = "Display information related to Cache", tags = ["PropertyStore"])
   @ApiResponses(
@@ -88,7 +90,8 @@ class PropertyStoreResource(@Autowired val propertyStoreServices: PropertyStoreS
     ), ApiResponse(responseCode = "404", description = "property store is not cached")]
   )
   @GetMapping(value = [("/$RESOURCE_CACHE")], produces = [APPLICATION_JSON_VALUE])
-  fun getPropertiesFromCache(): Mono<CacheApiBean> = Mono.just(propertyStoreServices.getPropertiesFromCache())
+  fun getPropertiesFromCache():  ResponseEntity<Mono<CacheApiBean>> =
+    ResponseEntity.ok(Mono.just(propertyStoreServices.getPropertiesFromCache()))
 
   @Operation(summary = "Delete all Properties in store", tags = ["PropertyStore"])
   @ApiResponses(
@@ -97,9 +100,9 @@ class PropertyStoreResource(@Autowired val propertyStoreServices: PropertyStoreS
     )]
   )
   @DeleteMapping(value = [("/$STORE_CLEAR")])
-  fun deleteAllProperties(): Mono<ResponseEntity<Void>> {
+  fun deleteAllProperties(): ResponseEntity<Mono<Void>> {
     propertyStoreServices.deleteAllProperties()
-    return Mono.just(ResponseEntity(NO_CONTENT))
+    return ResponseEntity.status(NO_CONTENT).build()
   }
 
   @Operation(summary = "Clear cache", tags = ["PropertyStore"])
@@ -109,8 +112,8 @@ class PropertyStoreResource(@Autowired val propertyStoreServices: PropertyStoreS
     ), ApiResponse(responseCode = "404", description = "property store is not cached")]
   )
   @DeleteMapping(value = [RESOURCE_CLEAR_CACHE])
-  fun clearCachedPropertyStore(): Mono<ResponseEntity<Void>> {
+  fun clearCachedPropertyStore():  ResponseEntity<Mono<Void>>  {
     propertyStoreServices.clearCachedPropertyStore()
-    return Mono.just(ResponseEntity(NO_CONTENT))
+    return ResponseEntity.status(NO_CONTENT).build()
   }
 }

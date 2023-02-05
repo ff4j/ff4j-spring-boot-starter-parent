@@ -39,6 +39,7 @@ import org.ff4j.spring.boot.web.api.utils.FeatureWebUtils
 import org.ff4j.web.FF4jWebConstants.OPERATION_UPDATE
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
+import org.springframework.http.HttpStatus.ACCEPTED
 import org.springframework.http.HttpStatus.NO_CONTENT
 import org.springframework.http.MediaType.APPLICATION_JSON_VALUE
 import org.springframework.http.ResponseEntity
@@ -64,7 +65,8 @@ class PropertyResource(@Autowired val propertyServices: PropertyServices) {
     ), ApiResponse(responseCode = "404", description = "Property not found")]
   )
   @GetMapping(produces = [APPLICATION_JSON_VALUE])
-  fun getProperty(@PathVariable(value = PARAM_NAME) propertyName: String): Mono<PropertyApiBean> = Mono.just(propertyServices.getProperty(propertyName))
+  fun getProperty(@PathVariable(value = PARAM_NAME) propertyName: String): ResponseEntity<Mono<PropertyApiBean>> =
+    ResponseEntity.ok(Mono.just(propertyServices.getProperty(propertyName)))
 
   @Operation(summary = "Create or update a property", tags = ["Property"])
   @ApiResponses(
@@ -89,9 +91,9 @@ class PropertyResource(@Autowired val propertyServices: PropertyServices) {
     ), ApiResponse(responseCode = "404", description = "Property not found")]
   )
   @DeleteMapping(produces = [APPLICATION_JSON_VALUE])
-  fun deleteProperty(@PathVariable(value = PARAM_NAME) propertyName: String): Mono<ResponseEntity<Void>> {
+  fun deleteProperty(@PathVariable(value = PARAM_NAME) propertyName: String): ResponseEntity<Mono<Void>> {
     propertyServices.deleteProperty(propertyName)
-    return Mono.just(ResponseEntity(NO_CONTENT))
+    return ResponseEntity.status(NO_CONTENT).build()
   }
 
   @Operation(summary = "Update value of a property", tags = ["Property"])
@@ -106,8 +108,8 @@ class PropertyResource(@Autowired val propertyServices: PropertyServices) {
     value = [("/$OPERATION_UPDATE/$PATH_PARAM_VALUE")], produces = [APPLICATION_JSON_VALUE]
   )
   fun updatePropertyName(@PathVariable(value = PARAM_NAME) propertyName: String,
-                         @PathVariable(value = PARAM_VALUE) newPropertyName: String): Mono<ResponseEntity<Void>> {
+                         @PathVariable(value = PARAM_VALUE) newPropertyName: String): ResponseEntity<Mono<Void>>  {
     propertyServices.updatePropertyName(propertyName, newPropertyName)
-    return Mono.just(ResponseEntity(HttpStatus.ACCEPTED))
+    return ResponseEntity.status(ACCEPTED).build()
   }
 }

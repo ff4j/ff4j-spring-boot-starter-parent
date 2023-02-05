@@ -34,6 +34,7 @@ import org.ff4j.web.FF4jWebConstants.PARAM_END
 import org.ff4j.web.FF4jWebConstants.PARAM_START
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.MediaType.APPLICATION_JSON_VALUE
+import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
@@ -65,6 +66,6 @@ class MonitoringResource(@Autowired val monitoringServices: MonitoringServices) 
   @GetMapping(produces = [APPLICATION_JSON_VALUE])
   fun getMonitoringStatus(@RequestParam(
     value = PARAM_START, required = false, defaultValue = "0"
-  ) start: Long, @RequestParam(value = PARAM_END, required = false, defaultValue = "0") end: Long): Mono<EventRepositoryApiBean> =
-    Mono.just(monitoringServices.getMonitoringStatus(start, end))
+  ) start: Long, @RequestParam(value = PARAM_END, required = false, defaultValue = "0") end: Long): ResponseEntity<Mono<EventRepositoryApiBean>> =
+    ResponseEntity.ok(Mono.just(monitoringServices.getMonitoringStatus(start, end)))
 }
