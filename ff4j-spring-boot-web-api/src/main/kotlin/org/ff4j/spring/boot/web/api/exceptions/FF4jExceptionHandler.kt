@@ -93,27 +93,21 @@ class FF4jExceptionHandler {
   }
 
   @ExceptionHandler(value = [(PropertyNotFoundException::class)])
-  @ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "property not found")
-  fun propertyNotFoundException() { // no-op comment, do nothing
-  }
+  fun propertyNotFoundException(): ResponseEntity<String> =
+    ResponseEntity.status(HttpStatus.NOT_FOUND).body("property not found")
 
   @ExceptionHandler(value = [(PropertyNameBlankException::class)])
-  @ResponseStatus(value = HttpStatus.BAD_REQUEST, reason = "property name cannot be blank")
-  fun propertyNameBlankException() { // no-op comment, do nothing
-  }
+  fun propertyNameBlankException(): ResponseEntity<String> =
+    ResponseEntity.status(HttpStatus.BAD_REQUEST).body("property name cannot be blank")
 
   @ExceptionHandler(value = [(InvalidPropertyTypeException::class)])
-  @ResponseStatus(value = HttpStatus.BAD_REQUEST, reason = "bad request")
-  fun propertyValueInvalidException() { // no-op comment, do nothing
-  }
+  fun propertyValueInvalidException(): ResponseEntity<String> =
+    ResponseEntity.status(HttpStatus.BAD_REQUEST).body("bad request")
 
   @ExceptionHandler(value = [(PropertyNameNotMatchException::class)])
-  @ResponseStatus(
-    value = HttpStatus.BAD_REQUEST,
-    reason = "property name did not match with the requested property name to be created or updated"
-  )
-  fun propertyNameNotMatchException() { // no-op comment, do nothing
-  }
+  fun propertyNameNotMatchException(): ResponseEntity<String> =
+    ResponseEntity.status(HttpStatus.BAD_REQUEST)
+      .body("property name did not match with the requested property name to be created or updated")
 
   @ExceptionHandler(value = [(PropertyStoreNotCached::class)])
   fun propertyStoreNotCached(): ResponseEntity<String> =
