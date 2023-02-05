@@ -37,6 +37,7 @@ import org.ff4j.web.FF4jWebConstants.OPERATION_DISABLE
 import org.ff4j.web.FF4jWebConstants.OPERATION_ENABLE
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.MediaType.APPLICATION_JSON_VALUE
+import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import reactor.core.publisher.Flux
 
@@ -59,8 +60,8 @@ class GroupResource(@Autowired val groupServices: GroupServices) {
     ), ApiResponse(responseCode = "404", description = "Group not found")]
   )
   @GetMapping(produces = [APPLICATION_JSON_VALUE])
-  fun getFeaturesByGroup(@PathVariable(value = PARAM_GROUP) groupName: String): Flux<FeatureApiBean> =
-    Flux.fromIterable(groupServices.getFeaturesByGroup(groupName))
+  fun getFeaturesByGroup(@PathVariable(value = PARAM_GROUP) groupName: String): ResponseEntity<Flux<FeatureApiBean>> =
+    ResponseEntity.ok(Flux.fromIterable(groupServices.getFeaturesByGroup(groupName)))
 
   @Operation(summary = "Enable a group", tags = ["Groups"])
   @ApiResponses(
@@ -69,7 +70,8 @@ class GroupResource(@Autowired val groupServices: GroupServices) {
     ), ApiResponse(responseCode = "404", description = "Group not found")]
   )
   @PostMapping(value = [("/$OPERATION_ENABLE")], produces = [APPLICATION_JSON_VALUE])
-  fun enableGroup(@PathVariable(value = PARAM_GROUP) groupName: String) = groupServices.enableGroup(groupName)
+  fun enableGroup(@PathVariable(value = PARAM_GROUP) groupName: String): ResponseEntity<Unit> =
+    ResponseEntity.ok(groupServices.enableGroup(groupName))
 
   @Operation(summary = "Disable a group", tags = ["Groups"])
   @ApiResponses(
@@ -78,5 +80,6 @@ class GroupResource(@Autowired val groupServices: GroupServices) {
     ), ApiResponse(responseCode = "404", description = "Group not found")]
   )
   @PostMapping(value = [("/$OPERATION_DISABLE")], produces = [APPLICATION_JSON_VALUE])
-  fun disableGroup(@PathVariable(value = PARAM_GROUP) groupName: String) = groupServices.disableGroup(groupName)
+  fun disableGroup(@PathVariable(value = PARAM_GROUP) groupName: String): ResponseEntity<Unit> =
+    ResponseEntity.ok(groupServices.disableGroup(groupName))
 }
