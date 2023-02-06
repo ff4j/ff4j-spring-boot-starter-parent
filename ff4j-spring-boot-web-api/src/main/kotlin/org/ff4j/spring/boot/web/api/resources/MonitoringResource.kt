@@ -64,8 +64,10 @@ class MonitoringResource(@Autowired val monitoringServices: MonitoringServices) 
     ), ApiResponse(responseCode = "404", description = "No event repository defined")]
   )
   @GetMapping(produces = [APPLICATION_JSON_VALUE])
-  fun getMonitoringStatus(@RequestParam(
-    value = PARAM_START, required = false, defaultValue = "0"
-  ) start: Long, @RequestParam(value = PARAM_END, required = false, defaultValue = "0") end: Long): ResponseEntity<Mono<EventRepositoryApiBean>> =
+  fun getMonitoringStatus(
+    @RequestParam(
+      value = PARAM_START, required = false, defaultValue = "0"
+    ) start: Long, @RequestParam(value = PARAM_END, required = false, defaultValue = "0") end: Long
+  ): ResponseEntity<Mono<EventRepositoryApiBean>> =
     ResponseEntity.ok(Mono.just(monitoringServices.getMonitoringStatus(start, end)))
 }

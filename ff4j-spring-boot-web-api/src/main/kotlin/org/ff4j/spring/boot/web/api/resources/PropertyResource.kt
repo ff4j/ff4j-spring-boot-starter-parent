@@ -38,7 +38,6 @@ import org.ff4j.services.domain.PropertyApiBean
 import org.ff4j.spring.boot.web.api.utils.FeatureWebUtils
 import org.ff4j.web.FF4jWebConstants.OPERATION_UPDATE
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.http.HttpStatus
 import org.springframework.http.HttpStatus.ACCEPTED
 import org.springframework.http.HttpStatus.NO_CONTENT
 import org.springframework.http.MediaType.APPLICATION_JSON_VALUE
@@ -78,11 +77,15 @@ class PropertyResource(@Autowired val propertyServices: PropertyServices) {
     )]
   )
   @PutMapping(produces = [APPLICATION_JSON_VALUE])
-  fun createOrUpdateProperty(@PathVariable(value = PARAM_NAME) propertyName: String,
-                             @RequestBody propertyApiBean: PropertyApiBean): Mono<ResponseEntity<*>> =
-    Mono.just(FeatureWebUtils.getBooleanResponseEntityByHttpStatus(
-      propertyServices.createOrUpdateProperty(propertyName, propertyApiBean)
-    ))
+  fun createOrUpdateProperty(
+    @PathVariable(value = PARAM_NAME) propertyName: String,
+    @RequestBody propertyApiBean: PropertyApiBean
+  ): Mono<ResponseEntity<*>> =
+    Mono.just(
+      FeatureWebUtils.getBooleanResponseEntityByHttpStatus(
+        propertyServices.createOrUpdateProperty(propertyName, propertyApiBean)
+      )
+    )
 
   @Operation(summary = "Delete a property", tags = ["Property"])
   @ApiResponses(
@@ -107,8 +110,10 @@ class PropertyResource(@Autowired val propertyServices: PropertyServices) {
   @PostMapping(
     value = [("/$OPERATION_UPDATE/$PATH_PARAM_VALUE")], produces = [APPLICATION_JSON_VALUE]
   )
-  fun updatePropertyName(@PathVariable(value = PARAM_NAME) propertyName: String,
-                         @PathVariable(value = PARAM_VALUE) newPropertyName: String): ResponseEntity<Mono<Void>>  {
+  fun updatePropertyName(
+    @PathVariable(value = PARAM_NAME) propertyName: String,
+    @PathVariable(value = PARAM_VALUE) newPropertyName: String
+  ): ResponseEntity<Mono<Void>> {
     propertyServices.updatePropertyName(propertyName, newPropertyName)
     return ResponseEntity.status(ACCEPTED).build()
   }
