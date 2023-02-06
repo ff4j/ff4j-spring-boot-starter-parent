@@ -34,7 +34,6 @@ import org.ff4j.services.domain.FF4jStatusApiBean
 import org.ff4j.services.exceptions.FeatureNotFoundException
 import org.ff4j.web.FF4jWebConstants.*
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.http.HttpStatus.OK
 import org.springframework.http.MediaType.APPLICATION_FORM_URLENCODED_VALUE
 import org.springframework.http.MediaType.APPLICATION_JSON_VALUE
 import org.springframework.http.ResponseEntity
@@ -80,7 +79,8 @@ class FF4jResource(@Autowired val ff4JServices: FF4jServices) {
     ), ApiResponse(responseCode = "404", description = "no security has been defined")]
   )
   @GetMapping(value = [("/$RESOURCE_SECURITY")], produces = [APPLICATION_JSON_VALUE])
-  fun getSecurityInfo(): ResponseEntity<Mono<AuthorizationsManagerApiBean>> = ResponseEntity.ok(Mono.just(ff4JServices.getSecurityInfo()))
+  fun getSecurityInfo(): ResponseEntity<Mono<AuthorizationsManagerApiBean>> =
+    ResponseEntity.ok(Mono.just(ff4JServices.getSecurityInfo()))
 
   @Operation(summary = "Simple check feature toggle", tags = ["FF4J"])
   @ApiResponses(
@@ -109,8 +109,10 @@ class FF4jResource(@Autowired val ff4JServices: FF4jServices) {
   @PostMapping(
     value = [("/$OPERATION_CHECK/$PATH_PARAM_UID")], consumes = [APPLICATION_FORM_URLENCODED_VALUE]
   )
-  fun check(@PathVariable(value = PARAM_UID) featureUID: String,
-            @RequestParam formParams: MultiValueMap<String, String>): ResponseEntity<Mono<Boolean>> {
+  fun check(
+    @PathVariable(value = PARAM_UID) featureUID: String,
+    @RequestParam formParams: MultiValueMap<String, String>
+  ): ResponseEntity<Mono<Boolean>> {
     val map = formParams.toSingleValueMap()
     val status = ff4JServices.check(featureUID, map)
     return ResponseEntity.ok(Mono.just(status))
@@ -125,8 +127,10 @@ class FF4jResource(@Autowired val ff4JServices: FF4jServices) {
     ), ApiResponse(responseCode = "400", description = "Invalid parameter")]
   )
   @PostMapping(value = [("/$OPERATION_CHECK")])
-  fun check(@RequestBody featureUIDs: Set<String>,
-            @RequestParam formParams: MultiValueMap<String, String>): ResponseEntity<Mono<Map<String, Boolean>>> {
+  fun check(
+    @RequestBody featureUIDs: Set<String>,
+    @RequestParam formParams: MultiValueMap<String, String>
+  ): ResponseEntity<Mono<Map<String, Boolean>>> {
     val featureUIDToEnableMap = HashMap<String, Boolean>()
     for (featureUID in featureUIDs) {
       try {

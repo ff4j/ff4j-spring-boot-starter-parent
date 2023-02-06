@@ -36,7 +36,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler
 class FF4jExceptionHandler {
 
   @ExceptionHandler(value = [(IllegalArgumentException::class)])
-  fun badRequestHandler() : ResponseEntity<String> =
+  fun badRequestHandler(): ResponseEntity<String> =
     ResponseEntity.status(HttpStatus.BAD_REQUEST).body("bad request")
 
   @ExceptionHandler(value = [(FeatureNotFoundException::class)])
@@ -86,7 +86,7 @@ class FF4jExceptionHandler {
     ResponseEntity.status(HttpStatus.NOT_FOUND).body("feature store is not cached")
 
   @ExceptionHandler(value = [(AuthorizationNotExistsException::class)])
-  fun authorizationNotExistsException() : ResponseEntity<String> =
+  fun authorizationNotExistsException(): ResponseEntity<String> =
     ResponseEntity.status(HttpStatus.NOT_FOUND).body("no security has been defined")
 
   @ExceptionHandler(value = [(PropertyNotFoundException::class)])

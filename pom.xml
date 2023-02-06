@@ -104,6 +104,7 @@
     <version.maven.plugin.javadoc>3.4.1</version.maven.plugin.javadoc>
     <version.maven.plugin.source>3.2.1</version.maven.plugin.source>
     <version.maven.plugin.dokka>1.7.20</version.maven.plugin.dokka>
+    <kotlin.code.style>official</kotlin.code.style>
     <license.path>${project.baseUri}/src/license</license.path>
   </properties>
   <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->

@@ -139,7 +139,7 @@ Feature:
     Then the user gets the response with response code "200"
     And the response body has content to be "false"
     When the user requests for a feature by "/api/ff4j/check/login" by "POST" http method and content type as "application/x-www-form-urlencoded" and the following form param
-      | name       | value          |
+      | name       | value           |
       # or will be replaced by '|'
       | expression | login  \| admin |
     Then the user gets the response with response code "200"

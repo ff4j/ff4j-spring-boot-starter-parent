@@ -90,7 +90,7 @@ class PropertyStoreResource(@Autowired val propertyStoreServices: PropertyStoreS
     ), ApiResponse(responseCode = "404", description = "property store is not cached")]
   )
   @GetMapping(value = [("/$RESOURCE_CACHE")], produces = [APPLICATION_JSON_VALUE])
-  fun getPropertiesFromCache():  ResponseEntity<Mono<CacheApiBean>> =
+  fun getPropertiesFromCache(): ResponseEntity<Mono<CacheApiBean>> =
     ResponseEntity.ok(Mono.just(propertyStoreServices.getPropertiesFromCache()))
 
   @Operation(summary = "Delete all Properties in store", tags = ["PropertyStore"])
@@ -112,7 +112,7 @@ class PropertyStoreResource(@Autowired val propertyStoreServices: PropertyStoreS
     ), ApiResponse(responseCode = "404", description = "property store is not cached")]
   )
   @DeleteMapping(value = [RESOURCE_CLEAR_CACHE])
-  fun clearCachedPropertyStore():  ResponseEntity<Mono<Void>>  {
+  fun clearCachedPropertyStore(): ResponseEntity<Mono<Void>> {
     propertyStoreServices.clearCachedPropertyStore()
     return ResponseEntity.status(NO_CONTENT).build()
   }
