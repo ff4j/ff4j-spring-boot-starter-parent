@@ -5,12 +5,6 @@ import org.ff4j.property.PropertyBoolean
 import org.ff4j.property.PropertyInt
 import org.ff4j.property.PropertyLong
 import org.ff4j.property.PropertyString
-
-/**
- * Created by Paul
- *
- * @author <a href="mailto:paul58914080@gmail.com">Paul Williams</a>
- */
 enum class PropertyValueEnum(private val type: String, private val className: String?) {
 
   INT("int", PropertyInt::class.qualifiedName),
