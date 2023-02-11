@@ -2,7 +2,7 @@
  * #%L
  * ff4j-spring-boot-autoconfigure
  * %%
- * Copyright (C) 2013 - 2022 FF4J
+ * Copyright (C) 2013 - 2023 FF4J
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,9 +20,7 @@
 package org.ff4j.spring.boot.autoconfigure
 
 import org.springframework.boot.context.properties.ConfigurationProperties
-import org.springframework.boot.context.properties.ConstructorBinding
 
-@ConstructorBinding
 @ConfigurationProperties(prefix = "ff4j")
 data class FF4JConfigurationProperties(val api: Api = Api(),
                                        val audit: Audit = Audit(),

@@ -2,7 +2,7 @@
  * #%L
  * ff4j-spring-boot-autoconfigure
  * %%
- * Copyright (C) 2013 - 2022 FF4J
+ * Copyright (C) 2013 - 2023 FF4J
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -40,7 +40,7 @@ import org.springframework.context.annotation.Configuration
 @OpenAPIDefinition(
   info = Info(
     title = "FF4J (ff4j.org) WebAPI",
-    version = "1.8",
+    version = "2.0.0",
     description = "Administer and operate all tasks on your features through this api.",
     license = License(
       name = "Apache 2.0", url = "http://www.apache.org/licenses/LICENSE-2.0.html"

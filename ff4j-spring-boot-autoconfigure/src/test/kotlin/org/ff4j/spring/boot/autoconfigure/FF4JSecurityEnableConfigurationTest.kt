@@ -19,23 +19,33 @@
  */
 package org.ff4j.spring.boot.autoconfigure
 
-import jakarta.annotation.PostConstruct
+import org.assertj.core.api.Assertions
 import org.ff4j.FF4j
 import org.ff4j.security.SpringSecurityAuthorisationManager
-import org.springframework.boot.autoconfigure.AutoConfigureAfter
-import org.springframework.boot.autoconfigure.condition.ConditionalOnClass
-import org.springframework.context.annotation.Configuration
+import org.junit.jupiter.api.Test
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.test.context.TestPropertySource
 
-@Configuration
-@AutoConfigureAfter(FF4JConfiguration::class)
-@ConditionalOnClass(FF4j::class)
-class FF4JInitializationConfiguration(private val config: FF4JConfigurationProperties, val ff4j: FF4j) {
+@SpringBootTest(
+  webEnvironment = SpringBootTest.WebEnvironment.MOCK,
+  classes = [Application::class]
+)
+@TestPropertySource(properties = ["ff4j.security.enabled=true"])
+class FF4JSecurityEnableConfigurationTest {
 
-  @PostConstruct
-  fun init() {
-   ff4j.audit(config.audit.enabled)
-    if (config.security.enabled) {
-      ff4j.authorizationsManager = SpringSecurityAuthorisationManager()
-    }
+  @Autowired
+  private lateinit var ff4j: FF4j
+
+  @Test
+  fun testBoot() {
+    Assertions.assertThat(true).isTrue
+  }
+
+  @Test
+  fun testAuditEnable() {
+    Assertions.assertThat(ff4j.authorizationsManager).isInstanceOf(
+      SpringSecurityAuthorisationManager::class.java
+    )
   }
 }
