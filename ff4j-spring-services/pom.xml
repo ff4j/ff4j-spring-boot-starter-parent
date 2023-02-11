@@ -31,16 +31,16 @@
   </properties>
   <dependencies>
     <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-context</artifactId>
-    </dependency>
-    <dependency>
       <groupId>org.ff4j</groupId>
       <artifactId>ff4j-core</artifactId>
     </dependency>
     <dependency>
-      <artifactId>ff4j-aop</artifactId>
       <groupId>org.ff4j</groupId>
+      <artifactId>ff4j-aop</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-context</artifactId>
     </dependency>
     <dependency>
       <groupId>org.apache.commons</groupId>
@@ -59,18 +59,17 @@
     <dependency>
       <groupId>org.skyscreamer</groupId>
       <artifactId>jsonassert</artifactId>
+      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.easymock</groupId>
       <artifactId>easymock</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-test</artifactId>
+      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.meanbean</groupId>
       <artifactId>meanbean</artifactId>
+      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>io.cucumber</groupId>
@@ -92,23 +91,13 @@
       <artifactId>kotlin-test-junit</artifactId>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-test</artifactId>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
   <build>
-    <finalName>ff4j-spring-services</finalName>
-    <directory>target</directory>
-    <sourceDirectory>src/main/kotlin</sourceDirectory>
-    <testSourceDirectory>src/test/kotlin</testSourceDirectory>
-    <outputDirectory>target/classes</outputDirectory>
-    <testOutputDirectory>target/test-classes</testOutputDirectory>
-    <resources>
-      <resource>
-        <directory>src/main/resources</directory>
-      </resource>
-    </resources>
-    <testResources>
-      <testResource>
-        <directory>src/test/resources</directory>
-      </testResource>
-    </testResources>
+    <finalName>${project.artifactId}</finalName>
   </build>
 </project>
