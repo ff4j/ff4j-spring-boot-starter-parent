@@ -20,7 +20,7 @@
   <parent>
     <groupId>org.ff4j</groupId>
     <artifactId>ff4j-spring-boot-starter-parent</artifactId>
-    <version>1.10-SNAPSHOT</version>
+    <version>2.0.0-SNAPSHOT</version>
   </parent>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -28,24 +28,28 @@
   </properties>
   <dependencies>
     <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-web</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-autoconfigure</artifactId>
-    </dependency>
-    <dependency>
       <groupId>org.ff4j</groupId>
       <artifactId>ff4j-core</artifactId>
     </dependency>
     <dependency>
       <artifactId>ff4j-web</artifactId>
       <groupId>org.ff4j</groupId>
+    </dependency>
+    <dependency>
+      <groupId>org.ff4j</groupId>
+      <artifactId>ff4j-security-spring</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>jakarta.annotation</groupId>
+      <artifactId>jakarta.annotation-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-autoconfigure</artifactId>
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -62,61 +66,18 @@
       <artifactId>springdoc-openapi-ui</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.ff4j</groupId>
-      <artifactId>ff4j-security-spring</artifactId>
-    </dependency>
-    <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.assertj</groupId>
-      <artifactId>assertj-core</artifactId>
+      <scope>test</scope>
     </dependency>
   </dependencies>
   <build>
-    <finalName>ff4j-spring-boot-autoconfigure</finalName>
-    <directory>target</directory>
-    <sourceDirectory>src/main/kotlin</sourceDirectory>
-    <outputDirectory>target/classes</outputDirectory>
+    <finalName>${project.artifactId}</finalName>
     <plugins>
       <plugin>
-        <artifactId>kotlin-maven-plugin</artifactId>
         <groupId>org.jetbrains.kotlin</groupId>
-        <version>${kotlin.version}</version>
-        <configuration>
-          <compilerPlugins>
-            <plugin>spring</plugin>
-          </compilerPlugins>
-          <jvmTarget>1.8</jvmTarget>
-        </configuration>
+        <artifactId>kotlin-maven-plugin</artifactId>
         <executions>
-          <execution>
-            <id>compile</id>
-            <phase>process-sources</phase>
-            <goals>
-              <goal>compile</goal>
-            </goals>
-            <configuration>
-              <sourceDirs>
-                <sourceDir>${project.basedir}/src/main/kotlin</sourceDir>
-                <sourceDir>${project.basedir}/src/main/java</sourceDir>
-              </sourceDirs>
-            </configuration>
-          </execution>
-          <execution>
-            <id>test-compile</id>
-            <phase>test-compile</phase>
-            <goals>
-              <goal>test-compile</goal>
-            </goals>
-            <configuration>
-              <sourceDirs>
-                <sourceDir>${project.basedir}/src/test/kotlin</sourceDir>
-                <sourceDir>${project.basedir}/src/test/java</sourceDir>
-              </sourceDirs>
-            </configuration>
-          </execution>
           <execution>
             <id>kapt</id>
             <goals>
