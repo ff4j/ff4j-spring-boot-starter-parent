@@ -76,7 +76,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <java.version>17</java.version>
     <spring-boot.version>3.0.2</spring-boot.version>
-    <ff4j.version>2.0.0-SNAPSHOT</ff4j.version>
+    <ff4j.version>2.0.0</ff4j.version>
     <kotlin.version>1.8.0</kotlin.version>
     <commons3.lang>3.12.0</commons3.lang>
     <commons.collection.version>3.2.2</commons.collection.version>
@@ -113,9 +113,8 @@
   <modules>
     <module>ff4j-spring-services</module>
     <module>ff4j-spring-boot-web-api</module>
-    <!-- todo: uncomment the following
     <module>ff4j-spring-boot-autoconfigure</module>
-    <module>ff4j-spring-boot-starter</module>-->
+    <module>ff4j-spring-boot-starter</module>
   </modules>
   <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
   <!-- ~ DEPENDENCIES             ~ -->
@@ -244,6 +243,10 @@
   <build>
     <finalName>ff4j-spring-boot-starter-parent</finalName>
     <directory>target</directory>
+    <outputDirectory>target/classes</outputDirectory>
+    <testOutputDirectory>target/test-classes</testOutputDirectory>
+    <sourceDirectory>src/main/kotlin</sourceDirectory>
+    <testSourceDirectory>src/test/kotlin</testSourceDirectory>
     <resources>
       <resource>
         <directory>src/main/resources</directory>
