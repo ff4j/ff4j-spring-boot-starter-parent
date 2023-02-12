@@ -69,7 +69,7 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <java.version>1.8</java.version>
-    <spring-boot.version>2.7.6</spring-boot.version>
+    <spring-boot.version>2.7.8</spring-boot.version>
     <ff4j.version>1.9</ff4j.version>
     <kotlin.version>1.7.22</kotlin.version>
     <commons3.lang>3.12.0</commons3.lang>
@@ -498,7 +498,7 @@
                     </goals>
                   </pluginExecutionFilter>
                   <action>
-                    <ignore />
+                    <ignore/>
                   </action>
                 </pluginExecution>
               </pluginExecutions>
@@ -664,7 +664,7 @@
       </roles>
       <timezone>GMT+5:30</timezone>
       <properties>
-        <picUrl />
+        <picUrl/>
       </properties>
     </developer>
   </developers>
