@@ -80,12 +80,10 @@ class PropertyResource(@Autowired val propertyServices: PropertyServices) {
   fun createOrUpdateProperty(
     @PathVariable(value = PARAM_NAME) propertyName: String,
     @RequestBody propertyApiBean: PropertyApiBean
-  ): Mono<ResponseEntity<*>> =
-    Mono.just(
+  ): ResponseEntity<Mono<Boolean>> =
       FeatureWebUtils.getBooleanResponseEntityByHttpStatus(
         propertyServices.createOrUpdateProperty(propertyName, propertyApiBean)
       )
-    )
 
   @Operation(summary = "Delete a property", tags = ["Property"])
   @ApiResponses(

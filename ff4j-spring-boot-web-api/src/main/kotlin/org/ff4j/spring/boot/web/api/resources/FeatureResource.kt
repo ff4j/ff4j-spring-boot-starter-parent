@@ -86,14 +86,12 @@ class FeatureResource(@Autowired val featureServices: FeatureServices) {
   fun createOrUpdateFeature(
     @PathVariable(value = PARAM_UID) featureUID: String,
     @RequestBody featureApiBean: FeatureApiBean
-  ): Mono<ResponseEntity<Boolean>> =
-    Mono.just(
+  ): ResponseEntity<Mono<Boolean>> =
       FeatureWebUtils.getBooleanResponseEntityByHttpStatus(
         featureServices.createOrUpdateFeature(
           featureUID, featureApiBean
         )
       )
-    )
 
   @Operation(summary = "Delete a feature", tags = ["Feature"])
   @ApiResponses(
