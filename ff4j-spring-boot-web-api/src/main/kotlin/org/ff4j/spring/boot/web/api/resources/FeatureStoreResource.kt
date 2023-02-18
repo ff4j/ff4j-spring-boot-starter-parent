@@ -112,9 +112,9 @@ class FeatureStoreResource(@Autowired val featureStoreService: FeatureStoreServi
       responseCode = "204", description = "all feature have been deleted"
     )]
   )
-  fun deleteAllFeatures(): ResponseEntity<Mono<ResponseEntity<Void>>> {
+  fun deleteAllFeatures(): ResponseEntity<Mono<Void>> {
     featureStoreService.deleteAllFeatures()
-    return ResponseEntity.ok(Mono.just(ResponseEntity(NO_CONTENT)))
+    return ResponseEntity.status(NO_CONTENT).build()
   }
 
   @Operation(summary = "Clear cache", tags = ["FeatureStore"])
@@ -124,8 +124,8 @@ class FeatureStoreResource(@Autowired val featureStoreService: FeatureStoreServi
       responseCode = "204", description = "Gcache is cleared"
     ), ApiResponse(responseCode = "404", description = "feature store is not cached")]
   )
-  fun clearCachedFeatureStore(): ResponseEntity<Mono<ResponseEntity<Void>>> {
+  fun clearCachedFeatureStore(): ResponseEntity<Mono<Void>> {
     featureStoreService.clearCachedFeatureStore()
-    return ResponseEntity.ok(Mono.just(ResponseEntity(NO_CONTENT)))
+    return ResponseEntity.status(NO_CONTENT).build()
   }
 }

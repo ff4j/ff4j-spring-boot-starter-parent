@@ -23,6 +23,7 @@ package org.ff4j.spring.boot.web.api.utils
 import org.ff4j.services.model.FeatureActions
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import reactor.core.publisher.Mono
 import java.lang.Boolean.TRUE
 
 /**
@@ -32,10 +33,10 @@ import java.lang.Boolean.TRUE
  */
 object FeatureWebUtils {
 
-  fun getBooleanResponseEntityByHttpStatus(featureActions: FeatureActions): ResponseEntity<Boolean> {
+  fun getBooleanResponseEntityByHttpStatus(featureActions: FeatureActions): ResponseEntity<Mono<Boolean>> {
     return when (featureActions) {
-      FeatureActions.CREATED -> ResponseEntity(TRUE, HttpStatus.CREATED)
-      FeatureActions.UPDATED -> ResponseEntity(TRUE, HttpStatus.NO_CONTENT)
+      FeatureActions.CREATED -> ResponseEntity(Mono.just(TRUE), HttpStatus.CREATED)
+      FeatureActions.UPDATED -> ResponseEntity(Mono.just(TRUE), HttpStatus.NO_CONTENT)
     }
   }
 }
