@@ -17,7 +17,7 @@
  * limitations under the License.
  * #L%
  */
-package org.ff4j.spring.boot.autoconfigure
+package org.ff4j.spring.boot.autoconfigure.common
 
 import org.assertj.core.api.Assertions
 import org.ff4j.FF4j
