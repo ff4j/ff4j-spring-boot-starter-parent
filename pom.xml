@@ -114,9 +114,11 @@
     <module>ff4j-spring-services</module>
     <module>ff4j-spring-rest-api</module>
     <module>ff4j-spring-boot-autoconfigure-common</module>
-   <!--
     <module>ff4j-spring-boot-autoconfigure-webmvc</module>
-    <module>ff4j-spring-boot-starter-webmvc</module>-->
+
+   <!--
+<module>ff4j-spring-boot-starter-webmvc</module>
+    -->
     <!--<module>ff4j-spring-boot-webflux-starter</module>
     <module>ff4j-spring-boot-webflux-autoconfigure</module>-->
   </modules>
