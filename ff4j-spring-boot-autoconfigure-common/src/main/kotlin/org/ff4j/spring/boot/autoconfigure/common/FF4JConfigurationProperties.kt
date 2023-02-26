@@ -17,7 +17,7 @@
  * limitations under the License.
  * #L%
  */
-package org.ff4j.spring.boot.autoconfigure
+package org.ff4j.spring.boot.autoconfigure.common
 
 import org.springframework.boot.context.properties.ConfigurationProperties
 
@@ -25,7 +25,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties
 data class FF4JConfigurationProperties(val api: Api = Api(),
                                        val audit: Audit = Audit(),
                                        val security: Security = Security(),
-                                       val webConsole: WebConsole = WebConsole()) {
+                                       val webConsole: WebConsole = WebConsole()
+) {
 
   data class Api(val contextPath: String = "/api/ff4j", val springDoc: SpringDoc = SpringDoc())
 
@@ -35,7 +36,8 @@ data class FF4JConfigurationProperties(val api: Api = Api(),
 
   data class WebConsole(val enabled: Boolean = false,
                         val contextPath: String = "/ff4j-web-console",
-                        val security: WebConsoleSecurity = WebConsoleSecurity())
+                        val security: WebConsoleSecurity = WebConsoleSecurity()
+  )
 
   data class WebConsoleSecurity(val enabled: Boolean = false, val username: String = "admin", val password: String = "admin")
 

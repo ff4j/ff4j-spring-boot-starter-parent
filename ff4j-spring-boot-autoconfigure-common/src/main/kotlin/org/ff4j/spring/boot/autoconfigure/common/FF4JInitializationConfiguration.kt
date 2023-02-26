@@ -17,16 +17,16 @@
  * limitations under the License.
  * #L%
  */
-package org.ff4j.spring.boot.autoconfigure
+package org.ff4j.spring.boot.autoconfigure.common
 
 import jakarta.annotation.PostConstruct
 import org.ff4j.FF4j
 import org.ff4j.security.SpringSecurityAuthorisationManager
+import org.springframework.boot.autoconfigure.AutoConfiguration
 import org.springframework.boot.autoconfigure.AutoConfigureAfter
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass
-import org.springframework.context.annotation.Configuration
 
-@Configuration
+@AutoConfiguration
 @AutoConfigureAfter(FF4JConfiguration::class)
 @ConditionalOnClass(FF4j::class)
 class FF4JInitializationConfiguration(private val config: FF4JConfigurationProperties, val ff4j: FF4j) {

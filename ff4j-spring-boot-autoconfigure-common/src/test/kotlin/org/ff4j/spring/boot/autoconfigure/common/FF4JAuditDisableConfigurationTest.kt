@@ -17,7 +17,7 @@
  * limitations under the License.
  * #L%
  */
-package org.ff4j.spring.boot.autoconfigure
+package org.ff4j.spring.boot.autoconfigure.common
 
 import org.assertj.core.api.Assertions
 import org.ff4j.FF4j
@@ -30,8 +30,8 @@ import org.springframework.test.context.TestPropertySource
   webEnvironment = SpringBootTest.WebEnvironment.MOCK,
   classes = [Application::class]
 )
-@TestPropertySource(properties = ["ff4j.audit.enabled=true"])
-class FF4JAuditEnableConfigurationTest {
+@TestPropertySource(properties = ["ff4j.audit.enabled=false"])
+class FF4JAuditDisableConfigurationTest {
   @Autowired
   private lateinit var ff4j: FF4j
 
@@ -42,6 +42,6 @@ class FF4JAuditEnableConfigurationTest {
 
   @Test
   fun testAuditEnable() {
-    Assertions.assertThat(ff4j.isEnableAudit).isTrue
+    Assertions.assertThat(ff4j.isEnableAudit).isFalse
   }
 }

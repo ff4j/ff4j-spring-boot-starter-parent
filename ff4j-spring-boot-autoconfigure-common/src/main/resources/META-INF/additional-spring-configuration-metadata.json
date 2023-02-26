@@ -2,43 +2,43 @@
   "groups": [
     {
       "name": "ff4j",
-      "type": "org.ff4j.spring.boot.autoconfigure.FF4JConfigurationProperties",
-      "sourceType": "org.ff4j.spring.boot.autoconfigure.FF4JConfigurationProperties"
+      "type": "org.ff4j.spring.boot.autoconfigure.common.FF4JConfigurationProperties",
+      "sourceType": "org.ff4j.spring.boot.autoconfigure.common.FF4JConfigurationProperties"
     },
     {
       "name": "ff4j.api",
-      "type": "org.ff4j.spring.boot.autoconfigure.FF4JConfigurationProperties$Api",
-      "sourceType": "org.ff4j.spring.boot.autoconfigure.FF4JConfigurationProperties",
+      "type": "org.ff4j.spring.boot.autoconfigure.common.FF4JConfigurationProperties$Api",
+      "sourceType": "org.ff4j.spring.boot.autoconfigure.common.FF4JConfigurationProperties",
       "sourceMethod": "getApi()"
     },
     {
       "name": "ff4j.api.spring-doc",
-      "type": "org.ff4j.spring.boot.autoconfigure.FF4JConfigurationProperties$SpringDoc",
-      "sourceType": "org.ff4j.spring.boot.autoconfigure.FF4JConfigurationProperties$Api",
+      "type": "org.ff4j.spring.boot.autoconfigure.common.FF4JConfigurationProperties$SpringDoc",
+      "sourceType": "org.ff4j.spring.boot.autoconfigure.common.FF4JConfigurationProperties$Api",
       "sourceMethod": "getSpringDoc()"
     },
     {
       "name": "ff4j.audit",
-      "type": "org.ff4j.spring.boot.autoconfigure.FF4JConfigurationProperties$Audit",
-      "sourceType": "org.ff4j.spring.boot.autoconfigure.FF4JConfigurationProperties",
+      "type": "org.ff4j.spring.boot.autoconfigure.common.FF4JConfigurationProperties$Audit",
+      "sourceType": "org.ff4j.spring.boot.autoconfigure.common.FF4JConfigurationProperties",
       "sourceMethod": "getAudit()"
     },
     {
       "name": "ff4j.security",
-      "type": "org.ff4j.spring.boot.autoconfigure.FF4JConfigurationProperties$Security",
-      "sourceType": "org.ff4j.spring.boot.autoconfigure.FF4JConfigurationProperties",
+      "type": "org.ff4j.spring.boot.autoconfigure.common.FF4JConfigurationProperties$Security",
+      "sourceType": "org.ff4j.spring.boot.autoconfigure.common.FF4JConfigurationProperties",
       "sourceMethod": "getSecurity()"
     },
     {
       "name": "ff4j.web-console",
-      "type": "org.ff4j.spring.boot.autoconfigure.FF4JConfigurationProperties$WebConsole",
-      "sourceType": "org.ff4j.spring.boot.autoconfigure.FF4JConfigurationProperties",
+      "type": "org.ff4j.spring.boot.autoconfigure.common.FF4JConfigurationProperties$WebConsole",
+      "sourceType": "org.ff4j.spring.boot.autoconfigure.common.FF4JConfigurationProperties",
       "sourceMethod": "getWebConsole()"
     },
     {
       "name": "ff4j.web-console.security",
-      "type": "org.ff4j.spring.boot.autoconfigure.FF4JConfigurationProperties$WebConsoleSecurity",
-      "sourceType": "org.ff4j.spring.boot.autoconfigure.FF4JConfigurationProperties$WebConsole",
+      "type": "org.ff4j.spring.boot.autoconfigure.common.FF4JConfigurationProperties$WebConsoleSecurity",
+      "sourceType": "org.ff4j.spring.boot.autoconfigure.common.FF4JConfigurationProperties$WebConsole",
       "sourceMethod": "getSecurity()"
     }
   ],
@@ -46,70 +46,70 @@
     {
       "name": "ff4j.api.context-path",
       "type": "java.lang.String",
-      "sourceType": "org.ff4j.spring.boot.autoconfigure.FF4JConfigurationProperties$Api",
+      "sourceType": "org.ff4j.spring.boot.autoconfigure.common.FF4JConfigurationProperties$Api",
       "description": "The context path of the RESTful api.",
       "defaultValue": "/api/ff4j"
     },
     {
       "name": "ff4j.api.spring-doc.enabled",
       "type": "java.lang.Boolean",
-      "sourceType": "org.ff4j.spring.boot.autoconfigure.FF4JConfigurationProperties$SpringDoc",
+      "sourceType": "org.ff4j.spring.boot.autoconfigure.common.FF4JConfigurationProperties$SpringDoc",
       "description": "Enabling whether the spring-doc should display the resources of ff4j.",
       "defaultValue": false
     },
     {
       "name": "ff4j.api.spring-doc.group",
       "type": "java.lang.String",
-      "sourceType": "org.ff4j.spring.boot.autoconfigure.FF4JConfigurationProperties$SpringDoc",
+      "sourceType": "org.ff4j.spring.boot.autoconfigure.common.FF4JConfigurationProperties$SpringDoc",
       "description": "The name of the group given to the RESTful api resources for spring doc.",
       "defaultValue": "ff4j"
     },
     {
       "name": "ff4j.audit.enabled",
       "type": "java.lang.Boolean",
-      "sourceType": "org.ff4j.spring.boot.autoconfigure.FF4JConfigurationProperties$Audit",
+      "sourceType": "org.ff4j.spring.boot.autoconfigure.common.FF4JConfigurationProperties$Audit",
       "description": "Enabling whether ff4j needs auditing.",
       "defaultValue": false
     },
     {
       "name": "ff4j.security.enabled",
       "type": "java.lang.Boolean",
-      "sourceType": "org.ff4j.spring.boot.autoconfigure.FF4JConfigurationProperties$Security",
+      "sourceType": "org.ff4j.spring.boot.autoconfigure.common.FF4JConfigurationProperties$Security",
       "description": "Enabling the spring security authorization manager to ff4j.",
       "defaultValue": false
     },
     {
       "name": "ff4j.web-console.context-path",
       "type": "java.lang.String",
-      "sourceType": "org.ff4j.spring.boot.autoconfigure.FF4JConfigurationProperties$WebConsole",
+      "sourceType": "org.ff4j.spring.boot.autoconfigure.common.FF4JConfigurationProperties$WebConsole",
       "description": "The context path of the web-console.",
       "defaultValue": "/ff4j-web-console"
     },
     {
       "name": "ff4j.web-console.enabled",
       "type": "java.lang.Boolean",
-      "sourceType": "org.ff4j.spring.boot.autoconfigure.FF4JConfigurationProperties$WebConsole",
+      "sourceType": "org.ff4j.spring.boot.autoconfigure.common.FF4JConfigurationProperties$WebConsole",
       "description": "Enabling the ff4j web-console.",
       "defaultValue": false
     },
     {
       "name": "ff4j.web-console.security.enabled",
       "type": "java.lang.Boolean",
-      "sourceType": "org.ff4j.spring.boot.autoconfigure.FF4JConfigurationProperties$WebConsoleSecurity",
+      "sourceType": "org.ff4j.spring.boot.autoconfigure.common.FF4JConfigurationProperties$WebConsoleSecurity",
       "description": "Enabling the ff4j web-console security.",
       "defaultValue": false
     },
     {
       "name": "ff4j.web-console.security.password",
       "type": "java.lang.String",
-      "sourceType": "org.ff4j.spring.boot.autoconfigure.FF4JConfigurationProperties$WebConsoleSecurity",
+      "sourceType": "org.ff4j.spring.boot.autoconfigure.common.FF4JConfigurationProperties$WebConsoleSecurity",
       "description": "The web-console security password.",
       "defaultValue": "admin"
     },
     {
       "name": "ff4j.web-console.security.username",
       "type": "java.lang.String",
-      "sourceType": "org.ff4j.spring.boot.autoconfigure.FF4JConfigurationProperties$WebConsoleSecurity",
+      "sourceType": "org.ff4j.spring.boot.autoconfigure.common.FF4JConfigurationProperties$WebConsoleSecurity",
       "description": "The web-console security username.",
       "defaultValue": "admin"
     }

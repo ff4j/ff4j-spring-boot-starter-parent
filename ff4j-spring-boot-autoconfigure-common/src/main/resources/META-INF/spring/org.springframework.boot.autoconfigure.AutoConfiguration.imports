@@ -1,0 +1,2 @@
+org.ff4j.spring.boot.autoconfigure.common.FF4JConfiguration
+org.ff4j.spring.boot.autoconfigure.common.FF4JInitializationConfiguration

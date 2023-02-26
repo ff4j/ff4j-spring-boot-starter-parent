@@ -17,24 +17,24 @@
  * limitations under the License.
  * #L%
  */
-package org.ff4j.spring.boot.autoconfigure
+package org.ff4j.spring.boot.autoconfigure.common
 
 import org.ff4j.FF4j
+import org.springframework.boot.autoconfigure.AutoConfiguration
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.ComponentScan
-import org.springframework.context.annotation.Configuration
 
 /**
  * Created by Paul
  *
  * @author [Paul Williams](mailto:paul58914080@gmail.com)
  */
-@Configuration
+@AutoConfiguration
 @ConditionalOnClass(FF4j::class)
-@ComponentScan(value = ["org.ff4j.spring.boot.web.api", "org.ff4j.services", "org.ff4j.aop", "org.ff4j.spring"])
+@ComponentScan(value = ["org.ff4j.spring.rest.api", "org.ff4j.services", "org.ff4j.aop", "org.ff4j.spring"])
 @ConfigurationPropertiesScan
 class FF4JConfiguration {
 
