@@ -18,18 +18,19 @@
  * #L%
  */
 
-package org.ff4j.spring.boot.autoconfigure
+package org.ff4j.spring.boot.webmvc.autoconfigure
 
 import io.swagger.v3.oas.annotations.OpenAPIDefinition
 import io.swagger.v3.oas.annotations.info.Contact
 import io.swagger.v3.oas.annotations.info.Info
 import io.swagger.v3.oas.annotations.info.License
+import org.ff4j.spring.boot.autoconfigure.common.FF4JConfigurationProperties
 import org.springdoc.core.GroupedOpenApi
 import org.springdoc.core.SpringDocConfiguration
+import org.springframework.boot.autoconfigure.AutoConfiguration
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication
 import org.springframework.context.annotation.Bean
-import org.springframework.context.annotation.Configuration
 
 
 /**
@@ -53,7 +54,7 @@ import org.springframework.context.annotation.Configuration
 )
 @ConditionalOnClass(SpringDocConfiguration::class)
 @ConditionalOnWebApplication
-@Configuration
+@AutoConfiguration
 class FF4JOpenApiConfiguration(private val config: FF4JConfigurationProperties) {
 
   @Bean
