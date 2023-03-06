@@ -14,7 +14,6 @@
     <license.path>${project.baseUri}../src/license</license.path>
   </properties>
   <dependencies>
-
     <dependency>
       <groupId>org.ff4j</groupId>
       <artifactId>ff4j-spring-boot-autoconfigure-common</artifactId>
@@ -22,8 +21,7 @@
     </dependency>
     <dependency>
       <groupId>org.springdoc</groupId>
-      <artifactId>springdoc-openapi-webmvc-core</artifactId>
-      <version>${springdoc-openapi-webmvc-core.version}</version>
+      <artifactId>springdoc-openapi-starter-webmvc-api</artifactId>
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>

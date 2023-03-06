@@ -17,7 +17,7 @@
  * limitations under the License.
  * #L%
  */
-package org.ff4j.spring.boot.webmvc.autoconfigure
+package org.ff4j.spring.boot.autoconfigure.webmvc
 
 import org.ff4j.FF4j
 import org.ff4j.spring.boot.autoconfigure.common.FF4JConfiguration

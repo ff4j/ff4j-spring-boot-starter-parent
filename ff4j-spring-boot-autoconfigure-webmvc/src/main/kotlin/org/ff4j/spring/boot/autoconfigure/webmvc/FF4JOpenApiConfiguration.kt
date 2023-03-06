@@ -18,15 +18,15 @@
  * #L%
  */
 
-package org.ff4j.spring.boot.webmvc.autoconfigure
+package org.ff4j.spring.boot.autoconfigure.webmvc
 
 import io.swagger.v3.oas.annotations.OpenAPIDefinition
 import io.swagger.v3.oas.annotations.info.Contact
 import io.swagger.v3.oas.annotations.info.Info
 import io.swagger.v3.oas.annotations.info.License
 import org.ff4j.spring.boot.autoconfigure.common.FF4JConfigurationProperties
-import org.springdoc.core.GroupedOpenApi
-import org.springdoc.core.SpringDocConfiguration
+import org.springdoc.core.configuration.SpringDocConfiguration
+import org.springdoc.core.models.GroupedOpenApi
 import org.springframework.boot.autoconfigure.AutoConfiguration
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication
@@ -60,7 +60,6 @@ class FF4JOpenApiConfiguration(private val config: FF4JConfigurationProperties) 
   @Bean
   fun groupApiEnabled(): GroupedOpenApi {
     return when (config.api.springDoc.enabled) {
-      true -> GroupedOpenApi.builder().group(config.api.springDoc.group).pathsToMatch("${config.api.contextPath}/**").build()
       else -> GroupedOpenApi.builder().group(config.api.springDoc.group).pathsToExclude("${config.api.contextPath}/**").build()
     }
   }
