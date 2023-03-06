@@ -18,17 +18,13 @@
       <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.springdoc</groupId>
-      <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-    </dependency>
-    <dependency>
       <groupId>org.ff4j</groupId>
-      <artifactId>ff4j-spring-boot-autoconfigure-webmvc</artifactId>
+      <artifactId>ff4j-spring-rest-api</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>org.ff4j</groupId>
-      <artifactId>ff4j-spring-rest-api</artifactId>
+      <artifactId>ff4j-spring-boot-autoconfigure-webmvc</artifactId>
       <version>${project.version}</version>
     </dependency>
   </dependencies>
