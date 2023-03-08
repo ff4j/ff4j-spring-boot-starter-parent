@@ -20,32 +20,29 @@
   <groupId>org.ff4j</groupId>
   <artifactId>ff4j-spring-boot-sample</artifactId>
   <packaging>jar</packaging>
-  <version>AVENGERS-SNAPSHOT</version>
-  <parent>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-parent</artifactId>
-    <version>2.7.6</version>
-  </parent>
+  <version>ANTMAN-SNAPSHOT</version>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <java.version>1.8</java.version>
-    <kotlin.version>1.5.21</kotlin.version>
-    <ff4j.version>1.9</ff4j.version>
+    <java.version>17</java.version>
+    <kotlin.version>1.8.0</kotlin.version>
+    <ff4j.version>2.0.0-SNAPSHOT</ff4j.version>
     <start-class>org.ff4j.sample.Application</start-class>
-    <maven.compiler.target>1.8</maven.compiler.target>
-    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>17</maven.compiler.target>
+    <maven.compiler.source>17</maven.compiler.source>
+    <spring-boot.version>3.0.2</spring-boot.version>
+    <springdoc-openapi-starter.version>2.0.2</springdoc-openapi-starter.version>
   </properties>
   <dependencies>
     <dependency>
       <groupId>org.ff4j</groupId>
-      <artifactId>ff4j-spring-boot-starter</artifactId>
+      <artifactId>ff4j-spring-boot-starter-webmvc</artifactId>
       <version>${ff4j.version}</version>
     </dependency>
-    <!--<dependency>
-        <groupId>org.thymeleaf</groupId>
-        <artifactId>thymeleaf</artifactId>
-        <version>2.1.4.RELEASE</version>
-    </dependency>-->
+    <dependency>
+      <groupId>org.springdoc</groupId>
+      <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+      <version>${springdoc-openapi-starter.version}</version>
+    </dependency>
   </dependencies>
   <build>
     <resources>
@@ -57,6 +54,7 @@
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
+        <version>${spring-boot.version}</version>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
