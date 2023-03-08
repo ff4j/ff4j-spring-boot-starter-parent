@@ -75,7 +75,7 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <java.version>17</java.version>
-    <spring-boot.version>3.0.2</spring-boot.version>
+    <spring-boot.version>3.0.4</spring-boot.version>
     <ff4j.version>2.0.0</ff4j.version>
     <kotlin.version>1.8.10</kotlin.version>
     <commons3.lang>3.12.0</commons3.lang>
@@ -92,7 +92,7 @@
     <meanbean.version>2.0.3</meanbean.version>
     <enforcer.version>3.2.1</enforcer.version>
     <dokka.version>0.10.0</dokka.version>
-    <jackson-module-kotlin.version>2.14.1</jackson-module-kotlin.version>
+    <jackson-module-kotlin.version>2.14.2</jackson-module-kotlin.version>
     <!-- plugin -->
     <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
     <maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
@@ -103,7 +103,7 @@
     <version.maven.plugin.gpg>3.0.1</version.maven.plugin.gpg>
     <version.maven.plugin.javadoc>3.5.0</version.maven.plugin.javadoc>
     <version.maven.plugin.source>3.2.1</version.maven.plugin.source>
-    <version.maven.plugin.dokka>1.7.20</version.maven.plugin.dokka>
+    <version.maven.plugin.dokka>1.8.10</version.maven.plugin.dokka>
     <kotlin.code.style>official</kotlin.code.style>
     <license.path>${project.baseUri}/src/license</license.path>
   </properties>
