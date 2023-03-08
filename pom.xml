@@ -87,7 +87,7 @@
     <jsonassert.version>1.5.1</jsonassert.version>
     <easymock.version>5.1.0</easymock.version>
     <swagger.version>3.0.0</swagger.version>
-    <springdoc-openapi-starter-webmvc-ui.version>2.0.2</springdoc-openapi-starter-webmvc-ui.version>
+    <springdoc-openapi-starter.version>2.0.2</springdoc-openapi-starter.version>
     <jacoco.version>0.8.8</jacoco.version>
     <meanbean.version>2.0.3</meanbean.version>
     <enforcer.version>3.2.1</enforcer.version>
@@ -116,8 +116,8 @@
     <module>ff4j-spring-boot-autoconfigure-common</module>
     <module>ff4j-spring-boot-autoconfigure-webmvc</module>
     <module>ff4j-spring-boot-starter-webmvc</module>
-    <!--<module>ff4j-spring-boot-webflux-starter</module>
-    <module>ff4j-spring-boot-webflux-autoconfigure</module>-->
+    <module>ff4j-spring-boot-autoconfigure-webflux</module>
+    <module>ff4j-spring-boot-starter-webflux</module>
   </modules>
   <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
   <!-- ~ DEPENDENCIES             ~ -->
@@ -175,12 +175,17 @@
       <dependency>
         <groupId>org.springdoc</groupId>
         <artifactId>springdoc-openapi-starter-common</artifactId>
-        <version>${springdoc-openapi-starter-webmvc-ui.version}</version>
+        <version>${springdoc-openapi-starter.version}</version>
       </dependency>
       <dependency>
         <groupId>org.springdoc</groupId>
         <artifactId>springdoc-openapi-starter-webmvc-api</artifactId>
-        <version>${springdoc-openapi-starter-webmvc-ui.version}</version>
+        <version>${springdoc-openapi-starter.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springdoc</groupId>
+        <artifactId>springdoc-openapi-starter-webflux-api</artifactId>
+        <version>${springdoc-openapi-starter.version}</version>
       </dependency>
       <!-- Test dependency -->
       <dependency>
