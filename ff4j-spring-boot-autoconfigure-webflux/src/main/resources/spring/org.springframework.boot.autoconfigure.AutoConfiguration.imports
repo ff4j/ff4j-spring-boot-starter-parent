@@ -1,0 +1,2 @@
+org.ff4j.spring.boot.autoconfigure.webflux.FF4JOpenApiConfiguration
+org.ff4j.spring.boot.autoconfigure.webflux.FF4JWebConsoleConfiguration
