@@ -80,7 +80,7 @@
     <jsonassert.version>1.5.1</jsonassert.version>
     <easymock.version>5.0.1</easymock.version>
     <swagger.version>3.0.0</swagger.version>
-    <springdoc-openapi-ui.version>1.6.14</springdoc-openapi-ui.version>
+    <springdoc-openapi-ui.version>1.6.15</springdoc-openapi-ui.version>
     <jacoco.version>0.8.8</jacoco.version>
     <meanbean.version>2.0.3</meanbean.version>
     <enforcer.version>3.1.0</enforcer.version>
