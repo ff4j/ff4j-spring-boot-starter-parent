@@ -69,5 +69,5 @@ class MonitoringResource(@Autowired val monitoringServices: MonitoringServices) 
       value = PARAM_START, required = false, defaultValue = "0"
     ) start: Long, @RequestParam(value = PARAM_END, required = false, defaultValue = "0") end: Long
   ): ResponseEntity<Mono<EventRepositoryApiBean>> =
-    ResponseEntity.ok(Mono.just(monitoringServices.getMonitoringStatus(start, end)))
+    ResponseEntity.ok(monitoringServices.getMonitoringStatus(start, end))
 }

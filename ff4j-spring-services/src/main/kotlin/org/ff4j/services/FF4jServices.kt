@@ -27,6 +27,7 @@ import org.ff4j.services.exceptions.AuthorizationNotExistsException
 import org.ff4j.services.validator.FeatureValidator
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
+import reactor.core.publisher.Mono
 
 /**
  * Created by Paul
@@ -36,27 +37,27 @@ import org.springframework.stereotype.Service
 @Service
 class FF4jServices(@Autowired val fF4j: FF4j, @Autowired val ff4jValidator: FeatureValidator) {
 
-  fun getStatus(): FF4jStatusApiBean {
-    return FF4jStatusApiBean(this.fF4j)
+  fun getStatus(): Mono<FF4jStatusApiBean> {
+    return Mono.just(FF4jStatusApiBean(this.fF4j))
   }
 
-  fun getSecurityInfo(): AuthorizationsManagerApiBean {
-    return fF4j.authorizationsManager?.let {
+  fun getSecurityInfo(): Mono<AuthorizationsManagerApiBean> {
+    return Mono.just(fF4j.authorizationsManager?.let {
       AuthorizationsManagerApiBean(it)
     } ?: run {
       throw AuthorizationNotExistsException()
-    }
+    })
   }
 
-  fun check(featureUID: String): Boolean {
+  fun check(featureUID: String): Mono<Boolean> {
     ff4jValidator.assertFeatureExists(featureUID)
-    return fF4j.check(featureUID)
+    return Mono.just(fF4j.check(featureUID))
   }
 
-  fun check(featureUID: String, params: MutableMap<String, String>): Boolean {
+  fun check(featureUID: String, params: MutableMap<String, String>): Mono<Boolean> {
     ff4jValidator.assertFeatureExists(featureUID)
     val flipExecCtx = FlippingExecutionContext()
     params.entries.forEach { flipExecCtx.putString(it.key, it.value) }
-    return fF4j.check(featureUID, flipExecCtx)
+    return Mono.just(fF4j.check(featureUID, flipExecCtx))
   }
 }

@@ -25,7 +25,7 @@ import org.ff4j.services.domain.FeatureApiBean
 import org.ff4j.services.validator.FeatureValidator
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
-import java.util.stream.Collectors
+import reactor.core.publisher.Flux
 
 /**
  * Created by Paul
@@ -35,10 +35,9 @@ import java.util.stream.Collectors
 @Service
 class GroupServices(@Autowired val fF4j: FF4j, @Autowired val ff4jValidator: FeatureValidator) {
 
-  fun getFeaturesByGroup(groupName: String): Collection<FeatureApiBean> {
+  fun getFeaturesByGroup(groupName: String): Flux<FeatureApiBean> {
     ff4jValidator.assertGroupExist(groupName)
-    return fF4j.featureStore.readGroup(groupName).values.stream().map { feature: Feature -> FeatureApiBean(feature) }
-      .collect(Collectors.toList())
+    return Flux.fromStream(fF4j.featureStore.readGroup(groupName).values.stream().map { feature: Feature -> FeatureApiBean(feature) })
   }
 
   fun enableGroup(groupName: String) {

@@ -61,7 +61,7 @@ class GroupResource(@Autowired val groupServices: GroupServices) {
   )
   @GetMapping(produces = [APPLICATION_JSON_VALUE])
   fun getFeaturesByGroup(@PathVariable(value = PARAM_GROUP) groupName: String): ResponseEntity<Flux<FeatureApiBean>> =
-    ResponseEntity.ok(Flux.fromIterable(groupServices.getFeaturesByGroup(groupName)))
+    ResponseEntity.ok(groupServices.getFeaturesByGroup(groupName))
 
   @Operation(summary = "Enable a group", tags = ["Groups"])
   @ApiResponses(

@@ -35,7 +35,6 @@ import org.ff4j.services.constants.FeatureConstants.RESOURCE_FF4J
 import org.ff4j.services.constants.FeatureConstants.RESOURCE_PROPERTIES
 import org.ff4j.services.constants.FeatureConstants.RESOURCE_PROPERTY_STORE
 import org.ff4j.services.domain.PropertyApiBean
-import org.ff4j.spring.rest.api.utils.FeatureWebUtils
 import org.ff4j.web.FF4jWebConstants.OPERATION_UPDATE
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus.ACCEPTED
@@ -65,7 +64,7 @@ class PropertyResource(@Autowired val propertyServices: PropertyServices) {
   )
   @GetMapping(produces = [APPLICATION_JSON_VALUE])
   fun getProperty(@PathVariable(value = PARAM_NAME) propertyName: String): ResponseEntity<Mono<PropertyApiBean>> =
-    ResponseEntity.ok(Mono.just(propertyServices.getProperty(propertyName)))
+    ResponseEntity.ok(propertyServices.getProperty(propertyName))
 
   @Operation(summary = "Create or update a property", tags = ["Property"])
   @ApiResponses(
@@ -81,9 +80,10 @@ class PropertyResource(@Autowired val propertyServices: PropertyServices) {
     @PathVariable(value = PARAM_NAME) propertyName: String,
     @RequestBody propertyApiBean: PropertyApiBean
   ): ResponseEntity<Mono<Boolean>> =
-      org.ff4j.spring.rest.api.utils.FeatureWebUtils.getBooleanResponseEntityByHttpStatus(
-        propertyServices.createOrUpdateProperty(propertyName, propertyApiBean)
-      )
+    // TODO: remove the blocking call
+    org.ff4j.spring.rest.api.utils.FeatureWebUtils.getBooleanResponseEntityByHttpStatus(
+      propertyServices.createOrUpdateProperty(propertyName, propertyApiBean).block()
+    )
 
   @Operation(summary = "Delete a property", tags = ["Property"])
   @ApiResponses(

@@ -16,7 +16,7 @@ Feature: GroupServices
   # Read information about all the features belonging to a group
   Scenario: When the user tries to retrieve the group information
     When the user requests for group "admin"
-    Then the user gets the response as
+    Then the user gets the responses as
     """
     [
       {

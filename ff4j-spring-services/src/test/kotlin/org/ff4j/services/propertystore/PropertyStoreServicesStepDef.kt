@@ -28,6 +28,9 @@ import org.ff4j.services.FF4JTestHelperUtils
 import org.ff4j.services.InitializerStepDef
 import org.ff4j.services.PropertyStoreServices
 import org.ff4j.services.representation.PropertyPojo
+import org.json.JSONArray
+import org.reactivestreams.Publisher
+import reactor.test.StepVerifier
 
 /**
  * Created by Paul
@@ -85,7 +88,21 @@ class PropertyStoreServicesStepDef(ff4j: FF4j, propertyStoreServices: PropertySt
       }
     }
     Then("the user gets the response as") { expectedResponse: String ->
-      testUtils.assertLenientResponse(expectedResponse, actualResponse)
+      StepVerifier.create(actualResponse as Publisher<out Any>).consumeNextWith { response: Any ->
+        testUtils.assertLenientResponse(expectedResponse, response)
+      }.verifyComplete()
+    }
+
+    Then("the user get the responses as") { expectedResponse: String ->
+      val jsonArray = JSONArray(expectedResponse)
+      StepVerifier.create(actualResponse as Publisher<out Any>).consumeNextWith { response ->
+        testUtils.assertLenientResponse(jsonArray.getString(0), response)
+      }.consumeNextWith { response ->
+        testUtils.assertLenientResponse(jsonArray.getString(1), response)
+      }.verifyComplete()
+    }
+    Then("the user gets blank response") { expectedResponse: String ->
+      StepVerifier.create(actualResponse as Publisher<out Any>).verifyComplete()
     }
     Then("the user gets an exception {string}") { className: String ->
       testUtils.assertException(exception, className)

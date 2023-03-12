@@ -64,7 +64,7 @@ class FF4jResource(@Autowired val ff4JServices: FF4jServices) {
     )]
   )
   @GetMapping(produces = [APPLICATION_JSON_VALUE])
-  fun getStatus(): ResponseEntity<Mono<FF4jStatusApiBean>> = ResponseEntity.ok(Mono.just(ff4JServices.getStatus()))
+  fun getStatus(): ResponseEntity<Mono<FF4jStatusApiBean>> = ResponseEntity.ok(ff4JServices.getStatus())
 
   @Operation(
     summary = "Gets Security information (permissions manager)",
@@ -80,7 +80,7 @@ class FF4jResource(@Autowired val ff4JServices: FF4jServices) {
   )
   @GetMapping(value = [("/$RESOURCE_SECURITY")], produces = [APPLICATION_JSON_VALUE])
   fun getSecurityInfo(): ResponseEntity<Mono<AuthorizationsManagerApiBean>> =
-    ResponseEntity.ok(Mono.just(ff4JServices.getSecurityInfo()))
+    ResponseEntity.ok(ff4JServices.getSecurityInfo())
 
   @Operation(summary = "Simple check feature toggle", tags = ["FF4J"])
   @ApiResponses(
@@ -93,7 +93,7 @@ class FF4jResource(@Autowired val ff4JServices: FF4jServices) {
   @GetMapping(value = [("/$OPERATION_CHECK/$PATH_PARAM_UID")])
   fun check(@PathVariable(value = PARAM_UID) featureUID: String): ResponseEntity<Mono<Boolean>> {
     val status = ff4JServices.check(featureUID)
-    return ResponseEntity.ok(Mono.just(status))
+    return ResponseEntity.ok(status)
   }
 
   @Operation(summary = "Advanced check feature toggle (parametrized)", tags = ["FF4J"])
@@ -115,7 +115,7 @@ class FF4jResource(@Autowired val ff4JServices: FF4jServices) {
   ): ResponseEntity<Mono<Boolean>> {
     val map = formParams.toSingleValueMap()
     val status = ff4JServices.check(featureUID, map)
-    return ResponseEntity.ok(Mono.just(status))
+    return ResponseEntity.ok(status)
   }
 
   @Operation(summary = "Check feature toggles", tags = ["FF4J"])
@@ -134,7 +134,8 @@ class FF4jResource(@Autowired val ff4JServices: FF4jServices) {
     val featureUIDToEnableMap = HashMap<String, Boolean>()
     for (featureUID in featureUIDs) {
       try {
-        val status = ff4JServices.check(featureUID, formParams.toSingleValueMap())
+        //TODO: remove the blocking call
+        val status = ff4JServices.check(featureUID, formParams.toSingleValueMap()).block()
         featureUIDToEnableMap[featureUID] = status
       } catch (e: FeatureNotFoundException) {
         featureUIDToEnableMap[featureUID] = false

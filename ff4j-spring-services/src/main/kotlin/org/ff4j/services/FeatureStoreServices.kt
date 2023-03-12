@@ -29,6 +29,8 @@ import org.ff4j.services.exceptions.FeatureStoreNotCached
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import org.springframework.util.CollectionUtils
+import reactor.core.publisher.Flux
+import reactor.core.publisher.Mono
 import java.util.stream.Collectors
 
 /**
@@ -38,22 +40,22 @@ import java.util.stream.Collectors
  */
 @Service
 class FeatureStoreServices(@Autowired val fF4j: FF4j) {
-  fun getFeatureStore(): FeatureStoreApiBean {
-    return FeatureStoreApiBean(this.fF4j.featureStore)
+  fun getFeatureStore(): Mono<FeatureStoreApiBean> {
+    return Mono.just(FeatureStoreApiBean(this.fF4j.featureStore))
   }
 
-  fun getAllFeatures(): Collection<FeatureApiBean> {
+  fun getAllFeatures(): Flux<FeatureApiBean> {
     val allFeatures = fF4j.featureStore.readAll()
     return if (CollectionUtils.isEmpty(allFeatures)) {
-      ArrayList(0)
+      Flux.empty()
     } else {
       val features = ArrayList<FeatureApiBean>(allFeatures.size)
       features.addAll(allFeatures.values.stream().map { FeatureApiBean(it) }.collect(Collectors.toList()))
-      features
+      Flux.fromIterable(features)
     }
   }
 
-  fun getAllGroups(): MutableCollection<GroupDescApiBean> {
+  fun getAllGroups(): Flux<GroupDescApiBean> {
     val groups = HashMap<String, GroupDescApiBean>()
     val allFeatures = fF4j.featureStore.readAll()
     allFeatures?.let {
@@ -61,7 +63,7 @@ class FeatureStoreServices(@Autowired val fF4j: FF4j) {
         initGroup(groups, it.uid, it.group)
       }
     }
-    return groups.values
+    return Flux.fromIterable(groups.values)
   }
 
   private fun initGroup(groups: HashMap<String, GroupDescApiBean>, uid: String, groupName: String?) {
@@ -79,9 +81,9 @@ class FeatureStoreServices(@Autowired val fF4j: FF4j) {
     fF4j.featureStore.clear()
   }
 
-  fun getFeaturesFromCache(): CacheApiBean {
+  fun getFeaturesFromCache(): Mono<CacheApiBean> {
     fF4j.cacheProxy ?: throw FeatureStoreNotCached()
-    return CacheApiBean(fF4j.featureStore)
+    return Mono.just(CacheApiBean(fF4j.featureStore))
   }
 
   fun clearCachedFeatureStore() { // Fixing #218 : If audit is enabled, cannot clear cache.
