@@ -45,10 +45,6 @@
       <artifactId>commons-lang3</artifactId>
     </dependency>
     <dependency>
-      <groupId>commons-collections</groupId>
-      <artifactId>commons-collections</artifactId>
-    </dependency>
-    <dependency>
       <groupId>org.springdoc</groupId>
       <artifactId>springdoc-openapi-starter-common</artifactId>
     </dependency>
@@ -81,11 +77,6 @@
     <dependency>
       <groupId>org.jetbrains.kotlin</groupId>
       <artifactId>kotlin-test-junit</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.easymock</groupId>
-      <artifactId>easymock</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>
