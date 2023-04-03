@@ -21,14 +21,14 @@ package org.ff4j.spring.boot.web.api.resources.ff4j;
  */
 
 import com.google.gson.Gson;
-import cucumber.api.java.Before;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+
+import java.util.*;
+
+import io.cucumber.java.Before;
+import io.cucumber.java.DataTableType;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import org.apache.commons.lang3.StringUtils;
 import org.ff4j.security.AbstractAuthorizationManager;
 import org.ff4j.spring.boot.web.api.resources.AbstractStepDef;
@@ -42,9 +42,28 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 public class FF4JStepDef extends AbstractStepDef {
 
   @Before
-  @Override
   public void init() {
     this.mockMvc = MockMvcBuilders.webAppContextSetup(context).build();
+  }
+
+  @DataTableType
+  public FeaturePojo featurePojo(Map<String, String> row) {
+    return new FeaturePojo(row.get("uid"), row.get("enable"), row.get("description"), row.get("group"), row.get("permissions"));
+  }
+
+  @DataTableType
+  public PropertyPojo propertyPojo(Map<String, String> row) {
+    return new PropertyPojo(row.get("name"), row.get("description"), row.get("type"), row.get("value"), row.get("fixedValueCSV"));
+  }
+
+  @DataTableType
+  public TestAuthorizationsManager testAuthorizationsManager(Map<String, String> row) {
+    return new TestAuthorizationsManager(row.get("currentUserPermissions"), row.get("allPermissions"), row.get("currentUserName"));
+  }
+
+  @DataTableType
+  public FormParam formParam(Map<String, String> row) {
+    return new FormParam(row.get("name"), row.get("value"));
   }
 
   @Given("^the feature store is cleared$")
@@ -89,7 +108,7 @@ public class FF4JStepDef extends AbstractStepDef {
   @When("^the following form param$")
   public void the_following_form_param(List<FormParam> formParams) throws Throwable {
     for (FormParam formParam : formParams) {
-      requestBuilder.param(formParam.getName(), formParam.getValue().replace("or", "|"));
+      requestBuilder.param(formParam.name(), formParam.value().replace("or", "|"));
     }
   }
 
@@ -120,13 +139,19 @@ public class FF4JStepDef extends AbstractStepDef {
     assertContent(expectedResponse);
   }
 
-  private class TestAuthorizationsManager extends AbstractAuthorizationManager {
+  private static class TestAuthorizationsManager extends AbstractAuthorizationManager {
 
-    private String currentUserPermissions;
+    private final String currentUserPermissions;
 
-    private String allPermissions;
+    private final String allPermissions;
 
-    private String currentUserName;
+    private final String currentUserName;
+
+    public TestAuthorizationsManager(String currentUserPermissions, String allPermissions, String currentUserName) {
+      this.currentUserPermissions = currentUserPermissions;
+      this.allPermissions = allPermissions;
+      this.currentUserName = currentUserName;
+    }
 
     @Override
     public String getCurrentUserName() {
@@ -146,18 +171,6 @@ public class FF4JStepDef extends AbstractStepDef {
     }
   }
 
-  private class FormParam {
-
-    private String name;
-    private String value;
-
-    public String getName() {
-      return name;
-    }
-
-
-    public String getValue() {
-      return value;
-    }
+  private record FormParam(String name, String value) {
   }
 }

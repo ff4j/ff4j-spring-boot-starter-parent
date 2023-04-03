@@ -23,11 +23,14 @@ package org.ff4j.services.feature;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.ff4j.services.utils.JsonUtils.GSON;
 
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+
+import io.cucumber.java.DataTableType;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import org.ff4j.core.Feature;
 import org.ff4j.services.AbstractStepDef;
 import org.ff4j.services.FeatureServices;
@@ -41,6 +44,16 @@ public class FeatureServicesStepDef extends AbstractStepDef {
 
   @Autowired
   private FeatureServices featureServices;
+
+  @DataTableType
+  public FeaturePojo featurePojo(Map<String, String> row) {
+    return new FeaturePojo(row.get("uid"), row.get("enable"), row.get("description"), row.get("group"), row.get("permissions"));
+  }
+
+  @DataTableType
+  public PropertyPojo propertyPojo(Map<String, String> row) {
+    return new PropertyPojo(row.get("name"), row.get("description"), row.get("type"), row.get("value"), row.get("fixedValueCSV"));
+  }
 
   @Given("^the feature store is cleared$")
   public void the_feature_store_is_cleared() throws Throwable {

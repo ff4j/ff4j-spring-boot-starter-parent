@@ -68,19 +68,18 @@
   <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <java.version>1.8</java.version>
-    <spring-boot.version>2.7.6</spring-boot.version>
-    <ff4j.version>1.9</ff4j.version>
+    <spring-boot.version>3.0.5</spring-boot.version>
+    <ff4j.version>2.0.0</ff4j.version>
     <kotlin.version>1.7.22</kotlin.version>
     <commons3.lang>3.12.0</commons3.lang>
     <commons.collection.version>3.2.2</commons.collection.version>
-    <cucumber.version>1.2.5</cucumber.version>
+    <cucumber.version>7.11.1</cucumber.version>
     <gson.version>2.2.4</gson.version>
     <assertj.version>3.23.1</assertj.version>
     <jsonassert.version>1.5.1</jsonassert.version>
     <easymock.version>5.0.1</easymock.version>
     <swagger.version>3.0.0</swagger.version>
-    <springdoc-openapi-ui.version>1.6.14</springdoc-openapi-ui.version>
+    <springdoc-openapi-starter-webmvc-ui.version>2.0.4</springdoc-openapi-starter-webmvc-ui.version>
     <jacoco.version>0.8.8</jacoco.version>
     <meanbean.version>2.0.3</meanbean.version>
     <enforcer.version>3.1.0</enforcer.version>
@@ -170,8 +169,8 @@
       <!-- Open API -->
       <dependency>
         <groupId>org.springdoc</groupId>
-        <artifactId>springdoc-openapi-ui</artifactId>
-        <version>${springdoc-openapi-ui.version}</version>
+        <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+        <version>${springdoc-openapi-starter-webmvc-ui.version}</version>
       </dependency>
       <!-- Test dependency -->
       <dependency>
@@ -199,19 +198,25 @@
         <scope>test</scope>
       </dependency>
       <dependency>
-        <groupId>info.cukes</groupId>
-        <artifactId>cucumber-java8</artifactId>
+        <groupId>io.cucumber</groupId>
+        <artifactId>cucumber-java</artifactId>
         <version>${cucumber.version}</version>
         <scope>test</scope>
       </dependency>
       <dependency>
-        <groupId>info.cukes</groupId>
+        <groupId>io.cucumber</groupId>
+        <artifactId>datatable</artifactId>
+        <version>${cucumber.version}</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>io.cucumber</groupId>
         <artifactId>cucumber-junit</artifactId>
         <version>${cucumber.version}</version>
         <scope>test</scope>
       </dependency>
       <dependency>
-        <groupId>info.cukes</groupId>
+        <groupId>io.cucumber</groupId>
         <artifactId>cucumber-spring</artifactId>
         <version>${cucumber.version}</version>
         <scope>test</scope>
@@ -373,8 +378,8 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
         <configuration>
-          <source>8</source>
-          <target>8</target>
+          <source>17</source>
+          <target>17</target>
         </configuration>
       </plugin>
       <!-- license -->

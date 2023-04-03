@@ -22,15 +22,17 @@ package org.ff4j.services.ff4j;
 
 import static org.ff4j.services.utils.JsonUtils.GSON;
 
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import io.cucumber.java.DataTableType;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import org.apache.commons.lang3.StringUtils;
 import org.ff4j.cache.FF4jCacheProxy;
 import org.ff4j.cache.InMemoryCacheManager;
@@ -50,6 +52,21 @@ public class FF4JServicesStepDef extends AbstractStepDef {
   private FF4jServices ff4jServices;
   @Autowired
   private FeatureServices featureServices;
+
+  @DataTableType
+  public FeaturePojo featurePojo(Map<String, String> row) {
+    return new FeaturePojo(row.get("uid"), row.get("enable"), row.get("description"), row.get("group"), row.get("permissions"));
+  }
+
+  @DataTableType
+  public PropertyPojo propertyPojo(Map<String, String> row) {
+    return new PropertyPojo(row.get("name"), row.get("description"), row.get("type"), row.get("value"), row.get("fixedValueCSV"));
+  }
+
+  @DataTableType
+  public TestAuthorizationsManager testAuthorizationsManager(Map<String, String> row) {
+    return new TestAuthorizationsManager(row.get("currentUserPermissions"), row.get("allPermissions"), row.get("currentUserName"));
+  }
 
   @Given("^the feature store is cleared$")
   public void the_feature_store_is_cleared() throws Throwable {
@@ -176,6 +193,12 @@ public class FF4JServicesStepDef extends AbstractStepDef {
     private String allPermissions;
 
     private String currentUserName;
+
+    public TestAuthorizationsManager(String currentUserPermissions, String allPermissions, String currentUserName) {
+      this.currentUserPermissions = currentUserPermissions;
+      this.allPermissions = allPermissions;
+      this.currentUserName = currentUserName;
+    }
 
     @Override
     public String getCurrentUserName() {

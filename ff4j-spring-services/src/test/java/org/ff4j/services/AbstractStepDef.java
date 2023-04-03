@@ -20,21 +20,11 @@ package org.ff4j.services;
  * #L%
  */
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.ff4j.services.utils.JsonUtils.GSON;
-
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import io.cucumber.java.DataTableType;
 import org.apache.commons.lang3.StringUtils;
 import org.ff4j.FF4j;
 import org.ff4j.core.Feature;
-import org.ff4j.property.Property;
-import org.ff4j.property.PropertyBoolean;
-import org.ff4j.property.PropertyInt;
-import org.ff4j.property.PropertyLong;
-import org.ff4j.property.PropertyString;
+import org.ff4j.property.*;
 import org.ff4j.property.store.InMemoryPropertyStore;
 import org.ff4j.property.util.PropertyFactory;
 import org.ff4j.services.model.FeatureActions;
@@ -44,228 +34,249 @@ import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 
+import java.util.*;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.ff4j.services.utils.JsonUtils.GSON;
+
 /**
  * @author <a href="mailto:paul58914080@gmail.com">Paul Williams</a>
  */
 @ContextConfiguration(classes = {CucumberConfiguration.class})
 public class AbstractStepDef {
 
-  @Autowired
-  protected FF4j ff4j;
-  protected Throwable exception;
-  protected Object actualResponse;
+    @Autowired
+    protected FF4j ff4j;
+    protected Throwable exception;
+    protected Object actualResponse;
 
-  protected void createFeatures(List<FeaturePojo> features) {
-    for (FeaturePojo featurePojo : features) {
-      Feature feature = new Feature(featurePojo.getUid(), Boolean.valueOf(featurePojo.getEnable()),
-          featurePojo.getDescription(), featurePojo.getGroup(),
-          Arrays.asList(featurePojo.getPermissions().split(",")));
-      createFeature(feature);
-    }
-  }
-
-  protected void createProperties(List<PropertyPojo> properties) {
-    for (PropertyPojo propertyPojo : properties) {
-      Property<?> property = asProperty(propertyPojo.getName(), propertyPojo.getType(),
-          propertyPojo.getValue(),
-          propertyPojo.getDescription(),
-          StringUtils.isNotBlank(propertyPojo.getFixedValueCSV()) ? new HashSet<>(
-              Arrays.asList(propertyPojo.getFixedValueCSV().split(","))) : null);
-      createProperty(property);
-    }
-  }
-
-  private void createProperty(Property<?> property) {
-    ff4j.createProperty(property);
-  }
-
-  protected void createFeature(Feature feature) {
-    ff4j.createFeature(feature);
-  }
-
-  protected void clearFeatureStore() {
-    ff4j.setPropertiesStore(new InMemoryPropertyStore());
-    ff4j.setFeatureStore(new InMemoryFeatureStore());
-  }
-
-  protected void clearPropertyStore() {
-    ff4j.setPropertiesStore(new InMemoryPropertyStore());
-    ff4j.setFeatureStore(new InMemoryFeatureStore());
-  }
-
-  protected Property<?> asProperty(String name, String type, String value, String description,
-      Set<String> fixedValues) {
-    return PropertyFactory.createProperty(name, getType(type), value, description, fixedValues);
-  }
-
-  protected void assertException(String className) throws ClassNotFoundException {
-    assertThat(exception).isInstanceOf(Class.forName(className));
-  }
-
-  protected void assertUpdated() {
-    assertThat(actualResponse).isEqualTo(FeatureActions.UPDATED);
-  }
-
-  protected void assertCreated() {
-    assertThat(actualResponse).isEqualTo(FeatureActions.CREATED);
-  }
-
-  protected void assertStrictResponse(String expectedResponse) throws JSONException {
-    JSONAssert.assertEquals(expectedResponse, GSON.toJson(actualResponse), true);
-  }
-
-  protected void assertFalse() {
-    assertThat(Boolean.parseBoolean(actualResponse.toString())).isFalse();
-  }
-
-  protected void assertTrue() {
-    assertThat(Boolean.parseBoolean(actualResponse.toString())).isTrue();
-  }
-
-  protected void assertLenientResponse(String expectedResponse) throws JSONException {
-    JSONAssert.assertEquals(expectedResponse, GSON.toJson(actualResponse), false);
-  }
-
-  private String getType(String name) {
-    PropertyValueEnum propertyEnum = PropertyValueEnum.getEnum(name);
-    switch (propertyEnum) {
-      case INT:
-      case LONG:
-      case STRING:
-      case BOOLEAN:
-        return propertyEnum.getType();
-      default:
-        return null;
-    }
-  }
-
-  private enum PropertyValueEnum {
-    INT("int", PropertyInt.class.getName()),
-    LONG("long", PropertyLong.class.getName()),
-    STRING("string", PropertyString.class.getName()),
-    BOOLEAN("boolean", PropertyBoolean.class.getName());
-
-    private String name;
-    private String type;
-
-    public String getName() {
-      return name;
-    }
-
-    public String getType() {
-      return type;
-    }
-
-    PropertyValueEnum(String name, String type) {
-      this.name = name;
-      this.type = type;
-    }
-
-    public static PropertyValueEnum getEnum(String name) {
-      for (PropertyValueEnum propertyValueEnum : PropertyValueEnum.values()) {
-        if (StringUtils.isNotBlank(name) && name.equalsIgnoreCase(propertyValueEnum.getName())) {
-          return propertyValueEnum;
+    protected void createFeatures(List<FeaturePojo> features) {
+        for (FeaturePojo featurePojo : features) {
+            Feature feature = new Feature(featurePojo.getUid(), Boolean.valueOf(featurePojo.getEnable()),
+                    featurePojo.getDescription(), featurePojo.getGroup(),
+                    Arrays.asList(featurePojo.getPermissions().split(",")));
+            createFeature(feature);
         }
-      }
-      throw new UnsupportedOperationException("property " + name + " not found");
-    }
-  }
-
-  protected class FeaturePojo {
-
-    private String uid;
-    private String enable;
-    private String description;
-    private String group;
-    private String permissions;
-
-    public String getUid() {
-      return uid;
     }
 
-    public void setUid(String uid) {
-      this.uid = uid;
+    protected void createProperties(List<PropertyPojo> properties) {
+        for (PropertyPojo propertyPojo : properties) {
+            Property<?> property = asProperty(propertyPojo.getName(), propertyPojo.getType(),
+                    propertyPojo.getValue(),
+                    propertyPojo.getDescription(),
+                    StringUtils.isNotBlank(propertyPojo.getFixedValueCSV()) ? new HashSet<>(
+                            Arrays.asList(propertyPojo.getFixedValueCSV().split(","))) : null);
+            createProperty(property);
+        }
     }
 
-    public String getEnable() {
-      return enable;
+    private void createProperty(Property<?> property) {
+        ff4j.createProperty(property);
     }
 
-    public void setEnable(String enable) {
-      this.enable = enable;
+    protected void createFeature(Feature feature) {
+        ff4j.createFeature(feature);
     }
 
-    public String getDescription() {
-      return description;
+    protected void clearFeatureStore() {
+        ff4j.setPropertiesStore(new InMemoryPropertyStore());
+        ff4j.setFeatureStore(new InMemoryFeatureStore());
     }
 
-    public void setDescription(String description) {
-      this.description = description;
+    protected void clearPropertyStore() {
+        ff4j.setPropertiesStore(new InMemoryPropertyStore());
+        ff4j.setFeatureStore(new InMemoryFeatureStore());
     }
 
-    public String getGroup() {
-      return group;
+    protected Property<?> asProperty(String name, String type, String value, String description,
+                                     Set<String> fixedValues) {
+        return PropertyFactory.createProperty(name, getType(type), value, description, fixedValues);
     }
 
-    public void setGroup(String group) {
-      this.group = group;
+    protected void assertException(String className) throws ClassNotFoundException {
+        assertThat(exception).isInstanceOf(Class.forName(className));
     }
 
-    public String getPermissions() {
-      return permissions;
+    protected void assertUpdated() {
+        assertThat(actualResponse).isEqualTo(FeatureActions.UPDATED);
     }
 
-    public void setPermissions(String permissions) {
-      this.permissions = permissions;
-    }
-  }
-
-  protected class PropertyPojo {
-
-    private String name;
-    private String description;
-    private String type;
-    private String value;
-    private String fixedValueCSV;
-
-    public String getName() {
-      return name;
+    protected void assertCreated() {
+        assertThat(actualResponse).isEqualTo(FeatureActions.CREATED);
     }
 
-    public void setName(String name) {
-      this.name = name;
+    protected void assertStrictResponse(String expectedResponse) throws JSONException {
+        JSONAssert.assertEquals(expectedResponse, GSON.toJson(actualResponse), true);
     }
 
-    public String getDescription() {
-      return description;
+    protected void assertFalse() {
+        assertThat(Boolean.parseBoolean(actualResponse.toString())).isFalse();
     }
 
-    public void setDescription(String description) {
-      this.description = description;
+    protected void assertTrue() {
+        assertThat(Boolean.parseBoolean(actualResponse.toString())).isTrue();
     }
 
-    public String getType() {
-      return type;
+    protected void assertLenientResponse(String expectedResponse) throws JSONException {
+        JSONAssert.assertEquals(expectedResponse, GSON.toJson(actualResponse), false);
     }
 
-    public void setType(String type) {
-      this.type = type;
+    private String getType(String name) {
+        PropertyValueEnum propertyEnum = PropertyValueEnum.getEnum(name);
+        switch (propertyEnum) {
+            case INT:
+            case LONG:
+            case STRING:
+            case BOOLEAN:
+                return propertyEnum.getType();
+            default:
+                return null;
+        }
     }
 
-    public String getValue() {
-      return value;
+    private enum PropertyValueEnum {
+        INT("int", PropertyInt.class.getName()),
+        LONG("long", PropertyLong.class.getName()),
+        STRING("string", PropertyString.class.getName()),
+        BOOLEAN("boolean", PropertyBoolean.class.getName());
+
+        private String name;
+        private String type;
+
+        public String getName() {
+            return name;
+        }
+
+        public String getType() {
+            return type;
+        }
+
+        PropertyValueEnum(String name, String type) {
+            this.name = name;
+            this.type = type;
+        }
+
+        public static PropertyValueEnum getEnum(String name) {
+            for (PropertyValueEnum propertyValueEnum : PropertyValueEnum.values()) {
+                if (StringUtils.isNotBlank(name) && name.equalsIgnoreCase(propertyValueEnum.getName())) {
+                    return propertyValueEnum;
+                }
+            }
+            throw new UnsupportedOperationException("property " + name + " not found");
+        }
     }
 
-    public void setValue(String value) {
-      this.value = value;
+    protected class FeaturePojo {
+
+        private String uid;
+        private String enable;
+        private String description;
+        private String group;
+        private String permissions;
+
+        public FeaturePojo(String uid, String enable, String description, String group, String permissions) {
+            this.uid = uid;
+            this.enable = enable;
+            this.description = description;
+            this.group = group;
+            this.permissions = permissions;
+        }
+
+        public String getUid() {
+            return uid;
+        }
+
+        public void setUid(String uid) {
+            this.uid = uid;
+        }
+
+        public String getEnable() {
+            return enable;
+        }
+
+        public void setEnable(String enable) {
+            this.enable = enable;
+        }
+
+        public String getDescription() {
+            return description;
+        }
+
+        public void setDescription(String description) {
+            this.description = description;
+        }
+
+        public String getGroup() {
+            return group;
+        }
+
+        public void setGroup(String group) {
+            this.group = group;
+        }
+
+        public String getPermissions() {
+            return permissions;
+        }
+
+        public void setPermissions(String permissions) {
+            this.permissions = permissions;
+        }
     }
 
-    public String getFixedValueCSV() {
-      return fixedValueCSV;
-    }
+    protected static class PropertyPojo {
 
-    public void setFixedValueCSV(String fixedValueCSV) {
-      this.fixedValueCSV = fixedValueCSV;
+        private String name;
+        private String description;
+        private String type;
+        private String value;
+        private String fixedValueCSV;
+
+        public PropertyPojo(String name, String description, String type, String value, String fixedValueCSV) {
+            this.name = name;
+            this.description = description;
+            this.type = type;
+            this.value = value;
+            this.fixedValueCSV = fixedValueCSV;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getDescription() {
+            return description;
+        }
+
+        public void setDescription(String description) {
+            this.description = description;
+        }
+
+        public String getType() {
+            return type;
+        }
+
+        public void setType(String type) {
+            this.type = type;
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        public void setValue(String value) {
+            this.value = value;
+        }
+
+        public String getFixedValueCSV() {
+            return fixedValueCSV;
+        }
+
+        public void setFixedValueCSV(String fixedValueCSV) {
+            this.fixedValueCSV = fixedValueCSV;
+        }
     }
-  }
 }

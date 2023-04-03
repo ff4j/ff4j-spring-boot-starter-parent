@@ -20,15 +20,14 @@
 package org.ff4j.spring.boot.autoconfigure
 
 import org.springframework.boot.context.properties.ConfigurationProperties
-import org.springframework.boot.context.properties.ConstructorBinding
+import org.springframework.boot.context.properties.bind.ConstructorBinding
 
-@ConstructorBinding
+
 @ConfigurationProperties(prefix = "ff4j")
-data class FF4JConfigurationProperties(val api: Api = Api(),
+data class FF4JConfigurationProperties constructor(val api: Api = Api(),
                                        val audit: Audit = Audit(),
                                        val security: Security = Security(),
                                        val webConsole: WebConsole = WebConsole()) {
-
   data class Api(val contextPath: String = "/api/ff4j", val springDoc: SpringDoc = SpringDoc())
 
   data class Audit(val enabled: Boolean = false)

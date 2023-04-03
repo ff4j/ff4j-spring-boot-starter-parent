@@ -20,17 +20,22 @@ package org.ff4j.services.group;
  * #L%
  */
 
-import cucumber.api.CucumberOptions;
-import cucumber.api.junit.Cucumber;
+import io.cucumber.junit.Cucumber;
+import io.cucumber.junit.CucumberOptions;
+import io.cucumber.spring.CucumberContextConfiguration;
+import org.ff4j.services.CucumberConfiguration;
 import org.junit.runner.RunWith;
+import org.springframework.boot.test.context.SpringBootTest;
 
 /**
  * @author <a href="mailto:paul58914080@gmail.com">Paul Williams</a>
  */
 @RunWith(Cucumber.class)
-@CucumberOptions(features = "classpath:features/GroupServices.feature", strict = true,
+@CucumberOptions(features = "classpath:features/GroupServices.feature",
     plugin = {"json:target/cucumber/GroupServices.json", "junit:target/cucumber/GroupServices.xml"},
     glue = "classpath:org/ff4j/services/group", tags = "@GroupServices")
+@CucumberContextConfiguration
+@SpringBootTest(classes = CucumberConfiguration.class)
 public class RunCucumberGroupServicesTest {
 
 }

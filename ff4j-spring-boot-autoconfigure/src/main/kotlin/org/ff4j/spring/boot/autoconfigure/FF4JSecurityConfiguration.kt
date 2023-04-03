@@ -22,32 +22,41 @@ package org.ff4j.spring.boot.autoconfigure
 import org.springframework.boot.autoconfigure.AutoConfigureAfter
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty
+import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
+import org.springframework.security.core.userdetails.User
+import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.crypto.factory.PasswordEncoderFactories
+import org.springframework.security.provisioning.InMemoryUserDetailsManager
+import org.springframework.security.web.SecurityFilterChain
+
 
 @Configuration
 @ConditionalOnProperty(
-  value = ["ff4j.web-console.security.enabled"], havingValue = "true", matchIfMissing = false
+        value = ["ff4j.web-console.security.enabled"], havingValue = "true", matchIfMissing = false
 )
 @ConditionalOnBean(FF4JWebConsoleConfiguration::class)
 @AutoConfigureAfter(FF4JWebConsoleConfiguration::class)
 @EnableWebSecurity
-class FF4JSecurityConfiguration(private val config: FF4JConfigurationProperties) : WebSecurityConfigurerAdapter() {
+class FF4JSecurityConfiguration(private val config: FF4JConfigurationProperties) {
 
-  override fun configure(auth: AuthenticationManagerBuilder?) {
-    val encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder()
-    auth?.inMemoryAuthentication()?.withUser(config.webConsole.security.username)
-      ?.password(encoder.encode(config.webConsole.security.password))?.roles("ADMIN")
-  }
+    @Bean
+    fun filterChain(http: HttpSecurity): SecurityFilterChain {
+        http.csrf()?.disable()?.authorizeHttpRequests()?.anyRequest()?.permitAll();
+        return http.build();
+    }
 
-  override fun configure(http: HttpSecurity?) {
-    //http?.authorizeRequests()?.antMatchers("/")?.permitAll()?
-    //?.antMatchers("${config.webConsole.contextPath}/**")?.hasRole("ADMIN")?.and()?.formLogin()
-    http?.csrf()?.disable()?.authorizeRequests()?.anyRequest()?.permitAll();
-  }
+    @Bean
+    fun userDetailsService(): InMemoryUserDetailsManager? {
+        val encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder()
+        val user: UserDetails = User.builder().passwordEncoder(encoder::encode)
+                .username(config.webConsole.security.username)
+                .password(encoder.encode(config.webConsole.security.password))
+                .roles("ADMIN")
+                .build()
+        return InMemoryUserDetailsManager(user)
+    }
 }
 

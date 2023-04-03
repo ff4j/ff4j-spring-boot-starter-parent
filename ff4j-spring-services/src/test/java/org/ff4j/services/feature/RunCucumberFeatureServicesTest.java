@@ -20,18 +20,23 @@ package org.ff4j.services.feature;
  * #L%
  */
 
-import cucumber.api.CucumberOptions;
-import cucumber.api.junit.Cucumber;
+import io.cucumber.junit.Cucumber;
+import io.cucumber.junit.CucumberOptions;
+import io.cucumber.spring.CucumberContextConfiguration;
+import org.ff4j.services.CucumberConfiguration;
 import org.junit.runner.RunWith;
+import org.springframework.boot.test.context.SpringBootTest;
 
 /**
  * @author <a href="mailto:paul58914080@gmail.com">Paul Williams</a>
  */
 @RunWith(Cucumber.class)
-@CucumberOptions(features = "classpath:features/FeatureServices.feature", strict = true,
-    plugin = {"json:target/cucumber/FeatureService.json",
-        "junit:target/cucumber/FeatureService.xml"},
-    glue = "classpath:org/ff4j/services/feature", tags = "@FeatureServices")
+@CucumberOptions(features = "classpath:features/FeatureServices.feature",
+        plugin = {"json:target/cucumber/FeatureService.json",
+                "junit:target/cucumber/FeatureService.xml"},
+        glue = "classpath:org/ff4j/services/feature", tags = "@FeatureServices")
+@CucumberContextConfiguration
+@SpringBootTest(classes = CucumberConfiguration.class)
 public class RunCucumberFeatureServicesTest {
 
 }

@@ -19,12 +19,12 @@
  */
 package org.ff4j.spring.boot.autoconfigure
 
+import jakarta.annotation.PostConstruct
 import org.ff4j.FF4j
 import org.ff4j.security.SpringSecurityAuthorisationManager
 import org.springframework.boot.autoconfigure.AutoConfigureAfter
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass
 import org.springframework.context.annotation.Configuration
-import javax.annotation.PostConstruct
 
 @Configuration
 @AutoConfigureAfter(FF4JConfiguration::class)

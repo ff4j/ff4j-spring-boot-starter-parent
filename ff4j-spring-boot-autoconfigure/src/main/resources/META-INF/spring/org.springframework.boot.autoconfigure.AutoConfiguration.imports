@@ -1,0 +1,4 @@
+org.ff4j.spring.boot.autoconfigure.FF4JConfiguration
+org.ff4j.spring.boot.autoconfigure.FF4JInitializationConfiguration
+org.ff4j.spring.boot.autoconfigure.FF4JWebConsoleConfiguration
+org.ff4j.spring.boot.autoconfigure.FF4JOpenApiConfiguration

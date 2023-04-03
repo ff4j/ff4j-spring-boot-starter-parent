@@ -20,9 +20,17 @@ package org.ff4j.spring.boot.web.api.resources.feature;
  * #L%
  */
 
-import cucumber.api.CucumberOptions;
-import cucumber.api.junit.Cucumber;
+import io.cucumber.junit.Cucumber;
+import io.cucumber.junit.CucumberOptions;
+import io.cucumber.spring.CucumberContextConfiguration;
+import org.ff4j.services.FF4jServices;
+import org.ff4j.spring.boot.autoconfigure.FF4JConfiguration;
+import org.ff4j.spring.boot.web.api.Application;
 import org.junit.runner.RunWith;
+import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
+import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Import;
 
 /**
  * Created by Paul
@@ -30,10 +38,13 @@ import org.junit.runner.RunWith;
  * @author <a href="mailto:paul58914080@gmail.com">Paul Williams</a>
  */
 @RunWith(Cucumber.class)
-@CucumberOptions(features = "classpath:features/FeatureResource.feature", strict = true,
-    plugin = {"json:target/cucumber/FeatureResource.json",
-        "junit:target/cucumber/FeatureResource.xml"},
-    glue = "classpath:org/ff4j/spring/boot/web/api/resources/feature", tags = "@FeatureResource")
+@CucumberOptions(features = "classpath:features/FeatureResource.feature",
+        plugin = {"json:target/cucumber/FeatureResource.json",
+                "junit:target/cucumber/FeatureResource.xml"},
+        glue = "classpath:org/ff4j/spring/boot/web/api/resources/feature", tags = "@FeatureResource")
+@CucumberContextConfiguration
+@SpringBootTest
+@Import({FF4JConfiguration.class})
 public class RunCucumberFeatureTest {
 
 }

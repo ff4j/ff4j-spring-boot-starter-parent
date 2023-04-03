@@ -20,11 +20,14 @@ package org.ff4j.spring.boot.web.api.resources.property;
  * #L%
  */
 
-import cucumber.api.java.Before;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
 import java.util.List;
+import java.util.Map;
+
+import io.cucumber.java.Before;
+import io.cucumber.java.DataTableType;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import org.ff4j.spring.boot.web.api.resources.AbstractStepDef;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
@@ -36,9 +39,18 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 public class PropertyStepDef extends AbstractStepDef {
 
   @Before
-  @Override
   public void init() {
     this.mockMvc = MockMvcBuilders.webAppContextSetup(context).build();
+  }
+
+  @DataTableType
+  public FeaturePojo featurePojo(Map<String, String> row) {
+    return new FeaturePojo(row.get("uid"), row.get("enable"), row.get("description"), row.get("group"), row.get("permissions"));
+  }
+
+  @DataTableType
+  public PropertyPojo propertyPojo(Map<String, String> row) {
+    return new PropertyPojo(row.get("name"), row.get("description"), row.get("type"), row.get("value"), row.get("fixedValueCSV"));
   }
 
   @Given("^the property store is cleared$")

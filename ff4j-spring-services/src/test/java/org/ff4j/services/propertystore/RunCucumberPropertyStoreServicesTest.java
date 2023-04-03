@@ -20,18 +20,23 @@ package org.ff4j.services.propertystore;
  * #L%
  */
 
-import cucumber.api.CucumberOptions;
-import cucumber.api.junit.Cucumber;
+import io.cucumber.junit.Cucumber;
+import io.cucumber.junit.CucumberOptions;
+import io.cucumber.spring.CucumberContextConfiguration;
+import org.ff4j.services.CucumberConfiguration;
 import org.junit.runner.RunWith;
+import org.springframework.boot.test.context.SpringBootTest;
 
 /**
  * @author <a href="mailto:paul58914080@gmail.com">Paul Williams</a>
  */
 @RunWith(Cucumber.class)
-@CucumberOptions(features = "classpath:features/PropertyStoreServices.feature", strict = true,
+@CucumberOptions(features = "classpath:features/PropertyStoreServices.feature",
     plugin = {"json:target/cucumber/PropertyStoreServices.json",
         "junit:target/cucumber/PropertyStoreServices.xml"},
     glue = "classpath:org/ff4j/services/propertystore", tags = "@PropertyStoreServices")
+@CucumberContextConfiguration
+@SpringBootTest(classes = CucumberConfiguration.class)
 public class RunCucumberPropertyStoreServicesTest {
 
 }

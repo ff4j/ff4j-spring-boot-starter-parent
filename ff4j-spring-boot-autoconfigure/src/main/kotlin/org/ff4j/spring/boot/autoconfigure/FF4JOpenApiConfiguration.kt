@@ -24,8 +24,8 @@ import io.swagger.v3.oas.annotations.OpenAPIDefinition
 import io.swagger.v3.oas.annotations.info.Contact
 import io.swagger.v3.oas.annotations.info.Info
 import io.swagger.v3.oas.annotations.info.License
-import org.springdoc.core.GroupedOpenApi
-import org.springdoc.core.SpringDocConfiguration
+import org.springdoc.core.configuration.SpringDocConfiguration
+import org.springdoc.core.models.GroupedOpenApi
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication
 import org.springframework.context.annotation.Bean
