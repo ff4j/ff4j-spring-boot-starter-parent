@@ -1,6 +1,6 @@
 /*-
  * #%L
- * ff4j-spring-boot-autoconfigure
+ * ff4j-spring-boot-autoconfigure-common
  * %%
  * Copyright (C) 2013 - 2023 FF4J
  * %%
