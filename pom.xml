@@ -78,23 +78,23 @@
     <spring-boot.version>3.0.5</spring-boot.version>
     <ff4j.version>2.0.0</ff4j.version>
     <jackson-module-kotlin.version>2.14.2</jackson-module-kotlin.version>
-    <kotlin.version>1.8.10</kotlin.version>
-    <cucumber.version>7.11.0</cucumber.version>
-    <springdoc-openapi-starter.version>2.0.2</springdoc-openapi-starter.version>
+    <kotlin.version>1.8.20</kotlin.version>
+    <cucumber.version>7.11.2</cucumber.version>
+    <springdoc-openapi-starter.version>2.1.0</springdoc-openapi-starter.version>
     <meanbean.version>2.0.3</meanbean.version>
     <!-- plugin -->
-    <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
-    <maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
-    <license-maven-plugin.version>1.20</license-maven-plugin.version>
-    <maven-resources-plugin.version>3.3.0</maven-resources-plugin.version>
-    <version.maven.plugin.nexus>1.6.13</version.maven.plugin.nexus>
-    <version.maven.plugin.release>2.5.3</version.maven.plugin.release>
-    <version.maven.plugin.gpg>3.0.1</version.maven.plugin.gpg>
-    <version.maven.plugin.javadoc>3.5.0</version.maven.plugin.javadoc>
-    <version.maven.plugin.source>3.2.1</version.maven.plugin.source>
-    <version.maven.plugin.dokka>1.8.10</version.maven.plugin.dokka>
-    <jacoco.plugin.version>0.8.8</jacoco.plugin.version>
-    <enforcer.plugin.version>3.2.1</enforcer.plugin.version>
+    <maven-surefire-plugin.version>3.0.0</maven-surefire-plugin.version>
+    <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
+    <license-maven-plugin.version>2.0.0</license-maven-plugin.version>
+    <maven-resources-plugin.version>3.3.1</maven-resources-plugin.version>
+    <nexus-staging-maven-plugin.version>1.6.13</nexus-staging-maven-plugin.version>
+    <maven-release-plugin.version>3.0.0</maven-release-plugin.version>
+    <maven-gpg-plugin.version>3.0.1</maven-gpg-plugin.version>
+    <maven-javadoc-plugin.version>3.5.0</maven-javadoc-plugin.version>
+    <aven-source-plugin.version>3.2.1</aven-source-plugin.version>
+    <dokka-maven-plugin.version>1.8.10</dokka-maven-plugin.version>
+    <jacoco-maven-plugin.version>0.8.9</jacoco-maven-plugin.version>
+    <maven-enforcer-plugin.version>3.3.0</maven-enforcer-plugin.version>
     <dokka.plugin.version>0.10.0</dokka.plugin.version>
     <kotlin.code.style>official</kotlin.code.style>
     <license.path>${project.baseUri}/src/license</license.path>
@@ -251,7 +251,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-enforcer-plugin</artifactId>
-        <version>${enforcer.plugin.version}</version>
+        <version>${maven-enforcer-plugin.version}</version>
         <configuration>
           <rules>
             <dependencyConvergence/>
@@ -322,7 +322,7 @@
       <plugin>
         <groupId>org.jacoco</groupId>
         <artifactId>jacoco-maven-plugin</artifactId>
-        <version>${jacoco.plugin.version}</version>
+        <version>${jacoco-maven-plugin.version}</version>
         <executions>
           <execution>
             <goals>
@@ -399,7 +399,7 @@
       <plugin>
         <groupId>org.sonatype.plugins</groupId>
         <artifactId>nexus-staging-maven-plugin</artifactId>
-        <version>${version.maven.plugin.nexus}</version>
+        <version>${nexus-staging-maven-plugin.version}</version>
         <extensions>true</extensions>
         <configuration>
           <serverId>ossrh</serverId>
@@ -429,7 +429,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-source-plugin</artifactId>
-        <version>${version.maven.plugin.source}</version>
+        <version>${aven-source-plugin.version}</version>
         <executions>
           <execution>
             <id>attach-sources</id>
@@ -446,7 +446,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-release-plugin</artifactId>
-          <version>${version.maven.plugin.release}</version>
+          <version>${maven-release-plugin.version}</version>
           <configuration>
             <autoVersionSubmodules>true</autoVersionSubmodules>
             <useReleaseProfile>false</useReleaseProfile>
@@ -500,7 +500,7 @@
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-javadoc-plugin</artifactId>
-            <version>${version.maven.plugin.javadoc}</version>
+            <version>${maven-javadoc-plugin.version}</version>
             <configuration>
               <additionalparam>-Xdoclint:none</additionalparam>
             </configuration>
@@ -521,7 +521,7 @@
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-source-plugin</artifactId>
-            <version>${version.maven.plugin.source}</version>
+            <version>${aven-source-plugin.version}</version>
             <executions>
               <execution>
                 <id>attach-sources</id>
@@ -534,7 +534,7 @@
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-javadoc-plugin</artifactId>
-            <version>${version.maven.plugin.javadoc}</version>
+            <version>${maven-javadoc-plugin.version}</version>
             <executions>
               <execution>
                 <id>attach-javadocs</id>
@@ -547,7 +547,7 @@
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-gpg-plugin</artifactId>
-            <version>${version.maven.plugin.gpg}</version>
+            <version>${maven-gpg-plugin.version}</version>
             <executions>
               <execution>
                 <id>sign-artifacts</id>
@@ -562,7 +562,7 @@
           <plugin>
             <groupId>org.jetbrains.dokka</groupId>
             <artifactId>dokka-maven-plugin</artifactId>
-            <version>${version.maven.plugin.dokka}</version>
+            <version>${dokka-maven-plugin.version}</version>
             <executions>
               <execution>
                 <phase>prepare-package</phase>
