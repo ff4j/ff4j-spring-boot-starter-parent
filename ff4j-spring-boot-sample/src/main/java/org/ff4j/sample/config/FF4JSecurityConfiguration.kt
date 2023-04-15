@@ -37,7 +37,7 @@ import org.springframework.security.web.SecurityFilterChain
 @ConditionalOnBean(FF4JWebConsoleConfiguration::class)
 @AutoConfigureAfter(FF4JWebConsoleConfiguration::class)
 @EnableWebSecurity
-class FF4JSecurityConfiguration(private val config: FF4JConfigurationProperties) {
+class FF4JSecurityConfiguration() {
 
   @Bean
   @Throws(Exception::class)
