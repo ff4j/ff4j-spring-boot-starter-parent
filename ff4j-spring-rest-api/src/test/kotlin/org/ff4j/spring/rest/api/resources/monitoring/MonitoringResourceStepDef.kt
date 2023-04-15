@@ -1,6 +1,6 @@
 /*-
  * #%L
- * ff4j-spring-boot-web-api
+ * ff4j-spring-rest-api
  * %%
  * Copyright (C) 2013 - 2023 FF4J
  * %%
