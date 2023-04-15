@@ -1,5 +1,5 @@
 server:
-  port: ${PORT:5000}
+  port: ${PORT:8080}
 ff4j:
   api:
     context-path: /api/v1/ff4j     # default '/api/ff4j'
@@ -20,3 +20,6 @@ springdoc:
   swagger-ui:
     tags-sorter: "alpha"
     operations-sorter: "alpha"
+  group-configs:
+    - group: ff4j
+      paths-to-match: ${ff4j.api.context-path:/api/ff4j}/**
