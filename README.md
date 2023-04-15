@@ -7,7 +7,7 @@
 
 > This is a **work-in-progress** branch (master). Please refer branch [v1](https://github.com/ff4j/ff4j-spring-boot-starter-parent/tree/v1) for the current version's documentation
 
-![Build Status](https://github.com/ff4j/ff4j-spring-boot-starter/actions/workflows/build_workflow.yml/badge.svg?branch=main)
+![Build Status](https://github.com/ff4j/ff4j-spring-boot-starter-parent/actions/workflows/build_workflow.yml/badge.svg?branch=main)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/e6fc893a940e44f18ade46d2d13036bf)](https://app.codacy.com/gh/ff4j/ff4j-spring-boot-starter-parent/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade) 
 [![codecov](https://codecov.io/gh/ff4j/ff4j-spring-boot-starter-parent/branch/main/graph/badge.svg?token=P37n0ZwhlR)](https://codecov.io/gh/ff4j/ff4j-spring-boot-starter-parent) 
 [![License Apache2](http://img.shields.io/badge/license-APACHE2-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0.html) 
