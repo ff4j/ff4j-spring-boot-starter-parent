@@ -1,3 +1,8 @@
+# :mega:
+<h1>
+This is a <b>work-in-progress</b> branch(main). Please refer branch <a href='https://github.com/ff4j/ff4j-spring-boot-starter-parent/tree/v1'>v1</a> for the current version's documentation
+</h1>
+
 <p align="center">
 <img src="https://github.com/paul58914080/ff4j-spring-boot-starter-parent/blob/master/images/ff4j.png" alt="Feature Flipping For Java" height="120px" />
 <img src="https://github.com/paul58914080/ff4j-spring-boot-starter-parent/blob/master/images/spring-boot.png" alt="Spring boot" height="120px" />
@@ -5,7 +10,7 @@
 
 ## Spring boot starter for FF4J (Feature Flipping for Java)
 
-> This is a **work-in-progress** branch (master). Please refer branch [v1](https://github.com/ff4j/ff4j-spring-boot-starter-parent/tree/v1) for the current version's documentation
+
 
 ![Build Status](https://github.com/ff4j/ff4j-spring-boot-starter-parent/actions/workflows/build_workflow.yml/badge.svg?branch=main)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/e6fc893a940e44f18ade46d2d13036bf)](https://app.codacy.com/gh/ff4j/ff4j-spring-boot-starter-parent/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade) 
