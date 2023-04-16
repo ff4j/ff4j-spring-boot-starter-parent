@@ -67,7 +67,7 @@ class PropertyStoreResource(@Autowired val propertyStoreServices: PropertyStoreS
   )
   @GetMapping(produces = [APPLICATION_JSON_VALUE])
   fun getPropertyStore(): ResponseEntity<Mono<PropertyStoreApiBean>> =
-    ResponseEntity.ok(Mono.just(propertyStoreServices.getPropertyStore()))
+    ResponseEntity.ok(propertyStoreServices.getPropertyStore())
 
   @Operation(summary = "Display all the Properties", tags = ["PropertyStore"])
   @ApiResponses(
@@ -79,7 +79,7 @@ class PropertyStoreResource(@Autowired val propertyStoreServices: PropertyStoreS
   )
   @GetMapping(value = [RESOURCE_PROPERTIES], produces = [APPLICATION_JSON_VALUE])
   fun getAllProperties(): ResponseEntity<Flux<PropertyApiBean>> =
-    ResponseEntity.ok(Flux.fromIterable(propertyStoreServices.getAllProperties()))
+    ResponseEntity.ok(propertyStoreServices.getAllProperties())
 
   @Operation(summary = "Display information related to Cache", tags = ["PropertyStore"])
   @ApiResponses(
@@ -91,7 +91,7 @@ class PropertyStoreResource(@Autowired val propertyStoreServices: PropertyStoreS
   )
   @GetMapping(value = [("/$RESOURCE_CACHE")], produces = [APPLICATION_JSON_VALUE])
   fun getPropertiesFromCache(): ResponseEntity<Mono<CacheApiBean>> =
-    ResponseEntity.ok(Mono.just(propertyStoreServices.getPropertiesFromCache()))
+    ResponseEntity.ok(propertyStoreServices.getPropertiesFromCache())
 
   @Operation(summary = "Delete all Properties in store", tags = ["PropertyStore"])
   @ApiResponses(

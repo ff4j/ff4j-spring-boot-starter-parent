@@ -28,6 +28,8 @@ import org.ff4j.services.InitializerStepDef
 import org.ff4j.services.PropertyServices
 import org.ff4j.services.domain.PropertyApiBean
 import org.ff4j.services.representation.PropertyPojo
+import org.reactivestreams.Publisher
+import reactor.test.StepVerifier
 
 /**
  * Created by Paul
@@ -82,16 +84,22 @@ class PropertyServicesStepDef(ff4j: FF4j, propertyServices: PropertyServices) : 
       }
     }
     Then("the user gets the response as") { expectedResponse: String ->
-      testUtils.assertLenientResponse(expectedResponse, actualResponse)
+      StepVerifier.create(actualResponse as Publisher<out Any>).consumeNextWith { response: Any ->
+        testUtils.assertLenientResponse(expectedResponse, response)
+      }.verifyComplete()
     }
     Then("the user gets an exception {string}") { className: String ->
       testUtils.assertException(exception, className)
     }
     Then("property is created") {
-      testUtils.assertCreated(actualResponse)
+      StepVerifier.create(actualResponse as Publisher<out Any>).consumeNextWith { response: Any ->
+        testUtils.assertCreated(response)
+      }.verifyComplete()
     }
     Then("property is updated") {
-      testUtils.assertUpdated(actualResponse)
+      StepVerifier.create(actualResponse as Publisher<out Any>).consumeNextWith { response: Any ->
+        testUtils.assertUpdated(response)
+      }.verifyComplete()
     }
   }
 }

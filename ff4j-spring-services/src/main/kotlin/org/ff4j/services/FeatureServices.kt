@@ -25,6 +25,7 @@ import org.ff4j.services.model.FeatureActions
 import org.ff4j.services.validator.FeatureValidator
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
+import reactor.core.publisher.Mono
 
 /**
  * Created by Paul
@@ -33,20 +34,20 @@ import org.springframework.stereotype.Service
  */
 @Service
 class FeatureServices(@Autowired val fF4j: FF4j, @Autowired val featureValidator: FeatureValidator) {
-  fun getFeature(featureUID: String): FeatureApiBean {
+  fun getFeature(featureUID: String): Mono<FeatureApiBean> {
     featureValidator.assertFeatureExists(featureUID)
-    return FeatureApiBean(fF4j.featureStore.read(featureUID))
+    return Mono.just(FeatureApiBean(fF4j.featureStore.read(featureUID)))
   }
 
-  fun createOrUpdateFeature(featureUID: String, featureApiBean: FeatureApiBean): FeatureActions {
+  fun createOrUpdateFeature(featureUID: String, featureApiBean: FeatureApiBean): Mono<FeatureActions> {
     featureValidator.assertFeatureUIDIsNotBlank(featureApiBean.uid)
     featureValidator.assertFeatureIdsMatch(featureUID, featureApiBean.uid)
     return if (fF4j.featureStore.exist(featureUID)) {
       fF4j.featureStore.update(featureApiBean.toFeature())
-      FeatureActions.UPDATED
+      Mono.just(FeatureActions.UPDATED)
     } else {
       fF4j.featureStore.create(featureApiBean.toFeature())
-      FeatureActions.CREATED
+      Mono.just(FeatureActions.CREATED)
     }
   }
 

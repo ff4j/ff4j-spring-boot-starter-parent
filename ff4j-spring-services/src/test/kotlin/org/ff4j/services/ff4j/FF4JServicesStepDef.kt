@@ -32,6 +32,8 @@ import org.ff4j.services.InitializerStepDef
 import org.ff4j.services.domain.FeatureApiBean
 import org.ff4j.services.model.FeatureActions
 import org.ff4j.services.representation.TestAuthorizationsManager
+import org.reactivestreams.Publisher
+import reactor.test.StepVerifier
 
 /**
  * Created by Paul
@@ -100,13 +102,19 @@ class FF4JServicesStepDef(
       testUtils.assertException(exception, className)
     }
     Then("the user gets the response as") { expectedResponse: String ->
-      testUtils.assertLenientResponse(expectedResponse, actualResponse)
+      StepVerifier.create(actualResponse as Publisher<out Any>).consumeNextWith { actualResponse: Any ->
+        testUtils.assertLenientResponse(expectedResponse, actualResponse)
+      }.verifyComplete()
     }
     Then("the user gets a response {string}") { expectedResponse: String ->
-      assertThat(actualResponse).isEqualTo(expectedResponse.toBooleanStrict())
+      StepVerifier.create(actualResponse as Publisher<out Any>).consumeNextWith { actualResponse: Any ->
+        assertThat(actualResponse).isEqualTo(expectedResponse.toBooleanStrict())
+      }.verifyComplete()
     }
     Then("feature is updated") {
-      assertThat(actualResponse).isEqualTo(FeatureActions.UPDATED)
+      StepVerifier.create(actualResponse as Publisher<out Any>).consumeNextWith { actualResponse: Any ->
+        assertThat(actualResponse).isEqualTo(FeatureActions.UPDATED)
+      }.verifyComplete()
     }
     When("the user requests to check if the feature is flipped with feature uid as {string} and parameters") { featureUID: String, dataTable: DataTable ->
       val map = HashMap(dataTable.asMap())

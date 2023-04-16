@@ -27,6 +27,8 @@ import org.ff4j.services.FF4JTestHelperUtils
 import org.ff4j.services.InitializerStepDef
 import org.ff4j.services.MonitoringServices
 import org.ff4j.services.representation.PropertyPojo
+import org.reactivestreams.Publisher
+import reactor.test.StepVerifier
 
 /**
  * Created by Paul
@@ -37,7 +39,6 @@ class MonitoringServicesStepDef(ff4j: FF4j, monitoringServices: MonitoringServic
 
   private val testUtils = FF4JTestHelperUtils(ff4j)
   private lateinit var actualResponse: Any
-  private lateinit var exception: Throwable
 
   init {
     InitializerStepDef().initDataTable()
@@ -61,7 +62,9 @@ class MonitoringServicesStepDef(ff4j: FF4j, monitoringServices: MonitoringServic
       actualResponse = monitoringServices.getMonitoringStatus()
     }
     Then("the user gets the response as") { expectedResponse: String ->
-      testUtils.assertLenientResponse(expectedResponse, actualResponse)
+      StepVerifier.create(actualResponse as Publisher<out Any>).consumeNextWith { response: Any ->
+        testUtils.assertLenientResponse(expectedResponse, response)
+      }.verifyComplete()
     }
   }
 }

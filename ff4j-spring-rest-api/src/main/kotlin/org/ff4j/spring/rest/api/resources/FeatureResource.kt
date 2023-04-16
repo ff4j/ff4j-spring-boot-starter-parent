@@ -36,6 +36,8 @@ import org.ff4j.services.constants.FeatureConstants.RESOURCE_FEATURES
 import org.ff4j.services.constants.FeatureConstants.RESOURCE_FF4J
 import org.ff4j.services.constants.FeatureConstants.RESOURCE_STORE
 import org.ff4j.services.domain.FeatureApiBean
+import org.ff4j.services.model.FeatureActions
+import org.ff4j.spring.rest.api.utils.FeatureWebUtils
 import org.ff4j.web.FF4jWebConstants.*
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus.ACCEPTED
@@ -64,7 +66,7 @@ class FeatureResource(@Autowired val featureServices: FeatureServices) {
   )
   @GetMapping(produces = [APPLICATION_JSON_VALUE])
   fun getFeatureByUID(@PathVariable(value = PARAM_UID) featureUID: String): ResponseEntity<Mono<FeatureApiBean>> =
-    ResponseEntity.ok(Mono.just(featureServices.getFeature(featureUID)))
+    ResponseEntity.ok(featureServices.getFeature(featureUID))
 
   @Operation(summary = "Create or update a feature", tags = ["Feature"])
   @ApiResponses(
@@ -85,12 +87,13 @@ class FeatureResource(@Autowired val featureServices: FeatureServices) {
   fun createOrUpdateFeature(
     @PathVariable(value = PARAM_UID) featureUID: String,
     @RequestBody featureApiBean: FeatureApiBean
-  ): ResponseEntity<Mono<Boolean>> =
-      org.ff4j.spring.rest.api.utils.FeatureWebUtils.getBooleanResponseEntityByHttpStatus(
-        featureServices.createOrUpdateFeature(
-          featureUID, featureApiBean
-        )
-      )
+  ): ResponseEntity<Mono<Boolean>> {
+    //TODO: remove the blocking call
+    val featureAction: FeatureActions = featureServices.createOrUpdateFeature(
+      featureUID, featureApiBean
+    ).block()
+    return FeatureWebUtils.getBooleanResponseEntityByHttpStatus(featureAction)
+  }
 
   @Operation(summary = "Delete a feature", tags = ["Feature"])
   @ApiResponses(

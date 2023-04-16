@@ -27,6 +27,9 @@ import org.ff4j.services.FF4JTestHelperUtils
 import org.ff4j.services.FeatureServices
 import org.ff4j.services.GroupServices
 import org.ff4j.services.InitializerStepDef
+import org.json.JSONArray
+import org.reactivestreams.Publisher
+import reactor.test.StepVerifier
 
 /**
  * Created by Paul
@@ -41,6 +44,7 @@ class GroupServicesStepDef(
 
   private val testUtils = FF4JTestHelperUtils(ff4j)
   private lateinit var actualResponse: Any
+
   private lateinit var exception: Throwable
 
   init {
@@ -83,7 +87,17 @@ class GroupServicesStepDef(
       }
     }
     Then("the user gets the response as") { expectedResponse: String ->
-      testUtils.assertLenientResponse(expectedResponse, actualResponse)
+      StepVerifier.create(actualResponse as Publisher<out Any>).consumeNextWith { response: Any ->
+        testUtils.assertLenientResponse(expectedResponse, response)
+      }.verifyComplete()
+    }
+    Then("the user gets the responses as") { expectedResponse: String ->
+      val jsonArray = JSONArray(expectedResponse)
+      StepVerifier.create(actualResponse as Publisher<out Any>).consumeNextWith { response ->
+        testUtils.assertLenientResponse(jsonArray.getString(0), response)
+      }.consumeNextWith { response ->
+        testUtils.assertLenientResponse(jsonArray.getString(1), response)
+      }.verifyComplete()
     }
     Then("the user gets an exception {string}") { className: String ->
       testUtils.assertException(exception, className)
