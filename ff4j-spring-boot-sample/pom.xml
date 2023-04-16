@@ -24,13 +24,13 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <java.version>17</java.version>
-    <kotlin.version>1.8.0</kotlin.version>
+    <kotlin.version>1.8.20</kotlin.version>
     <ff4j.version>2.0.0-SNAPSHOT</ff4j.version>
     <start-class>org.ff4j.sample.Application</start-class>
     <maven.compiler.target>17</maven.compiler.target>
     <maven.compiler.source>17</maven.compiler.source>
     <spring-boot.version>3.0.5</spring-boot.version>
-    <springdoc-openapi-starter.version>2.0.2</springdoc-openapi-starter.version>
+    <springdoc-openapi-starter.version>2.1.0</springdoc-openapi-starter.version>
   </properties>
   <dependencies>
     <dependency>
