@@ -27,23 +27,24 @@ import org.ff4j.services.exceptions.PropertyStoreNotCached
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import org.springframework.util.CollectionUtils
-import java.util.stream.Collectors
+import reactor.core.publisher.Flux
+import reactor.core.publisher.Mono
 
 /**
  * @author [Paul Williams](mailto:paul58914080@gmail.com)
  */
 @Service
 class PropertyStoreServices(@Autowired val ff4j: FF4j) {
-  fun getPropertyStore(): PropertyStoreApiBean {
-    return PropertyStoreApiBean(ff4j.propertiesStore)
+  fun getPropertyStore(): Mono<PropertyStoreApiBean> {
+    return Mono.just(PropertyStoreApiBean(ff4j.propertiesStore))
   }
 
-  fun getAllProperties(): List<PropertyApiBean> {
+  fun getAllProperties(): Flux<PropertyApiBean> {
     val allProperties = ff4j.propertiesStore.readAllProperties()
     return if (CollectionUtils.isEmpty(allProperties)) {
-      ArrayList(0)
+      Flux.empty()
     } else {
-      allProperties.values.stream().map { PropertyApiBean(it) }.collect(Collectors.toList())
+      Flux.fromStream(allProperties.values.stream().map { PropertyApiBean(it) })
     }
   }
 
@@ -51,9 +52,9 @@ class PropertyStoreServices(@Autowired val ff4j: FF4j) {
     ff4j.propertiesStore.clear()
   }
 
-  fun getPropertiesFromCache(): CacheApiBean {
+  fun getPropertiesFromCache(): Mono<CacheApiBean> {
     ff4j.cacheProxy ?: throw PropertyStoreNotCached()
-    return CacheApiBean(ff4j.propertiesStore)
+    return Mono.just(CacheApiBean(ff4j.propertiesStore))
   }
 
   fun clearCachedPropertyStore() {

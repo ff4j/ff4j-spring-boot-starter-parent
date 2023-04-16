@@ -30,6 +30,10 @@ import org.ff4j.services.FeatureServices
 import org.ff4j.services.InitializerStepDef
 import org.ff4j.services.domain.FeatureApiBean
 import org.ff4j.services.model.FeatureActions
+import org.reactivestreams.Publisher
+import reactor.test.StepVerifier
+import kotlin.String
+import kotlin.Throwable
 
 /**
  * @author [Paul Williams](mailto:paul58914080@gmail.com)
@@ -131,23 +135,31 @@ class FeatureServicesStepDef(ff4j: FF4j, featureServices: FeatureServices) : En 
         expectedPermissions.split(",")
       )
       val expectedFeatureApiBean = FeatureApiBean(expectedFeature)
-      assertThat(actualResponse).usingRecursiveComparison()
-        .isEqualTo(expectedFeatureApiBean)
+      StepVerifier.create(actualResponse as Publisher<out Any>).consumeNextWith { actualBean: Any ->
+        assertThat(actualBean).usingRecursiveComparison()
+          .isEqualTo(expectedFeatureApiBean)
+      }.verifyComplete()
     }
     Then("feature is created") {
-      assertThat(actualResponse).isEqualTo(FeatureActions.CREATED)
+      StepVerifier.create(actualResponse as Publisher<out Any>).consumeNextWith { actualBean: Any ->
+        assertThat(actualBean).isEqualTo(FeatureActions.CREATED)
+      }.verifyComplete()
     }
     Then("feature is updated") {
-      assertThat(actualResponse).isEqualTo(FeatureActions.UPDATED)
+      StepVerifier.create(actualResponse as Publisher<out Any>).consumeNextWith { actualBean: Any ->
+        assertThat(actualBean).isEqualTo(FeatureActions.UPDATED)
+      }.verifyComplete()
     }
     Then("the user gets the response as") { expectedResponse: String ->
       val featureApiBean: FeatureApiBean =
         Gson().fromJson(expectedResponse, FeatureApiBean::class.java)
-      assertThat(actualResponse).usingRecursiveComparison()
-        .ignoringActualNullFields()
-        .ignoringCollectionOrder()
-        .withStrictTypeChecking()
-        .isEqualTo(featureApiBean)
+      StepVerifier.create(actualResponse as Publisher<out Any>).consumeNextWith { actualBean: Any ->
+        assertThat(actualBean).usingRecursiveComparison()
+          .ignoringActualNullFields()
+          .ignoringCollectionOrder()
+          .withStrictTypeChecking()
+          .isEqualTo(featureApiBean)
+      }.verifyComplete()
     }
   }
 }
