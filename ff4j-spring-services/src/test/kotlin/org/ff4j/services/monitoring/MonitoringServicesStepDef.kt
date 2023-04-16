@@ -27,6 +27,8 @@ import org.ff4j.services.FF4JTestHelperUtils
 import org.ff4j.services.InitializerStepDef
 import org.ff4j.services.MonitoringServices
 import org.ff4j.services.representation.PropertyPojo
+import org.reactivestreams.Publisher
+import reactor.test.StepVerifier
 
 /**
  * @author [Paul Williams](mailto:paul58914080@gmail.com)
@@ -58,7 +60,9 @@ class MonitoringServicesStepDef(ff4j: FF4j, monitoringServices: MonitoringServic
       actualResponse = monitoringServices.getMonitoringStatus()
     }
     Then("the user gets the response as") { expectedResponse: String ->
-      testUtils.assertLenientResponse(expectedResponse, actualResponse)
+      StepVerifier.create(actualResponse as Publisher<out Any>).consumeNextWith { response: Any ->
+        testUtils.assertLenientResponse(expectedResponse, response)
+      }.verifyComplete()
     }
   }
 }

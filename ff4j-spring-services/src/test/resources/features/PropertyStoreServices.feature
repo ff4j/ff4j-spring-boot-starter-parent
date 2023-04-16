@@ -42,7 +42,7 @@ Feature: PropertyStoreServices
   # Get all the properties in the property store
   Scenario: When the user tries to retrieve all the properties from the property store
     When the user requests for all the properties from the property store
-    Then the user gets the response as
+    Then the user get the responses as
     """
     [
       {
@@ -65,7 +65,7 @@ Feature: PropertyStoreServices
   Scenario: When the user tries to retrieve all the properties from the property store and the property store is empty
     Given the property store is cleared
     When the user requests for all the properties from the property store
-    Then the user gets the response as
+    Then the user gets blank response
     """
     []
     """
@@ -74,7 +74,7 @@ Feature: PropertyStoreServices
   Scenario: When the user tries to delete all the properties in the property store
     When the user requests to delete all the properties from the property store
     When the user requests for all the properties from the property store
-    Then the user gets the response as
+    Then the user gets blank response
     """
     []
     """
@@ -100,7 +100,7 @@ Feature: PropertyStoreServices
     }
     """
     When the user requests for all the properties from the property store
-    Then the user gets the response as
+    Then the user get the responses as
     """
     [
       {
@@ -141,7 +141,7 @@ Feature: PropertyStoreServices
     }
     """
     When the user requests for all the properties from the property store
-    Then the user gets the response as
+    Then the user get the responses as
     """
     [
       {
@@ -172,7 +172,7 @@ Feature: PropertyStoreServices
     }
     """
     When the user requests for all the properties from the property store
-    Then the user gets the response as
+    Then the user get the responses as
     """
     [
       {

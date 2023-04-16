@@ -27,27 +27,28 @@ import org.ff4j.services.model.FeatureActions.UPDATED
 import org.ff4j.services.validator.PropertyValidator
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
+import reactor.core.publisher.Mono
 
 /**
  * @author [Paul Williams](mailto:paul58914080@gmail.com)
  */
 @Service
 class PropertyServices(@Autowired val fF4j: FF4j, @Autowired val propertyValidator: PropertyValidator) {
-  fun getProperty(propertyUID: String): PropertyApiBean {
+  fun getProperty(propertyUID: String): Mono<PropertyApiBean> {
     propertyValidator.assertPropertyExist(propertyUID)
-    return PropertyApiBean(fF4j.propertiesStore.readProperty(propertyUID))
+    return Mono.just(PropertyApiBean(fF4j.propertiesStore.readProperty(propertyUID)))
   }
 
-  fun createOrUpdateProperty(propertyUID: String, propertyApiBean: PropertyApiBean): FeatureActions {
+  fun createOrUpdateProperty(propertyUID: String, propertyApiBean: PropertyApiBean): Mono<FeatureActions> {
     propertyValidator.assertPropertyNameNotBlank(propertyApiBean.name)
     propertyValidator.assertPropertyNameMatch(propertyUID, propertyApiBean.name)
     val property = propertyApiBean.asProperty()
     return if (fF4j.propertiesStore.existProperty(propertyUID)) {
       fF4j.propertiesStore.updateProperty(property)
-      UPDATED
+      Mono.just(UPDATED)
     } else {
       fF4j.propertiesStore.createProperty(property)
-      CREATED
+      Mono.just(CREATED)
     }
   }
 
