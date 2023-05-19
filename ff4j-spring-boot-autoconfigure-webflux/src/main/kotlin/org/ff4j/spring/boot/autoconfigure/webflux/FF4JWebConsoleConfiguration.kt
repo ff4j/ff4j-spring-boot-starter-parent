@@ -48,7 +48,7 @@ class FF4JWebConsoleConfiguration(private val config: FF4JConfigurationPropertie
   @Bean
   @ConditionalOnMissingBean
   fun getFF4jDispatcherServlet(ff4j: FF4j): FF4jDispatcherServlet? {
-    log.info("Initializing the web console servlet");
+    log.info("Initializing the web console servlet")
     val ff4jConsoleServlet = FF4jDispatcherServlet()
     ff4jConsoleServlet.ff4j = ff4j
     return ff4jConsoleServlet

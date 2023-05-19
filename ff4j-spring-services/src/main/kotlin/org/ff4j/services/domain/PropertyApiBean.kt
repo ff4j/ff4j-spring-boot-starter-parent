@@ -48,8 +48,8 @@ class PropertyApiBean {
       this.description = it.description
       this.type = it.type
       this.value = it.asString()
-      it.fixedValues?.let {
-        this.fixedValues.addAll(it.stream().map({ it.toString() }).collect(Collectors.toList()))
+      it.fixedValues?.let { fixedValues ->
+        this.fixedValues.addAll(fixedValues.stream().map { fixedValue -> fixedValue.toString() }.collect(Collectors.toList()))
       }
     }
   }

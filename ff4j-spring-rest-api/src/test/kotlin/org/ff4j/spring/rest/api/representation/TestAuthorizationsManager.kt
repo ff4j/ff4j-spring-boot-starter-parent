@@ -34,7 +34,7 @@ class TestAuthorizationsManager(
   private val currentUserName: String = ""
 ) : AbstractAuthorizationManager() {
 
-  override fun getCurrentUserName(): String? = currentUserName
+  override fun getCurrentUserName(): String = currentUserName
 
   override fun getCurrentUserPermissions(): MutableSet<String> =
     if (StringUtils.isBlank(currentUserPermissions)) Collections.emptySet() else HashSet(

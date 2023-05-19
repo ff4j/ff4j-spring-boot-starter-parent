@@ -37,7 +37,6 @@ class MonitoringServicesStepDef(ff4j: FF4j, monitoringServices: MonitoringServic
 
   private val testUtils = FF4JTestHelperUtils(ff4j)
   private lateinit var actualResponse: Any
-  private lateinit var exception: Throwable
 
   init {
     InitializerStepDef().initDataTable()

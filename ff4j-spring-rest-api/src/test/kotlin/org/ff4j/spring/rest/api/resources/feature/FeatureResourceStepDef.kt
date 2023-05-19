@@ -32,7 +32,6 @@ import org.springframework.http.MediaType
 import org.springframework.test.web.reactive.server.WebTestClient
 import org.springframework.test.web.reactive.server.expectBody
 import org.springframework.web.context.WebApplicationContext
-import java.lang.Boolean
 import kotlin.Int
 import kotlin.String
 
@@ -53,7 +52,7 @@ class FeatureResourceStepDef(ff4j: FF4j, context: WebApplicationContext) : En {
     }
     Given("the feature with {string}, {string}, {string}, {string} and {string} exists in the feature store") { uid: String, enabled: String, description: String, group: String, permissions: String ->
       val feature =
-        Feature(uid, Boolean.valueOf(enabled), description, group, permissions.split(","))
+        Feature(uid, enabled.toBooleanStrict(), description, group, permissions.split(","))
       testUtils.createFeatures(listOf(feature))
     }
     Given("the following features exists in the feature store") { dataTable: DataTable ->
@@ -82,7 +81,7 @@ class FeatureResourceStepDef(ff4j: FF4j, context: WebApplicationContext) : En {
     Then("the user gets the response with response code as {int} and content as {string}, {string}, {string}, {string} and {string}") { responseCode: Int, expectedUid: String, expectedEnabled: String, expectedDescription: String, expectedGroup: String, expectedPermissions: String ->
       val expectedFeature = Feature(
         expectedUid,
-        Boolean.valueOf(expectedEnabled),
+        expectedEnabled.toBooleanStrict(),
         expectedDescription,
         expectedGroup,
         expectedPermissions.split(","),

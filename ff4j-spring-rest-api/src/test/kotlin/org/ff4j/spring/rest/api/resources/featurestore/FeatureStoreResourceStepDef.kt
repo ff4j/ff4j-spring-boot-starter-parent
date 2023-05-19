@@ -35,7 +35,7 @@ import org.springframework.web.context.WebApplicationContext
 
 class FeatureStoreResourceStepDef(ff4j: FF4j, context: WebApplicationContext) : En {
 
-  private val testUtils = org.ff4j.spring.rest.api.FF4JTestHelperUtils(ff4j)
+  private val testUtils = FF4JTestHelperUtils(ff4j)
   private lateinit var response: WebTestClient.ResponseSpec
   private lateinit var webTestClient: WebTestClient
 

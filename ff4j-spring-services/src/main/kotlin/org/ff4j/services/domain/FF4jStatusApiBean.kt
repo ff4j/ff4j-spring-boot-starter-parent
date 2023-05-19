@@ -52,10 +52,7 @@ class FF4jStatusApiBean : Serializable {
     val minute = up / (1000 * 60)
     up -= minute * 1000 * 60
     val second = up / 1000
-    uptime = day.toString() + " day(s) "
-    uptime += hourNumber.toString() + " hours(s) "
-    uptime += minute.toString() + " minute(s) "
-    uptime += second.toString() + " seconds\""
+    uptime = "$day day(s) $hourNumber hours(s) $minute minute(s) $second seconds"
     autocreate = ff4j.isAutocreate
     version = ff4j.version
     ff4j.featureStore?.let {

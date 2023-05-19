@@ -68,29 +68,6 @@ class FF4JTestHelperUtils(val ff4j: FF4j) {
     return PropertyFactory.createProperty(name, getClassname(type), value, description, fixedValues)
   }
 
-  @Throws(ClassNotFoundException::class)
-  fun assertException(exception: Throwable, className: String) {
-    Assertions.assertThat(exception).isInstanceOf(Class.forName(className))
-  }
-
-  fun assertUpdated(actualResponse: Any) {
-    Assertions.assertThat(actualResponse).isEqualTo(FeatureActions.UPDATED)
-  }
-
-  fun assertCreated(actualResponse: Any) {
-    Assertions.assertThat(actualResponse).isEqualTo(FeatureActions.CREATED)
-  }
-
-  @Throws(JSONException::class)
-  fun assertStrictResponse(expectedResponse: String, actualResponse: Any) {
-    JSONAssert.assertEquals(expectedResponse, Gson().toJson(actualResponse), true)
-  }
-
-  @Throws(JSONException::class)
-  fun assertLenientResponse(expectedResponse: String, actualResponse: Any) {
-    JSONAssert.assertEquals(expectedResponse, Gson().toJson(actualResponse), false)
-  }
-
   private fun getClassname(name: String): String {
     return when (val propertyEnum: PropertyValueEnum = PropertyValueEnum.getEnum(name)) {
       PropertyValueEnum.INT, PropertyValueEnum.LONG, PropertyValueEnum.STRING, PropertyValueEnum.BOOLEAN -> propertyEnum.getClassName()

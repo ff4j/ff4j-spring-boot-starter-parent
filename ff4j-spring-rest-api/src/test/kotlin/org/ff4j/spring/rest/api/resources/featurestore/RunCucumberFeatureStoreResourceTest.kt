@@ -50,8 +50,7 @@ import org.springframework.test.context.web.WebAppConfiguration
     value = "json:target/cucumber/FeatureStoreResource.json"
   )
 )
-class RunCucumberFeatureStoreTest {
-}
+class RunCucumberFeatureStoreTest
 
 @CucumberContextConfiguration
 @ContextConfiguration(classes = [FF4JTestConfiguration::class, RestTestApplication::class])

@@ -59,7 +59,7 @@ class FeatureApiBean : Serializable {
     feature.customProperties?.let {
       it.values.forEach { property ->
         run {
-          this.customProperties.put(property.name, PropertyApiBean(property))
+          this.customProperties[property.name] = PropertyApiBean(property)
         }
       }
     }

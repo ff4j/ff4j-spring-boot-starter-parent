@@ -24,7 +24,6 @@ import org.ff4j.services.model.FeatureActions
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import reactor.core.publisher.Mono
-import java.lang.Boolean.TRUE
 
 /**
  * Created by Paul
@@ -35,8 +34,8 @@ object FeatureWebUtils {
 
   fun getBooleanResponseEntityByHttpStatus(featureActions: FeatureActions): ResponseEntity<Mono<Boolean>> {
     return when (featureActions) {
-      FeatureActions.CREATED -> ResponseEntity(Mono.just(TRUE), HttpStatus.CREATED)
-      FeatureActions.UPDATED -> ResponseEntity(Mono.just(TRUE), HttpStatus.NO_CONTENT)
+      FeatureActions.CREATED -> ResponseEntity(Mono.just(true), HttpStatus.CREATED)
+      FeatureActions.UPDATED -> ResponseEntity(Mono.just(true), HttpStatus.NO_CONTENT)
     }
   }
 }

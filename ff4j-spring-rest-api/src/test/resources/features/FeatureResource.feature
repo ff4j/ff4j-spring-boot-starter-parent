@@ -25,8 +25,8 @@ Feature: FeatureResource
     Then the user gets the response with response code as <responseCode> and content as <expectedUid>, <expectedEnabled>, <expectedDescription>, <expectedGroup> and <expectedPermissions>
     Examples:
       | uid     | enabled | description                          | group   | permissions             | requestUID | responseCode | expectedUid | expectedEnabled | expectedDescription                  | expectedGroup | expectedPermissions     |
-      | "login" | "TRUE"  | "feature for showing the login page" | "users" | "ROLE_USERS,ROLE_ADMIN" | "login"    | 200          | "login"     | "TRUE"          | "feature for showing the login page" | "users"       | "ROLE_USERS,ROLE_ADMIN" |
-      | "admin" | "FALSE" | "feature for showing the admin page" | "admin" | "ROLE_ADMIN"            | "admin"    | 200          | "admin"     | "FALSE"         | "feature for showing the admin page" | "admin"       | "ROLE_ADMIN"            |
+      | "login" | "true"  | "feature for showing the login page" | "users" | "ROLE_USERS,ROLE_ADMIN" | "login"    | 200          | "login"     | "true"          | "feature for showing the login page" | "users"       | "ROLE_USERS,ROLE_ADMIN" |
+      | "admin" | "false" | "feature for showing the admin page" | "admin" | "ROLE_ADMIN"            | "admin"    | 200          | "admin"     | "false"         | "feature for showing the admin page" | "admin"       | "ROLE_ADMIN"            |
 
   # Update the configuration of the feature
   Scenario: When the feature uid is blank or empty and the user tries to create or update the configuration, the user gets an exception

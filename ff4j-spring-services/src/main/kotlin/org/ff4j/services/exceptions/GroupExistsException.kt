@@ -27,6 +27,6 @@ package org.ff4j.services.exceptions
  */
 class GroupExistsException : RuntimeException() {
   companion object {
-    private val serialVersionUID = 8560277437073933250L
+    private const val serialVersionUID = 8560277437073933250L
   }
 }

@@ -39,7 +39,7 @@ import java.net.URI
 
 class FF4JResourceStepDef(ff4j: FF4j, context: WebApplicationContext) : En {
 
-  private val testUtils = org.ff4j.spring.rest.api.FF4JTestHelperUtils(ff4j)
+  private val testUtils = FF4JTestHelperUtils(ff4j)
   private lateinit var requestBodySpec: WebTestClient.RequestBodySpec
   private lateinit var responseSpec: WebTestClient.ResponseSpec
   private lateinit var webTestClient: WebTestClient
