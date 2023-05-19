@@ -88,11 +88,6 @@ class FF4JTestHelperUtils(val ff4j: FF4j) {
   }
 
   @Throws(JSONException::class)
-  fun assertStrictResponse(expectedResponse: String, actualResponse: Any) {
-    JSONAssert.assertEquals(expectedResponse, Gson().toJson(actualResponse), true)
-  }
-
-  @Throws(JSONException::class)
   fun assertLenientResponse(expectedResponse: String, actualResponse: Any) {
     JSONAssert.assertEquals(expectedResponse, Gson().toJson(actualResponse), false)
   }

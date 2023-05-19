@@ -23,6 +23,7 @@ import com.google.gson.Gson
 import io.cucumber.datatable.DataTable
 import io.cucumber.java8.En
 import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.recursive.comparison.RecursiveComparisonConfiguration
 import org.ff4j.FF4j
 import org.ff4j.core.Feature
 import org.ff4j.services.FF4JTestHelperUtils
@@ -30,7 +31,6 @@ import org.ff4j.services.FeatureServices
 import org.ff4j.services.InitializerStepDef
 import org.ff4j.services.domain.FeatureApiBean
 import org.ff4j.services.model.FeatureActions
-import java.lang.Boolean
 import kotlin.Any
 import kotlin.String
 import kotlin.Throwable
@@ -54,7 +54,7 @@ class FeatureServicesStepDef(ff4j: FF4j, featureServices: FeatureServices) : En 
     }
     Given("the feature with {string}, {string}, {string}, {string} and {string} exists in the feature store") { uid: String, enabled: String, description: String, group: String, permissions: String ->
       val feature =
-        Feature(uid, Boolean.valueOf(enabled), description, group, permissions.split(","))
+        Feature(uid, enabled.toBooleanStrict(), description, group, permissions.split(","))
       testUtils.createFeatures(listOf(feature))
     }
     Given("the following features exists in the feature store") { dataTable: DataTable ->
@@ -131,13 +131,14 @@ class FeatureServicesStepDef(ff4j: FF4j, featureServices: FeatureServices) : En 
     Then("the user gets the response as {string}, {string}, {string}, {string} and {string}") { expectedUid: String, expectedEnabled: String, expectedDescription: String, expectedGroup: String, expectedPermissions: String ->
       val expectedFeature = Feature(
         expectedUid,
-        Boolean.valueOf(expectedEnabled),
+        expectedEnabled.toBooleanStrict(),
         expectedDescription,
         expectedGroup,
         expectedPermissions.split(",")
       )
       val expectedFeatureApiBean = FeatureApiBean(expectedFeature)
-      assertThat(actualResponse).isEqualToComparingFieldByField(expectedFeatureApiBean)
+      assertThat(actualResponse).usingRecursiveComparison()
+        .isEqualTo(expectedFeatureApiBean)
     }
     Then("feature is created") {
       assertThat(actualResponse).isEqualTo(FeatureActions.CREATED)
@@ -148,7 +149,11 @@ class FeatureServicesStepDef(ff4j: FF4j, featureServices: FeatureServices) : En 
     Then("the user gets the response as") { expectedResponse: String ->
       val featureApiBean: FeatureApiBean =
         Gson().fromJson(expectedResponse, FeatureApiBean::class.java)
-      assertThat(actualResponse).isEqualToComparingOnlyGivenFields(featureApiBean)
+      assertThat(actualResponse).usingRecursiveComparison()
+        .ignoringActualNullFields()
+        .ignoringCollectionOrder()
+        .withStrictTypeChecking()
+        .isEqualTo(featureApiBean)
     }
   }
 }

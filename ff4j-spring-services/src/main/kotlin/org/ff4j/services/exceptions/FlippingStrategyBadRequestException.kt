@@ -27,6 +27,6 @@ package org.ff4j.services.exceptions
  */
 class FlippingStrategyBadRequestException(cause: Throwable) : RuntimeException(cause) {
   companion object {
-    private val serialVersionUID = -3239022865148294488L
+    private const val serialVersionUID = -3239022865148294488L
   }
 }

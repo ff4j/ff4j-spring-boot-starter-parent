@@ -25,8 +25,8 @@ Feature: FeatureServices
     Then the user gets the response as <expectedUid>, <expectedEnabled>, <expectedDescription>, <expectedGroup> and <expectedPermissions>
     Examples:
       | uid     | enabled | description                          | group   | permissions             | requestUID | expectedUid | expectedEnabled | expectedDescription                  | expectedGroup | expectedPermissions     |
-      | "login" | "TRUE"  | "feature for showing the login page" | "users" | "ROLE_USERS,ROLE_ADMIN" | "login"    | "login"     | "TRUE"          | "feature for showing the login page" | "users"       | "ROLE_USERS,ROLE_ADMIN" |
-      | "admin" | "FALSE" | "feature for showing the admin page" | "admin" | "ROLE_ADMIN"            | "admin"    | "admin"     | "FALSE"         | "feature for showing the admin page" | "admin"       | "ROLE_ADMIN"            |
+      | "login" | "true"  | "feature for showing the login page" | "users" | "ROLE_USERS,ROLE_ADMIN" | "login"    | "login"     | "true"          | "feature for showing the login page" | "users"       | "ROLE_USERS,ROLE_ADMIN" |
+      | "admin" | "false" | "feature for showing the admin page" | "admin" | "ROLE_ADMIN"            | "admin"    | "admin"     | "false"         | "feature for showing the admin page" | "admin"       | "ROLE_ADMIN"            |
 
   # Update the configuration of the feature
   Scenario: When the feature uid is blank or empty and the user tries to create or update the configuration, the user gets an exception
@@ -121,7 +121,15 @@ Feature: FeatureServices
           "name": "spring.log.level",
           "description": "spring log level",
           "type": "org.ff4j.property.PropertyLogLevel",
-          "value": "DEBUG"
+          "value": "DEBUG",
+          "fixedValues": [
+            "TRACE",
+            "ERROR",
+            "INFO",
+            "DEBUG",
+            "FATAL",
+            "WARN"
+            ]
         }
       }
     }

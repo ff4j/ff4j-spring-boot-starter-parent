@@ -31,7 +31,7 @@
   <url>https://ff4j.github.io/</url>
   <inceptionYear>2013</inceptionYear>
   <description>
-    FF4J, stands for Feature Flipping for Java, helps you implementing the 'feature toggle' agile
+    FF4J, stands for Feature Flipping for Java, helps you to implement the 'feature toggle' agile
     development
     practice.
     Features (services/behaviour/treatments/screen parts) can be enabled and disabled at runtime but

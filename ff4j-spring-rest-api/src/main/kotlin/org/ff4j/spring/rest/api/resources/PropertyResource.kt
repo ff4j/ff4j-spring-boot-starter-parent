@@ -81,7 +81,7 @@ class PropertyResource(@Autowired val propertyServices: PropertyServices) {
     @PathVariable(value = PARAM_NAME) propertyName: String,
     @RequestBody propertyApiBean: PropertyApiBean
   ): ResponseEntity<Mono<Boolean>> =
-      org.ff4j.spring.rest.api.utils.FeatureWebUtils.getBooleanResponseEntityByHttpStatus(
+      FeatureWebUtils.getBooleanResponseEntityByHttpStatus(
         propertyServices.createOrUpdateProperty(propertyName, propertyApiBean)
       )
 

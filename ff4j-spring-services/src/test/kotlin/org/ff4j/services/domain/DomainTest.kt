@@ -30,24 +30,24 @@ import org.meanbean.test.BeanTester
  */
 class DomainTest {
 
-  private val BEAN_TESTER = BeanTester()
+  private val beanTester = BeanTester()
 
   @Test
   fun getterAndSetterCorrectness() {
     Assert.assertTrue(true)
-    BEAN_TESTER.testBean(FeatureApiBean::class.java)
-    BEAN_TESTER.testBean(FeatureStoreApiBean::class.java)
-    BEAN_TESTER.testBean(PropertyStoreApiBean::class.java)
-    BEAN_TESTER.testBean(FlippingStrategyApiBean::class.java)
-    BEAN_TESTER.testBean(BarChartApiBean::class.java)
-    BEAN_TESTER.testBean(PieChartApiBean::class.java)
-    BEAN_TESTER.testBean(AuthorizationsManagerApiBean::class.java)
-    BEAN_TESTER.testBean(PropertyApiBean::class.java)
-    BEAN_TESTER.testBean(FF4jStatusApiBean::class.java)
-    BEAN_TESTER.testBean(EventRepositoryApiBean::class.java)
-    BEAN_TESTER.testBean(CacheApiBean::class.java)
-    BEAN_TESTER.testBean(GroupDescApiBean::class.java)
-    BEAN_TESTER.testBean(BarSeriesApiBean::class.java)
-    BEAN_TESTER.testBean(PieSectorApiBean::class.java)
+    beanTester.testBean(FeatureApiBean::class.java)
+    beanTester.testBean(FeatureStoreApiBean::class.java)
+    beanTester.testBean(PropertyStoreApiBean::class.java)
+    beanTester.testBean(FlippingStrategyApiBean::class.java)
+    beanTester.testBean(BarChartApiBean::class.java)
+    beanTester.testBean(PieChartApiBean::class.java)
+    beanTester.testBean(AuthorizationsManagerApiBean::class.java)
+    beanTester.testBean(PropertyApiBean::class.java)
+    beanTester.testBean(FF4jStatusApiBean::class.java)
+    beanTester.testBean(EventRepositoryApiBean::class.java)
+    beanTester.testBean(CacheApiBean::class.java)
+    beanTester.testBean(GroupDescApiBean::class.java)
+    beanTester.testBean(BarSeriesApiBean::class.java)
+    beanTester.testBean(PieSectorApiBean::class.java)
   }
 }
