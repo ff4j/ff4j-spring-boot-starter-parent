@@ -8,6 +8,7 @@
   <packaging>pom</packaging>
   <modules>
     <module>ff4j-spring-boot-starter-webmvc-sample</module>
+      <module>ff4j-spring-boot-starter-webflux-sample</module>
   </modules>
   <version>1.0-SNAPSHOT</version>
   <properties>
