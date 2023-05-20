@@ -11,24 +11,22 @@
  *
  * Copyright 2013-2016 the original author or authors.
  */
+package org.ff4j.spring.boot.starter.webmvc.sample;
 
-package org.ff4j.sample.config;
-
-import org.ff4j.FF4j;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 
 /**
  * Created by Paul
  *
  * @author <a href="mailto:paul58914080@gmail.com">Paul Williams</a>
  */
-@Configuration
-public class FF4JConfiguration {
+@SpringBootApplication(exclude = {SecurityAutoConfiguration.class})
+public class FF4jSpringBootWebMvcSampleApplication {
 
-  @Bean
-  public FF4j getFF4j() {
-    return new FF4j("ff4j-features.xml");
+  public static void main(String[] args) {
+    SpringApplication.run(FF4jSpringBootWebMvcSampleApplication.class, args);
   }
 }
 

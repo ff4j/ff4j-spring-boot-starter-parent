@@ -1,4 +1,4 @@
-package org.ff4j.sample.rest;
+package org.ff4j.spring.boot.starter.webmvc.sample.rest;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -24,5 +24,4 @@ public class Greeting {
             "<li><a href=\"/api/v1/ff4j\">Web Api</a>" +
             "<li><a href=\"/ff4j-web\">Web Console (admin/admin)</a>";
   }
-
 }
