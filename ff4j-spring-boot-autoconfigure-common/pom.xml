@@ -33,14 +33,6 @@
       <artifactId>ff4j-core</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.ff4j</groupId>
-      <artifactId>ff4j-web</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.ff4j</groupId>
-      <artifactId>ff4j-security-spring</artifactId>
-    </dependency>
-    <dependency>
       <groupId>jakarta.annotation</groupId>
       <artifactId>jakarta.annotation-api</artifactId>
     </dependency>

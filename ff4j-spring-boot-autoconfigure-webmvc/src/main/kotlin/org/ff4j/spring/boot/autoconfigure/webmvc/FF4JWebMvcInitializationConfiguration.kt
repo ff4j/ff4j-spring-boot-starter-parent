@@ -1,6 +1,6 @@
 /*-
  * #%L
- * ff4j-spring-boot-autoconfigure-common
+ * ff4j-spring-boot-autoconfigure-webmvc
  * %%
  * Copyright (C) 2013 - 2023 FF4J
  * %%
@@ -17,26 +17,29 @@
  * limitations under the License.
  * #L%
  */
-package org.ff4j.spring.boot.autoconfigure.common
+package org.ff4j.spring.boot.autoconfigure.webmvc
 
+import jakarta.annotation.PostConstruct
 import org.ff4j.FF4j
+import org.ff4j.security.SpringSecurityAuthorisationManager
+import org.ff4j.spring.boot.autoconfigure.common.FF4JConfiguration
+import org.ff4j.spring.boot.autoconfigure.common.FF4JConfigurationProperties
 import org.springframework.boot.autoconfigure.AutoConfiguration
+import org.springframework.boot.autoconfigure.AutoConfigureAfter
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
-import org.springframework.boot.context.properties.ConfigurationPropertiesScan
-import org.springframework.context.annotation.Bean
-import org.springframework.context.annotation.ComponentScan
 
 /**
  * @author [Paul Williams](mailto:paul58914080@gmail.com)
  */
 @AutoConfiguration
+@AutoConfigureAfter(FF4JConfiguration::class)
 @ConditionalOnClass(FF4j::class)
-@ComponentScan(value = ["org.ff4j.spring.rest.api", "org.ff4j.services", "org.ff4j.aop", "org.ff4j.spring"])
-@ConfigurationPropertiesScan
-class FF4JConfiguration {
+class FF4JWebMvcInitializationConfiguration(private val config: FF4JConfigurationProperties, val ff4j: FF4j) {
 
-  @Bean
-  @ConditionalOnMissingBean
-  fun getFF4J(): FF4j = FF4j()
+  @PostConstruct
+  fun init() {
+    if (config.security.enabled) {
+      ff4j.authorizationsManager = SpringSecurityAuthorisationManager()
+    }
+  }
 }
