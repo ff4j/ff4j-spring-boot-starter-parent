@@ -20,6 +20,14 @@
       <version>${project.version}</version>
     </dependency>
     <dependency>
+      <groupId>org.ff4j</groupId>
+      <artifactId>ff4j-web</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.ff4j</groupId>
+      <artifactId>ff4j-security-spring</artifactId>
+    </dependency>
+    <dependency>
       <groupId>org.springdoc</groupId>
       <artifactId>springdoc-openapi-starter-webmvc-api</artifactId>
     </dependency>
