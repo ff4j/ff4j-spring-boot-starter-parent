@@ -17,9 +17,8 @@
  * limitations under the License.
  * #L%
  */
-package org.ff4j.sample.config
+package org.ff4j.spring.boot.starter.webmvc.sample.config
 
-import org.ff4j.spring.boot.autoconfigure.common.FF4JConfigurationProperties
 import org.ff4j.spring.boot.autoconfigure.webmvc.FF4JWebConsoleConfiguration
 import org.springframework.boot.autoconfigure.AutoConfigureAfter
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean
