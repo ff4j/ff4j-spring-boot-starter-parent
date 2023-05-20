@@ -20,7 +20,7 @@ public class Greeting {
       @ApiResponse(responseCode = "500", description = "Internal Server Error")})
   public String greeting() {
     return "<ul>" +
-            "<li><a href=\"/swagger-ui/index.html\">Swagger</a>" +
+            "<li><a href=\"/swagger-ui.html\">Swagger</a>" +
             "<li><a href=\"/api/v1/ff4j\">Web Api</a>" +
             "<li><a href=\"/ff4j-web\">Web Console (admin/admin)</a>";
   }
