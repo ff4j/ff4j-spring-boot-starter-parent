@@ -7,9 +7,9 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -36,6 +36,7 @@ import org.ff4j.services.constants.FeatureConstants.RESOURCE_FEATURES
 import org.ff4j.services.constants.FeatureConstants.RESOURCE_FF4J
 import org.ff4j.services.constants.FeatureConstants.RESOURCE_STORE
 import org.ff4j.services.domain.FeatureApiBean
+import org.ff4j.spring.rest.api.utils.FeatureWebUtils
 import org.ff4j.web.FF4jWebConstants.*
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus.ACCEPTED
@@ -45,8 +46,6 @@ import org.springframework.web.bind.annotation.*
 import reactor.core.publisher.Mono
 
 /**
- * Created by Paul
- *
  * @author [Paul Williams](mailto:paul58914080@gmail.com)
  */
 @Tag(name = "Feature", description = "The API for feature related operations")
@@ -86,11 +85,11 @@ class FeatureResource(@Autowired val featureServices: FeatureServices) {
     @PathVariable(value = PARAM_UID) featureUID: String,
     @RequestBody featureApiBean: FeatureApiBean
   ): ResponseEntity<Mono<Boolean>> =
-      org.ff4j.spring.rest.api.utils.FeatureWebUtils.getBooleanResponseEntityByHttpStatus(
-        featureServices.createOrUpdateFeature(
-          featureUID, featureApiBean
-        )
+    FeatureWebUtils.getBooleanResponseEntityByHttpStatus(
+      featureServices.createOrUpdateFeature(
+        featureUID, featureApiBean
       )
+    )
 
   @Operation(summary = "Delete a feature", tags = ["Feature"])
   @ApiResponses(

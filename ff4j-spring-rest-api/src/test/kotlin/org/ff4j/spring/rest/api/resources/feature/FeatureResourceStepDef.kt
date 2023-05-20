@@ -7,9 +7,9 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -32,9 +32,10 @@ import org.springframework.http.MediaType
 import org.springframework.test.web.reactive.server.WebTestClient
 import org.springframework.test.web.reactive.server.expectBody
 import org.springframework.web.context.WebApplicationContext
-import kotlin.Int
-import kotlin.String
 
+/**
+ * @author [Paul Williams](mailto:paul58914080@gmail.com)
+ */
 class FeatureResourceStepDef(ff4j: FF4j, context: WebApplicationContext) : En {
 
   private val testUtils = org.ff4j.spring.rest.api.FF4JTestHelperUtils(ff4j)
