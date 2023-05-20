@@ -7,9 +7,9 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -23,7 +23,6 @@ import com.google.gson.Gson
 import io.cucumber.datatable.DataTable
 import io.cucumber.java8.En
 import org.assertj.core.api.Assertions.assertThat
-import org.assertj.core.api.recursive.comparison.RecursiveComparisonConfiguration
 import org.ff4j.FF4j
 import org.ff4j.core.Feature
 import org.ff4j.services.FF4JTestHelperUtils
@@ -31,14 +30,9 @@ import org.ff4j.services.FeatureServices
 import org.ff4j.services.InitializerStepDef
 import org.ff4j.services.domain.FeatureApiBean
 import org.ff4j.services.model.FeatureActions
-import kotlin.Any
-import kotlin.String
-import kotlin.Throwable
 
 /**
- * Created by Paul
- *
- * @author <a href="mailto:paul58914080@gmail.com">Paul Williams</a>
+ * @author [Paul Williams](mailto:paul58914080@gmail.com)
  */
 class FeatureServicesStepDef(ff4j: FF4j, featureServices: FeatureServices) : En {
 

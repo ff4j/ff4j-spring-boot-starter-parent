@@ -1,6 +1,6 @@
 /*-
  * #%L
- * ff4j-spring-boot-autoconfigure-webflux
+ * ff4j-spring-boot-autoconfigure-webmvc
  * %%
  * Copyright (C) 2013 - 2023 FF4J
  * %%
@@ -35,14 +35,17 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 import org.springframework.context.annotation.Bean
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
 
-
+/**
+ * @author [Paul Williams](mailto:paul58914080@gmail.com)
+ */
 @AutoConfiguration
 @ConditionalOnClass(FF4jDispatcherServlet::class)
 @AutoConfigureAfter(FF4JConfiguration::class)
 @ConditionalOnProperty(
   value = ["ff4j.web-console.enabled"], havingValue = "true", matchIfMissing = true
 )
-class FF4JWebConsoleConfiguration(private val config: FF4JConfigurationProperties) : SpringBootServletInitializer(), WebMvcConfigurer {
+class FF4JWebConsoleConfiguration(private val config: FF4JConfigurationProperties) : SpringBootServletInitializer(),
+  WebMvcConfigurer {
 
   private val log: Logger = LoggerFactory.getLogger(FF4JWebConsoleConfiguration::class.java)
 

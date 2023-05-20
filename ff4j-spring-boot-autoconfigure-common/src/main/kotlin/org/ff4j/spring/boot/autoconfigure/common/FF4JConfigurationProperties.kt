@@ -21,11 +21,15 @@ package org.ff4j.spring.boot.autoconfigure.common
 
 import org.springframework.boot.context.properties.ConfigurationProperties
 
+/**
+ * @author [Paul Williams](mailto:paul58914080@gmail.com)
+ */
 @ConfigurationProperties(prefix = "ff4j")
-data class FF4JConfigurationProperties(val api: Api = Api(),
-                                       val audit: Audit = Audit(),
-                                       val security: Security = Security(),
-                                       val webConsole: WebConsole = WebConsole()
+data class FF4JConfigurationProperties(
+  val api: Api = Api(),
+  val audit: Audit = Audit(),
+  val security: Security = Security(),
+  val webConsole: WebConsole = WebConsole()
 ) {
 
   data class Api(val contextPath: String = "/api/ff4j", val springDoc: SpringDoc = SpringDoc())
@@ -34,12 +38,17 @@ data class FF4JConfigurationProperties(val api: Api = Api(),
 
   data class Security(val enabled: Boolean = false)
 
-  data class WebConsole(val enabled: Boolean = false,
-                        val contextPath: String = "/ff4j-web-console",
-                        val security: WebConsoleSecurity = WebConsoleSecurity()
+  data class WebConsole(
+    val enabled: Boolean = false,
+    val contextPath: String = "/ff4j-web-console",
+    val security: WebConsoleSecurity = WebConsoleSecurity()
   )
 
-  data class WebConsoleSecurity(val enabled: Boolean = false, val username: String = "admin", val password: String = "admin")
+  data class WebConsoleSecurity(
+    val enabled: Boolean = false,
+    val username: String = "admin",
+    val password: String = "admin"
+  )
 
   data class SpringDoc(val enabled: Boolean = false, val group: String = "ff4j")
 }

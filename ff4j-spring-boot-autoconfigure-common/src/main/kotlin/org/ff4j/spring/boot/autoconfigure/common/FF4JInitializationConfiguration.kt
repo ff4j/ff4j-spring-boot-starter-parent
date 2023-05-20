@@ -26,6 +26,9 @@ import org.springframework.boot.autoconfigure.AutoConfiguration
 import org.springframework.boot.autoconfigure.AutoConfigureAfter
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass
 
+/**
+ * @author [Paul Williams](mailto:paul58914080@gmail.com)
+ */
 @AutoConfiguration
 @AutoConfigureAfter(FF4JConfiguration::class)
 @ConditionalOnClass(FF4j::class)
@@ -33,7 +36,7 @@ class FF4JInitializationConfiguration(private val config: FF4JConfigurationPrope
 
   @PostConstruct
   fun init() {
-   ff4j.audit(config.audit.enabled)
+    ff4j.audit(config.audit.enabled)
     if (config.security.enabled) {
       ff4j.authorizationsManager = SpringSecurityAuthorisationManager()
     }
