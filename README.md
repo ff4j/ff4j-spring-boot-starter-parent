@@ -4,13 +4,11 @@ This is a <b>work-in-progress</b> branch(main). Please refer branch <a href='htt
 </h1>
 
 <p align="center">
-<img src="https://github.com/paul58914080/ff4j-spring-boot-starter-parent/blob/master/images/ff4j.png" alt="Feature Flipping For Java" height="120px" />
-<img src="https://github.com/paul58914080/ff4j-spring-boot-starter-parent/blob/master/images/spring-boot.png" alt="Spring boot" height="120px" />
+<img src="https://github.com/ff4j/ff4j-spring-boot-starter-parent/blob/main/images/ff4j.png?raw=true" alt="Feature Flipping For Java" height="120px" />
+<img src="https://github.com/ff4j/ff4j-spring-boot-starter-parent/blob/main/images/spring-boot.png?raw=true" alt="Spring boot" height="120px" />
 </p>
 
 ## Spring boot starter for FF4J (Feature Flipping for Java)
-
-
 
 ![Build Status](https://github.com/ff4j/ff4j-spring-boot-starter-parent/actions/workflows/build_workflow.yml/badge.svg?branch=main)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/e6fc893a940e44f18ade46d2d13036bf)](https://app.codacy.com/gh/ff4j/ff4j-spring-boot-starter-parent/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade) 
@@ -18,17 +16,20 @@ This is a <b>work-in-progress</b> branch(main). Please refer branch <a href='htt
 [![License Apache2](http://img.shields.io/badge/license-APACHE2-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0.html) 
 [![Join the chat at https://gitter.im/paul58914080/ff4j-spring-boot-starter-parent](https://badges.gitter.im/paul58914080/ff4j-spring-boot-starter-parent.svg)](https://gitter.im/paul58914080/ff4j-spring-boot-starter-parent?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) 
 
-[Swagger Documentation](https://ff4j.herokuapp.com/swagger-ui.html)
 
-This project aims in providing a bootable starter which provides RESTful apis for FF4J. 
+This project aims in providing bootable starters which provides RESTful apis for FF4J. We provide 2 starters, one for webmvc and another for webflux.
+- [ff4j-spring-boot-starter-webmvc](#ff4j-spring-boot-starter-webmvc)
+- [ff4j-spring-boot-starter-webflux](#ff4j-spring-boot-starter-webflux)
 
-Create a bootable jar with 
+### ff4j-spring-boot-starter-webmvc
 
-`mvn clean install`
+This starter is aimed to facilitate to use FF4J with spring boot webmvc. It provides the following features:
+- Webapi's for FF4J
+- OpenApi documentation for FF4J
+- Spring security integration
+- Web-console for FF4J
 
-Add dependency in your project
-
-### webmvc
+You can add the following dependency in your project to use this starter
 
 ```xml
 <dependency>
@@ -38,7 +39,15 @@ Add dependency in your project
 </dependency>
 ```
 
-### webflux
+A sample project is located at [ff4j-spring-boot-starter-webmvc-sample](https://github.com/ff4j/ff4j-samples/tree/master/ff4j-spring-boot-samples/ff4j-spring-boot-starter-webmvc-sample)
+
+### ff4j-spring-boot-starter-webflux
+
+This starter is aimed to facilitate to use FF4J with spring boot webflux. **Please note this is not fully supported by a foundation for the future**. It provides the following features:
+- Webapi's for FF4J
+- OpenApi documentation for FF4J
+
+You can add the following dependency in your project to use this starter
 
 ```xml
 <dependency>
@@ -48,28 +57,11 @@ Add dependency in your project
 </dependency>
 ```
 
-### Sample
+A sample project is located at [ff4j-spring-boot-starter-webflux-sample](https://github.com/ff4j/ff4j-samples/tree/master/ff4j-spring-boot-samples/ff4j-spring-boot-starter-webflux-sample)
 
-A sample project is located at [ff4j-spring-boot-sample](https://github.com/paul58914080/ff4j-spring-boot-starter-parent/tree/master/ff4j-spring-boot-sample)
-
-Use `mvn spring-boot:run`
-
-Once the sample application is booted use the following curl command:
- 
-`curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X GET http://localhost:8080/ff4j`
-
-Have a look at [FF4JConfiguration](https://github.com/paul58914080/ff4j-spring-boot-starter-parent/blob/master/ff4j-spring-boot-sample/src/main/java/org/ff4j/sample/config/FF4JConfiguration.java)
-
-### What is FF4J ?
+## What is FF4J ?
 
 FF4J is a proposition of [Feature Toggle](http://martinfowler.com/bliki/FeatureToggle.html). 
 Features can be enabled or disabled through configuration at runtime with dedicated consoles, Web API, or __monitor__ features usage. The same web console can also define any __Property__ and change its value at runtime.
 
 More information can be found at [ff4j.org](http://ff4j.org) or the [reference guide](https://github.com/clun/ff4j-extra/raw/master/ff4j-reference-guide-1.3.pdf). To access a demo please click [here] (http://cannys.com/ff4j-demo)
-
- <p align="center">
-  <img src="https://raw.github.com/clun/ff4j/master/src/site/resources/images/ff4j-console.png?raw=true" />
-  <br>
-  <img src="https://raw.github.com/clun/ff4j/master/src/site/resources/images/stack3.png?raw=true" />
-</p>
-</p>
