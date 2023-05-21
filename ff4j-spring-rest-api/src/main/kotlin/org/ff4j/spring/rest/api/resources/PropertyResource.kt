@@ -79,9 +79,8 @@ class PropertyResource(@Autowired val propertyServices: PropertyServices) {
     @PathVariable(value = PARAM_NAME) propertyName: String,
     @RequestBody propertyApiBean: PropertyApiBean
   ): ResponseEntity<Mono<Boolean>> =
-    // TODO: remove the blocking call
     FeatureWebUtils.getBooleanResponseEntityByHttpStatus(
-      propertyServices.createOrUpdateProperty(propertyName, propertyApiBean).block()
+      propertyServices.createOrUpdateProperty(propertyName, propertyApiBean)
     )
 
   @Operation(summary = "Delete a property", tags = ["Property"])
