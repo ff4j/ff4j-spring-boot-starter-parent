@@ -33,10 +33,14 @@ import java.lang.Boolean.TRUE
  */
 object FeatureWebUtils {
 
-  fun getBooleanResponseEntityByHttpStatus(featureActions: FeatureActions): ResponseEntity<Mono<Boolean>> {
-    return when (featureActions) {
-      FeatureActions.CREATED -> ResponseEntity(Mono.just(TRUE), HttpStatus.CREATED)
-      FeatureActions.UPDATED -> ResponseEntity(Mono.just(TRUE), HttpStatus.NO_CONTENT)
+    fun getBooleanResponseEntityByHttpStatus(featureActions: Mono<FeatureActions>): ResponseEntity<Mono<Boolean>> {
+        var status: HttpStatus = HttpStatus.OK
+        featureActions.subscribe { featureAction ->
+            status = when (featureAction!!) {
+                FeatureActions.CREATED -> HttpStatus.CREATED
+                FeatureActions.UPDATED -> HttpStatus.NO_CONTENT
+            }
+        }
+        return ResponseEntity.status(status).body(Mono.just(TRUE))
     }
-  }
 }

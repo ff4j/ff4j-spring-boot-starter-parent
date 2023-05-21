@@ -78,7 +78,7 @@ class FeatureResource(@Autowired val featureServices: FeatureServices) {
       description = "Feature has been created",
       content = arrayOf(Content(schema = Schema(implementation = Boolean::class)))
     ), ApiResponse(
-      responseCode = "204",
+      responseCode = "200",
       description = "Feature has been updated",
       content = arrayOf(Content(schema = Schema(implementation = Boolean::class)))
     )
@@ -88,10 +88,9 @@ class FeatureResource(@Autowired val featureServices: FeatureServices) {
     @PathVariable(value = PARAM_UID) featureUID: String,
     @RequestBody featureApiBean: FeatureApiBean
   ): ResponseEntity<Mono<Boolean>> {
-    //TODO: remove the blocking call
-    val featureAction: FeatureActions = featureServices.createOrUpdateFeature(
+    val featureAction: Mono<FeatureActions> = featureServices.createOrUpdateFeature(
       featureUID, featureApiBean
-    ).block()
+    )
     return FeatureWebUtils.getBooleanResponseEntityByHttpStatus(featureAction)
   }
 
