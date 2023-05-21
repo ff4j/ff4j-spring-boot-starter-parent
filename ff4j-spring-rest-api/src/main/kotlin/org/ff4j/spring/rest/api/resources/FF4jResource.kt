@@ -132,9 +132,9 @@ class FF4jResource(@Autowired val ff4JServices: FF4jServices) {
     val featureUIDToEnableMap = HashMap<String, Boolean>()
     for (featureUID in featureUIDs) {
       try {
-        //TODO: remove the blocking call
-        val status = ff4JServices.check(featureUID, formParams.toSingleValueMap()).block()
-        featureUIDToEnableMap[featureUID] = status
+        ff4JServices.check(featureUID, formParams.toSingleValueMap())
+          .map { featureUIDToEnableMap[featureUID] = it }
+          .subscribe()
       } catch (e: FeatureNotFoundException) {
         featureUIDToEnableMap[featureUID] = false
       }
