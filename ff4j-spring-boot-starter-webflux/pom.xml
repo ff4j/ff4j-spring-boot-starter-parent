@@ -10,6 +10,7 @@
   </parent>
   <artifactId>ff4j-spring-boot-starter-webflux</artifactId>
   <properties>
+    <ff4j-spring-boot-starter-webflux.version>${project.version}</ff4j-spring-boot-starter-webflux.version>
     <license.path>${project.baseUri}../src/license</license.path>
   </properties>
   <dependencies>
@@ -30,5 +31,27 @@
   </dependencies>
   <build>
     <finalName>${project.artifactId}</finalName>
+    <resources>
+      <resource>
+        <directory>${project.basedir}/src/main/resources</directory>
+        <filtering>true</filtering>
+        <includes>
+          <include>banner.txt</include>
+        </includes>
+      </resource>
+    </resources>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-resources-plugin</artifactId>
+        <version>${maven-resources-plugin.version}</version>
+        <configuration>
+          <delimiters>
+            <delimiter>@</delimiter>
+          </delimiters>
+          <useDefaultDelimiters>false</useDefaultDelimiters>
+        </configuration>
+      </plugin>
+    </plugins>
   </build>
 </project>

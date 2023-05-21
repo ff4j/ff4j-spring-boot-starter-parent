@@ -1,0 +1,5 @@
+=============================================================================================
+Spring boot: ${spring-boot.formatted-version}
+ff4j-core: (v@ff4j.version@)
+ff4j-spring-boot-starter-webflux: (v@ff4j-spring-boot-starter-webflux.version@)
+=============================================================================================
