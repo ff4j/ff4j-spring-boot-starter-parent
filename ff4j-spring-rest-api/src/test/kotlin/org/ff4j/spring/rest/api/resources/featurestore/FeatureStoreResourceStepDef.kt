@@ -77,10 +77,10 @@ class FeatureStoreResourceStepDef(ff4j: FF4j, context: WebApplicationContext) : 
     Then("the response body as") { responseBody: String ->
       response.expectBody().json(responseBody)
     }
-    Then("the user gets an error response with code {string} and error message as {string}") { responseCode: String, responseBody: String ->
+    Then("the user gets an error response with code {string} and error message as") { responseCode: String, responseBody: String ->
       response
         .expectStatus().isEqualTo(responseCode.toInt())
-        .expectBody<String>().isEqualTo(responseBody)
+        .expectBody().json(responseBody)
     }
   }
 }

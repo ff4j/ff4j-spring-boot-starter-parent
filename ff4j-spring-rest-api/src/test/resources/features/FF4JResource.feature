@@ -57,7 +57,16 @@ Feature:
   # Display security resources
   Scenario: When the user tries to retrieve security information and there is no security defined
     When the user requests for a feature by "/api/ff4j/security" by "GET" http method and content type as "application/json"
-    Then the user gets an error response with code "404" and error message as "no security has been defined"
+    Then the user gets an error response with code "404" and error message as
+    """
+    {
+      "type": "about:blank",
+      "title": "Not Found",
+      "status": 404,
+      "detail": "no security has been defined",
+      "instance": "/api/ff4j/security"
+    }
+    """
 
   Scenario: When the user tries to retrieve security information and there is security defined
     Given the feature store has the following security information
@@ -87,7 +96,16 @@ Feature:
 
   Scenario: When the user tries to know whether the feature is flipped and the feature does not exist
     When the user requests for a feature by "/api/ff4j/check/cart" by "GET" http method and content type as "application/json"
-    Then the user gets an error response with code "404" and error message as "feature not found"
+    Then the user gets an error response with code "404" and error message as
+    """
+    {
+      "type": "about:blank",
+      "title": "Not Found",
+      "status": 404,
+      "detail": "feature not found",
+      "instance": "/api/ff4j/check/cart"
+    }
+    """
 
 
   # Initialize a flip strategy with an execution strategy and check if the feature has been flipped
@@ -145,7 +163,16 @@ Feature:
     Then the user gets the response with response code "200"
     And the response body has content to be "true"
     When the user requests for a feature by "/api/ff4j/check/cart" by "POST" http method and content type as "application/x-www-form-urlencoded"
-    Then the user gets an error response with code "404" and error message as "feature not found"
+    Then the user gets an error response with code "404" and error message as
+    """
+    {
+      "type": "about:blank",
+      "title": "Not Found",
+      "status": 404,
+      "detail": "feature not found",
+      "instance": "/api/ff4j/check/cart"
+    }
+    """
 
   Scenario: When the user tries to initialize multiple features of its flipping strategy with an execution strategy
     When the user requests for a feature by "/api/ff4j/check" by "POST" http method and content type as "application/json" and the following form param
@@ -187,4 +214,13 @@ Feature:
     When the user requests for a feature by "/api/ff4j/check/login" by "POST" http method and content type as "application/x-www-form-urlencoded" and the following form param
       | name         | value |
       | InvalidParam | c2    |
-    Then the user gets an error response with code "400" and error message as "bad request"
+    Then the user gets an error response with code "400" and error message as
+    """
+    {
+      "type": "about:blank",
+      "title": "Bad Request",
+      "status": 400,
+      "detail": "bad request",
+      "instance": "/api/ff4j/check/login"
+    }
+    """

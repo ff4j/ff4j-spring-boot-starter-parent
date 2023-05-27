@@ -89,7 +89,16 @@ Feature:
   # Get all the cached content in the property store
   Scenario: When the user tries to get all the cached feature from the property store when the property store is not cached
     When the user requests for a feature by "/api/ff4j/propertyStore/cache" by "GET" http method and content type as "application/json"
-    Then the user gets an error response with code "404" and error message as "property store is not cached"
+    Then the user gets an error response with code "404" and error message as
+    """
+    {
+      "type": "about:blank",
+      "title": "Not Found",
+      "status": 404,
+      "detail": "property store is not cached",
+      "instance": "/api/ff4j/propertyStore/cache"
+    }
+    """
 
   Scenario: When the user tries to get all the cached properties from the property store
     Given the property store is cached
@@ -132,7 +141,16 @@ Feature:
  # Clear cache
   Scenario: When the user tries to clear all the cached properties from the property store when the property store is not cached
     When the user requests for a feature by "/api/ff4j/propertyStore/clearCache" by "DELETE" http method and content type as "application/json"
-    Then the user gets an error response with code "404" and error message as "property store is not cached"
+    Then the user gets an error response with code "404" and error message as
+    """
+    {
+      "type": "about:blank",
+      "title": "Not Found",
+      "status": 404,
+      "detail": "property store is not cached",
+      "instance": "/api/ff4j/propertyStore/clearCache"
+    }
+    """
 
   Scenario: When the user tries to clear all the cached feature from the feature store
     Given the property store is cached
