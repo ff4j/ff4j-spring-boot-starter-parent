@@ -48,7 +48,10 @@ Feature:
 
   Scenario: When the user tries to retrieve the group information and the group does not exist
     When the user requests for a feature by "/api/ff4j/store/groups/user" by "GET" http method and content type as "application/json"
-    Then the user gets an error response with code "404" and error message as "group does not exist"
+    Then the user gets an error response with code "404" and error message as
+  """
+  {"type":"about:blank","title":"Not Found","status":404,"detail":"group does not exist","instance":"/api/ff4j/store/groups/user"}
+  """
 
   # Enable a group
   Scenario: When the user tries to enable a group
@@ -75,7 +78,10 @@ Feature:
 
   Scenario: When the user tries to enable a group where the group does not exist
     When the user requests for a feature by "/api/ff4j/store/groups/invalid/enable" by "POST" http method and content type as "application/json"
-    Then the user gets an error response with code "404" and error message as "group does not exist"
+    Then the user gets an error response with code "404" and error message as
+    """
+    {"type":"about:blank","title":"Not Found","status":404,"detail":"group does not exist","instance":"/api/ff4j/store/groups/invalid/enable"}
+    """
 
   # Disable a group
   Scenario: When the user tries to disable a group
@@ -102,4 +108,13 @@ Feature:
 
   Scenario: When the user tries to disable a group where the group does not exist
     When the user requests for a feature by "/api/ff4j/store/groups/invalid/disable" by "POST" http method and content type as "application/json"
-    Then the user gets an error response with code "404" and error message as "group does not exist"
+    Then the user gets an error response with code "404" and error message as
+    """
+    {
+      "type": "about:blank",
+      "title": "Not Found",
+      "status": 404,
+      "detail": "group does not exist",
+      "instance": "/api/ff4j/store/groups/invalid/disable"
+    }
+    """

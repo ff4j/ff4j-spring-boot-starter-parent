@@ -17,7 +17,16 @@ Feature: FeatureResource
   # Read configuration information about the feature
   Scenario: When the feature does not exists in the feature store and when the user wants to read its feature configuration by its uid, we get an exception
     When the user requests for a feature by "/api/ff4j/store/features/login" by "GET" http method and content type as "application/json"
-    Then the user gets an error response with code "404" and error message as "feature not found"
+    Then the user gets an error response with code "404" and error message as
+    """
+    {
+      "type": "about:blank",
+      "title": "Not Found",
+      "status": 404,
+      "detail": "feature not found",
+      "instance": "/api/ff4j/store/features/login"
+    }
+    """
 
   Scenario Outline: Read configuration information about the feature
     Given the feature with <uid>, <enabled>, <description>, <group> and <permissions> exists in the feature store
@@ -37,7 +46,16 @@ Feature: FeatureResource
       "enable" : true
     }
     """
-    Then the user gets an error response with code "400" and error message as "feature uid cannot be blank"
+    Then the user gets an error response with code "400" and error message as
+    """
+    {
+      "type": "about:blank",
+      "title": "Bad Request",
+      "status": 400,
+      "detail": "feature uid cannot be blank",
+      "instance": "/api/ff4j/store/features/login"
+    }
+    """
 
   Scenario: When the feature uid is valid and does not match with the feature we are trying to update and when the user tries to create or update the configuration, we get an exception
     When the user requests for a feature by "/api/ff4j/store/features/login" by "PUT" http method and content type as "application/json"
@@ -48,7 +66,16 @@ Feature: FeatureResource
       "enable" : true
     }
     """
-    Then the user gets an error response with code "400" and error message as "feature uid did not match with the requested feature uid to be created or updated"
+    Then the user gets an error response with code "400" and error message as
+    """
+    {
+      "type": "about:blank",
+      "title": "Bad Request",
+      "status": 400,
+      "detail": "feature uid did not match with the requested feature uid to be created or updated",
+      "instance": "/api/ff4j/store/features/login"
+    }
+    """
 
   Scenario: When the user requests to create a feature with uid
     When the user requests for a feature by "/api/ff4j/store/features/login" by "PUT" http method and content type as "application/json"
@@ -156,7 +183,16 @@ Feature: FeatureResource
       }
     }
     """
-    Then the user gets an error response with code "400" and error message as "flipping strategy specified wrongly"
+    Then the user gets an error response with code "400" and error message as
+    """
+    {
+      "type": "about:blank",
+      "title": "Bad Request",
+      "status": 400,
+      "detail": "flipping strategy specified wrongly",
+      "instance": "/api/ff4j/store/features/login"
+    }
+    """
     When the user requests for a feature by "/api/ff4j/store/features/login" by "GET" http method and content type as "application/json"
     Then the user gets the response with response code "200"
     And the response body as
@@ -194,7 +230,16 @@ Feature: FeatureResource
       }
     }
     """
-    Then the user gets an error response with code "400" and error message as "properties specified wrongly"
+    Then the user gets an error response with code "400" and error message as
+    """
+    {
+      "type": "about:blank",
+      "title": "Bad Request",
+      "status": 400,
+      "detail": "properties specified wrongly",
+      "instance": "/api/ff4j/store/features/login"
+    }
+    """
     When the user requests for a feature by "/api/ff4j/store/features/login" by "GET" http method and content type as "application/json"
     Then the user gets the response with response code "200"
     And the response body as
@@ -217,12 +262,30 @@ Feature: FeatureResource
     When the user requests for a feature by "/api/ff4j/store/features/login" by "DELETE" http method and content type as "application/json"
     Then the user gets the response with response code "204"
     When the user requests for a feature by "/api/ff4j/store/features/login" by "GET" http method and content type as "application/json"
-    Then the user gets an error response with code "404" and error message as "feature not found"
+    Then the user gets an error response with code "404" and error message as
+    """
+    {
+      "type": "about:blank",
+      "title": "Not Found",
+      "status": 404,
+      "detail": "feature not found",
+      "instance": "/api/ff4j/store/features/login"
+    }
+    """
 
 
   Scenario: When the user requests to delete a feature which is not present in the feature store
     When the user requests for a feature by "/api/ff4j/store/features/login" by "DELETE" http method and content type as "application/json"
-    Then the user gets an error response with code "404" and error message as "feature not found"
+    Then the user gets an error response with code "404" and error message as
+    """
+    {
+      "type": "about:blank",
+      "title": "Not Found",
+      "status": 404,
+      "detail": "feature not found",
+      "instance": "/api/ff4j/store/features/login"
+    }
+    """
 
   # Disable a feature
   Scenario: When the user requests to disable a feature which is present in the feature store
@@ -246,7 +309,16 @@ Feature: FeatureResource
 
   Scenario: When the user requests to disable a feature which is not present in the feature store
     When the user requests for a feature by "/api/ff4j/store/features/login/disable" by "POST" http method and content type as "application/json"
-    Then the user gets an error response with code "404" and error message as "feature not found"
+    Then the user gets an error response with code "404" and error message as
+    """
+    {
+      "type": "about:blank",
+      "title": "Not Found",
+      "status": 404,
+      "detail": "feature not found",
+      "instance": "/api/ff4j/store/features/login/disable"
+    }
+    """
 
   # Enable a feature
   Scenario: When the user requests to enable a feature which is present in the feature store
@@ -270,13 +342,31 @@ Feature: FeatureResource
 
   Scenario: When the user requests to enable a feature which is not present in the feature store
     When the user requests for a feature by "/api/ff4j/store/features/login/enable" by "POST" http method and content type as "application/json"
-    Then the user gets an error response with code "404" and error message as "feature not found"
+    Then the user gets an error response with code "404" and error message as
+    """
+    {
+      "type": "about:blank",
+      "title": "Not Found",
+      "status": 404,
+      "detail": "feature not found",
+      "instance": "/api/ff4j/store/features/login/enable"
+    }
+    """
 
 
   # Grant a role for a feature
   Scenario: When the user requests to grant a role and when the feature id is blank
     When the user requests for a feature by "/api/ff4j/store/features/login/grantrole/ROLE_SUPPORT" by "POST" http method and content type as "application/json"
-    Then the user gets an error response with code "404" and error message as "feature not found"
+    Then the user gets an error response with code "404" and error message as
+    """
+    {
+      "type": "about:blank",
+      "title": "Not Found",
+      "status": 404,
+      "detail": "feature not found",
+      "instance": "/api/ff4j/store/features/login/grantrole/ROLE_SUPPORT"
+    }
+    """
 
   Scenario: When the user requests to grant a role and when the feature exists in the feature store, the feature is updated with this new role\permission addition
     Given the following features exists in the feature store
@@ -302,7 +392,16 @@ Feature: FeatureResource
       | uid   | enable | description    | group | permissions          |
       | login | false  | the login page | user  | ROLE_ADMIN,ROLE_USER |
     When the user requests for a feature by "/api/ff4j/store/features/login/grantrole/ROLE_ADMIN" by "POST" http method and content type as "application/json"
-    Then the user gets an error response with code "304" and error message as "role already exists"
+    Then the user gets an error response with code "304" and error message as
+    """
+    {
+      "type": "about:blank",
+      "title": "Not Modified",
+      "status": 304,
+      "detail": "role already exists",
+      "instance": "/api/ff4j/store/features/login/grantrole/ROLE_ADMIN"
+    }
+    """
     When the user requests for a feature by "/api/ff4j/store/features/login" by "GET" http method and content type as "application/json"
     Then the user gets the response with response code "200"
     And the response body as
@@ -319,7 +418,16 @@ Feature: FeatureResource
   # Remove a role from a feature
   Scenario: When the user requests to remove a role and when the feature does not exists in the feature store
     When the user requests for a feature by "/api/ff4j/store/features/login/removerole/ROLE_ADMIN" by "POST" http method and content type as "application/json"
-    Then the user gets an error response with code "404" and error message as "feature not found"
+    Then the user gets an error response with code "404" and error message as
+    """
+    {
+      "type": "about:blank",
+      "title": "Not Found",
+      "status": 404,
+      "detail": "feature not found",
+      "instance": "/api/ff4j/store/features/login/removerole/ROLE_ADMIN"
+    }
+    """
 
   Scenario: When the user requests to remove a role and when the feature exists in the feature store, the feature is updated with this role\permission deletion
     Given the following features exists in the feature store
@@ -345,7 +453,16 @@ Feature: FeatureResource
       | uid   | enable | description    | group | permissions          |
       | login | false  | the login page | user  | ROLE_ADMIN,ROLE_USER |
     When the user requests for a feature by "/api/ff4j/store/features/login/removerole/ROLE_SUPPORT" by "POST" http method and content type as "application/json"
-    Then the user gets an error response with code "404" and error message as "role does not exist"
+    Then the user gets an error response with code "404" and error message as
+    """
+    {
+      "type": "about:blank",
+      "title": "Not Found",
+      "status": 404,
+      "detail": "role does not exist",
+      "instance": "/api/ff4j/store/features/login/removerole/ROLE_SUPPORT"
+    }
+    """
     When the user requests for a feature by "/api/ff4j/store/features/login" by "GET" http method and content type as "application/json"
     Then the user gets the response with response code "200"
     And the response body as
@@ -362,14 +479,32 @@ Feature: FeatureResource
   # Add a group to a feature
   Scenario: When the user requests to add a group and when the feature does not exists in the feature store
     When the user requests for a feature by "/api/ff4j/store/features/login/addGroup/user" by "POST" http method and content type as "application/json"
-    Then the user gets an error response with code "404" and error message as "feature not found"
+    Then the user gets an error response with code "404" and error message as
+    """
+    {
+      "type": "about:blank",
+      "title": "Not Found",
+      "status": 404,
+      "detail": "feature not found",
+      "instance": "/api/ff4j/store/features/login/addGroup/user"
+    }
+    """
 
   Scenario: When the user requests to add a group and when the feature exists in the feature store and a group already exists for the feature, no changes are made
     Given the following features exists in the feature store
       | uid   | enable | description    | group | permissions          |
       | login | false  | the login page | user  | ROLE_ADMIN,ROLE_USER |
     When the user requests for a feature by "/api/ff4j/store/features/login/addGroup/user" by "POST" http method and content type as "application/json"
-    Then the user gets an error response with code "304" and error message as "group already exists"
+    Then the user gets an error response with code "304" and error message as
+    """
+    {
+      "type": "about:blank",
+      "title": "Not Modified",
+      "status": 304,
+      "detail": "group already exists",
+      "instance": "/api/ff4j/store/features/login/addGroup/user"
+    }
+    """
     When the user requests for a feature by "/api/ff4j/store/features/login" by "GET" http method and content type as "application/json"
     Then the user gets the response with response code "200"
     And the response body as
@@ -405,7 +540,16 @@ Feature: FeatureResource
   # Remove a group from a feature
   Scenario: When the user requests to remove a group and when the feature does not exists in the feature store
     When the user requests for a feature by "/api/ff4j/store/features/login/removeGroup/user" by "POST" http method and content type as "application/json"
-    Then the user gets an error response with code "404" and error message as "feature not found"
+    Then the user gets an error response with code "404" and error message as
+    """
+    {
+      "type": "about:blank",
+      "title": "Not Found",
+      "status": 404,
+      "detail": "feature not found",
+      "instance": "/api/ff4j/store/features/login/removeGroup/user"
+    }
+    """
 
   Scenario: When the user requests to remove a group and when the feature exists in the feature store and a group is being removed, the feature is updated with the group's deletion
     Given the following features exists in the feature store
@@ -431,7 +575,16 @@ Feature: FeatureResource
       | uid   | enable | description    | group | permissions          |
       | login | false  | the login page | user  | ROLE_ADMIN,ROLE_USER |
     When the user requests for a feature by "/api/ff4j/store/features/login/removeGroup/support" by "POST" http method and content type as "application/json"
-    Then the user gets an error response with code "404" and error message as "group does not exist"
+    Then the user gets an error response with code "404" and error message as
+    """
+    {
+      "type": "about:blank",
+      "title": "Not Found",
+      "status": 404,
+      "detail": "group does not exist",
+      "instance": "/api/ff4j/store/features/login/removeGroup/support"
+    }
+    """
     When the user requests for a feature by "/api/ff4j/store/features/login" by "GET" http method and content type as "application/json"
     Then the user gets the response with response code "200"
     And the response body as

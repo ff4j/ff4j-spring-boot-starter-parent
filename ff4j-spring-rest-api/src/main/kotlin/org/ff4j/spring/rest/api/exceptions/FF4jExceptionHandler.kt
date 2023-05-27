@@ -23,88 +23,161 @@ package org.ff4j.spring.rest.api.exceptions
 import org.ff4j.exception.InvalidPropertyTypeException
 import org.ff4j.services.exceptions.*
 import org.springframework.http.HttpStatus
+import org.springframework.http.ProblemDetail
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.ControllerAdvice
 import org.springframework.web.bind.annotation.ExceptionHandler
+import org.springframework.web.reactive.result.method.annotation.ResponseEntityExceptionHandler
 
 /**
  * @author [Paul Williams](mailto:paul58914080@gmail.com)
  */
 @ControllerAdvice(basePackages = ["org.ff4j.spring.rest.api.resources"])
-class FF4jExceptionHandler {
+class FF4jExceptionHandler : ResponseEntityExceptionHandler() {
 
   @ExceptionHandler(value = [(IllegalArgumentException::class)])
-  fun badRequestHandler(): ResponseEntity<String> =
-    ResponseEntity.status(HttpStatus.BAD_REQUEST).body("bad request")
+  fun badRequestHandler(): ResponseEntity<ProblemDetail> =
+    ResponseEntity.status(HttpStatus.BAD_REQUEST)
+      .body(ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, "bad request"))
 
   @ExceptionHandler(value = [(FeatureNotFoundException::class)])
-  fun featureNotFoundException(): ResponseEntity<String> =
-    ResponseEntity.status(HttpStatus.NOT_FOUND).body("feature not found")
+  fun featureNotFoundException(): ResponseEntity<ProblemDetail> =
+    ResponseEntity.status(HttpStatus.NOT_FOUND)
+      .body(ProblemDetail.forStatusAndDetail(HttpStatus.NOT_FOUND, "feature not found"))
 
   @ExceptionHandler(value = [(FeatureIdBlankException::class)])
-  fun featureIdBlankException(): ResponseEntity<String> =
-    ResponseEntity.status(HttpStatus.BAD_REQUEST).body("feature uid cannot be blank")
+  fun featureIdBlankException(): ResponseEntity<ProblemDetail> =
+    ResponseEntity.status(HttpStatus.BAD_REQUEST)
+      .body(ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, "feature uid cannot be blank"))
 
   @ExceptionHandler(value = [(FeatureIdNotMatchException::class)])
-  fun featureIdNotMatchException(): ResponseEntity<String> =
+  fun featureIdNotMatchException(): ResponseEntity<ProblemDetail> =
     ResponseEntity.status(HttpStatus.BAD_REQUEST)
-      .body("feature uid did not match with the requested feature uid to be created or updated")
+      .body(
+        ProblemDetail.forStatusAndDetail(
+          HttpStatus.BAD_REQUEST,
+          "feature uid did not match with the requested feature uid to be created or updated"
+        )
+      )
 
   @ExceptionHandler(value = [(FlippingStrategyBadRequestException::class)])
-  fun flippingStrategyBadRequestException(): ResponseEntity<String> =
+  fun flippingStrategyBadRequestException(): ResponseEntity<ProblemDetail> =
     ResponseEntity.status(HttpStatus.BAD_REQUEST)
-      .body("flipping strategy specified wrongly")
+      .body(
+        ProblemDetail.forStatusAndDetail(
+          HttpStatus.BAD_REQUEST,
+          "flipping strategy specified wrongly"
+        )
+      )
 
   @ExceptionHandler(value = [(PropertiesBadRequestException::class)])
-  fun propertiesBadRequestException(): ResponseEntity<String> =
+  fun propertiesBadRequestException(): ResponseEntity<ProblemDetail> =
     ResponseEntity.status(HttpStatus.BAD_REQUEST)
-      .body("properties specified wrongly")
+      .body(
+        ProblemDetail.forStatusAndDetail(
+          HttpStatus.BAD_REQUEST,
+          "properties specified wrongly"
+        )
+      )
 
   @ExceptionHandler(value = [(RoleExistsException::class)])
-  fun roleExistsException(): ResponseEntity<String> =
+  fun roleExistsException(): ResponseEntity<ProblemDetail> =
     ResponseEntity.status(HttpStatus.NOT_MODIFIED)
-      .body("role already exists")
+      .body(
+        ProblemDetail.forStatusAndDetail(
+          HttpStatus.NOT_MODIFIED,
+          "role already exists"
+        )
+      )
 
   @ExceptionHandler(value = [(RoleNotExistsException::class)])
-  fun roleNotExistsException(): ResponseEntity<String> =
+  fun roleNotExistsException(): ResponseEntity<ProblemDetail> =
     ResponseEntity.status(HttpStatus.NOT_FOUND)
-      .body("role does not exist")
+      .body(
+        ProblemDetail.forStatusAndDetail(
+          HttpStatus.NOT_FOUND,
+          "role does not exist"
+        )
+      )
 
   @ExceptionHandler(value = [(GroupExistsException::class)])
-  fun groupExistsException(): ResponseEntity<String> =
+  fun groupExistsException(): ResponseEntity<ProblemDetail> =
     ResponseEntity.status(HttpStatus.NOT_MODIFIED)
-      .body("group already exists")
+      .body(
+        ProblemDetail.forStatusAndDetail(
+          HttpStatus.NOT_MODIFIED,
+          "group already exists"
+        )
+      )
 
   @ExceptionHandler(value = [(GroupNotExistsException::class)])
-  fun groupNotExistsException(): ResponseEntity<String> =
-    ResponseEntity.status(HttpStatus.NOT_FOUND).body("group does not exist")
+  fun groupNotExistsException(): ResponseEntity<ProblemDetail> =
+    ResponseEntity.status(HttpStatus.NOT_FOUND).body(
+      ProblemDetail.forStatusAndDetail(
+        HttpStatus.NOT_FOUND,
+        "group does not exist"
+      )
+    )
 
   @ExceptionHandler(value = [(FeatureStoreNotCached::class)])
-  fun featureStoreNotCached(): ResponseEntity<String> =
-    ResponseEntity.status(HttpStatus.NOT_FOUND).body("feature store is not cached")
+  fun featureStoreNotCached(): ResponseEntity<ProblemDetail> =
+    ResponseEntity.status(HttpStatus.NOT_FOUND).body(
+      ProblemDetail.forStatusAndDetail(
+        HttpStatus.NOT_FOUND,
+        "feature store is not cached"
+      )
+    )
 
   @ExceptionHandler(value = [(AuthorizationNotExistsException::class)])
-  fun authorizationNotExistsException(): ResponseEntity<String> =
-    ResponseEntity.status(HttpStatus.NOT_FOUND).body("no security has been defined")
+  fun authorizationNotExistsException(): ResponseEntity<ProblemDetail> =
+    ResponseEntity.status(HttpStatus.NOT_FOUND).body(
+      ProblemDetail.forStatusAndDetail(
+        HttpStatus.NOT_FOUND,
+        "no security has been defined"
+      )
+    )
 
   @ExceptionHandler(value = [(PropertyNotFoundException::class)])
-  fun propertyNotFoundException(): ResponseEntity<String> =
-    ResponseEntity.status(HttpStatus.NOT_FOUND).body("property not found")
+  fun propertyNotFoundException(): ResponseEntity<ProblemDetail> =
+    ResponseEntity.status(HttpStatus.NOT_FOUND).body(
+      ProblemDetail.forStatusAndDetail(
+        HttpStatus.NOT_FOUND,
+        "property not found"
+      )
+    )
 
   @ExceptionHandler(value = [(PropertyNameBlankException::class)])
-  fun propertyNameBlankException(): ResponseEntity<String> =
-    ResponseEntity.status(HttpStatus.BAD_REQUEST).body("property name cannot be blank")
+  fun propertyNameBlankException(): ResponseEntity<ProblemDetail> =
+    ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
+      ProblemDetail.forStatusAndDetail(
+        HttpStatus.BAD_REQUEST,
+        "property name cannot be blank"
+      )
+    )
 
   @ExceptionHandler(value = [(InvalidPropertyTypeException::class)])
-  fun propertyValueInvalidException(): ResponseEntity<String> =
-    ResponseEntity.status(HttpStatus.BAD_REQUEST).body("bad request")
+  fun propertyValueInvalidException(): ResponseEntity<ProblemDetail> =
+    ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
+      ProblemDetail.forStatusAndDetail(
+        HttpStatus.BAD_REQUEST, "bad request"
+      )
+    )
 
   @ExceptionHandler(value = [(PropertyNameNotMatchException::class)])
-  fun propertyNameNotMatchException(): ResponseEntity<String> =
+  fun propertyNameNotMatchException(): ResponseEntity<ProblemDetail> =
     ResponseEntity.status(HttpStatus.BAD_REQUEST)
-      .body("property name did not match with the requested property name to be created or updated")
+      .body(
+        ProblemDetail.forStatusAndDetail(
+          HttpStatus.BAD_REQUEST,
+          "property name did not match with the requested property name to be created or updated"
+        )
+      )
 
   @ExceptionHandler(value = [(PropertyStoreNotCached::class)])
-  fun propertyStoreNotCached(): ResponseEntity<String> =
-    ResponseEntity.status(HttpStatus.NOT_FOUND).body("property store is not cached")
+  fun propertyStoreNotCached(): ResponseEntity<ProblemDetail> =
+    ResponseEntity.status(HttpStatus.NOT_FOUND).body(
+      ProblemDetail.forStatusAndDetail(
+        HttpStatus.NOT_FOUND, "property store is not cached"
+      )
+    )
 }

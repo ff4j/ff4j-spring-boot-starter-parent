@@ -130,7 +130,16 @@ Feature: FeatureStoreResource
   # Get all the cached content in the feature store
   Scenario: When the user tries to get all the cached feature from the feature store when the feature store is not cached
     When the user requests for a feature by "/api/ff4j/store/cache" by "GET" http method and content type as "application/json"
-    Then the user gets an error response with code "404" and error message as "feature store is not cached"
+    Then the user gets an error response with code "404" and error message as
+    """
+    {
+      "type": "about:blank",
+      "title": "Not Found",
+      "status": 404,
+      "detail": "feature store is not cached",
+      "instance": "/api/ff4j/store/cache"
+    }
+    """
 
   Scenario: When the user tries to get all the cached feature from the feature store
     Given the feature store is cached
@@ -182,7 +191,16 @@ Feature: FeatureStoreResource
   # Clear cache
   Scenario: When the user tries to clear all the cached feature from the feature store when the feature store is not cached
     When the user requests for a feature by "/api/ff4j/store/clearCache" by "DELETE" http method and content type as "application/json"
-    Then the user gets an error response with code "404" and error message as "feature store is not cached"
+    Then the user gets an error response with code "404" and error message as
+    """
+    {
+      "type": "about:blank",
+      "title": "Not Found",
+      "status": 404,
+      "detail": "feature store is not cached",
+      "instance": "/api/ff4j/store/clearCache"
+    }
+    """
 #
   Scenario: When the user tries to clear all the cached feature from the feature store
     Given the feature store is cached

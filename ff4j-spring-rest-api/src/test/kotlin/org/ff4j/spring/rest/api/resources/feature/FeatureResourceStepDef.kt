@@ -73,11 +73,11 @@ class FeatureResourceStepDef(ff4j: FF4j, context: WebApplicationContext) : En {
     When("request body as") { requestBody: String ->
       requestBodySpec.bodyValue(requestBody)
     }
-    Then("the user gets an error response with code {string} and error message as {string}") { responseCode: String, responseBody: String ->
+    Then("the user gets an error response with code {string} and error message as") { responseCode: String, responseBody: String ->
       responseSpec = requestBodySpec.exchange()
       responseSpec
         .expectStatus().isEqualTo(responseCode.toInt())
-        .expectBody<String>().isEqualTo(responseBody)
+        .expectBody().json(responseBody)
     }
     Then("the user gets the response with response code as {int} and content as {string}, {string}, {string}, {string} and {string}") { responseCode: Int, expectedUid: String, expectedEnabled: String, expectedDescription: String, expectedGroup: String, expectedPermissions: String ->
       val expectedFeature = Feature(
