@@ -50,7 +50,13 @@ Feature:
     When the user requests for a feature by "/api/ff4j/store/groups/user" by "GET" http method and content type as "application/json"
     Then the user gets an error response with code "404" and error message as
   """
-  {"type":"about:blank","title":"Not Found","status":404,"detail":"group does not exist","instance":"/api/ff4j/store/groups/user"}
+  {
+    "type": "about:blank",
+    "title": "Not Found",
+    "status": 404,
+    "detail": "group does not exist",
+    "instance": "/api/ff4j/store/groups/user"
+  }
   """
 
   # Enable a group
@@ -80,7 +86,13 @@ Feature:
     When the user requests for a feature by "/api/ff4j/store/groups/invalid/enable" by "POST" http method and content type as "application/json"
     Then the user gets an error response with code "404" and error message as
     """
-    {"type":"about:blank","title":"Not Found","status":404,"detail":"group does not exist","instance":"/api/ff4j/store/groups/invalid/enable"}
+    {
+      "type": "about:blank",
+      "title": "Not Found",
+      "status": 404,
+      "detail": "group does not exist",
+      "instance": "/api/ff4j/store/groups/invalid/enable"
+    }
     """
 
   # Disable a group
