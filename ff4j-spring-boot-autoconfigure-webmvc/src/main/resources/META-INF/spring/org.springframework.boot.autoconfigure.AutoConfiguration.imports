@@ -1,1 +1,2 @@
 org.ff4j.spring.boot.autoconfigure.webmvc.FF4JWebConsoleConfiguration
+org.ff4j.spring.boot.autoconfigure.webmvc.FF4JWebMvcSecurityConfiguration
