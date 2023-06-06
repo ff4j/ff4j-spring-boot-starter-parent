@@ -92,7 +92,7 @@
     <maven-gpg-plugin.version>3.1.0</maven-gpg-plugin.version>
     <maven-javadoc-plugin.version>3.5.0</maven-javadoc-plugin.version>
     <aven-source-plugin.version>3.3.0</aven-source-plugin.version>
-    <dokka-maven-plugin.version>1.8.10</dokka-maven-plugin.version>
+    <dokka-maven-plugin.version>1.8.20</dokka-maven-plugin.version>
     <jacoco-maven-plugin.version>0.8.10</jacoco-maven-plugin.version>
     <maven-enforcer-plugin.version>3.3.0</maven-enforcer-plugin.version>
     <dokka.plugin.version>0.10.0</dokka.plugin.version>
