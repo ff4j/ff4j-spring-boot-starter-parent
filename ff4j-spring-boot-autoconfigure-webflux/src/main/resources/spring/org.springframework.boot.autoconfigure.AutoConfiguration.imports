@@ -1,2 +1,1 @@
-org.ff4j.spring.boot.autoconfigure.webflux.FF4JWebConsoleConfiguration
-org.ff4j.spring.boot.autoconfigure.webflux.FF4JWebFluxConfiguration
+org.ff4j.spring.boot.autoconfigure.webflux.FF4JWebFluxSecurityConfiguration
