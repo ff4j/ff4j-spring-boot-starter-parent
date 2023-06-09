@@ -19,27 +19,23 @@
  */
 package org.ff4j.spring.boot.autoconfigure.webmvc
 
-import jakarta.annotation.PostConstruct
 import org.ff4j.FF4j
 import org.ff4j.security.SpringSecurityAuthorisationManager
 import org.ff4j.spring.boot.autoconfigure.common.FF4JConfiguration
-import org.ff4j.spring.boot.autoconfigure.common.FF4JConfigurationProperties
 import org.springframework.boot.autoconfigure.AutoConfiguration
 import org.springframework.boot.autoconfigure.AutoConfigureAfter
-import org.springframework.boot.autoconfigure.condition.ConditionalOnClass
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty
 
 /**
  * @author [Paul Williams](mailto:paul58914080@gmail.com)
  */
 @AutoConfiguration
 @AutoConfigureAfter(FF4JConfiguration::class)
-@ConditionalOnClass(FF4j::class)
-class FF4JWebMvcSecurityConfiguration(private val config: FF4JConfigurationProperties, val ff4j: FF4j) {
-
-  @PostConstruct
-  fun init() {
-    if (config.security.enabled) {
-      ff4j.authorizationsManager = SpringSecurityAuthorisationManager()
-    }
+@ConditionalOnProperty(
+  value = ["ff4j.security.enabled"], havingValue = "true", matchIfMissing = false
+)
+class FF4JWebMvcSecurityConfiguration(ff4j: FF4j) {
+  init {
+    ff4j.authorizationsManager = SpringSecurityAuthorisationManager()
   }
 }
