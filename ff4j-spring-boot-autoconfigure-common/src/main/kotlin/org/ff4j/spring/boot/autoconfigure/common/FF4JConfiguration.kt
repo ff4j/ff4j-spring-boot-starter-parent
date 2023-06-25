@@ -20,6 +20,8 @@
 package org.ff4j.spring.boot.autoconfigure.common
 
 import org.ff4j.FF4j
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.autoconfigure.AutoConfiguration
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass
@@ -36,6 +38,7 @@ import org.springframework.context.annotation.ComponentScan
 @ComponentScan(value = ["org.ff4j.spring.rest.api", "org.ff4j.services", "org.ff4j.aop", "org.ff4j.spring"])
 @ConfigurationPropertiesScan
 class FF4JConfiguration {
+  private val log: Logger = LoggerFactory.getLogger(FF4JConfiguration::class.java)
 
   @Value("\${ff4j.audit.enabled:false}")
   var isAuditEnabled = false
@@ -43,7 +46,9 @@ class FF4JConfiguration {
   @Bean
   @ConditionalOnMissingBean
   fun getFF4J(): FF4j {
+    log.info("Initializing FF4J")
     val ff4j = FF4j()
+    log.info("FF4J isAuditEnabled: {}", isAuditEnabled)
     ff4j.audit(isAuditEnabled)
     return ff4j
   }
