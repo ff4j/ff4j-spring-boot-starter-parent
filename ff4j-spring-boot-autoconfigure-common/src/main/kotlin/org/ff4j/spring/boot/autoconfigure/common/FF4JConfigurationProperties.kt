@@ -28,7 +28,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties
 data class FF4JConfigurationProperties(
   var api: Api = Api(),
   var audit: Audit = Audit(),
-  var security: Security = Security(),
   var webConsole: WebConsole = WebConsole()
 ) {
 
@@ -36,18 +35,9 @@ data class FF4JConfigurationProperties(
 
   data class Audit(var enabled: Boolean = false)
 
-  data class Security(var enabled: Boolean = false)
-
   data class WebConsole(
     var enabled: Boolean = false,
     var contextPath: String = "/ff4j-web-console",
-    var security: WebConsoleSecurity = WebConsoleSecurity()
-  )
-
-  data class WebConsoleSecurity(
-    var enabled: Boolean = false,
-    var username: String = "admin",
-    var password: String = "admin"
   )
 
   data class SpringDoc(var enabled: Boolean = false, var group: String = "ff4j")
