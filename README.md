@@ -25,7 +25,6 @@ This project aims in providing bootable starters with  RESTful apis for FF4J. We
 This starter is aimed to facilitate the use FF4J with spring boot webmvc. It provides the following features:
 - Webapi's for FF4J
 - OpenApi documentation for FF4J
-- Spring security integration
 - Web-console for FF4J
 
 You can add the following dependency in your project to use this starter
@@ -47,7 +46,6 @@ A sample project is located at [ff4j-spring-boot-starter-webmvc-sample](https://
 This starter is aimed to facilitate the use FF4J with spring boot webflux.  It provides the following features:
 - Webapi's for FF4J
 - OpenApi documentation for FF4J
-- Spring security integration
 
 You can add the following dependency in your project to use this starter
 
