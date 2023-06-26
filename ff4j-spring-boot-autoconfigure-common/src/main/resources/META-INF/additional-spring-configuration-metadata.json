@@ -24,22 +24,10 @@
       "sourceMethod": "getAudit()"
     },
     {
-      "name": "ff4j.security",
-      "type": "org.ff4j.spring.boot.autoconfigure.common.FF4JConfigurationProperties$Security",
-      "sourceType": "org.ff4j.spring.boot.autoconfigure.common.FF4JConfigurationProperties",
-      "sourceMethod": "getSecurity()"
-    },
-    {
       "name": "ff4j.web-console",
       "type": "org.ff4j.spring.boot.autoconfigure.common.FF4JConfigurationProperties$WebConsole",
       "sourceType": "org.ff4j.spring.boot.autoconfigure.common.FF4JConfigurationProperties",
       "sourceMethod": "getWebConsole()"
-    },
-    {
-      "name": "ff4j.web-console.security",
-      "type": "org.ff4j.spring.boot.autoconfigure.common.FF4JConfigurationProperties$WebConsoleSecurity",
-      "sourceType": "org.ff4j.spring.boot.autoconfigure.common.FF4JConfigurationProperties$WebConsole",
-      "sourceMethod": "getSecurity()"
     }
   ],
   "properties": [
@@ -72,13 +60,6 @@
       "defaultValue": false
     },
     {
-      "name": "ff4j.security.enabled",
-      "type": "java.lang.Boolean",
-      "sourceType": "org.ff4j.spring.boot.autoconfigure.common.FF4JConfigurationProperties$Security",
-      "description": "Enabling the spring security authorization manager to ff4j.",
-      "defaultValue": false
-    },
-    {
       "name": "ff4j.web-console.context-path",
       "type": "java.lang.String",
       "sourceType": "org.ff4j.spring.boot.autoconfigure.common.FF4JConfigurationProperties$WebConsole",
@@ -91,27 +72,6 @@
       "sourceType": "org.ff4j.spring.boot.autoconfigure.common.FF4JConfigurationProperties$WebConsole",
       "description": "Enabling the ff4j web-console.",
       "defaultValue": false
-    },
-    {
-      "name": "ff4j.web-console.security.enabled",
-      "type": "java.lang.Boolean",
-      "sourceType": "org.ff4j.spring.boot.autoconfigure.common.FF4JConfigurationProperties$WebConsoleSecurity",
-      "description": "Enabling the ff4j web-console security.",
-      "defaultValue": false
-    },
-    {
-      "name": "ff4j.web-console.security.password",
-      "type": "java.lang.String",
-      "sourceType": "org.ff4j.spring.boot.autoconfigure.common.FF4JConfigurationProperties$WebConsoleSecurity",
-      "description": "The web-console security password.",
-      "defaultValue": "admin"
-    },
-    {
-      "name": "ff4j.web-console.security.username",
-      "type": "java.lang.String",
-      "sourceType": "org.ff4j.spring.boot.autoconfigure.common.FF4JConfigurationProperties$WebConsoleSecurity",
-      "description": "The web-console security username.",
-      "defaultValue": "admin"
     }
   ],
   "hints": []
