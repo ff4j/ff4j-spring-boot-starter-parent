@@ -76,7 +76,7 @@
     <spring-boot.version>3.1.1</spring-boot.version>
     <ff4j.version>2.0.0</ff4j.version>
     <jackson-module-kotlin.version>2.15.2</jackson-module-kotlin.version>
-    <kotlin.version>1.8.22</kotlin.version>
+    <kotlin.version>1.9.0</kotlin.version>
     <cucumber.version>7.12.1</cucumber.version>
     <springdoc-openapi-starter.version>2.1.0</springdoc-openapi-starter.version>
     <meanbean.version>2.0.3</meanbean.version>
