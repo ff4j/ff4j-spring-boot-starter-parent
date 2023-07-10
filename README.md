@@ -5,18 +5,13 @@
 [![License Apache2](http://img.shields.io/badge/license-APACHE2-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
 [![Join the chat at https://gitter.im/paul58914080/ff4j-spring-boot-starter-parent](https://badges.gitter.im/paul58914080/ff4j-spring-boot-starter-parent.svg)](https://gitter.im/paul58914080/ff4j-spring-boot-starter-parent?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-### :mega:
-<h3>
-This is a <b>work-in-progress</b> branch(<code>main</code>). Please refer branch <a href='https://github.com/ff4j/ff4j-spring-boot-starter-parent/tree/v1'>v1</a> for the current version's documentation
-</h3>
-
 <p align="center">
 <img src="https://github.com/ff4j/ff4j-spring-boot-starter-parent/blob/main/images/ff4j.png?raw=true" alt="Feature Flipping For Java" height="120px" />
 <img src="https://github.com/ff4j/ff4j-spring-boot-starter-parent/blob/main/images/spring-boot.png?raw=true" alt="Spring boot" height="120px" />
 </p>
 
 
-This project aims in providing bootable starters with  RESTful apis for FF4J. We provide 2 starters, one for webmvc and another for webflux.
+This project aims in providing bootable starters with  RESTful apis for FF4J. We provide 2 starters, one for **webmvc** and another for **webflux**.
 - [ff4j-spring-boot-starter-webmvc](#ff4j-spring-boot-starter-webmvc)
 - [ff4j-spring-boot-starter-webflux](#ff4j-spring-boot-starter-webflux)
 
@@ -58,6 +53,10 @@ You can add the following dependency in your project to use this starter
 ```
 
 A sample project is located at [ff4j-spring-boot-starter-webflux-sample](https://github.com/ff4j/ff4j-samples/tree/master/ff4j-spring-boot-samples/ff4j-spring-boot-starter-webflux-sample)
+
+## About older version(version 1.x)
+
+Please refer [branch 1.x](https://github.com/ff4j/ff4j-spring-boot-starter-parent/tree/1.x) for the older version. We will have limited support on 1.x version. We suggest you to move to the latest version.
 
 ## What is FF4J ?
 
