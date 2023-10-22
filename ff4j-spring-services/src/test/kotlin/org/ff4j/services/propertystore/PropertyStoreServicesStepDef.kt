@@ -101,6 +101,7 @@ class PropertyStoreServicesStepDef(ff4j: FF4j, propertyStoreServices: PropertySt
     }
     Then("the user gets blank response") { expectedResponse: String ->
       StepVerifier.create(actualResponse as Publisher<out Any>).verifyComplete()
+      testUtils.assertLenientResponse(expectedResponse, actualResponse)
     }
     Then("the user gets an exception {string}") { className: String ->
       testUtils.assertException(exception, className)
