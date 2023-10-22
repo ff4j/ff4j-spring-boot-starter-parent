@@ -67,7 +67,7 @@ Feature: PropertyStoreServices
     When the user requests for all the properties from the property store
     Then the user gets blank response
     """
-    []
+    {}
     """
 
   # Delete all properties in the property store
@@ -76,7 +76,7 @@ Feature: PropertyStoreServices
     When the user requests for all the properties from the property store
     Then the user gets blank response
     """
-    []
+    {}
     """
 
   # Get all the cached content in the property store
