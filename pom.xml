@@ -91,7 +91,7 @@
     <maven-javadoc-plugin.version>3.6.3</maven-javadoc-plugin.version>
     <aven-source-plugin.version>3.3.0</aven-source-plugin.version>
     <dokka-maven-plugin.version>1.9.20</dokka-maven-plugin.version>
-    <jacoco-maven-plugin.version>0.8.11</jacoco-maven-plugin.version>
+    <jacoco-maven-plugin.version>0.8.12</jacoco-maven-plugin.version>
     <maven-enforcer-plugin.version>3.4.1</maven-enforcer-plugin.version>
     <dokka.plugin.version>0.10.0</dokka.plugin.version>
     <kotlin.code.style>official</kotlin.code.style>
