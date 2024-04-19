@@ -22,7 +22,7 @@
   <parent>
     <groupId>org.ff4j</groupId>
     <artifactId>ff4j-spring-boot-starter-parent</artifactId>
-    <version>2.0.1-SNAPSHOT</version>
+    <version>2.1</version>
   </parent>
   <properties>
     <license.path>${project.baseUri}../src/license</license.path>
