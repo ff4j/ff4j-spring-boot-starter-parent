@@ -73,7 +73,7 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <java.version>21</java.version>
-    <spring-boot.version>3.5.0</spring-boot.version>
+    <spring-boot.version>3.5.2</spring-boot.version>
     <ff4j.version>2.1</ff4j.version>
     <jackson-module-kotlin.version>2.19.0</jackson-module-kotlin.version>
     <kotlin.version>2.1.21</kotlin.version>
