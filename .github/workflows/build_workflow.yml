@@ -25,5 +25,3 @@ jobs:
         run: mvn clean install -ntp
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v5
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
