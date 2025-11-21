@@ -110,8 +110,8 @@ class FF4JResourceStepDef(ff4j: FF4j, context: WebApplicationContext) : En {
     uriBuilder: UriBuilder,
     path: String,
     formParams: Map<String, String>
-  ): URI? {
-    formParams.forEach { (name: String?, values: String?) ->
+  ): URI {
+    formParams.forEach { (name: String, values: String) ->
       uriBuilder.queryParam(
         name,
         values

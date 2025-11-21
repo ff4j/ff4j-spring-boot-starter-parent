@@ -34,7 +34,6 @@ Feature:
     Then the user gets an error response with code "404" and error message as
     """
     {
-      "type": "about:blank",
       "title": "Not Found",
       "status": 404,
       "detail": "property not found",
@@ -81,7 +80,6 @@ Feature:
     Then the user gets an error response with code "400" and error message as
     """
     {
-      "type": "about:blank",
       "title": "Bad Request",
       "status": 400,
       "detail": "property name cannot be blank",
@@ -103,7 +101,6 @@ Feature:
     Then the user gets an error response with code "400" and error message as
     """
     {
-      "type": "about:blank",
       "title": "Bad Request",
       "status": 400,
       "detail": "property name did not match with the requested property name to be created or updated",
@@ -144,7 +141,6 @@ Feature:
     Then the user gets an error response with code "404" and error message as
     """
     {
-      "type": "about:blank",
       "title": "Not Found",
       "status": 404,
       "detail": "property not found",
@@ -157,7 +153,6 @@ Feature:
     Then the user gets an error response with code "404" and error message as
     """
     {
-      "type": "about:blank",
       "title": "Not Found",
       "status": 404,
       "detail": "property not found",
@@ -186,7 +181,6 @@ Feature:
     Then the user gets an error response with code "404" and error message as
     """
     {
-      "type": "about:blank",
       "title": "Not Found",
       "status": 404,
       "detail": "property not found",
@@ -199,7 +193,6 @@ Feature:
     Then the user gets an error response with code "400" and error message as
     """
     {
-      "type": "about:blank",
       "title": "Bad Request",
       "status": 400,
       "detail": "bad request",

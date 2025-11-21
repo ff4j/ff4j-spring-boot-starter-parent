@@ -60,7 +60,6 @@ Feature:
     Then the user gets an error response with code "404" and error message as
     """
     {
-      "type": "about:blank",
       "title": "Not Found",
       "status": 404,
       "detail": "no security has been defined",
@@ -99,7 +98,6 @@ Feature:
     Then the user gets an error response with code "404" and error message as
     """
     {
-      "type": "about:blank",
       "title": "Not Found",
       "status": 404,
       "detail": "feature not found",
@@ -166,7 +164,6 @@ Feature:
     Then the user gets an error response with code "404" and error message as
     """
     {
-      "type": "about:blank",
       "title": "Not Found",
       "status": 404,
       "detail": "feature not found",
@@ -217,7 +214,6 @@ Feature:
     Then the user gets an error response with code "400" and error message as
     """
     {
-      "type": "about:blank",
       "title": "Bad Request",
       "status": 400,
       "detail": "bad request",

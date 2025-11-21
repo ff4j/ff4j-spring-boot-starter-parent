@@ -92,7 +92,6 @@ Feature:
     Then the user gets an error response with code "404" and error message as
     """
     {
-      "type": "about:blank",
       "title": "Not Found",
       "status": 404,
       "detail": "property store is not cached",
@@ -144,7 +143,6 @@ Feature:
     Then the user gets an error response with code "404" and error message as
     """
     {
-      "type": "about:blank",
       "title": "Not Found",
       "status": 404,
       "detail": "property store is not cached",
