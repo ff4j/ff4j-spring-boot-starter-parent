@@ -133,7 +133,6 @@ Feature: FeatureStoreResource
     Then the user gets an error response with code "404" and error message as
     """
     {
-      "type": "about:blank",
       "title": "Not Found",
       "status": 404,
       "detail": "feature store is not cached",
@@ -194,7 +193,6 @@ Feature: FeatureStoreResource
     Then the user gets an error response with code "404" and error message as
     """
     {
-      "type": "about:blank",
       "title": "Not Found",
       "status": 404,
       "detail": "feature store is not cached",

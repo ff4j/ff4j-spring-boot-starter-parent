@@ -20,7 +20,6 @@ Feature: FeatureResource
     Then the user gets an error response with code "404" and error message as
     """
     {
-      "type": "about:blank",
       "title": "Not Found",
       "status": 404,
       "detail": "feature not found",
@@ -49,7 +48,6 @@ Feature: FeatureResource
     Then the user gets an error response with code "400" and error message as
     """
     {
-      "type": "about:blank",
       "title": "Bad Request",
       "status": 400,
       "detail": "feature uid cannot be blank",
@@ -69,7 +67,6 @@ Feature: FeatureResource
     Then the user gets an error response with code "400" and error message as
     """
     {
-      "type": "about:blank",
       "title": "Bad Request",
       "status": 400,
       "detail": "feature uid did not match with the requested feature uid to be created or updated",
@@ -186,7 +183,6 @@ Feature: FeatureResource
     Then the user gets an error response with code "400" and error message as
     """
     {
-      "type": "about:blank",
       "title": "Bad Request",
       "status": 400,
       "detail": "flipping strategy specified wrongly",
@@ -233,7 +229,6 @@ Feature: FeatureResource
     Then the user gets an error response with code "400" and error message as
     """
     {
-      "type": "about:blank",
       "title": "Bad Request",
       "status": 400,
       "detail": "properties specified wrongly",
@@ -265,7 +260,6 @@ Feature: FeatureResource
     Then the user gets an error response with code "404" and error message as
     """
     {
-      "type": "about:blank",
       "title": "Not Found",
       "status": 404,
       "detail": "feature not found",
@@ -279,7 +273,6 @@ Feature: FeatureResource
     Then the user gets an error response with code "404" and error message as
     """
     {
-      "type": "about:blank",
       "title": "Not Found",
       "status": 404,
       "detail": "feature not found",
@@ -312,7 +305,6 @@ Feature: FeatureResource
     Then the user gets an error response with code "404" and error message as
     """
     {
-      "type": "about:blank",
       "title": "Not Found",
       "status": 404,
       "detail": "feature not found",
@@ -345,7 +337,6 @@ Feature: FeatureResource
     Then the user gets an error response with code "404" and error message as
     """
     {
-      "type": "about:blank",
       "title": "Not Found",
       "status": 404,
       "detail": "feature not found",
@@ -360,7 +351,6 @@ Feature: FeatureResource
     Then the user gets an error response with code "404" and error message as
     """
     {
-      "type": "about:blank",
       "title": "Not Found",
       "status": 404,
       "detail": "feature not found",
@@ -395,7 +385,6 @@ Feature: FeatureResource
     Then the user gets an error response with code "304" and error message as
     """
     {
-      "type": "about:blank",
       "title": "Not Modified",
       "status": 304,
       "detail": "role already exists",
@@ -421,7 +410,6 @@ Feature: FeatureResource
     Then the user gets an error response with code "404" and error message as
     """
     {
-      "type": "about:blank",
       "title": "Not Found",
       "status": 404,
       "detail": "feature not found",
@@ -456,7 +444,6 @@ Feature: FeatureResource
     Then the user gets an error response with code "404" and error message as
     """
     {
-      "type": "about:blank",
       "title": "Not Found",
       "status": 404,
       "detail": "role does not exist",
@@ -482,7 +469,6 @@ Feature: FeatureResource
     Then the user gets an error response with code "404" and error message as
     """
     {
-      "type": "about:blank",
       "title": "Not Found",
       "status": 404,
       "detail": "feature not found",
@@ -498,7 +484,6 @@ Feature: FeatureResource
     Then the user gets an error response with code "304" and error message as
     """
     {
-      "type": "about:blank",
       "title": "Not Modified",
       "status": 304,
       "detail": "group already exists",
@@ -543,7 +528,6 @@ Feature: FeatureResource
     Then the user gets an error response with code "404" and error message as
     """
     {
-      "type": "about:blank",
       "title": "Not Found",
       "status": 404,
       "detail": "feature not found",
@@ -578,7 +562,6 @@ Feature: FeatureResource
     Then the user gets an error response with code "404" and error message as
     """
     {
-      "type": "about:blank",
       "title": "Not Found",
       "status": 404,
       "detail": "group does not exist",
