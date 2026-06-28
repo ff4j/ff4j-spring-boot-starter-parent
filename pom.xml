@@ -72,18 +72,18 @@
   <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <java.version>21</java.version>
-    <spring-boot.version>4.0.1</spring-boot.version>
+    <java.version>25</java.version>
+    <spring-boot.version>4.1.0</spring-boot.version>
     <ff4j.version>2.1</ff4j.version>
-    <jackson-module-kotlin.version>2.21.0</jackson-module-kotlin.version>
-    <kotlin.version>2.3.0</kotlin.version>
-    <cucumber.version>7.33.0</cucumber.version>
-    <junit-jupiter.version>6.0.2</junit-jupiter.version>
-    <springdoc-openapi-starter.version>3.0.1</springdoc-openapi-starter.version>
+    <jackson-module-kotlin.version>3.1.4</jackson-module-kotlin.version>
+    <kotlin.version>2.4.0</kotlin.version>
+    <cucumber.version>7.34.4</cucumber.version>
+    <junit-jupiter.version>6.1.0</junit-jupiter.version>
+    <springdoc-openapi-starter.version>3.0.3</springdoc-openapi-starter.version>
     <meanbean.version>2.0.3</meanbean.version>
     <!-- plugin -->
-    <maven-surefire-plugin.version>3.5.4</maven-surefire-plugin.version>
-    <maven-compiler-plugin.version>3.14.1</maven-compiler-plugin.version>
+    <maven-surefire-plugin.version>3.5.6</maven-surefire-plugin.version>
+    <maven-compiler-plugin.version>3.15.0</maven-compiler-plugin.version>
     <license-maven-plugin.version>2.7.1</license-maven-plugin.version>
     <maven-resources-plugin.version>3.4.0</maven-resources-plugin.version>
     <nexus-staging-maven-plugin.version>1.7.0</nexus-staging-maven-plugin.version>
@@ -92,7 +92,7 @@
     <maven-javadoc-plugin.version>3.12.0</maven-javadoc-plugin.version>
     <aven-source-plugin.version>3.4.0</aven-source-plugin.version>
     <dokka-maven-plugin.version>2.1.0</dokka-maven-plugin.version>
-    <jacoco-maven-plugin.version>0.8.14</jacoco-maven-plugin.version>
+    <jacoco-maven-plugin.version>0.8.15</jacoco-maven-plugin.version>
     <maven-enforcer-plugin.version>3.6.2</maven-enforcer-plugin.version>
     <dokka.plugin.version>0.10.0</dokka.plugin.version>
     <kotlin.code.style>official</kotlin.code.style>
@@ -183,7 +183,7 @@
         <version>${kotlin.version}</version>
       </dependency>
       <dependency>
-        <groupId>com.fasterxml.jackson.module</groupId>
+        <groupId>tools.jackson.module</groupId>
         <artifactId>jackson-module-kotlin</artifactId>
         <version>${jackson-module-kotlin.version}</version>
       </dependency>
@@ -233,7 +233,7 @@
       <artifactId>kotlin-stdlib</artifactId>
     </dependency>
     <dependency>
-      <groupId>com.fasterxml.jackson.module</groupId>
+      <groupId>tools.jackson.module</groupId>
       <artifactId>jackson-module-kotlin</artifactId>
     </dependency>
   </dependencies>
@@ -368,6 +368,7 @@
         <configuration>
           <source>${java.version}</source>
           <target>${java.version}</target>
+          <release>${java.version}</release>
         </configuration>
       </plugin>
       <!-- license -->

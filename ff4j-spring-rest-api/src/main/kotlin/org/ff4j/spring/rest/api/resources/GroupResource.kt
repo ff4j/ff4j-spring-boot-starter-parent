@@ -35,7 +35,6 @@ import org.ff4j.services.constants.FeatureConstants.RESOURCE_STORE
 import org.ff4j.services.domain.FeatureApiBean
 import org.ff4j.web.FF4jWebConstants.OPERATION_DISABLE
 import org.ff4j.web.FF4jWebConstants.OPERATION_ENABLE
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.MediaType.APPLICATION_JSON_VALUE
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -47,7 +46,7 @@ import reactor.core.publisher.Flux
 @Tag(name = "Groups", description = "The API for group related operations")
 @RestController
 @RequestMapping(value = ["\${ff4j.api.context-path:$RESOURCE_FF4J}$RESOURCE_STORE$RESOURCE_GROUPS/$PATH_PARAM_GROUP"])
-class GroupResource(@Autowired val groupServices: GroupServices) {
+class GroupResource(val groupServices: GroupServices) {
 
   @Operation(summary = "Get all the features belonging to the group", tags = ["Groups"])
   @ApiResponses(

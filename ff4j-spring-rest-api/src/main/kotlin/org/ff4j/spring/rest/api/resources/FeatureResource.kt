@@ -39,7 +39,6 @@ import org.ff4j.services.domain.FeatureApiBean
 import org.ff4j.spring.rest.api.utils.FeatureWebUtils
 import org.ff4j.services.model.FeatureActions
 import org.ff4j.web.FF4jWebConstants.*
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus.ACCEPTED
 import org.springframework.http.MediaType.APPLICATION_JSON_VALUE
 import org.springframework.http.ResponseEntity
@@ -52,7 +51,7 @@ import reactor.core.publisher.Mono
 @Tag(name = "Feature", description = "The API for feature related operations")
 @RestController
 @RequestMapping(value = ["\${ff4j.api.context-path:$RESOURCE_FF4J}$RESOURCE_STORE$RESOURCE_FEATURES/$PATH_PARAM_UID"])
-class FeatureResource(@Autowired val featureServices: FeatureServices) {
+class FeatureResource(val featureServices: FeatureServices) {
 
   @Operation(summary = "Get feature by uid", description = "Get feature by uid", tags = ["Feature"])
   @ApiResponses(

@@ -21,7 +21,7 @@ package org.ff4j.services.domain
 
 import org.assertj.core.api.Assertions
 import org.ff4j.services.constants.CommonConstants
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * @author [Paul Williams](mailto:paul58914080@gmail.com)

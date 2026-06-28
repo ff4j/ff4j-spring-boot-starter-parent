@@ -25,7 +25,6 @@ import org.ff4j.services.domain.AuthorizationsManagerApiBean
 import org.ff4j.services.domain.FF4jStatusApiBean
 import org.ff4j.services.exceptions.AuthorizationNotExistsException
 import org.ff4j.services.validator.FeatureValidator
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import reactor.core.publisher.Mono
 
@@ -33,7 +32,7 @@ import reactor.core.publisher.Mono
  * @author [Paul Williams](mailto:paul58914080@gmail.com)
  */
 @Service
-class FF4jServices(@Autowired val fF4j: FF4j, @Autowired val ff4jValidator: FeatureValidator) {
+class FF4jServices(val fF4j: FF4j, val ff4jValidator: FeatureValidator) {
 
   fun getStatus(): Mono<FF4jStatusApiBean> {
     return Mono.just(FF4jStatusApiBean(this.fF4j))

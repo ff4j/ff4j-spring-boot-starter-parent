@@ -19,8 +19,8 @@
  */
 package org.ff4j.services.domain
 
-import org.junit.Assert
-import org.junit.Test
+import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Test
 import org.meanbean.test.BeanTester
 
 /**
@@ -32,7 +32,7 @@ class DomainTest {
 
   @Test
   fun getterAndSetterCorrectness() {
-    Assert.assertTrue(true)
+    Assertions.assertTrue(true)
     beanTester.testBean(FeatureApiBean::class.java)
     beanTester.testBean(FeatureStoreApiBean::class.java)
     beanTester.testBean(PropertyStoreApiBean::class.java)
