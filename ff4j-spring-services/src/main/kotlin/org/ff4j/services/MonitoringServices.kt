@@ -21,7 +21,6 @@ package org.ff4j.services
 
 import org.ff4j.FF4j
 import org.ff4j.services.domain.EventRepositoryApiBean
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import reactor.core.publisher.Mono
 
@@ -29,7 +28,7 @@ import reactor.core.publisher.Mono
  * @author [Paul Williams](mailto:paul58914080@gmail.com)
  */
 @Service
-class MonitoringServices(@Autowired val fF4j: FF4j) {
+class MonitoringServices(val fF4j: FF4j) {
 
   fun getMonitoringStatus(): Mono<EventRepositoryApiBean> {
     return Mono.just(EventRepositoryApiBean(fF4j.eventRepository))

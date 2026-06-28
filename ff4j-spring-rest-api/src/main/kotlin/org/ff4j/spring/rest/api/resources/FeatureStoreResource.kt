@@ -36,7 +36,6 @@ import org.ff4j.services.domain.FeatureApiBean
 import org.ff4j.services.domain.FeatureStoreApiBean
 import org.ff4j.services.domain.GroupDescApiBean
 import org.ff4j.web.FF4jWebConstants.*
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus.NO_CONTENT
 import org.springframework.http.MediaType.APPLICATION_JSON_VALUE
 import org.springframework.http.ResponseEntity
@@ -53,7 +52,7 @@ import reactor.core.publisher.Mono
 @Tag(name = "FeatureStore", description = "The API for accessing the store of all features")
 @RestController
 @RequestMapping(value = ["\${ff4j.api.context-path:$RESOURCE_FF4J}$RESOURCE_STORE"])
-class FeatureStoreResource(@Autowired val featureStoreService: FeatureStoreServices) {
+class FeatureStoreResource(val featureStoreService: FeatureStoreServices) {
 
   @Operation(summary = "Displays information regarding the FeaturesStore", tags = ["FeatureStore"])
   @ApiResponses(

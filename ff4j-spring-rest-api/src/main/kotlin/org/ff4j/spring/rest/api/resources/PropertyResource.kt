@@ -37,7 +37,6 @@ import org.ff4j.services.constants.FeatureConstants.RESOURCE_PROPERTY_STORE
 import org.ff4j.services.domain.PropertyApiBean
 import org.ff4j.spring.rest.api.utils.FeatureWebUtils
 import org.ff4j.web.FF4jWebConstants.OPERATION_UPDATE
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus.ACCEPTED
 import org.springframework.http.HttpStatus.NO_CONTENT
 import org.springframework.http.MediaType.APPLICATION_JSON_VALUE
@@ -51,7 +50,7 @@ import reactor.core.publisher.Mono
 @Tag(name = "Property", description = "The API for property related operations")
 @RestController
 @RequestMapping(value = ["\${ff4j.api.context-path:$RESOURCE_FF4J}$RESOURCE_PROPERTY_STORE$RESOURCE_PROPERTIES/$PATH_PARAM_NAME"])
-class PropertyResource(@Autowired val propertyServices: PropertyServices) {
+class PropertyResource(val propertyServices: PropertyServices) {
 
   @Operation(summary = "Read information about a property", tags = ["Property"])
   @ApiResponses(

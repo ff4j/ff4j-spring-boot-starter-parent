@@ -20,7 +20,7 @@
 package org.ff4j.services.constants
 
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 /**
  * @author [Paul Williams](mailto:paul58914080@gmail.com)

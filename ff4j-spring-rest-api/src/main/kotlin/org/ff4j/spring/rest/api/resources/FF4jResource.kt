@@ -33,7 +33,6 @@ import org.ff4j.services.domain.AuthorizationsManagerApiBean
 import org.ff4j.services.domain.FF4jStatusApiBean
 import org.ff4j.services.exceptions.FeatureNotFoundException
 import org.ff4j.web.FF4jWebConstants.*
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.MediaType.APPLICATION_FORM_URLENCODED_VALUE
 import org.springframework.http.MediaType.APPLICATION_JSON_VALUE
 import org.springframework.http.ResponseEntity
@@ -47,7 +46,7 @@ import reactor.core.publisher.Mono
 @Tag(name = "FF4J", description = "The API for global status of FF4J")
 @RestController
 @RequestMapping(value = ["\${ff4j.api.context-path:$RESOURCE_FF4J}"])
-class FF4jResource(@Autowired val ff4JServices: FF4jServices) {
+class FF4jResource(val ff4JServices: FF4jServices) {
 
   @Operation(
     summary = "Gets ff4j status overview",

@@ -36,7 +36,6 @@ import org.ff4j.services.domain.PropertyApiBean
 import org.ff4j.services.domain.PropertyStoreApiBean
 import org.ff4j.web.FF4jWebConstants.RESOURCE_CACHE
 import org.ff4j.web.FF4jWebConstants.STORE_CLEAR
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus.NO_CONTENT
 import org.springframework.http.MediaType.APPLICATION_JSON_VALUE
 import org.springframework.http.ResponseEntity
@@ -53,7 +52,7 @@ import reactor.core.publisher.Mono
 @Tag(name = "PropertyStore", description = "The API for accessing the store for all properties")
 @RestController
 @RequestMapping(value = ["\${ff4j.api.context-path:$RESOURCE_FF4J}$RESOURCE_PROPERTY_STORE"])
-class PropertyStoreResource(@Autowired val propertyStoreServices: PropertyStoreServices) {
+class PropertyStoreResource(val propertyStoreServices: PropertyStoreServices) {
 
   @Operation(summary = "Display information regarding Properties Store", tags = ["PropertyStore"])
   @ApiResponses(

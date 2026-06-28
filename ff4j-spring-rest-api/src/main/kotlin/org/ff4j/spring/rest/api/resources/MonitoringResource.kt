@@ -32,7 +32,6 @@ import org.ff4j.services.constants.FeatureConstants.RESOURCE_MONITORING
 import org.ff4j.services.domain.EventRepositoryApiBean
 import org.ff4j.web.FF4jWebConstants.PARAM_END
 import org.ff4j.web.FF4jWebConstants.PARAM_START
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.MediaType.APPLICATION_JSON_VALUE
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
@@ -47,7 +46,7 @@ import reactor.core.publisher.Mono
 @Tag(name = "Monitoring", description = "The API for monitoring related operations")
 @RestController
 @RequestMapping(value = ["\${ff4j.api.context-path:$RESOURCE_FF4J}$RESOURCE_MONITORING"])
-class MonitoringResource(@Autowired val monitoringServices: MonitoringServices) {
+class MonitoringResource(val monitoringServices: MonitoringServices) {
 
   @Operation(
     summary = "Display Monitoring information for all features",
