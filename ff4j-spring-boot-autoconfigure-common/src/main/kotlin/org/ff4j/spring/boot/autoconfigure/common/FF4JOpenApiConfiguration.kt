@@ -24,34 +24,52 @@ import org.slf4j.LoggerFactory
 import org.springdoc.core.configuration.SpringDocConfiguration
 import org.springdoc.core.models.GroupedOpenApi
 import org.springdoc.core.properties.SpringDocConfigProperties
+import org.springframework.beans.factory.InitializingBean
+import org.springframework.beans.factory.ObjectProvider
 import org.springframework.boot.autoconfigure.AutoConfiguration
 import org.springframework.boot.autoconfigure.AutoConfigureAfter
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty
+import org.springframework.boot.context.properties.bind.Binder
 import org.springframework.context.annotation.Bean
+import org.springframework.core.env.Environment
 
+/**
+ * This configuration must remain instantiable with a default constructor and must not rely on
+ * autowired state: when `springdoc.show-actuator=true` and the management port differs from the
+ * server port, springdoc registers a BeanFactoryPostProcessor depending on all [GroupedOpenApi]
+ * beans, so this class is instantiated before autowiring and configuration-properties binding
+ * are available.
+ */
 @AutoConfiguration
 @AutoConfigureAfter(FF4JConfiguration::class, SpringDocConfiguration::class)
 @ConditionalOnClass(SpringDocConfiguration::class)
-class FF4JOpenApiConfiguration(
-  private val config: FF4JConfigurationProperties,
-  private val springDocConfigProperties: SpringDocConfigProperties = SpringDocConfigProperties()
-) {
+class FF4JOpenApiConfiguration {
 
   private val log: Logger = LoggerFactory.getLogger(FF4JOpenApiConfiguration::class.java)
 
-  init {
-    if (!config.api.springDoc.enabled) {
-      log.info("Exclude FF4J OpenAPI configuration")
-      springDocConfigProperties.pathsToExclude = listOf("${config.api.contextPath}/**")
-    }
+  @Bean
+  @ConditionalOnProperty(name = ["ff4j.api.spring-doc.enabled"], havingValue = "true", matchIfMissing = false)
+  fun groupApiEnabled(environment: Environment): GroupedOpenApi {
+    log.info("Initializing FF4J GroupedOpenApi configuration")
+    // Bind from the Environment instead of injecting FF4JConfigurationProperties: this bean can be
+    // created during the BeanFactoryPostProcessor phase, where the properties bean would exist but
+    // never get bound (ConfigurationPropertiesBindingPostProcessor is not registered yet).
+    val config = Binder.get(environment)
+      .bindOrCreate("ff4j", FF4JConfigurationProperties::class.java)
+    return GroupedOpenApi.builder().group(config.api.springDoc.group).pathsToMatch("${config.api.contextPath}/**")
+      .build()
   }
 
   @Bean
-  @ConditionalOnProperty(name = ["ff4j.api.spring-doc.enabled"], havingValue = "true", matchIfMissing = false)
-  fun groupApiEnabled(springDocConfigProperties: SpringDocConfigProperties): GroupedOpenApi {
-    log.info("Initializing FF4J GroupedOpenApi configuration")
-    return GroupedOpenApi.builder().group(config.api.springDoc.group).pathsToMatch("${config.api.contextPath}/**")
-      .build()
+  @ConditionalOnProperty(name = ["ff4j.api.spring-doc.enabled"], havingValue = "false", matchIfMissing = true)
+  fun ff4jOpenApiPathsExclusion(
+    config: FF4JConfigurationProperties,
+    springDocConfigProperties: ObjectProvider<SpringDocConfigProperties>
+  ): InitializingBean = InitializingBean {
+    springDocConfigProperties.ifAvailable {
+      log.info("Exclude FF4J OpenAPI configuration")
+      it.pathsToExclude = listOf("${config.api.contextPath}/**")
+    }
   }
 }
