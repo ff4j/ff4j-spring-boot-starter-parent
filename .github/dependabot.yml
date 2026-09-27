@@ -4,19 +4,63 @@ updates:
     directory: "/"
     schedule:
       interval: daily
-    open-pull-requests-limit: 10
     labels:
       - dependencies
       - automated
+    groups:
+      spring:
+        patterns:
+          - "org.springframework:*"
+          - "org.springframework.boot:*"
+      kotlin:
+        patterns:
+          - "org.jetbrains.kotlin:*"
+          - "org.jetbrains.dokka:*"
+      testing:
+        patterns:
+          - "org.junit*:*"
+          - "org.mockito:*"
+          - "org.assertj:*"
+          - "org.testcontainers:*"
+          - "io.cucumber:*"
+          - "org.easymock:*"
+          - "org.meanbean:*"
+      logging:
+        patterns:
+          - "org.slf4j:*"
+          - "ch.qos.logback:*"
+      jackson:
+        patterns:
+          - "com.fasterxml.jackson*:*"
+          - "tools.jackson.module:*"
+      openapi:
+        patterns:
+          - "org.springdoc:*"
+      apache:
+        patterns:
+          - "org.apache.*:*"
+          - "org.apache.maven.plugins:*"
+    open-pull-requests-limit: 10
     commit-message:
       prefix: "build: "
   - package-ecosystem: github-actions
-    directory: "/.github/"
+    directory: "/"
     schedule:
       interval: weekly
+    groups:
+      actions-core:
+        patterns:
+          - "actions/checkout"
+          - "actions/cache"
+      language-setup:
+        patterns:
+          - "actions/setup-java"
+          - "actions/setup-python"
+      reporting:
+        patterns:
+          - "actions/upload-artifact"
+          - "actions/download-artifact"
+          - "codecov/codecov-action"
     open-pull-requests-limit: 5
-    labels:
-      - ci
-      - automated
     commit-message:
       prefix: "ci: "
