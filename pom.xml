@@ -73,8 +73,8 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <java.version>25</java.version>
-    <spring-boot.version>4.1.1</spring-boot.version>
-    <ff4j.version>2.1</ff4j.version>
+    <spring-boot.version>4.1.2</spring-boot.version>
+    <ff4j.version>3.0.0</ff4j.version>
     <jackson-module-kotlin.version>3.2.3</jackson-module-kotlin.version>
     <kotlin.version>2.4.20</kotlin.version>
     <cucumber.version>7.34.4</cucumber.version>
